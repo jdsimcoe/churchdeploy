@@ -1,0 +1,17 @@
+{
+    "Name": {
+        "type": "input"
+    },
+    "Tags": {
+        "type": "taglist",
+        "pre_populate_source": [
+            {
+                "optgroup": "News",
+                "value": "Name"
+            },
+            {
+                "value": "Existing Values"
+            }
+        ]
+    }
+}

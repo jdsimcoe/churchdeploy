@@ -1,0 +1,55 @@
+## Tweak UI ##
+
+version 0.1.2 beta
+
+This extension adds the following tweaks to the UI of Symphony:
+
+- Collapsable fields in the section editor
+- Removes the 'Meiryo' font from the stylesheet (and removing the annoying Yen-sign)
+- Increases the length of multiselect boxes
+- Replaces multiselect fields to checkboxes whereever available.
+- Allows grouping of datasources
+
+## Grouping of datasources ##
+
+Grouping of datasources is done automaticly by the way how you name your datasources.
+Practicly, group names are automaticly detected by the use of a colon in your datasource.
+
+For example:
+
+If you have the following datasources:
+
+- Navigation
+- Shop : Orders
+- Shop : Order detail
+- Shop : Products
+- Shop : Product detail
+- Content : Articles
+- Content : Article Detail
+- Content : News
+- Content : News detail
+- Banners
+
+The following groups will be made:
+
+- Uncategorized
+    - Navigation
+    - Banners
+- Shop
+    - Shop : Orders
+    - Shop : Order detail
+    - Shop : Products
+    - Shop : Product detail
+- Content
+    - Content : Articles
+    - Content : Article Detail
+    - Content : News
+    - Content : News detail
+
+### Please note: ###
+
+This extension is just a quick mockup and hasn't been tested in any live or production environment yet. Use it at your own risk!
+
+### Changelog ###
+
+10-12-2010	: Implemented an alternate multiselect-plugin, since the Symphony Multiselect-to-checkbox extension was causing problems on the datasource page; Implemented grouping of datasources

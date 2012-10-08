@@ -1,0 +1,100 @@
+// Main Styles
+
+.lbsTooltip {
+  background: @color-body;
+  border: 5px solid @color-gray-light;
+  z-index: 99;
+  text-align: left;
+  text-indent: 0;
+  letter-spacing: normal;
+  .box-shadow(0 2px 5px rgba(0,0,0,0.5));
+
+  * {
+    #font > #helvetica > .regular;
+  }
+
+  div {
+    text-align: left;
+  }
+
+  + div {
+    background: none;
+  }
+
+}
+
+.lbsTooltipHeader {
+  background: @color-accent;
+  color: @color-white;
+  font-size:15px;
+  line-height: 18px;
+  #font > #helvetica > .bold;
+  text-transform: uppercase;
+  margin: 0;
+  padding:4px;
+  position:relative;
+  border: 0;
+}
+
+.lbsTooltipBody {
+  padding: 4px 8px 0 8px;
+  margin:0;
+  position:relative;
+  z-index: 2;
+  border: 0;
+  line-height:16px;
+
+  p,
+  span {
+    display: inline;
+    color: @color-black;
+    #font > #helvetica > .regular;
+    font-size: 14px;
+    line-height:16px;
+  }
+
+  .ch-ref,
+  .verse-ref {
+    font-size: 85%;
+    top: -1px;
+  position: relative;
+  }
+}
+
+.lbsTooltipFooter {
+  font-size: 11px;
+  bottom: 4px;
+  margin-top: 4px;
+  position: absolute;
+  text-align: right;
+  border: 0;
+  letter-spacing: normal;
+
+  a {
+    background: #999;
+    padding: 4px;
+    #font > #helvetica > .bold;
+    text-transform: uppercase;
+
+    &:link,
+    &:visited,
+    &:hover {
+      background: @color-gray-dark;
+      color: @color-white;
+      text-decoration: none;
+    }
+  }
+
+  div {
+    text-align: right;
+  }
+}
+
+// Cleanup
+
+.lbsLibronix img {
+  float: none !important;
+}
+
+// Reftagger 2.0
+

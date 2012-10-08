@@ -1,0 +1,884 @@
+/*-----------------------------------------------------------------------------
+	Globals - Miscellaneous
+-----------------------------------------------------------------------------*/
+
+body {
+	background: #fff;
+	color: #222;
+}
+h2 {
+	margin: 0;
+	padding: 0 0 0.5em;
+	border-bottom: 1px solid #ddc;
+}
+h3 {
+	text-shadow: -1px 2px 2px #ddd;
+	font-weight: bold;
+}
+pre {
+	color: #474742;
+	white-space: normal;
+	font: inherit;
+}
+pre code {
+	border: 1px dashed #a1a19a;
+	padding: 5px 7px;
+	overflow: auto;
+}
+i, var {
+	color: #aa9;
+	text-shadow: none;
+	font-style: normal;
+}
+legend {
+	margin-bottom: -3em;
+	padding: 0;
+	color: #665;
+	text-shadow: -1px 2px 3px #ddd;
+	font-weight: bold;
+}
+label {
+	display: block;
+	position: relative;
+}
+label > i {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+/*-----------------------------------------------------------------------------
+	Globals - Tables
+-----------------------------------------------------------------------------*/
+
+table {
+	margin: 0;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+	word-wrap: break-word;
+}
+th {
+	padding-right: 19px;
+	color: #665;
+	text-align: left;
+	font-weight: normal;
+	line-height: 2;
+}
+td {
+	border: 1px solid #e6e6e5;
+	border-width: 1px 0;
+	padding: 0.67em 19px 0.67em 0;
+	background-color: #f5f5f4;
+}
+th:first-child,
+td:first-child {
+	padding-left: 19px;
+}
+tr:nth-child(even) td {
+	background-color: transparent;
+}
+tbody a {
+	padding: 0.67em 0;
+}
+table input {
+	float: right;
+	margin-right: 19px;
+}
+th a,
+th a:hover,
+th a:hover:after {
+	color: #665;
+	text-decoration: none;
+}
+th a:after {
+	color: #ccb;
+}
+th a:active,
+th a.active,
+th a.active:after {
+	color: #554;
+}
+th a:after,
+th a.active:hover:after,
+th a.active[href$=asc]:after {
+	margin-left: 3px;
+	content: "\2193"
+}
+th a.active:after,
+th a[href$=asc]:after,
+th a.active[href$=asc]:hover:after {
+	content: "\2191";
+}
+table.busy td {
+	border-top: 1px solid #e6e6e5;
+	border-bottom: 1px solid #e6e6e5;
+	background-color: #fff;
+}
+table.busy tr:nth-child(odd) td {
+	border-top: 1px solid #e6e6e5;
+	border-bottom: 1px solid #e6e6e5;
+	background-color: #f5f5f4;
+}
+table.busy a {
+	color: #5072bf;
+}
+
+/*--- Selectable ---*/
+
+table.selectable input {
+	display: none;
+}
+tr.selected td {
+	border-top: 1px solid #617dc5;
+	border-bottom: 1px solid #617dc5;
+	background-color: #5273c0;
+}
+tr:nth-child(odd).selected td {
+	background-color: #5677c3;
+}
+tr.selected td,
+tr.selected a,
+tr.selected .inactive {
+	color: #fff;
+}
+
+/*--- Orderable ---*/
+
+tr.ordering {
+	cursor: move;
+}
+tr.ordering td,
+tr:nth-child(odd).ordering td {
+	border-color: #998;
+	background-color: #887;
+}
+tr.ordering td,
+tr.ordering a,
+tr.ordering .inactive {
+	color: #fff;
+}
+tr.selecting td, tr:nth-child(odd).selecting td {
+	border-top: 1px solid #617dc5;
+	border-bottom: 1px solid #617dc5;
+	background-color: #5273c0;
+}
+tr.selecting td,
+tr.selecting a,
+tr.selecting .inactive {
+	color: #fff;
+}
+
+/*-----------------------------------------------------------------------------
+	Globals - Classes & UI components
+-----------------------------------------------------------------------------*/
+
+/*--- Common ---*/
+
+.code {
+	font: 134%/1.3 monospace;
+}
+.busy,
+.busy * {
+	cursor: wait;
+}
+.inactive,
+.inactive * {
+	color: #887;
+}
+.irrelevant {
+	display: none;
+}
+.selected, .selected a, .selected .inactive {
+	color: #fff;
+}
+.selected a:hover {
+	color: #f2f2f2;
+}
+.help {
+	color: #887;
+}
+p.label {
+	margin: 0 0 2px;
+}
+span.frame {
+	display: block;
+	margin-bottom: 1.5em;
+	border: 1px solid #e4e4de;
+	padding: 12px;
+	background-color: #f5f5f3;
+	text-align: center;
+}
+span.frame code {
+	color: #919183;
+}
+
+/*--- Tags/suggestion list ---*/
+
+ul.tags {
+	margin: -0.75em 0 1.5em 0;
+	padding: 0;
+	color: #887;
+	list-style: none;
+}
+ul.tags li {
+	display: inline;
+	padding: 0 6px 0 0;
+	border-top: none;
+	word-spacing: -1px;
+	cursor: pointer;
+	font-size: 90.91%;
+}
+ul.tags li:hover {
+	color: #554;
+}
+ul.tags li.more {
+	color: #5072bf;
+	text-decoration: underline;
+}
+ul.tags .more:hover {
+	color: #222;
+}
+
+/*--- Group ---*/
+
+.group {
+	position: relative;
+	right: -0.75em;
+	margin: 0 0 0 -1.5em;
+	padding: 0 0.75em 0 3.65em;
+}
+.group:after {
+	content: "";
+	display: block;
+	clear: left;
+	height: 0;
+}
+.group > * {
+	float: left;
+	margin-left: 2.95em;
+	width: 50%;
+}
+.group > *:first-child {
+	margin-left: -2.95em;
+}
+.group > input[type=hidden]:first-child + * {
+	margin-left: -2.95em;
+}
+.group label > i,
+.secondary label > i {
+	max-width: 45%;
+	height: 16px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: help;
+	float: right;
+}
+.group label > i:hover,
+.secondary label > i:hover {
+	white-space:normal;
+	height:auto;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+/*--- Triple ---*/
+
+.triple {
+	padding: 0 0 0 72px;
+}
+.triple > * {
+	width: 33%;
+}
+.triple > *:first-child {
+	margin-left: -64px;
+}
+
+/*--- Compact ---*/
+
+div.compact:after {
+	content: "";
+	display: block;
+	clear: left;
+	height: 0;
+}
+div.compact label {
+	float: left;
+	width: 50%;
+	min-width: 250px;
+	margin-right: 1.5em;
+}
+div.compact label:nth-of-type(even) {
+	max-width: 45%;
+}
+div.compact label i {
+	max-width: 100%;
+	height: auto;
+	white-space: normal;
+	overflow: none;
+	text-overflow: auto;
+	float: none;
+	color: #887;
+	display: block;
+	position: static;
+	padding-left: 1.75em;
+}
+
+/*--- Settings ---*/
+
+fieldset.settings {
+	position: relative;
+	padding: 1em 0 1em 275px;
+	margin: 0 0 1em;
+	border-top: 1px solid #ddc;
+}
+fieldset.settings > legend {
+	float: left;
+	margin-bottom: -3em;
+	padding: 0;
+	color: #665;
+	text-indent: -275px;
+}
+fieldset.settings > label {
+	clear: left;
+}
+fieldset.settings select {
+	width: 100%;
+}
+fieldset.settings p.help {
+	margin: -0.5em 0 1.5em;
+	color: #887;
+}
+fieldset.settings li .label {
+	margin: 1em 0 1.25em;
+}
+fieldset.settings:first-child {
+	border-top: none;
+}
+fieldset.settings > legend + .help {
+	position: absolute;
+	margin: 1.75em 0 0 -275px;
+	width: 22em;
+}
+fieldset.settings > legend + .help p {
+	margin: 0 0 1.5em;
+}
+fieldset.settings > *:first-child {
+	margin-top: 0;
+}
+fieldset.settings fieldset {
+	margin-top: 0.5em;
+	padding-bottom: 0;
+	border-top: 1px solid #ddc;
+}
+fieldset.settings fieldset legend {
+	display: inline;
+	margin: 0 0 0 -0.5em;
+	padding: 0 0.75em 0 0.5em;
+	font-weight: normal;
+	line-height: 1.5;
+	text-indent: 0;
+	background: #fff;
+	color: #665;
+}
+
+/*--- Settings: Pickable ---*/
+
+.active .settings.picker {
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+.active .settings.pickable {
+	border-top: 0;
+	padding-top: 0;
+}
+.active .settings.pickable legend {
+	display: none;
+}
+
+/*--- Settings: Duplicator ---*/
+
+.settings .duplicator {
+	margin-bottom: 1.5em;
+}
+.settings .duplicator fieldset {
+	border-top: 1px solid #eed;
+}
+.settings .duplicator legend {
+	background: #DDC;
+	color: #665;
+}
+.settings .duplicator .group label > i:hover {
+	white-space:normal;
+	height:auto;
+	background: rgba(221, 221, 204, 0.8);
+}
+
+/*--- Buttons ---*/
+
+a.button,
+button.button {
+	display: -moz-inline-stack; /* Firefox 2 */
+	display: inline-block;
+	background-color: #597bc6;
+	border: 0;
+	color: #fff;
+	padding: .5em 1em;
+	margin: 0;
+	font: 10px/11px Lucida Grande, Leelawadee, Tahoma, Verdana, sans-serif;
+	text-decoration: none;
+	text-shadow: none;
+	cursor: pointer;
+	border-radius: 1em;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+}
+a.button.create,
+button.button.create {
+	background-color: #81b934;
+}
+a.button.delete,
+button.button.delete {
+	background-color: #887;
+}
+a.button:hover,
+a.button.active,
+button.button:hover,
+button.button.active {
+	background-color: #222;
+	color: #fff;
+}
+a.button.delete:hover,
+button.button.delete:hover {
+	background-color: #d43;
+}
+
+/*-----------------------------------------------------------------------------
+	Globals - System Messages
+-----------------------------------------------------------------------------*/
+
+#notice {
+	position: relative;
+	z-index: 2;
+	margin: 0;
+	border-top: 3px solid #979792;
+	border-bottom: 2px solid #777;
+	padding: 0.5em 0.83em;
+	background-color: #e4e4e0;
+	color: #555;
+	font-size: 90.91%;
+	line-height: 1.6;
+}
+#notice.error {
+	background-color: #ffb;
+	border-top: 3px solid #cc8;
+}
+#notice.success {
+	background-color: #ddf6bb;
+	border-top: 3px solid #90c349;
+}
+#notice.silence {
+	background: #e4e4e0;
+	border-top-color: #979792;
+	border-bottom-color: #777;
+	color: #555;
+}
+#notice a,
+#notice button {
+	color: #999;
+	margin-left: 0.5em;
+}
+#notice a:hover,
+#notice button:hover {
+	color: #332;
+}
+#notice.error a,
+#notice.error button {
+	color: #d55;
+}
+#notice.error a:hover,
+#notice.error button:hover {
+	color: #912712;
+}
+#notice.success a:hover,
+#notice.success button:hover {
+	color: #111;
+}
+#notice button {
+	border: none;
+	background: none;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/*-----------------------------------------------------------------------------
+	Header
+-----------------------------------------------------------------------------*/
+
+body, html {
+	height: 100%;
+}
+#wrapper {
+	position: relative;
+	min-height: 100%;
+}
+#header {
+	margin: 0 0 1.8em;
+	background: #353530;
+	color: #fff;
+}
+#header h1 {
+	padding: 1.64em 19px 0.74em;
+	text-shadow: -1px 2px 3px #111;
+	font-weight: bold;
+	line-height: 1;
+}
+#header h1 a {
+	color: #fff;
+	text-decoration: none;
+}
+#header h1 a:hover {
+	color: #ccb;
+}
+#nav {
+	z-index: 3;
+	position: relative;
+	bottom: -5px;
+	margin: 0;
+	padding: 5px 19px;
+	background: url("images/navigation.png") 0 -60px repeat-x;
+	color: #646464;
+	white-space: nowrap;
+	list-style: none;
+	text-transform: uppercase;
+	font: bold 90.91%/0 Lucida Grande, Leelawadee, Tahoma, Verdana, sans-serif;
+}
+#nav:after {
+	content: "";
+	display: block;
+	clear: left;
+	height: 0;
+}
+#nav > li {
+	position: relative;
+	float: left;
+	position: relative;
+	padding: 0 1em;
+	height: 30px;
+	line-height: 32px;
+	cursor:pointer;
+}
+#nav > li.active {
+	background: #517ca6 url("images/navigation.png") repeat-x;
+	color: #fff;
+}
+#nav > li:hover,
+#nav > li.current {
+	background: #7e7e70 url("images/navigation.png") 0 -30px repeat-x;
+	color: #fff;
+}
+#nav ul {
+	position: absolute;
+	z-index: 3;
+	top: 25px;
+	left: -9999px;
+	margin: 0;
+	min-width: 120px;
+	border: 1px solid;
+	border-color: #fdfdfd #f1f1f1 #d2d2d2 #ececec;
+	padding-left: 0;
+	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.8);
+	list-style: none;
+	text-transform: none;
+	font-weight: normal;
+	font-size: 130%;
+	line-height: 2.5;
+	-moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+#nav li:hover ul,
+#nav li.current ul {
+	left: 5px;
+}
+#nav a {
+	display: block;
+	padding: 0 0.77em;
+	color: #444;
+	text-decoration: none;
+}
+#nav a:hover,
+#nav a:focus {
+	background-color: #7e7e70;
+	color: #fff;
+}
+#contents {
+	padding: 0 19px 5em;
+}
+#contents h2 span {
+	float: left;
+}
+#contents h2:after {
+	content: "";
+	display: block;
+	clear: both;
+	height: 0;
+}
+#contents h2 .button {
+	float: right;
+	margin-left: 10px;
+}
+
+/*-----------------------------------------------------------------------------
+	Footer
+-----------------------------------------------------------------------------*/
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 1.75em 19px;
+	background: #353530 url("images/navigation.png") 0 -95px repeat-x;
+	text-align: right;
+	text-shadow: -1px 2px 3px #111;
+	color: #fff;
+}
+#footer:after {
+	content: "";
+	display: block;
+	clear: left;
+	height: 0;
+}
+#version,
+#usr,
+#usr li {
+	margin: 0;
+	padding: 0
+}
+#version {
+	color: #A5A5A0;
+	float: left;
+}
+#usr li {
+	display: inline;
+	padding-left: 12px;
+}
+#usr a {
+	padding: 5px;
+	border: none;
+	text-decoration: none;
+	color: #fff;
+}
+#usr a:hover {
+	color: #ccb;
+}
+
+/*-----------------------------------------------------------------------------
+	Index page
+-----------------------------------------------------------------------------*/
+
+.index h2 {
+	border: none;
+}
+.index form {
+	margin: 0 -19px;
+	padding: 0;
+}
+.index .actions {
+	text-align: right;
+	padding: 1.75em 1.75em 0 0;
+	height: 38px;
+}
+.index .actions select {
+	width: auto;
+	display: -moz-inline-stack; /* Firefox 2 */
+	display: inline-block;
+	margin: 0;
+}
+.index .actions input {
+	margin: 0 0 0 5px;
+/*	padding: 3.5px 6px 4px;*/
+}
+.index .actions + ul.page {
+	margin-top: -58px;
+}
+ul.page {
+	margin: 0;
+	padding: 20px 50px 0 19px;
+	height: 36px;
+	color: #887;
+}
+ul.page li {
+	display: inline;
+	margin-right: 0.75em;
+}
+ul.page li[title] {
+	color: #222;
+}
+ul.page a {
+	margin: 0 -0.67em;
+	padding: 0.67em;
+	text-decoration: none;
+}
+
+/*-----------------------------------------------------------------------------
+	Single page
+-----------------------------------------------------------------------------*/
+
+.single #contents {
+	padding-bottom: 9em;
+}
+.single form {
+	margin: 0;
+}
+.primary {
+	float: left;
+	width: 60%;
+}
+.secondary {
+	float: right;
+	width: 35%;
+}
+.primary,
+.secondary {
+	padding: 0 0 2em;
+}
+.primary label,
+.secondary label,
+.secondary .label {
+	margin-top: 1.5em;
+}
+.primary .group label,
+.secondary .group label {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.primary .help,
+.secondary .help {
+	margin-top: 1.5em;
+}
+.primary label > * + span.frame,
+.secondary label > * + span.frame {
+	margin-top: 1.25em;
+}
+.primary label > i + span.frame,
+.secondary label > i + span.frame,
+.primary label > span.frame:first-child,
+.secondary label > span.frame:first-child {
+	margin-top: 0;
+}
+.file input {
+	margin: -3px 0;
+	font: inherit;
+}
+.file span {
+	overflow: hidden;
+	text-align: left;
+}
+.file a {
+	float: left;
+	max-width: 50%;
+	overflow: hidden;
+	text-overflow :ellipsis;
+}
+.file em {
+	float: right;
+	color: #998;
+	text-decoration: underline;
+	font-style: normal;
+	cursor: pointer;
+}
+.file em:hover {
+	color: #d43;
+}
+.single .actions {
+	clear: both;
+	border-top: 1px solid #ddc;
+	padding: 1.75em 0 0;
+}
+.single .actions input {
+	float: right;
+	margin-left: 1em;
+	padding: 3.5px 6px 4px;
+}
+.single .actions button {
+	float: left;
+}
+
+/*-----------------------------------------------------------------------------
+	Specific pages
+-----------------------------------------------------------------------------*/
+
+#blueprints-components form {
+	margin: 0;
+}
+#blueprints-components .triple {
+	padding-top: 5px;
+}
+#components {
+	padding-bottom: 5px;
+	background-color: #fff;
+}
+#components h3 {
+	margin-top: 0.5em;
+	margin-bottom: 0.75em;
+}
+#components h3:after {
+	content: "";
+	display: block;
+	clear: left;
+	height: 0;
+}
+#components h3 span {
+	float: left;
+}
+#components h3 .button {
+	float: right;
+}
+#components ul {
+	margin: 0;
+	border-top: 1px solid #ddc;
+	padding-top: 0.75em;
+	list-style: none;
+}
+#components li {
+	margin-bottom: 0.75em;
+}
+#components .button {
+	margin-top: -0.25em;
+	font-weight: normal;
+}
+#utilities {
+	margin: 0 0 1.5em 0;
+	border: 1px solid #bba;
+	max-height: 510px;
+	overflow: auto;
+	list-style: none;
+}
+#utilities li {
+	border-top: 1px solid #ddc;
+	padding: 0.63em 1.25em 0.67em;
+	cursor: pointer;
+}
+#utilities li:first-child {
+	border-top: none;
+}
+#utilities .odd {
+	background-color: #f5f5f4;
+}
+#utilities > :nth-child(odd) {
+	background-color: #f5f5f4;
+}
+#utilities .selected {
+	border-color: #617dc5;
+	background-color: #5273c0;
+}
+#utilities .selected.odd {
+	background-color: #5677c3;
+}
+#utilities .selected:nth-child(odd) {
+	background-color: #5677c3;
+}

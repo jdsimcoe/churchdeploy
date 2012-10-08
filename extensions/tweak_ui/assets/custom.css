@@ -1,0 +1,17 @@
+/* Remove 'Meiryo' from the stylesheet: */
+body { font: 68.75%/1.5 Lucida Grande, Tahoma, Verdana, sans-serif; }
+
+/* Double the height for multiselect-boxes: */
+select[multiple] { height: 20em !important; }
+
+/* On the pages-page: */
+li.instance h4 em { color: #848466; font-weight: normal; font-style: normal; }
+
+/* Multiselectbox: */
+div.custom-select-box { height: 20em; border: 1px solid #a9a9a9; padding: 2px; overflow: auto; }
+div.custom-unselect { padding: 2px 2px 2px 22px; cursor: pointer; background: url("unchecked.png") 3px 3px no-repeat; }
+div.custom-select { color: #fff; padding: 2px 2px 2px 22px; cursor: pointer; background: #a9aa98 url("checked.png") 3px 3px no-repeat; }
+div.custom-disabled { padding: 2px 2px 2px 22px; color: #a9a9a9; font-style: italic; background: url("disabled.png") 3px 3px no-repeat; }
+
+/* Fix for subsection manager: */
+div.field-subsectionmanager div.custom-select-box { display: none; }

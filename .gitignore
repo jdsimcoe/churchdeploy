@@ -1,0 +1,10 @@
+.htaccess
+._*
+.Apple*
+.DS_Store
+*.esproj
+*~
+*.geany
+install-log.txt
+manifest/*
+workspace/uploads/*

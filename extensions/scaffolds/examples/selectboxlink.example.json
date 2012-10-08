@@ -1,0 +1,19 @@
+{
+    "Name": {
+        "type": "input"
+    },
+    "Related": {
+        "type": "selectbox_link",
+        "related_field_id": [
+            {
+                "optgroup": "News",
+                "value": "Name"
+            }
+        ]
+    },
+    "Publish": {
+        "type": "checkbox",
+        "default_state": "yes",
+        "description": "Publish this entry?"
+    }
+}

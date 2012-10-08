@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="scaffolds" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Scaffolds</name>
+	<description lang="en">A Symphony extension that allows a developer to quickly create Sections using JSON</description>
+	<repo type="github">https://github.com/brendo/scaffolds</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/74663/</url>
+	<types>
+		<type>Workflow</type>
+	</types>
+	<authors>
+		<author>
+			<name github="brendo" symphony="brendo">Brendan Abbott</name>
+			<website>http://www.bloodbone.ws</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="0.5" date="2012-02-03" min="2.2">
+			- Add support for exporting/importing the Section essentials (name, navigation group, backend visibility). Definition files now have a slightly different output format (old formats still supported). Implements [#4](https://github.com/brendo/scaffolds/issues/4) &amp; [#5](https://github.com/brendo/scaffolds/issues/5)
+			- Fixed exporting of some Select values, [#2](https://github.com/brendo/scaffolds/issues/2)
+			- Exported definitions are now pretty printed
+			- Small Javascript cleanup
+		</release>
+		<release version="0.4" date="2011-08-10" min="2.2" />
+	</releases>
+</extension>

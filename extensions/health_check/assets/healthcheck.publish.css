@@ -1,0 +1,9 @@
+tr.invalid td{color: red;}
+tr.invalid.selected td{color: #fff;}
+input.button {float: right; margin: -20px 20px 0 0; background-color: #81B934; border: 0 none; border-radius: 1em 1em 1em 1em; color: #FFFFFF; cursor: pointer; display: inline-block; font: 10px/11px Lucida Grande,Leelawadee,Tahoma,Verdana,sans-serif; padding: 0.2em 1em; text-decoration: none; text-shadow: none;}
+input.button:hover {background: #222;color: #fff;}
+
+.recommendation p{margin-bottom: 5px;}
+.recommendation ul{
+	margin: 0 0 1.5em 5px;
+}
