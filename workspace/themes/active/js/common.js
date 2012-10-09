@@ -29,6 +29,7 @@
 			}
 
 			$(".alert").alert();
+			$('.carousel').carousel();
 
 			function isPlaceholderSupported() {
 		        var input = document.createElement("input");

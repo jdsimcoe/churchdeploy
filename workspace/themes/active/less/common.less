@@ -46,6 +46,7 @@
 @import 'league-gothic.less';
 @import 'font-awesome.less';
 @import 'font-awesome-ie7.less';
+@import 'anchor.less';
 
 // RefTagger
 // =========
@@ -70,6 +71,7 @@
 @teaching-text: #bbb;
 
 @icons: "PictosRegular", sans-serif;
+@anchor: "Anchor", sans-serif;
 
 // responsimage
 
@@ -424,6 +426,12 @@ hr.soften {
 
 // classes
 
+.anchor {
+	font-family: @anchor;
+	text-transform: lowercase !important;
+	font-style: normal;
+}
+
 .center {
 	text-align: center;
 }
@@ -505,11 +513,17 @@ hr.soften {
 					color: @color-accent;
 					position: relative;
 					top: @base * 3;
-					float: left;
+					display: block;
+					text-align: center;
 					text-transform: uppercase;
 					font-size: 44px;
 					z-index: 1000;
 					height: 100px;
+
+					span {
+						padding-bottom: @base;
+						border-bottom: 4px solid lighten(@color-accent, 40%);
+					}
 
 					&:hover {
 						color: darken(@color-accent,15%);
@@ -518,7 +532,7 @@ hr.soften {
 
 				.main {
 					#font > #helvetica > .regular;
-					float: right;
+					text-align: center;
 					position: relative;
 					right: -10px;
 					display: block;
@@ -835,14 +849,14 @@ hr.soften {
 		.navbar-inner {
 			.border-radius(0);
 			#font > #helvetica > .bold;
-			background: @color-gray-dark;
+			background: darken(desaturate(@color-accent, 10%), 25%);
 			filter: none;
 			text-transform: uppercase;
 		}
 
 		.btn-navbar {
 			.border-radius(0);
-			background: @color-gray-dark;
+			background: darken(desaturate(@color-accent, 10%), 25%);
 		}
 
 		.divider-vertical {
@@ -870,7 +884,7 @@ hr.soften {
 
 			input {
 				padding-left: @base * 3.5;
-				background: @color-gray-dark;
+				background: darken(desaturate(@color-accent, 10%), 25%);
 
 				&:focus {
 					padding-left: @base * 3.5;
@@ -912,7 +926,7 @@ hr.soften {
 			.border-radius(0);
 			border: none;
 			#font > #helvetica > .bold;
-			background: @color-gray-dark;
+			background: darken(desaturate(@color-accent, 10%), 25%);
 			filter: none;
 			text-transform: uppercase;
 			letter-spacing: 1px;
@@ -934,7 +948,7 @@ hr.soften {
 
 				input {
 					padding-left: @base * 3.5;
-					background: @color-gray-dark;
+					background: darken(desaturate(@color-accent, 10%), 25%);
 
 					&:focus {
 						background-color: @color-body;
@@ -946,10 +960,10 @@ hr.soften {
 				margin-left: @base;
 				top: 0;
 				z-index: 1040;
-				background: @color-gray-dark;
+				background: darken(desaturate(@color-accent, 10%), 25%);
 
 				.btn {
-					background: @color-gray-dark;
+					background: darken(desaturate(@color-accent, 10%), 25%);
 					#font > #helvetica > .bold;
 					text-transform: uppercase;
 					letter-spacing: 1px;
@@ -1070,7 +1084,7 @@ hr.soften {
 }
 
 .subnav {
-	background: #fdfdfd;
+	background: @color-white;
 	border: none;
 	text-transform: uppercase;
 	font-size: 12px;
@@ -1244,9 +1258,10 @@ hr.soften {
 }
 
 .footer {
-	background: @color-gray-dark;
+	background: darken(desaturate(@color-accent, 10%), 25%);
 	position: absolute;
-	margin: 60px 0 80px 0;
+	margin: @base * 6 0 0 0;
+	padding-bottom: @base * 3;
 	left: 0;
 	width: 100%;
 
@@ -1262,15 +1277,12 @@ hr.soften {
 		}
 
 		&.give {
+			background: darken(desaturate(@color-accent, 15%), 30%) !important;
+			padding: 3px 6px;
 			position: relative;
 			top: -5px;
-			color: @color-accent;
-			-webkit-box-shadow: none;
-			-moz-box-shadow: none;
-			box-shadow: none;
-			border: none;
+			color: lighten(@color-accent, 15%);
 			text-transform: uppercase;
-			text-shadow: none;
 
 			&:hover {
 				color: @color-white;
@@ -1349,7 +1361,7 @@ hr.soften {
 
 					&.entry {
 						padding: @base 0;
-						border-bottom: 2px solid darken(@color-gray-dark, 5%);
+						border-bottom: 2px solid darken(desaturate(@color-accent, 10%), 30%);
 
 						&.first {
 							padding-top: 0;
@@ -1380,11 +1392,12 @@ hr.soften {
 	}
 
 	.baseline {
-		background: darken(@color-gray-light, 25%);
+		background: darken(@color-gray-light, 5%);
 		position: relative;
+		top: @base * 3;
 		left: 0;
 		padding: @base * 2 @base * 5;
-		color: darken(desaturate(@color-accent, 20%), 35%);
+		color: darken(@color-gray-light, 35%);
 		font-size: 14px;
 
 		em {
@@ -1397,9 +1410,11 @@ hr.soften {
 
 			a {
 				#font > #helvetica > .bold;
-				color: darken(desaturate(@color-accent, 20%), 35%);
+				color: darken(@color-gray-light, 35%);
 				letter-spacing: 1px;
 				text-transform: uppercase;
+				padding-bottom: @base * 0.6;
+				border-bottom: 1px solid darken(@color-gray-light, 15%);
 
 				&:hover {
 					color: @color-white;
@@ -1408,7 +1423,7 @@ hr.soften {
 		}
 
 		a {
-			color: darken(desaturate(@color-accent, 20%), 35%);
+			color: darken(@color-gray-light, 35%);
 
 			&:hover {
 				color: @color-white;
@@ -1498,24 +1513,24 @@ hr.soften {
 				-webkit-font-smoothing: antialiased;
 
 				a {
-					background: darken(@color-body, 10%);
+					background: darken(@color-body, 5%);
 					display: block;
 					padding: @base * 8 0;
-					color: @color-gray-dark;
+					color: @color-accent;
 
 					span {
 						padding: @base * 2 0;
-						border-top: 2px solid @color-gray-dark;
-						border-bottom: 2px solid @color-gray-dark;
+						border-top: 2px solid @color-accent;
+						border-bottom: 2px solid @color-accent;
 					}
 
 					&:hover {
-						color: @color-accent;
+						color: darken(desaturate(@color-accent, 15%), 30%);
 						text-decoration: none;
 
 						span {
-							border-top: 2px solid @color-gray-dark;
-							border-bottom: 2px solid @color-gray-dark;
+							border-top: 2px solid lighten(@color-accent, 20%);
+							border-bottom: 2px solid lighten(@color-accent, 20%);
 						}
 					}
 				}
@@ -1581,10 +1596,12 @@ hr.soften {
 
 		&::-webkit-input-placeholder  {
 			position: relative;
-			top: 7px;
+			top: 4px;
 		}
 
 		&:-moz-placeholder {
+			position: relative;
+			top: 4px;
 		}
 	}
 
@@ -2404,10 +2421,6 @@ hr.soften {
 						vertical-align: center;
 						font-size: 18px;
 						line-height: 1.2;
-					}
-
-					.icon {
-						color: #999;
 					}
 
 					.email,

@@ -71,7 +71,9 @@
 							</xsl:call-template>
 						</div>
 						<a href="http://maps.google.com/maps?q={$address}" class="more" target="_blank">
-							<span class="icon">G</span>
+							<xsl:text>&#160;&#160;&#160;&#160;</xsl:text>
+							<i class="icon-list-ul icon-large"></i>
+							<xsl:text>&#160;&#160;</xsl:text>
 							<xsl:text> View on Google Maps</xsl:text>
 						</a>
 					</xsl:if>

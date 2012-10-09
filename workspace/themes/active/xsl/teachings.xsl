@@ -123,7 +123,7 @@
 												<xsl:call-template name="form-search-action"/>
 												<a>
 													<xsl:call-template name="url-search-home" />
-													<span class="icon">s</span>
+													<i class="icon-search icon-large"></i>
 												</a>
 												<input type="hidden" name="sections" value="teachings,teachings-tags,teachings-series" />
 												<input class="keywords" name="keywords" onclick="this.select()" placeholder="Search" autocomplete="off" />
@@ -167,9 +167,6 @@
                         <xsl:with-param name="length" select="230" />
                     </xsl:call-template>
 									</div>
-									<xsl:call-template name="teaching-tag-list">
-										<xsl:with-param name="tags" select="tags/item" />
-									</xsl:call-template>
 								</div>
 							</div>
 						</xsl:for-each>
@@ -323,7 +320,7 @@
 												<xsl:with-param name="url-only" select="true()" />
 											</xsl:call-template>
 										</xsl:attribute>
-										<label for="keywords"><span class="icon">s</span></label>
+										<label for="keywords"><i class="icon-search"></i>&#160;</label>
 										<input type="hidden" name="sections" value="teachings-tags" />
 										<input name="keywords" class="keywords" placeholder="Search" autocomplete="off" onclick="this.select()" />
 									</form>
@@ -336,7 +333,6 @@
 										<xsl:if test="position() &lt; last()">, </xsl:if>
 									</xsl:for-each>
 								</div>
-								<!-- <a href="" class="more"><span class="icon">z</span> See all tags</a> -->
 							</div>
 						</div>
 					</xsl:when>
@@ -355,41 +351,46 @@
 	<xsl:for-each select="$entry">
 		<xsl:if test="not($pt1) and video/item">
 			<div class="row">
-				<div class="span8">
-					<iframe src="http://player.vimeo.com/video/{video/item/id}?title=0&amp;byline=0&amp;portrait=0&amp;color=d83629" frameborder="0" class="video" webkitAllowFullScreen="webkitAllowFullScreen" mozallowfullscreen="mozallowfullscreen" allowFullScreen="allowFullScreen" style="width:620px; height:349px;"></iframe>
+				<div class="span12">
+					<a>
+						<xsl:call-template name="url-teachings" />
+							<img style="width: 940px; height: 529px">
+								<xsl:attribute name="data-responsimage">
+									<xsl:choose>
+										<xsl:when test="string-length(poster/@path)">
+											<xsl:value-of select="poster/filename" disable-output-escaping="yes" />
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:text disable-output-escaping="yes">accf-flat-4fc3e05b81747.jpg</xsl:text>
+										</xsl:otherwise>
+									</xsl:choose>
+								</xsl:attribute>
+							</img>
+					</a>
 				</div>
-				<div class="span4">
-					<h2>
-						<a>
-							<xsl:call-template name="url-teachings" />
-							<xsl:value-of select="title" disable-output-escaping="yes" />
-						</a>
-					</h2>
-					<div class="meta">
-						<div class="verse">
+			</div>
+			<div class="carousel-caption">
+				<a>
+					<xsl:call-template name="url-teachings" />
+					<h3>Latest Teaching</h3>
+					<h4>
+						<xsl:value-of select="title" disable-output-escaping="yes" />
+						<xsl:text> | </xsl:text>
+						<span class="verse">
+							<xsl:text> </xsl:text>
 							<xsl:value-of select="book/item" />
 							<xsl:text> </xsl:text>
 							<xsl:value-of select="chapter" />
-						</div>
-						<div class="teacher">
-							<em>by </em>
-							<xsl:value-of select="speaker/item/first-name" disable-output-escaping="yes" />
-							<xsl:text disable-output-escaping="yes"> </xsl:text>
-							<xsl:value-of select="speaker/item/last-name" disable-output-escaping="yes" />
-						</div>
-						<div class="date">
-							<xsl:call-template name="date-teaching">
-								<xsl:with-param name="date" select="date/date/start/@iso" />
-							</xsl:call-template>
-						</div>
-					</div>
+						</span>
+					</h4>
 					<div class="description">
 						<xsl:call-template name="truncate">
-                <xsl:with-param name="node" select="description" />
-                <xsl:with-param name="length" select="230" />
+              <xsl:with-param name="node" select="description" />
+              <xsl:with-param name="length" select="230" />
             </xsl:call-template>
+            <span class="link link-small inline pull-right">View Teaching</span>
 					</div>
-				</div>
+				</a>
 			</div>
 		</xsl:if>
 		<xsl:if test="number($pt3)">
@@ -482,7 +483,7 @@
 								<xsl:value-of select="speaker/item/last-name" disable-output-escaping="yes" />
 							</span>
 							<span class="verse">
-								<span class="icon">u</span>
+								<i class="icon-book">u</i>
 								<xsl:text> </xsl:text>
 								<xsl:value-of select="book/item" />
 								<xsl:text> </xsl:text>
@@ -526,12 +527,14 @@
 
 		<div class="button-wrapper">
 			<a href="{$audio-url}" class="btn downloadPopover pull-right" rel="popover" data-content="Right-click on this link and use the 'Save As' or 'Download File As' dialog to download teachings." data-original-title="Downloads" target="_blank">
-	        	<span class="icon">d</span>
+	        	<i class="icon-download"></i>
+	        	<xsl:text>&#160;&#160;</xsl:text>
 	        	<xsl:text>Download</xsl:text>
 	        </a>
 
 	        <button class="listen btn pull-right" data-toggle="collapse" data-target="#audio">
-				<span class="icon">m</span>
+				<i class="icon-music"></i>
+				<xsl:text>&#160;&#160;</xsl:text>
 				<xsl:text>Listen</xsl:text>
 			</button>
 		</div>
@@ -543,16 +546,16 @@
 			            <audio src="{$audio-url}" preload="none"></audio>
 			            <div class="play-pause">
 			                <p class="play">
-			                    <span class="icon">4</span>
+			                   <i class="icon-play"></i>
 			                </p>
 			                <p class="pause">
-			                    <span class="icon">5</span>
+			                   <i class="icon-pause"></i>
 			                </p>
 			                <p class="loading">
-			                    <span class="icon">1</span>
+			                    <i class="icon-refresh"></i>
 			                </p>
 			                <p class="error">
-			                    <span class="icon">!</span>
+			                    <i class="icon-exclamation-sign">!</i>
 			                </p>
 			            </div>
 			            <div class="scrubber">
@@ -586,7 +589,8 @@
 	<xsl:param name="tags" />
 
 	<div class="tags">
-		<span class="icon">z</span>
+		<i class="icon-tags"></i>
+		<xsl:text>&#160;&#160;</xsl:text>
 		<xsl:for-each select="tags/item">
 			<a>
 				<xsl:call-template name="url-teachings-tags" />

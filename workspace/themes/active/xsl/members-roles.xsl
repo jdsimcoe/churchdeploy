@@ -76,7 +76,7 @@
 											</span>
 
 											<span class="email">
-	
+
 												<a title="Email {$name}">
 													<xsl:attribute name="href">
 														<xsl:text disable-output-escaping="yes">mailto:</xsl:text>
@@ -138,7 +138,9 @@
 							</li>
 						</xsl:for-each>
 						<a href="/103/staff/" class="more">
-							<span class="icon">g</span>
+							<xsl:text>&#160;&#160;&#160;&#160;</xsl:text>
+							<i class="icon-list-ul icon-large"></i>
+							<xsl:text>&#160;&#160;</xsl:text>
 							<xsl:text>Meet our staff</xsl:text>
 						</a>
 					</ul>

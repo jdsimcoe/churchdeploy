@@ -162,7 +162,7 @@
 			<div class="row">
 				<div class="span12">
 					<a href="{$root}" class="logo standard">
-						Anchor Church
+						<span><i class="anchor">a</i> Anchor Church</span>
 					</a>
 					<ul class="main nav nav-pills">
 						<xsl:for-each select="//tags-all-entries/entry[ not(parent/item) and not(hide-from-header = 'Yes') ]">
@@ -181,24 +181,40 @@
 				<div class="row home">
 					<div id="main-content" class="span12">
 						<h3>Featured Content</h3>
-						<div class="component component-teachings large">
-							<div class="latest">
-								<xsl:for-each select="//teachings-featured-filtered/entry">
-									<xsl:call-template name="teaching-entry" />
-								</xsl:for-each>
-							</div>
-						</div>
+						<div id="frontCarousel" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="item active">
+									<xsl:for-each select="//teachings-featured-filtered/entry">
+										<xsl:call-template name="teaching-entry" />
+									</xsl:for-each>
+                </div>
+	              <xsl:if test="not($pt1) or $pt1 = 43">
+									<xsl:call-template name="component-featured">
+										<xsl:with-param name="entries" select="//featured-random/entry" />
+									</xsl:call-template>
+								</xsl:if>
+              </div>
+              <a class="left carousel-control" href="#frontCarousel" data-slide="prev">‹</a>
+              <a class="right carousel-control" href="#frontCarousel" data-slide="next">›</a>
+            </div>
 					</div>
 				</div>
-				<xsl:if test="not($pt1) or $pt1 = 43">
-					<xsl:call-template name="component-featured">
-						<xsl:with-param name="entries" select="//featured-random/entry" />
-					</xsl:call-template>
-				</xsl:if>
+			</div>
+		</div>
+		<div class="events">
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<xsl:call-template name="component-events">
+							<xsl:with-param name="position" select="'column-home'" />
+							<xsl:with-param name="entries" select="//events-3-latest/entry" />
+						</xsl:call-template>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="container well margin">
+		<div class="container margin">
 			<div class="row podcast">
 				<div class="span2">
 					<h3>Podcast</h3>
@@ -216,20 +232,8 @@
 				</div>
 			</div>
 		</div>
-
-	<div class="events">
-		<div class="container">
-			<div class="row">
-				<div class="span12">
-					<xsl:call-template name="component-events">
-						<xsl:with-param name="position" select="'column-home'" />
-						<xsl:with-param name="entries" select="//events-3-latest/entry" />
-					</xsl:call-template>
-				</div>
-			</div>
-		</div>
-	</div>
 	</xsl:if>
+
 </xsl:template>
 
 
@@ -364,7 +368,7 @@
 				</div>
 				<xsl:value-of select="normalize-space(//misc-all-entries/entry[name='footer']/content)" disable-output-escaping="yes" />
 				<div class="span4 twitter">
-					<h4><a href="http://twitter.com/atheycreek/" target="_blank">Recently on Twitter</a></h4>
+					<h4><a href="http://twitter.com/atheycreek/" target="_blank"><i class="icon-twitter"></i>&#160;&#160;Recently on Twitter</a></h4>
 					<ul>
 					<xsl:for-each select="//twitter-latest-entry/entry">
 						<li>

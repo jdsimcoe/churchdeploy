@@ -8,25 +8,27 @@
   <xsl:param name="entries" />
 
   <xsl:if test="count($entries)">
-    <div class="row featured">
 
-      <xsl:for-each select="$entries">
-          <div class="span4">
+    <xsl:for-each select="$entries">
+      <div class="item">
+        <div class="row">
+          <div class="span12">
             <a>
               <xsl:attribute name="href">
                 <xsl:value-of select="url" />
               </xsl:attribute>
 
-              <img style="width: 100%; height: 169px;" class="inline" data-responsimage-anchor="5">
+              <img style="width:940px; height: 529px;" class="inline" data-responsimage-anchor="5">
                 <xsl:attribute name="data-responsimage">
                   <xsl:value-of select="image" />
                 </xsl:attribute>
               </img>
             </a>
           </div>
-      </xsl:for-each>
+        </div>
+      </div>
+    </xsl:for-each>
 
-    </div>
   </xsl:if>
 
 </xsl:template>

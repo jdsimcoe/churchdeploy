@@ -20,7 +20,8 @@
 						<xsl:call-template name="class-rows" />
 						<a target="_blank">
 							<xsl:call-template name="url-downloads" />
-							<span class="icon">F</span>
+							<i class="icon-file icon-large"></i>
+							<xsl:text>&#160;&#160;</xsl:text>
 							<xsl:text>&#160;&#160;</xsl:text>
 							<span class="title">
 								<xsl:value-of select="name" />

@@ -30,7 +30,7 @@
 						<xsl:call-template name="form-search-action"/>
 						<a>
 							<xsl:call-template name="url-search-home" />
-							<span class="icon">s</span>
+							<i class="icon-search icon-large"></i>
 						</a>
 						<xsl:if test="$url-sections">
 							<input type="hidden" name="sections" value="{$url-sections}" />
@@ -112,8 +112,8 @@
 										</h3>
 										<div class="date">
 											<xsl:choose>
-												<xsl:when test="@section = 'events-recurring'"><span class="icon">r</span></xsl:when>
-												<xsl:otherwise><span class="icon">t</span></xsl:otherwise>
+												<xsl:when test="@section = 'events-recurring'"><i class="icon-refresh"></i><xsl:text>&#160;&#160;</xsl:text></xsl:when>
+												<xsl:otherwise><i class="icon-time"></i><xsl:text>&#160;&#160;</xsl:text></xsl:otherwise>
 											</xsl:choose>
 											<xsl:call-template name="timespan-format">
 												<xsl:with-param name="date" select="date/date" />
@@ -188,7 +188,7 @@
 									<a>
 										<xsl:call-template name="url-teachings-tags" />
 										<h3>
-												<span class="icon">z</span>
+												<i class="icon-tags"></i><xsl:text>&#160;&#160;</xsl:text>
 												<xsl:value-of select="tag" disable-output-escaping="yes" />
 												<span class="hyphen">—</span>
 												<span class="meta">
@@ -275,7 +275,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Show all</xsl:text>
 										</a>
 									</li>
@@ -286,7 +286,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}&amp;sections=downloads">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Downloads</xsl:text>
 										</a>
 									</li>
@@ -297,7 +297,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}&amp;sections=events">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Events</xsl:text>
 										</a>
 									</li>
@@ -308,7 +308,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}&amp;sections=events-recurring">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Bible Studies</xsl:text>
 										</a>
 									</li>
@@ -319,7 +319,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}&amp;sections=text">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Pages</xsl:text>
 										</a>
 									</li>
@@ -330,7 +330,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}&amp;sections=teachings">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Teachings</xsl:text>
 										</a>
 									</li>
@@ -341,7 +341,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}&amp;sections=teachings-series">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Teaching Series</xsl:text>
 										</a>
 									</li>
@@ -352,7 +352,7 @@
 											</xsl:attribute>
 										</xsl:if>
 										<a href="{$root}/{$pt1}/{$pt2}/?keywords={$url-keywords}&amp;sections=teachings-tags">
-											<span class="icon">J</span>
+											<i class="icon-check"></i>
 											<xsl:text> Teaching Tags</xsl:text>
 										</a>
 									</li>

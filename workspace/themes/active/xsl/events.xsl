@@ -69,7 +69,7 @@
 						<xsl:if test="$is-recurring = 'No'">
 							<a class="more">
 								<xsl:call-template name="url-events-home" />
-								<span class="icon">l</span>
+								<i class="icon-list-ul icon-large"></i>
 								<span>See more events</span>
 							</a>
 						</xsl:if>
@@ -161,13 +161,15 @@
 										<div class="date clearfix">
 											<xsl:choose>
 												<xsl:when test="$is-recurring = 'No'">
-													<span class="icon">t</span>
+													<i class="icon-time"></i>
+													<xsl:text>&#160;&#160;</xsl:text>
 													<xsl:call-template name="timespan-format">
 														<xsl:with-param name="date" select="date/date" />
 													</xsl:call-template>
 												</xsl:when>
 												<xsl:otherwise>
-													<span class="icon">r</span>
+													<i class="icon-refresh"></i>
+													<xsl:text>&#160;&#160;</xsl:text>
 													<xsl:value-of select="frequency" disable-output-escaping="yes" />
 												</xsl:otherwise>
 											</xsl:choose>

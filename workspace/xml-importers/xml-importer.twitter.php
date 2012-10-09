@@ -7,14 +7,14 @@
 			return array(
 				'name'			=> 'Twitter',
 				'author'		=> array(
-					'name'			=> 'Kirk Strobeck',
-					'website'		=> 'http://72.10.33.203',
-					'email'			=> 'kirk@strobeck.com'
+					'name'			=> 'Jonathan Simcoe',
+					'website'		=> 'http://churchdeploy',
+					'email'			=> 'jdsimcoe@gmail.com'
 				),
 				'description'	=> '',
 				'file'			=> __FILE__,
 				'created'		=> '2012-05-16T07:11:59+00:00',
-				'updated'		=> '2012-05-16T17:53:39+00:00'
+				'updated'		=> '2012-10-09T19:57:30+00:00'
 			);
 		}
 
@@ -76,7 +76,7 @@
     'uri' => 'http://api.twitter.com/',
   ),
 ),
-				'source'			=> 'http://search.twitter.com/search.rss?q=from%3Aatheycreek',
+				'source'			=> 'http://search.twitter.com/search.rss?q=from%3Achurchdeploy',
 				'section'			=> '24',
 				'unique-field'		=> '195'
 			);
