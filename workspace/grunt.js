@@ -3,6 +3,17 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
 
+    lint : {
+      all: ['themes/active/js/common.js', 'themes/active/js/alertManager.js']
+    },
+
+    minify : {
+      all: [
+        'themes/active/less/common.less',
+        'themes/active/coffee/*.coffee'
+      ]
+    },
+
     recess: {
       dist: {
         src: [
@@ -23,16 +34,13 @@ module.exports = function (grunt) {
       }
     },
 
-    lint : {
-      all: ['themes/active/js/common.js', 'themes/active/js/alertManager.js']
-    },
-
     watch : {
       scripts: {
-        files: '<config:lint.all>',
-        tasks: 'concat'
+        files: '<config:minify.all>',
+        tasks: 'coffee concat recess:dist'
       }
     },
+
     concat : {
       dist: {
         src : [
@@ -49,7 +57,9 @@ module.exports = function (grunt) {
     }
   });
 
-// Default task.
+// Load local NPM tasks
 grunt.loadNpmTasks('grunt-recess');
 grunt.loadNpmTasks('grunt-coffee');
+
+// Main task
 grunt.registerTask('default', 'coffee concat recess:dist')};
