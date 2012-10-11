@@ -11,6 +11,7 @@
 
 <xsl:template name="template-head">
 	<link rel="stylesheet" href="{$workspace}/themes/active/css/common.css" />
+	<xsl:comment><![CDATA[[if lte IE 7]> <link rel="stylesheet" href="{$workspace}/themes/active/css/font-awesome-ie7.css" /> <![endif]]]></xsl:comment>
 	<link rel="canonical" href="{$current-url}" />
 	<xsl:choose>
 		<xsl:when test="number($pt1) and $pt1 = 20 and $pt3 or number($pt1) and $pt1 = 20 and $pt3">
