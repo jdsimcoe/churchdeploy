@@ -84,20 +84,6 @@
 				}
 			}
 
-			Logos.ReferenceTagging.lbsBibleVersion = "KJV";
-			Logos.ReferenceTagging.lbsLinksOpenNewWindow = true;
-			Logos.ReferenceTagging.lbsLogosLinkIcon = "dark";
-			Logos.ReferenceTagging.lbsNoSearchTagNames = [ "cite", "h1", "h2", "h3", "h4", "h5", "h6" ];
-			Logos.ReferenceTagging.lbsTargetSite = "biblia";
-			Logos.ReferenceTagging.tag();
-			Logos.ReferenceTagging.lbsCssOverride = true;
-
-
-		  // $('.secret').raptorize({
-		  //   'enterOn' : 'click', //timer, konami-code, click
-		  //   'delayTime' : 1000 //time before raptor attacks on timer mode
-		  // });
-
 
 		});
 	});

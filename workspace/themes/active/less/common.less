@@ -67,6 +67,8 @@
 @color-mast: @color-body;
 @teaching-text: #bbb;
 
+@linkColor: @color-accent;
+
 @icons: "PictosRegular", sans-serif;
 @anchor: "Anchor", sans-serif;
 
@@ -1014,6 +1016,18 @@ hr.soften {
 				li {
 					margin: 0;
 
+					.dropdown-menu {
+						padding: 15px;
+
+						input[type="checkbox"] {
+							float: left;
+							margin-right: @base;
+						}
+
+						label {
+							text-transform: none;
+						}
+					}
 
 					&.last {
 
@@ -4733,11 +4747,14 @@ hr.soften {
 
 // RESPONSIVE IMAGES
 
-.featured {
+.carousel {
 
-	img {
-		width: 300px !important;
-		height: 200px !important;
+	.item {
+
+		img {
+			width: 940px !important;
+			height: 529px !important;
+		}
 	}
 }
 
@@ -4803,11 +4820,14 @@ hr.soften {
 
 @media (max-width: 979px)  {
 
-	.featured {
+	.carousel {
 
-		img {
-			width: 228px !important;
-			height: 152px !important;
+		.item {
+
+			img {
+				width: 724px !important;
+				height: 407px !important;
+			}
 		}
 	}
 
@@ -4870,11 +4890,14 @@ hr.soften {
 
 @media (max-width: 640px)  {
 
-	.featured {
+	.carousel {
 
-		img {
-			width: 600px !important;
-			height: 401px !important;
+		.item {
+
+			img {
+				width: 600px !important;
+				height: 338px !important;
+			}
 		}
 	}
 
@@ -4938,11 +4961,14 @@ hr.soften {
 
 @media (max-width: 480px)  {
 
-	.featured {
+	.carousel {
 
-		img {
-			width: 440px !important;
-			height: 294px !important;
+		.item {
+
+			img {
+				width: 440px !important;
+				height: 248px !important;
+			}
 		}
 	}
 
@@ -5004,11 +5030,14 @@ hr.soften {
 
 @media (max-width: 320px) {
 
-	.featured {
+	.carousel {
 
-		img {
-			width: 280px !important;
-			height: 187px !important;
+		.item {
+
+			img {
+				width: 280px !important;
+				height: 158px !important;
+			}
 		}
 	}
 

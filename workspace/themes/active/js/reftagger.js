@@ -24,3 +24,10 @@ kar:"hu-bible",byz:"byzprsd",kjv:"kjv1900",net:"gs-netbible"};a="AB,ASV,CEV,DARB
 a.join("|")+")|[,]?\\s?[(](?:"+a.join("|")+")[)])?",b.lbsCaseInsensitive?"i":"");b.lbsBookContRegExp=RegExp("^((?:(?:[,;\\.]+)?\\s?(?:and|or|&|&amp;)?)\\s*(?:(?:(?:cf|Cf|CF)[.,]?\\s?(?:v(?:v|ss?)?[.]?)?)[.,]?\\s*)?)((\\d{1,3})(?:\\s?\\:\\s?|\\.)\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?(?:\\s?(?:-|--|\\u2013|\\u2014)\\s?\\d{1,3}(?:(?:\\s?\\:\\s?|\\.)\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?)?)?)");b.lbsChapContRegExp=RegExp("^((?:(?:[,;\\.]+)?\\s?(?:and|or|&|&amp;)?)\\s*(?:(?:(?:cf|Cf|CF)[.,]?\\s?(?:v(?:v|ss?)?[.]?)?)[.,]?\\s*)?)(\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?(?:\\s?(?:-|--|\\u2013|\\u2014)\\s?\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?)?)(?!\\s*(?:st|nd|rd|th|T(?:i(?:m(?:othy)?)?|h(?:es(?:s(?:alonians)?)?)?)|S(?:a(?:m(?:uel)?)?|m)?|P(?:e(?:t(?:er)?)?|t)|Ma(?:c(?:c(?:abees)?)?)?|K(?:i(?:n(?:gs)?)?|gs)|J(?:o(?:hn?)?|h?n)|Es(?:d(?:r(?:as)?)?)?|C(?:o(?:r(?:inthians)?)?|h(?:r(?:on(?:icles)?)?)?)))",
 b.lbsCaseInsensitive?"i":"");b.Initialized=!0}},tag:function(a,c){b.lbsAddLogosLink=b.lbsAddLogosLink||b.lbsAddLibronixDLSLink;"ab".match(/b/);e.getElementById&&e.childNodes&&e.createElement&&RegExp.leftContext&&(b.Initialized||b.Init(),b.traverseDom(a||b.lbsRootNode||l),J||((new Image).src=[e.location.protocol,"//bible.logos.com/util/ReferenceData.aspx?location=",encodeURIComponent(e.location),"&refCount=",+x,"&microrefCount=",+y,"&bibleVersion=",encodeURIComponent(b.lbsBibleVersion),"&libronix=",
 !!b.lbsAddLogosLink,"&tooltip=",!!b.lbsUseTooltip,"&source=",encodeURIComponent(c||""),"&rand=",Math.random().toString().substring(10)].join(""),J=!0))}};i.Logos=i.Logos||{};i.Logos.ReferenceTagging=i.Logos.ReferenceTagging||b})(window,document,document.body);
+  Logos.ReferenceTagging.lbsBibleVersion = "KJV";
+  Logos.ReferenceTagging.lbsLinksOpenNewWindow = true;
+  Logos.ReferenceTagging.lbsLogosLinkIcon = "dark";
+  Logos.ReferenceTagging.lbsNoSearchTagNames = [ "cite", "h1", "h2", "h3", "h4", "h5", "h6" ];
+  Logos.ReferenceTagging.lbsTargetSite = "biblia";
+  Logos.ReferenceTagging.tag();
+  Logos.ReferenceTagging.lbsCssOverride = true;

@@ -7,5 +7,4 @@
 *.geany
 install-log.txt
 manifest/*
-node_modules/*
 workspace/uploads/*

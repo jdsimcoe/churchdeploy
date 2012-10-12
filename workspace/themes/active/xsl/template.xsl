@@ -36,7 +36,6 @@
 		<link rel="prefetch" href="{$root}/{@id}/{description/@handle}/" />
 	</xsl:for-each>
 	-->
-	<script src="{root}/workspace/themes/active/js/typekit-ck.js"></script>
   <script>
   	<xsl:comment>
     var _gaq=[['_setAccount','UA-32000708-1'],['_trackPageview']];
@@ -121,6 +120,21 @@
 						<li><a href="{$root}/13391/im-new-here/">New Here?</a></li>
 						<li class="divider-vertical"></li>
 						<li><a href="{$root}/24/give/" class="last">Give</a></li>
+						<li><a href="/signup">Sign Up</a></li>
+            <li class="divider-vertical"></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+							<div class="dropdown-menu">
+								<form method="post" action="login" accept-charset="UTF-8">
+									<input type="text" placeholder="Username" id="username" name="username" />
+									<input type="password" placeholder="Password" id="password" name="password" />
+									<input type="checkbox" name="remember-me" id="remember-me" value="1" />
+									<label class="string optional" for="user_remember_me"> Remember me</label>
+									<input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign In" />
+									<a href="/20/" class="btn btn-block">Sign Up</a>
+								</form>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -162,9 +176,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="span12">
-					<a href="{$root}" class="logo standard">
-						<span><i class="anchor">a</i> Anchor Church</span>
-					</a>
+					<div class="logo standard">
+						<a href="{$root}">
+							<span><i class="anchor">a</i> Anchor Church</span>
+						</a>
+					</div>
 					<ul class="main nav nav-pills">
 						<xsl:for-each select="//tags-all-entries/entry[ not(parent/item) and not(hide-from-header = 'Yes') ]">
 							<xsl:call-template name="subnav-entry" />

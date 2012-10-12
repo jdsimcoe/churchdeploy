@@ -230,80 +230,93 @@ kar:"hu-bible",byz:"byzprsd",kjv:"kjv1900",net:"gs-netbible"};a="AB,ASV,CEV,DARB
 a.join("|")+")|[,]?\\s?[(](?:"+a.join("|")+")[)])?",b.lbsCaseInsensitive?"i":"");b.lbsBookContRegExp=RegExp("^((?:(?:[,;\\.]+)?\\s?(?:and|or|&|&amp;)?)\\s*(?:(?:(?:cf|Cf|CF)[.,]?\\s?(?:v(?:v|ss?)?[.]?)?)[.,]?\\s*)?)((\\d{1,3})(?:\\s?\\:\\s?|\\.)\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?(?:\\s?(?:-|--|\\u2013|\\u2014)\\s?\\d{1,3}(?:(?:\\s?\\:\\s?|\\.)\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?)?)?)");b.lbsChapContRegExp=RegExp("^((?:(?:[,;\\.]+)?\\s?(?:and|or|&|&amp;)?)\\s*(?:(?:(?:cf|Cf|CF)[.,]?\\s?(?:v(?:v|ss?)?[.]?)?)[.,]?\\s*)?)(\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?(?:\\s?(?:-|--|\\u2013|\\u2014)\\s?\\d{1,3}(?:(?:\\s?(?:[a-z]|ff))(?=\\W|$))?)?)(?!\\s*(?:st|nd|rd|th|T(?:i(?:m(?:othy)?)?|h(?:es(?:s(?:alonians)?)?)?)|S(?:a(?:m(?:uel)?)?|m)?|P(?:e(?:t(?:er)?)?|t)|Ma(?:c(?:c(?:abees)?)?)?|K(?:i(?:n(?:gs)?)?|gs)|J(?:o(?:hn?)?|h?n)|Es(?:d(?:r(?:as)?)?)?|C(?:o(?:r(?:inthians)?)?|h(?:r(?:on(?:icles)?)?)?)))",
 b.lbsCaseInsensitive?"i":"");b.Initialized=!0}},tag:function(a,c){b.lbsAddLogosLink=b.lbsAddLogosLink||b.lbsAddLibronixDLSLink;"ab".match(/b/);e.getElementById&&e.childNodes&&e.createElement&&RegExp.leftContext&&(b.Initialized||b.Init(),b.traverseDom(a||b.lbsRootNode||l),J||((new Image).src=[e.location.protocol,"//bible.logos.com/util/ReferenceData.aspx?location=",encodeURIComponent(e.location),"&refCount=",+x,"&microrefCount=",+y,"&bibleVersion=",encodeURIComponent(b.lbsBibleVersion),"&libronix=",
 !!b.lbsAddLogosLink,"&tooltip=",!!b.lbsUseTooltip,"&source=",encodeURIComponent(c||""),"&rand=",Math.random().toString().substring(10)].join(""),J=!0))}};i.Logos=i.Logos||{};i.Logos.ReferenceTagging=i.Logos.ReferenceTagging||b})(window,document,document.body);
-"use strict";
+  Logos.ReferenceTagging.lbsBibleVersion = "KJV";
+  Logos.ReferenceTagging.lbsLinksOpenNewWindow = true;
+  Logos.ReferenceTagging.lbsLogosLinkIcon = "dark";
+  Logos.ReferenceTagging.lbsNoSearchTagNames = [ "cite", "h1", "h2", "h3", "h4", "h5", "h6" ];
+  Logos.ReferenceTagging.lbsTargetSite = "biblia";
+  Logos.ReferenceTagging.tag();
+  Logos.ReferenceTagging.lbsCssOverride = true;
 
-var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-
-$(document).ready(function() {
-  var alertLiveCookie, hostName, link, links, placeholdersupport, _i, _len, _results;
-  audiojs.events.ready(function() {
-    return audiojs.createAll();
-  });
-  $('.downloadPopover').hover(function() {
-    return $(this).popover('toggle');
-  });
-  hostName = window.location.hostname;
-  links = $("a");
-  alertLiveCookie = $.cookie("alertLive");
-  if (alertLiveCookie !== "hidden") {
-    $(".alertLive").removeClass("hidden");
-    $(".alertLive .close").on("click", function() {
-      return $.cookie("alertLive", "hidden", {
-        expires: 1,
-        path: "/"
+(function($, document, window, audiojs) {
+  "use strict";
+  return $(function() {
+    $.fn.exists = function() {
+      return $(this).length > 0;
+    };
+    return $(document).ready(function() {
+      var alertLiveCookie, hostName, i, isPlaceholderSupported, links, placeholdersupport, _results;
+      isPlaceholderSupported = function() {
+        var input;
+        input = document.createElement("input");
+        return "placeholder" in input;
+      };
+      audiojs.events.ready(function() {
+        return audiojs.createAll();
       });
+      $(".downloadPopover").hover(function() {
+        return $(this).popover("toggle");
+      });
+      hostName = window.location.hostname;
+      links = $("a");
+      alertLiveCookie = $.cookie("alertLive");
+      i = 0;
+      if (alertLiveCookie !== "hidden") {
+        $(".alertLive").removeClass("hidden");
+        $(".alertLive .close").click(function() {
+          return $.cookie("alertLive", "hidden", {
+            expires: 1,
+            path: "/"
+          });
+        });
+      }
+      $(".alert").alert();
+      $(".carousel").carousel();
+      placeholdersupport = isPlaceholderSupported();
+      if (placeholdersupport === false) {
+        $(".search-query").val("Search");
+      }
+      $(".search-query").focus(function() {
+        if (placeholdersupport === false ? $(this).val() === "Search" : void 0) {
+          return $(this).val("");
+        }
+      });
+      $(".search-query").blur(function() {
+        if (placeholdersupport === false ? $(this).val() === "" : void 0) {
+          return $(this).val("Search");
+        }
+      });
+      $(".modalLiveLink").click(function(e) {
+        e.preventDefault();
+        $(".modalLive").modal("show");
+        return false;
+      });
+      $(".modalLive .close").click(function(e) {
+        e.preventDefault();
+        $(".modalLive").modal("hide");
+        return false;
+      });
+      $(".modalLive").on("show", function() {
+        var url;
+        url = $(".modalLive .modal-body .url").html();
+        return $(".modalLive .modal-body .ustream-embed").html("<iframe src=\"" + url + "\" width=\"600\" height=\"363\" scrolling=\"no\" frameborder=\"0\" style=\"border: 0px none transparent;\"></iframe>");
+      });
+      $(".modalLive").on("hidden", function() {
+        $(".modalLive .modal-body .ustream-embed").html("#");
+        return $(".modalLive").hide();
+      });
+      i = 0;
+      _results = [];
+      while (i < links.length) {
+        if (links[i].href.indexOf(hostName) === -1) {
+          links[i].setAttribute("target", "_blank");
+        }
+        _results.push(i += 1);
+      }
+      return _results;
     });
-  }
-  $(".alert").alert();
-  $('.carousel').carousel();
-  placeholdersupport = false;
-  isPlaceholderSupported(function() {
-    var input;
-    input = document.createElement("input");
-    return placeholdersupport = (__indexOf.call(input, 'placeholder') >= 0);
   });
-  if (!isPlaceholderSupported()) {
-    $('.search-query').val('Search');
-  }
-  $('.search-query').focus(function() {
-    if (!placeholdersupport && $(this).val() === 'Search') {
-      return $(this).val('');
-    }
-  });
-  $('.search-query').blur(function() {
-    if (!placeholdersupport && !$(this).val().length) {
-      return $(this).val('Search');
-    }
-  });
-  $(".modalLiveLink").on("click", function(e) {
-    e.preventDefault();
-    return $(".modalLive").modal("show");
-  });
-  $(".modalLive .close").on("click", function(e) {
-    e.preventDefault();
-    return $(".modalLive").modal("hide");
-  });
-  $(".modalLive").on("show", function() {
-    var url;
-    url = $(".modalLive .modal-body .url").html();
-    return $(".modalLive .modal-body .ustream-embed").html("<iframe src=\"" + url + "\" width=\"600\" height=\"363\" scrolling=\"no\" frameborder=\"0\" style=\"border: 0px none transparent\"></iframe>");
-  });
-  $(".modalLive").on("hidden", function() {
-    $(".modalLive .modal-body .ustream-embed").html("#");
-    return $(".modalLive").hide();
-  });
-  targetBlank(function(link) {
-    if (link.href.indexOf(hostName) === -1) {
-      return link.setAttribute("target", "_blank");
-    }
-  });
-  _results = [];
-  for (_i = 0, _len = links.length; _i < _len; _i++) {
-    link = links[_i];
-    _results.push(targetBlank(link));
-  }
-  return _results;
-});
+})(jQuery, document, window, audiojs);
 
 (function($, window, _){
   "use strict";
