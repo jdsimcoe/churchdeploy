@@ -80,17 +80,17 @@ ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
 
 ## Components
 
-#### Downloads
+### Downloads
 
-#### Images
+### Images
 
-#### Locations
+### Locations
 
-#### Tags
+### Tags
 
-#### Text
+### Text
 
-#### Twitter
+### Twitter
 
 Cron job
 
@@ -100,9 +100,9 @@ Cron job
 
 This will update *Content > Twitter*
 
-#### Verses
+### Verses
 
-#### Videos
+### Videos
 
 Cron job
 
@@ -112,27 +112,27 @@ Cron job
 
 This will update *Content > Videos*
 
-#### Featured
+### Featured
 
-#### Events
+### Events
 
-#### Events: Recurring
+### Events: Recurring
 
-#### Events: Types
+### Events: Types
 
-#### Teachings
+### Teachings
 
-#### Teachings: Series
+### Teachings: Series
 
-#### Teachings: Tags
+### Teachings: Tags
 
-#### Members
+### Members
 
-#### Members: Roles
+### Members: Roles
 
-#### Members: Roles: Types
+### Members: Roles: Types
 
-#### UStream
+### UStream
 
 Cron job
 
