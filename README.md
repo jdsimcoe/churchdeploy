@@ -9,6 +9,33 @@ All of the components we used are free for you to use as Church Deploy is a comb
 Please write [kirk@strobeck.com](mailto:kirk@strobeck.com), IM kirkstrobeck on AIM/Skype, or call (503) 427-8050 if you have any questions.  
 We are excited to see how you use Church Deploy and how the project grows!
 
+## Installation
+
+Use the example organization [anchorchurch](https://github.com/anchorchurch), which contains a [theme](https://github.com/anchorchurch/anchor) and a [site](https://github.com/anchorchurch/churchdeploy) project. The theme should be like the [anchor theme](https://github.com/anchorchurch/anchor) and the [site](https://github.com/anchorchurch/churchdeploy) should be a [fork](https://github.com/anchorchurch/churchdeploy) of [Church Deploy](https://github.com/churchdeploy/churchdeploy). This will enable you to push updates directly to your server by installing git via SSH and using `git pull` to update your live site. The site project is your theme combined with the core Church Deploy ensemble.
+
+Once you fork [Church Deploy](https://github.com/churchdeploy/churchdeploy), you can update it
+
+    git remote add upstream https://github.com/churchdeploy/churchdeploy.git
+    git fetch upstream
+    git merge upstream/master
+    git push
+    
+To add your [theme](https://github.com/anchorchurch/anchor) to your [fork](https://github.com/anchorchurch/churchdeploy) in the [themes](https://github.com/anchorchurch/churchdeploy/tree/master/workspace/themes) directory as *active*
+    
+    git submodule add -f https://github.com/anchorchurch/anchor.git workspace/themes/active/
+    
+To clone a [site](https://github.com/anchorchurch/churchdeploy) project, remember to get the [submodule](https://github.com/anchorchurch/churchdeploy/tree/master/workspace/themes) by using the *recursive* flag
+
+	git clone https://github.com/anchorchurch/churchdeploy.git --recursive
+
+#### Server requirements
+
+- PHP 5.3
+- PHP's LibXML module, with the XSLT extension enabled (--with-xsl)
+- MySQL 5.0 or later
+- Apache webserver with mod_rewrite
+
+
 ## Features
 
 - Tag-based associations create content "meeting points," there aren't really any "pages" per se.
@@ -82,10 +109,3 @@ We are excited to see how you use Church Deploy and how the project grows!
 ## Walkthru
 
 We make no assumptions about how you will use Church Deploy. It is up to you to craft whatever solution is best for your use-case. We are doing our best to keep the core robust and controllable, so you can enable or disable different components. 
-
-## Server requirements *(same as Symphony CMS)*
-
-- PHP 5.3.2 or later
-- PHP's LibXML module, with the XSLT extension enabled (--with-xsl)
-- MySQL 5.0 or later
-- Apache webserver with mod_rewrite
