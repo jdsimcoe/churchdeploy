@@ -1,13 +1,14 @@
 ## Church Deploy is a robust [Symphony CMS](http://getsymphony.com/) ensemble (template)
 
-The base installation of Church Deploy doesn't come with any components, however they can be easily added. We use the term `component` for a Church Deploy object. A Church Deploy component has a template XSL file, with its component name, and some MySQL queries to add the functionality. The MySQL queries are always at the top of its respective template.
+The base installation of Church Deploy comes with all components. Our hope is to make this modular at some point. We use the term `component` for a Church Deploy object (in Symphony, objects are called *sections*). All Church Deploy components have a template XSL file, which lives in the *workspace/themes/yourtheme* directory, with its component name.
 
-We made an out of the box template for you to work from called `anchor` in which we use the name "Anchor Church." Church Deloy will use whatever theme that you title `active`. So if you want to switch templates, simply go to the templates directory and change the folder name. Church Deploy is designed to have all of the core functionalty and let your theme template files simply make only the changes that are unique to your installation.
+We made an out of the box template for you to work from called [anchor](https://github.com/anchorchurch/anchor) in which we use the name "Anchor Church." Church Deloy will use whatever theme that you title `active`. So if you want to switch templates, simply go to the templates directory and change the folder name. Church Deploy is designed to have all of the core functionalty in the parent project and let your theme template files only make the changes that are unique to your installation, but it isn't limiting in the least.
 
-All of the components we used are free for you to use as Church Deploy is a combination of open-source projects.
+All of the components we used are free for you to use with Church Deploy as it is a combination of open-source projects. Thank you open source community!
 
-Please write [kirk@strobeck.com](mailto:kirk@strobeck.com), IM kirkstrobeck on AIM/Skype, or call (503) 427-8050 if you have any questions.  
-We are excited to see how you use Church Deploy and how the project grows!
+Please write [kirk@strobeck.com](mailto:kirk@strobeck.com), IM kirkstrobeck on AIM/Skype, or call (503) 427-8050 if you have any questions. 
+
+**We are excited to see how you use Church Deploy and how the project grows!**
 
 ## Features
 
