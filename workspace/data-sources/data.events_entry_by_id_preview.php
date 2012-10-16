@@ -34,6 +34,7 @@
 				'downloads: name',
 				'downloads: file',
 				'downloads: link',
+				'tags: tag',
 				'childcare',
 				'images: image',
 				'images: height',
@@ -55,7 +56,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-10-12T17:43:52+00:00'
+				'release-date' => '2012-10-16T21:41:11+00:00'
 			);
 		}
 

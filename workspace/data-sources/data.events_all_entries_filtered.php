@@ -4,7 +4,6 @@
 
 	Class datasourceevents_all_entries_filtered extends Datasource{
 
-		public $dsParamCACHE = 'null';
 		public $dsParamROOTELEMENT = 'events-all-entries-filtered';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
@@ -25,7 +24,8 @@
 				'system:pagination',
 				'name',
 				'date',
-				'description'
+				'description',
+				'tags: tag'
 		);
 
 
@@ -38,11 +38,11 @@
 			return array(
 				'name' => 'Events: All entries (filtered)',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://atheycreek.com',
-					'email' => 'kirk@strobeck.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-07-04T17:35:26+00:00'
+				'release-date' => '2012-10-16T21:38:43+00:00'
 			);
 		}
 

@@ -24,20 +24,12 @@
 				'name',
 				'date',
 				'description',
-				'location: name-formal',
-				'location: name-casual',
-				'location: description',
-				'location: address',
-				'location: city',
-				'location: state',
-				'location: zip',
-				'location: latitude',
-				'location: longitude',
 				'member-role: member: first-name',
 				'member-role: member: last-name',
 				'member-role: member: photo',
 				'member-role: member: job-title',
 				'member-role: role: role',
+				'tags: tag',
 				'childcare'
 		);
 
@@ -51,11 +43,11 @@
 			return array(
 				'name' => 'Events: Entry by ID (api)',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://72.10.33.203',
-					'email' => 'kirk@strobeck.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-06-24T03:38:53+00:00'
+				'release-date' => '2012-10-16T21:40:14+00:00'
 			);
 		}
 

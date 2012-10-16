@@ -4,7 +4,6 @@
 
 	Class datasourceevents_entries_by_tag extends Datasource{
 
-		public $dsParamCACHE = 'null';
 		public $dsParamROOTELEMENT = 'events-entries-by-tag';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'no';
@@ -26,7 +25,8 @@
 				'system:pagination',
 				'name',
 				'date',
-				'description'
+				'description',
+				'tags: tag'
 		);
 
 
@@ -39,11 +39,11 @@
 			return array(
 				'name' => 'Events: Entries by tag',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://atheycreek.com',
-					'email' => 'kirk@strobeck.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-07-04T17:35:53+00:00'
+				'release-date' => '2012-10-16T21:37:27+00:00'
 			);
 		}
 

@@ -25,8 +25,7 @@
 				'name',
 				'date',
 				'description',
-				'location: name-formal',
-				'location: name-casual',
+				'tags: tag',
 				'childcare'
 		);
 
@@ -40,11 +39,11 @@
 			return array(
 				'name' => 'Events: All entries past (filtered)',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://72.10.33.203',
-					'email' => 'kirk@strobeck.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-05-25T00:40:58+00:00'
+				'release-date' => '2012-10-16T21:38:59+00:00'
 			);
 		}
 
