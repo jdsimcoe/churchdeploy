@@ -4,7 +4,6 @@
 
 	Class datasourceevents_3_latest extends Datasource{
 
-		public $dsParamCACHE = 'null';
 		public $dsParamROOTELEMENT = 'events-3-latest';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
@@ -24,7 +23,8 @@
 				'system:pagination',
 				'name',
 				'date',
-				'description'
+				'description',
+				'tags: tag'
 		);
 
 
@@ -37,11 +37,11 @@
 			return array(
 				'name' => 'Events: 3 latest',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://atheycreek.com',
-					'email' => 'kirk@strobeck.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-07-04T17:36:19+00:00'
+				'release-date' => '2012-10-13T14:53:48+00:00'
 			);
 		}
 
