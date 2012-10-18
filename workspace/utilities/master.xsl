@@ -17,7 +17,6 @@
 	indent="no"
 	/>
 
-<xsl:include href="../utilities/alerts.xsl" />
 <xsl:include href="../utilities/classes.xsl" />
 <xsl:include href="../utilities/components.xsl" />
 <xsl:include href="../utilities/date-time-advanced.xsl" />
@@ -27,6 +26,7 @@
 <xsl:include href="../utilities/toolkit.xsl" />
 <xsl:include href="../utilities/url-encode.xsl" />
 <xsl:include href="../themes/active/xsl/template.xsl" />
+<xsl:include href="../themes/active/xsl/alerts.xsl" />
 
 <xsl:param name="cookie-username" />
 <xsl:param name="url-language" />
