@@ -8,13 +8,13 @@
 				'name'			=> 'Twitter',
 				'author'		=> array(
 					'name'			=> 'Jonathan Simcoe',
-					'website'		=> 'http://churchdeploy',
+					'website'		=> 'http://atheycreek',
 					'email'			=> 'jdsimcoe@gmail.com'
 				),
 				'description'	=> '',
 				'file'			=> __FILE__,
 				'created'		=> '2012-05-16T07:11:59+00:00',
-				'updated'		=> '2012-10-09T19:57:30+00:00'
+				'updated'		=> '2012-10-18T15:58:45+00:00'
 			);
 		}
 
@@ -76,7 +76,7 @@
     'uri' => 'http://api.twitter.com/',
   ),
 ),
-				'source'			=> 'http://search.twitter.com/search.rss?q=from%3Achurchdeploy',
+				'source'			=> 'http://search.twitter.com/search.rss?q=from%3Aatheycreek',
 				'section'			=> '24',
 				'unique-field'		=> '195'
 			);
