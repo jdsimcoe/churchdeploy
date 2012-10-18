@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-
+<xsl:include href="../themes/active/xsl/alerts.xsl" />
 <xsl:include href="../themes/active/xsl/downloads.xsl" />
 <xsl:include href="../themes/active/xsl/events.xsl" />
 <xsl:include href="../themes/active/xsl/images.xsl" />

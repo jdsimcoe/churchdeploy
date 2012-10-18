@@ -7,7 +7,7 @@
 		public $dsParamROOTELEMENT = 'alerts-entries-by-tag';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'no';
-		public $dsParamLIMIT = '1';
+		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamREQUIREDPARAM = '$pt1:43';
@@ -19,12 +19,13 @@
 				'205' => '{$pt1:43}',
 				'227' => 'no',
 				'221' => 'no',
-				'255' => 'later than {$today}, {$today}',
+				'263' => 'later than {$today}, {$today}',
 		);
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'url',
 				'content: formatted',
+				'expiration',
 				'can-be-closed',
 				'type'
 		);
@@ -37,13 +38,13 @@
 
 		public function about(){
 			return array(
-				'name' => 'Alerts: Entries by tag',
+				'name' => 'Alerts: entries by tag',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-09-28T15:08:39+00:00'
+				'release-date' => '2012-10-18T21:31:19+00:00'
 			);
 		}
 

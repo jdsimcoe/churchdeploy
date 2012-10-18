@@ -17,14 +17,14 @@
 		public $dsParamFILTERS = array(
 				'227' => 'yes',
 				'221' => 'no',
-				'255' => 'later than {$today}, {$today}',
+				'263' => 'later than {$today}, {$today}',
 		);
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'url',
 				'content: formatted',
+				'expiration',
 				'can-be-closed',
-				'show-everywhere',
 				'type'
 		);
 
@@ -42,7 +42,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-09-28T15:08:58+00:00'
+				'release-date' => '2012-10-18T21:31:32+00:00'
 			);
 		}
 

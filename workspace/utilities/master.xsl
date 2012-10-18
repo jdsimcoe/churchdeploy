@@ -26,7 +26,6 @@
 <xsl:include href="../utilities/toolkit.xsl" />
 <xsl:include href="../utilities/url-encode.xsl" />
 <xsl:include href="../themes/active/xsl/template.xsl" />
-<xsl:include href="../themes/active/xsl/alerts.xsl" />
 
 <xsl:param name="cookie-username" />
 <xsl:param name="url-language" />
