@@ -5,6 +5,8 @@
 *.esproj
 *~
 *.geany
+*.sublime-project
+*.sublime-workspace
 install-log.txt
 manifest/*
 workspace/uploads/*
