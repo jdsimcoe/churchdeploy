@@ -4,14 +4,13 @@
 <xsl:template name="alerts">
 
 	<xsl:if test="//status-all-entries/entry[name = 'ustream-status']/content = 'live'">
-        <div class="alert alertLive hidden">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <div class="container">
-                <p>
-                    Athey Creek is currently broadcasting live. <a class="modalLiveLink" href="#">Watch Live &#8594;</a><a class="mobileLink" href="http://www.ustream.tv/embed/4325662/?autoplay=true">Watch Live &#8594;</a>
-                </p>
-            </div>
+    <div class="alert alertLive hidden">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="container">
+            <p>Athey Creek is currently broadcasting live. <a href="{$root}/14097/live/">Watch Live &#8594;</a>
+            </p>
         </div>
+    </div>
 	</xsl:if>
 
      <xsl:if test="//alerts-global">
