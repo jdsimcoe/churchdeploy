@@ -9,12 +9,12 @@
     {
       "name": "theme: atheycreek",
       "path": "workspace/themes/active",
-      "folder_exclude_patterns": [".git", "grunt/node-modules"]
+      "folder_exclude_patterns": [".git", "grunt/node_modules"]
     },
     {
       "name": "theme: anchor",
       "path": "workspace/themes/anchor",
-      "folder_exclude_patterns": [".git", "grunt/node-modules"]
+      "folder_exclude_patterns": [".git", "grunt/node_modules"]
     }
   ]
 }
