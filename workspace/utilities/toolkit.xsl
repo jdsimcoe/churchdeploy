@@ -11,7 +11,8 @@ Toolkit
 <xsl:template name="toolkit">
 
 	<xsl:if test="$pt1 = 'toolkit' and $pt2 = 'images'">
-		<h2>New</h2>
+		<h1>Responsive Image Toolkit</h1>
+		<hr class="soften" />
 		<xsl:if test="//images-create/message or //images-create/image/@message">
 			<p>
 				<b><xsl:value-of select="//images-create/message" /></b>
@@ -19,21 +20,25 @@ Toolkit
 				<xsl:value-of select="//images-create/image/@message" />
 			</p>
 		</xsl:if>
-		<form method="post" action="" enctype="multipart/form-data">
-			<label>Image <input name="fields[image]" type="file" style="width: 200px; background: #fff; border: solid 1px #ccc; padding: 15px; margin: 15px 0;" /></label>
-			<input name="action[images-create]" type="submit" value="Submit" class="btn btn-primary" />
+		<br />
+		<form method="post" action="" enctype="multipart/form-data" class="center">
+			<input name="fields[image]" type="file" class="btn" />
+			<xsl:text>&#160;&#160;</xsl:text>
+			<input name="action[images-create]" type="submit" value="Submit" class="btn btn-warning" style="padding:8px; text-transform:uppercase; font-weight: bold;" />
 		</form>
-		<p><a href="{$root}/symphony/publish/images/new/">Use the multiple file uploader »</a></p>
+		<br /><br />
+		<p class="center"><a href="{$root}/symphony/publish/images/new/" class="link link-small">OR use the multiple file uploader »</a></p>
+		<br />
 		<xsl:if test="//images-toolkit-all-entries-filtered/entry">
-			<hr />
-			<table border="1" style="border-collapse: collapse">
+			<hr class="soften" />
+			<table border="1" style="border-collapse: collapse; width: 100%; border-color: #ededec; border: 1px solid #ededec;">
 				<xsl:for-each select="//images-toolkit-all-entries-filtered/entry">
 					<tr>
 						<td style="padding: 10px">
 							<img src="{$root}/image/2/0/50/5/0{image/@path}/{image/filename}" style="border: #000 1px solid" />
 						</td>
 						<td style="padding: 10px">
-							<input value='&lt;img data-responsimage="{image/filename}" style="width: 350px; height: 200px;" class="inline" data-responsimage-anchor="5" /&gt;' style="width: 550px; font-size: 13px" onclick="this.select()" />
+							<input value='&lt;img data-responsimage="{image/filename}" style="width: 350px; height: 200px;" class="inline" data-responsimage-anchor="5" src="/workspace/img/spacer.gif" /&gt;' style="width: 550px; font-size: 13px" onclick="this.select()" />
 							<p style="font-size: 12px; margin: 5px 0; font-family: helvetica">
 								Filesize: <xsl:value-of select="image/@size" /> |
 								Type: <xsl:value-of select="image/@type" /> |
@@ -42,7 +47,7 @@ Toolkit
 							</p>
 						</td>
 						<td style="padding: 10px">
-							<a href="{$root}/symphony/publish/images/edit/{@id}/">Edit/Delete »</a>
+							<a href="{$root}/symphony/publish/images/edit/{@id}/" class="link link-small">Edit/Delete »</a>
 						</td>
 					</tr>
 				</xsl:for-each>
