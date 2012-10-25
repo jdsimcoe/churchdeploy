@@ -176,63 +176,10 @@
 	"buffers":
 	[
 		{
-			"file": "workspace/themes/active/less/athey.less",
+			"file": "manifest/config.php",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "workspace/themes/active/coffee/athey.coffee",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "workspace/themes/active/grunt/grunt.js",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "workspace/themes/active/xsl/template.xsl",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "Searching 915 files for \"40/40/5\"\n\n/Users/jdsimcoe/Sites/churchdeploy//extensions/subsectionmanager/lib/class.subsectionmanager.php:\n   39  				'image' =>	'<li data-value=\"{$value}\" data-drop=\"{$droptext}\" class=\"preview\">\n   40  								<input type=\"hidden\" value=\"{$value}\" />\n   41: 								<img src=\"{$url}/image/2/40/40/5{$preview}\" width=\"40\" height=\"40\" class=\"handle\" />\n   42  								<a href=\"{$href}\" class=\"image file handle\">{$caption}</a>\n   43  							 </li>',\n   ..\n   50  			'index' => array(\n   51  				'text' =>	'{$caption}',\n   52: 				'image' =>	'<img src=\"{$url}/image/2/40/40/5{$preview}\" width=\"40\" height=\"40\" /><span>{$caption}</span>',\n   53  				'file' =>	'{$caption}'\n   54  			)\n\n2 matches in 1 file\n\n\nSearching 915 files for \"{$preview}\"\n\n/Users/jdsimcoe/Sites/churchdeploy//extensions/subsectionmanager/lib/class.subsectionmanager.php:\n   39  				'image' =>	'<li data-value=\"{$value}\" data-drop=\"{$droptext}\" class=\"preview\">\n   40  								<input type=\"hidden\" value=\"{$value}\" />\n   41: 								<img src=\"{$url}/image/2/40/40/5{$preview}\" width=\"40\" height=\"40\" class=\"handle\" />\n   42  								<a href=\"{$href}\" class=\"image file handle\">{$caption}</a>\n   43  							 </li>',\n   ..\n   50  			'index' => array(\n   51  				'text' =>	'{$caption}',\n   52: 				'image' =>	'<img src=\"{$url}/image/2/40/40/5{$preview}\" width=\"40\" height=\"40\" /><span>{$caption}</span>',\n   53  				'file' =>	'{$caption}'\n   54  			)\n   ..\n  307  				if($type == 'image') {\n  308  					$template = str_replace('{$url}', URL, self::$templates[$mode]['image']);\n  309: 					$template = str_replace('{$preview}', $preview, $template);\n  310  					$template = str_replace('{$href}', $href, $template);\n  311  					$template = str_replace('{$value}', $entry['id'], $template);\n  ...\n  321  				}\n  322  				else {\n  323: 					$template = str_replace('{$preview}', $entry['id'], self::$templates[$mode]['text']);\n  324  					$template = str_replace('{$value}', $entry['id'], $template);\n  325  					$template = str_replace('{$droptext}', htmlspecialchars($droptext), $template);\n  ...\n  349  				$template = str_replace('{$caption}', $caption, self::$templates['index'][($type == 'image' ? 'image' : 'text')]);\n  350  				if($type == 'image') {\n  351: 					$template = str_replace('{$preview}', $preview, $template);\n  352  					$template = str_replace('{$url}', URL, $template);\n  353  				}\n\n5 matches in 1 file\n",
-			"settings":
-			{
-				"buffer_size": 2418,
-				"line_ending": "Unix",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "workspace/utilities/master.xsl",
-			"settings":
-			{
-				"buffer_size": 13808,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "",
-			"file": "workspace/themes/active/xsl/teachings.xsl",
-			"file_size": -1,
-			"file_write_time": -1,
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 7791,
 				"line_ending": "Unix"
 			}
 		}
@@ -421,6 +368,12 @@
 	},
 	"file_history":
 	[
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/teachings.xsl",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/utilities/master.xsl",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/template.xsl",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/grunt/grunt.js",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/coffee/athey.coffee",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/athey.less",
 		"/Users/jdsimcoe/Sites/churchdeploy/extensions/image_index_preview/assets/image_index_preview.publish.css",
 		"/Users/jdsimcoe/Sites/churchdeploy/extensions/image_index_preview/assets/image_index_preview.publish.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/images.xsl",
@@ -434,7 +387,6 @@
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/pictos.less",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/bootstrap/less/carousel.less",
 		"/Users/jdsimcoe/Dropbox/Apps/Mou/LESS/Athey.less",
-		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/teachings.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/alerts.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/js/responsimage.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/bootstrap/less/navbar.less",
@@ -449,7 +401,6 @@
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/utilities/alerts.xsl",
 		"/Users/jdsimcoe/Dropbox/Apps/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/css/ie7.css",
-		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/grunt/grunt.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/utilities/url-encode.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/package.json",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/js/reftagger.js",
@@ -544,11 +495,7 @@
 		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/utilities/master.xsl",
 		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/utilities/classes.xsl",
 		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/bootstrap/less/dropdowns.less",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/utilities/components.xsl",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/extensions/members/README.markdown",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/extensions/members/lib/class.members.php",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/bootstrap/less/mixins.less",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/bootstrap/less/easing.less"
+		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/utilities/components.xsl"
 	],
 	"find":
 	{
@@ -730,92 +677,32 @@
 			[
 				{
 					"buffer": 0,
-					"file": "workspace/themes/active/less/athey.less",
+					"file": "manifest/config.php",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 7791,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								6861,
+								6861
 							]
 						],
 						"settings":
 						{
-							"encoding_helper_confidence": 1.0,
+							"auto_name": "",
+							"encoding_helper_confidence": 0.896900805127,
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "workspace/themes/active/coffee/athey.coffee",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"encoding_helper_confidence": 1.0,
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "workspace/themes/active/grunt/grunt.js",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"encoding_helper_confidence": 1.0,
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2309.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -823,168 +710,8 @@
 			]
 		},
 		{
-			"selected": 3,
 			"sheets":
 			[
-				{
-					"buffer": 3,
-					"file": "workspace/themes/active/xsl/template.xsl",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"encoding_helper_confidence": 0.9690625,
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/XML/XSL.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"settings":
-					{
-						"buffer_size": 2418,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										319,
-										326
-									],
-									[
-										593,
-										600
-									],
-									[
-										1061,
-										1071
-									],
-									[
-										1335,
-										1345
-									],
-									[
-										1607,
-										1617
-									],
-									[
-										1856,
-										1866
-									],
-									[
-										2286,
-										2296
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								544,
-								544
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "workspace/utilities/master.xsl",
-					"settings":
-					{
-						"buffer_size": 13808,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								291,
-								291
-							]
-						],
-						"settings":
-						{
-							"encoding_helper_confidence": 0.773323101803,
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/XML/XSL.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "workspace/themes/active/xsl/teachings.xsl",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"encoding_helper_confidence": 0.776168807648,
-							"encoding_helper_encoding": "UTF-8",
-							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/XML/XSL.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 4521.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
