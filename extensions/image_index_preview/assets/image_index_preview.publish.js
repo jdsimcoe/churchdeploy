@@ -12,7 +12,7 @@
 			var link = $(this),
 				href = link.attr('href'),
                 size = (Symphony.Context.get('env')['page'] == 'index' ? '40/40' : '0/150')
-				file = href.replace(Symphony.Context.get('root') + '/workspace/', '');
+				file = href.replace('http://atheycreek.com/workspace/', '');
 
 			// Append preview
 			if(file) {
