@@ -6,7 +6,7 @@ We made an out of the box template for you to work from called [anchor](https://
 
 All of the components we used are free for you to use with Church Deploy as it is a combination of open-source projects. Thank you open source community!
 
-Please write [kirk@strobeck.com](mailto:kirk@strobeck.com), IM kirkstrobeck on AIM/Skype, or call (503) 427-8050 if you have any questions. 
+Please write [kirk@strobeck.com](mailto:kirk@strobeck.com), IM kirkstrobeck on AIM/Skype, or call (503) 427-8050 if you have any questions.
 
 **We are excited to see how you use Church Deploy and how the project grows!**
 
@@ -38,11 +38,11 @@ Once you fork [Church Deploy](https://github.com/churchdeploy/churchdeploy), you
     git fetch upstream
     git merge upstream/master
     git push
-    
+
 To add your [theme](https://github.com/anchorchurch/anchor) to your [fork](https://github.com/anchorchurch/churchdeploy) in the [themes](https://github.com/anchorchurch/churchdeploy/tree/master/workspace/themes) directory as *active*
-    
+
     git submodule add -f https://github.com/anchorchurch/anchor.git workspace/themes/active/
-    
+
 To clone a [site](https://github.com/anchorchurch/churchdeploy) project, remember to get the [submodule](https://github.com/anchorchurch/churchdeploy/tree/master/workspace/themes) by using the *recursive* flag
 
 	git clone https://github.com/anchorchurch/churchdeploy.git --recursive
@@ -57,8 +57,8 @@ To clone a [site](https://github.com/anchorchurch/churchdeploy) project, remembe
 #### Software recommendations
 
 - Mac OS X
-    - Local server: [MAMP pro](http://www.mamp.info/en/mamp-pro/index.html) - MAMP is free, pro is $59.00
-    - MySQL: [Sequel pro](http://www.sequelpro.com/) - Donationware
+    - Local server: [MAMP Pro](http://www.mamp.info/en/mamp-pro/index.html) - MAMP is free, pro is $59.00
+    - MySQL: [Sequel Pro](http://www.sequelpro.com/) - Donationware
     - Code editor: [Sublime 2](http://www.sublimetext.com/2) - Free demo, $59.00 to buy
     - FTP: [Transmit](http://panic.com/transmit/)
 
@@ -73,10 +73,10 @@ All text areas support [Markdown](http://whatismarkdown.com/) .. its awesome :)
 
 Go to `http://your-localhost/toolkit/images/` to [add images](http://see.kirkstrobeck.com/G7Xl) for use in text fields while utilizing [responsimage](http://responsimage.com/).
 
-Cron jobs need to be added to use twitter, vimeo, and ustream .. see component documentation below for details. The cron job will push the data into the backend CMS automatically. 
+Cron jobs need to be added to use twitter, vimeo, and ustream .. see component documentation below for details. The cron job will push the data into the backend CMS automatically.
 
-Get your *auth token* by going to *System > Authors > Your-name*, then check the box next to  
-ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/      
+Get your *auth token* by going to *System > Authors > Your-name*, then check the box next to
+ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
 `725e2ffa` is your auth token to use in the cron jobs below.
 
 ## Bug tracker
@@ -84,7 +84,6 @@ ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
 Have a bug? Please create an issue here on GitHub that conforms with [necolas's guidelines](https://github.com/necolas/issue-guidelines).
 
 https://github.com/churchdeploy/churchdeploy/issues
-
 
 # Components
 
@@ -164,6 +163,6 @@ This will update *Structure > Status > ustream-status*
 #### Status
 
 
-## Walkthru
+## Walkthrough
 
-We make no assumptions about how you will use Church Deploy. It is up to you to craft whatever solution is best for your use-case. We are doing our best to keep the core robust and controllable, so you can enable or disable different components. 
+We make no assumptions about how you will use Church Deploy. It is up to you to craft whatever solution is best for your use-case. We are doing our best to keep the core robust and controllable, so you can enable or disable different components.

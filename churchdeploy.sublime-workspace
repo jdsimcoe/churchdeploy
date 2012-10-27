@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"margin-",
+				"margin-bottom"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"positi",
+				"position"
+			],
+			[
+				"text",
+				"text-indent"
+			],
+			[
+				"download",
+				"downloadPopover"
+			],
+			[
 				"text-",
 				"text-align"
 			],
@@ -20,10 +40,6 @@
 				"background-position"
 			],
 			[
-				"margin-",
-				"margin-bottom"
-			],
-			[
 				"texture",
 				"texture-overlay-reverse"
 			],
@@ -32,16 +48,8 @@
 				"box-shadow"
 			],
 			[
-				"margin",
-				"margin-bottom"
-			],
-			[
 				"padding",
 				"padding"
-			],
-			[
-				"text",
-				"text-align"
 			],
 			[
 				"back",
@@ -176,10 +184,58 @@
 	"buffers":
 	[
 		{
-			"file": "manifest/config.php",
+			"file": "workspace/themes/active/less/athey.less",
 			"settings":
 			{
-				"buffer_size": 7791,
+				"buffer_size": 85246,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/js/athey.js",
+			"settings":
+			{
+				"buffer_size": 2276,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/grunt/grunt.js",
+			"settings":
+			{
+				"buffer_size": 1818,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/skin/mediaelementplayer.less",
+			"settings":
+			{
+				"buffer_size": 20599,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/xsl/teachings.xsl",
+			"settings":
+			{
+				"buffer_size": 28500,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/xsl/template.xsl",
+			"settings":
+			{
+				"buffer_size": 18497,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/grunt/node_modules/grunt-growl/package.json",
+			"settings":
+			{
+				"buffer_size": 2990,
 				"line_ending": "Unix"
 			}
 		}
@@ -187,9 +243,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 159.0,
+		"height": 375.0,
 		"selected_items":
 		[
+			[
+				"gist",
+				"Gist: Create Public Gist"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -221,10 +281,6 @@
 			[
 				"pack",
 				"Package Control: Install Package"
-			],
-			[
-				"gist",
-				"Gist: Create Public Gist"
 			],
 			[
 				"git add",
@@ -368,14 +424,19 @@
 	},
 	"file_history":
 	[
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/coffee/athey.coffee",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/js/mediaelement.js",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/js/audio.js",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/jplayer.less",
+		"/Users/jdsimcoe/Sites/churchdeploy/extensions/image_index_preview/assets/image_index_preview.publish.js",
+		"/Users/jdsimcoe/Sites/churchdeploy/.htaccess",
+		"/Users/jdsimcoe/Sites/churchdeploy/manifest/config.php",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/teachings.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/utilities/master.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/template.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/grunt/grunt.js",
-		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/coffee/athey.coffee",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/athey.less",
 		"/Users/jdsimcoe/Sites/churchdeploy/extensions/image_index_preview/assets/image_index_preview.publish.css",
-		"/Users/jdsimcoe/Sites/churchdeploy/extensions/image_index_preview/assets/image_index_preview.publish.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/images.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/members-roles.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/text.xsl",
@@ -490,12 +551,7 @@
 		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/css/webfonts.css",
 		"/Applications/Mou.app/Contents/Resources/export.html",
 		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/js/common-ck.js",
-		"/Users/jdsimcoe/Dropbox/Shell/icons.sh",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/bootstrap/less/sprites.less",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/utilities/master.xsl",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/utilities/classes.xsl",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/bootstrap/less/dropdowns.less",
-		"/Users/jdsimcoe/Sites/atheycreek/www/httpdocs/workspace/utilities/components.xsl"
+		"/Users/jdsimcoe/Dropbox/Shell/icons.sh"
 	],
 	"find":
 	{
@@ -514,6 +570,30 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"teaching-actions",
+			"badge",
+			"result",
+			"teaching-actions",
+			"tab",
+			"h2",
+			".component-teachings",
+			"component-teachings",
+			"poster",
+			"series",
+			"audio-container",
+			".audio",
+			"component-teachings",
+			"div",
+			"#fdd500",
+			"#feea36",
+			".share",
+			".icon",
+			"play",
+			"/workspace/",
+			"workspace",
+			"/workspace",
+			"/workspace/",
+			"php_value memory_limit",
 			"{$preview}",
 			"40/40/5",
 			"respons",
@@ -617,31 +697,7 @@
 			"icon",
 			"icion",
 			"tags",
-			"soften",
-			"component-search",
-			"redirects",
-			".welcome",
-			"feature",
-			"component-search",
-			"search",
-			"phen",
-			"page",
-			"max-width: 979",
-			"bootstrap",
-			"cleanup",
-			"default desktop",
-			"accent",
-			"mobile",
-			"divider",
-			"mobile",
-			"label",
-			"description",
-			"component-search",
-			"}\n",
-			"component-series",
-			".recent",
-			"{\n",
-			".component-teaching"
+			"soften"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -649,6 +705,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"darken(@color-accent, 5%)",
+			"@color-accent",
 			"2.3.2",
 			"label pull-right",
 			"progress",
@@ -672,37 +730,127 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "manifest/config.php",
+					"file": "workspace/themes/active/less/athey.less",
 					"settings":
 					{
-						"buffer_size": 7791,
+						"buffer_size": 85246,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6861,
-								6861
+								81260,
+								81260
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"encoding_helper_confidence": 0.896900805127,
+							"encoding_helper_confidence": 1.0,
 							"encoding_helper_encoding": "UTF-8",
 							"encoding_helper_encoding_sublime": "UTF-8",
-							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage",
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 78401.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "workspace/themes/active/js/athey.js",
+					"settings":
+					{
+						"buffer_size": 2276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1195,
+								1195
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2309.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "workspace/themes/active/grunt/grunt.js",
+					"settings":
+					{
+						"buffer_size": 1818,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1714,
+								1714
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 262.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "workspace/themes/active/skin/mediaelementplayer.less",
+					"settings":
+					{
+						"buffer_size": 20599,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								246,
+								246
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -710,8 +858,100 @@
 			]
 		},
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 4,
+					"file": "workspace/themes/active/xsl/teachings.xsl",
+					"settings":
+					{
+						"buffer_size": 28500,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								24782,
+								24677
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.776731149475,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8979.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "workspace/themes/active/xsl/template.xsl",
+					"settings":
+					{
+						"buffer_size": 18497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15019,
+								15021
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.87625,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5584.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "workspace/themes/active/grunt/node_modules/grunt-growl/package.json",
+					"settings":
+					{
+						"buffer_size": 2990,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								949,
+								949
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -768,8 +1008,56 @@
 		"selected_items":
 		[
 			[
+				"atheyjs",
+				"theme: atheycreek/js/athey.js"
+			],
+			[
+				"medi",
+				"theme: atheycreek/skin/mediaelementplayer.less"
+			],
+			[
+				"media",
+				"churchdeploy/workspace/js/mediaelement.js"
+			],
+			[
+				"templ",
+				"theme: atheycreek/xsl/template.xsl"
+			],
+			[
+				"teachings",
+				"theme: atheycreek/xsl/teachings.xsl"
+			],
+			[
+				"audio",
+				"churchdeploy/workspace/js/audio.js"
+			],
+			[
+				"players",
+				"theme: atheycreek/less/jplayer.less"
+			],
+			[
+				"htacces",
+				"churchdeploy/.htaccess"
+			],
+			[
 				"image",
 				"churchdeploy/extensions/image_index_preview/assets/image_index_preview.publish.js"
+			],
+			[
+				"grunt",
+				"theme: atheycreek/grunt/grunt.js"
+			],
+			[
+				"athey.c",
+				"theme: atheycreek/coffee/athey.coffee"
+			],
+			[
+				"athey",
+				"theme: atheycreek/less/athey.less"
+			],
+			[
+				"htaccess",
+				"churchdeploy/.htaccess"
 			],
 			[
 				"image_in",
@@ -796,10 +1084,6 @@
 				"theme: atheycreek/xsl/events.xsl"
 			],
 			[
-				"teachings",
-				"theme: atheycreek/xsl/teachings.xsl"
-			],
-			[
 				"toolkit",
 				"churchdeploy/workspace/utilities/toolkit.xsl"
 			],
@@ -818,10 +1102,6 @@
 			[
 				"responsi",
 				"churchdeploy/workspace/js/responsimage.js"
-			],
-			[
-				"athey",
-				"theme: atheycreek/coffee/athey.coffee"
 			],
 			[
 				"search",
@@ -932,10 +1212,6 @@
 				"workspace/themes/active/grunt/grunt.js"
 			],
 			[
-				"grunt",
-				"workspace/grunt.js"
-			],
-			[
 				"reftag",
 				"workspace/themes/active/js/reftagger.js"
 			],
@@ -996,10 +1272,6 @@
 				"extensions/markdown/lib/htmlpurifier-4.0.0-standalone/standalone/HTMLPurifier/ConfigSchema/schema/Output.CommentScriptContents.txt"
 			],
 			[
-				"htacces",
-				".htaccess"
-			],
-			[
 				"typek",
 				"workspace/themes/active/js/typekit.js"
 			],
@@ -1030,10 +1302,6 @@
 			[
 				"docs",
 				"workspace/themes/active/less/docs.less"
-			],
-			[
-				"audio",
-				"workspace/themes/active/js/audio.min.js"
 			],
 			[
 				"download",
@@ -1156,10 +1424,6 @@
 				"www/httpdocs/workspace/themes/active/xsl/teachings.xsl"
 			],
 			[
-				"templ",
-				"www/httpdocs/workspace/themes/active/xsl/template.xsl"
-			],
-			[
 				"bootstrap-respons",
 				"www/httpdocs/workspace/bootstrap/less/bootstrap-responsive.less"
 			],
@@ -1254,30 +1518,6 @@
 			[
 				"htac",
 				".htaccess"
-			],
-			[
-				"temp",
-				"workspace/themes/active/xsl/template.xsl"
-			],
-			[
-				"locations",
-				"workspace/themes/active/xsl/locations.xsl"
-			],
-			[
-				"member",
-				"extensions/members/assets/members.roles.js"
-			],
-			[
-				"compn",
-				"workspace/utilities/components.xsl"
-			],
-			[
-				"mixin",
-				"workspace/bootstrap/less/mixins.less"
-			],
-			[
-				"temlate",
-				"workspace/themes/active/xsl/template.xsl"
 			]
 		],
 		"width": 0.0
@@ -1293,7 +1533,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 238.0,
 	"status_bar_visible": false
 }
