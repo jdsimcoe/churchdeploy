@@ -34,7 +34,8 @@
 				'images: color',
 				'text: content',
 				'verses: passage',
-				'verses: tags: description'
+				'verses: tags: description',
+				'type: type'
 		);
 
 
@@ -48,10 +49,10 @@
 				'name' => 'Events: Recurring: All entries (filtered)',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreekdev',
+					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-09-01T16:08:02+00:00'
+				'release-date' => '2012-11-21T00:07:32+00:00'
 			);
 		}
 

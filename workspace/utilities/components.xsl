@@ -120,7 +120,7 @@
 			</xsl:call-template>
 			<xsl:call-template name="component-events">
 				<xsl:with-param name="position" select="name($xpath)" />
-				<xsl:with-param name="entries" select="//events-recurring-all-entries-filtered/entry" />
+				<xsl:with-param name="entries" select="//events-recurring-all-entries-filtered/entry [type/item/type/@handle = 'church-wide']" />
 			</xsl:call-template>
 			<xsl:call-template name="component-events">
 				<xsl:with-param name="position" select="name($xpath)" />
