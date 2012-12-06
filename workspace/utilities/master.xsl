@@ -312,7 +312,7 @@
 
 	<xsl:if test="count($group)">
 		<div class="jumbotron masthead" id="overview">
-			<div class="subnav">
+			<div class="subnav visible-desktop">
 				<ul class="nav nav-pills">
 					<xsl:for-each select="$group">
 						<xsl:call-template name="subnav-entry" />

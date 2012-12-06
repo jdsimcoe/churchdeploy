@@ -15,7 +15,6 @@
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 
 		public $dsParamFILTERS = array(
-				'192' => 'no',
 				'216' => 'no',
 		);
 
@@ -38,7 +37,8 @@
 				'video: player',
 				'video: id',
 				'day',
-				'tags: tag'
+				'tags: tag',
+				'featured'
 		);
 
 
@@ -55,7 +55,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-09-20T17:11:14+00:00'
+				'release-date' => '2012-12-06T17:14:29+00:00'
 			);
 		}
 
