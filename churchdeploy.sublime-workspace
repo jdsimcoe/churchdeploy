@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"fon",
+				"font-size"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
 				"text-",
 				"text-shadow"
 			],
@@ -16,16 +24,8 @@
 				"font-weight"
 			],
 			[
-				"text",
-				"text-shadow"
-			],
-			[
 				"border-",
 				"border-radius"
-			],
-			[
-				"fon",
-				"font-weight"
 			],
 			[
 				"tex",
@@ -212,6 +212,30 @@
 	"buffers":
 	[
 		{
+			"file": "workspace/themes/active/less/athey.less",
+			"settings":
+			{
+				"buffer_size": 86526,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/grunt/grunt.js",
+			"settings":
+			{
+				"buffer_size": 1697,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/js/athey.js",
+			"settings":
+			{
+				"buffer_size": 2276,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "workspace/themes/active/xsl/verses.xsl",
 			"settings":
 			{
@@ -223,7 +247,55 @@
 			"file": "workspace/themes/active/xsl/template.xsl",
 			"settings":
 			{
-				"buffer_size": 18662,
+				"buffer_size": 19049,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/utilities/master.xsl",
+			"settings":
+			{
+				"buffer_size": 13824,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/xsl/search.xsl",
+			"settings":
+			{
+				"buffer_size": 19143,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/xsl/teachings.xsl",
+			"settings":
+			{
+				"buffer_size": 30527,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/pages/podcast.xsl",
+			"settings":
+			{
+				"buffer_size": 6771,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "workspace/utilities/toolkit.xsl",
+			"settings":
+			{
+				"buffer_size": 11963,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "workspace/themes/active/xsl/events.xsl",
+			"settings":
+			{
+				"buffer_size": 26315,
 				"line_ending": "Unix"
 			}
 		}
@@ -231,9 +303,37 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 181.0,
+		"height": 357.0,
 		"selected_items":
 		[
+			[
+				"packge",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"install pack",
+				"Package Control: Install Package"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upgrad",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
 			[
 				"lore",
 				"Snippet: Lorem ipsum"
@@ -241,14 +341,6 @@
 			[
 				"gist",
 				"Gist: Create Public Gist"
-			],
-			[
-				"package",
-				"Package Control: Install Package"
-			],
-			[
-				"pack",
-				"Package Control: Remove Package"
 			],
 			[
 				"ipsum",
@@ -407,7 +499,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 569.0
+		"width": 579.0
 	},
 	"console":
 	{
@@ -424,6 +516,14 @@
 	},
 	"file_history":
 	[
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/wisdom.less",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/webfonts.less",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/widsom.less",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/utilities/toolkit.xsl",
+		"/Users/jdsimcoe/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/bootstrap/less/responsive-utilities.less",
+		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/coffee/athey.coffee",
+		"/Users/jdsimcoe/Desktop/GmailFaviconAlerts3.user.js",
 		"/Users/jdsimcoe/Sites/bible-api.md",
 		"/Users/jdsimcoe/Sites/dtrmn/symphony/content/content.blueprintsdatasources.php",
 		"/Users/jdsimcoe/Sites/dtrmn/workspace/grunt/grunt.js",
@@ -471,7 +571,6 @@
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/teachings.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/featured.xsl",
 		"/Users/jdsimcoe/Desktop/wings.html",
-		"/Users/jdsimcoe/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/jdsimcoe/Sites/churchdeploy/churchdeploy.sublime-project",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/data-sources/data.teachings_entries_by_series_filtered.php",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/anchor/less/anchor.less",
@@ -485,7 +584,6 @@
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/grunt/node_modules/grunt-growl/package.json",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/template.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/README.md",
-		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/coffee/athey.coffee",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/js/mediaelement.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/js/audio.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/jplayer.less",
@@ -497,7 +595,6 @@
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/images.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/members-roles.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/text.xsl",
-		"/Users/jdsimcoe/Sites/churchdeploy/workspace/utilities/toolkit.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/xsl/search.xsl",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/pictos.less",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/bootstrap/less/carousel.less",
@@ -546,12 +643,7 @@
 		"/Users/jdsimcoe/Sites/atheycreek/manifest/config.php",
 		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/xsl/images.xsl",
 		"/Users/jdsimcoe/Sites/atheycreek/workspace/utilities/master.xsl",
-		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/less/reftagger.less",
-		"/Users/jdsimcoe/Sites/atheycreek/extensions/markdown/lib/htmlpurifier-4.0.0-standalone/standalone/HTMLPurifier/ConfigSchema/schema/Output.CommentScriptContents.txt",
-		"/Users/jdsimcoe/Sites/atheycreek/workspace/bootstrap/less/navbar.less",
-		"/Users/jdsimcoe/Sites/atheycreek/.htaccess",
-		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/js/typekit.js",
-		"/Users/jdsimcoe/Sites/atheycreek/workspace/bootstrap/less/dropdowns.less"
+		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/less/reftagger.less"
 	],
 	"find":
 	{
@@ -570,6 +662,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".welcome",
+			"main",
+			"h2",
+			"h1",
+			"variable",
+			"capitalize",
+			"string-replace-all",
+			"string-replace",
+			"copyright",
+			"tablets and below",
+			"dropdown-menu",
+			".last",
+			".welcome",
+			"{\n",
+			".mast",
+			"subnav-mobile",
+			".welcome",
 			"icon-black",
 			"well",
 			"Please ensure name contains at least one Latin-based character.",
@@ -680,24 +789,7 @@
 			"component-images",
 			"label",
 			"carousel",
-			"2.3.1",
-			"carousel",
-			"updates",
-			"call-template",
-			"template-head",
-			"iso",
-			"date-teaching",
-			"date",
-			"footer",
-			"navbar",
-			".lead",
-			"@icons",
-			"welcome",
-			".component-events",
-			"iphone",
-			"chat",
-			"260",
-			"* "
+			"2.3.1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -738,6 +830,104 @@
 			[
 				{
 					"buffer": 0,
+					"file": "workspace/themes/active/less/athey.less",
+					"settings":
+					{
+						"buffer_size": 86526,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6354,
+								7203
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2798.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "workspace/themes/active/grunt/grunt.js",
+					"settings":
+					{
+						"buffer_size": 1697,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1002,
+								1002
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "workspace/themes/active/js/athey.js",
+					"settings":
+					{
+						"buffer_size": 2276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								545,
+								454
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 3,
 					"file": "workspace/themes/active/xsl/verses.xsl",
 					"settings":
 					{
@@ -748,8 +938,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								159,
+								159
 							]
 						],
 						"settings":
@@ -765,27 +955,21 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 1,
+					"buffer": 4,
 					"file": "workspace/themes/active/xsl/template.xsl",
 					"settings":
 					{
-						"buffer_size": 18662,
+						"buffer_size": 19049,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								17768,
+								17768
 							]
 						],
 						"settings":
@@ -797,7 +981,188 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+						"translation.y": 6638.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "workspace/utilities/master.xsl",
+					"settings":
+					{
+						"buffer_size": 13824,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								705,
+								705
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.773323101803,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "workspace/themes/active/xsl/search.xsl",
+					"settings":
+					{
+						"buffer_size": 19143,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1481,
+								1481
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.99,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "workspace/themes/active/xsl/teachings.xsl",
+					"settings":
+					{
+						"buffer_size": 30527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26023,
+								26043
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.781014473244,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 13517.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "workspace/pages/podcast.xsl",
+					"settings":
+					{
+						"buffer_size": 6771,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2934,
+								2997
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.732111295677,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 310.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "workspace/utilities/toolkit.xsl",
+					"settings":
+					{
+						"buffer_size": 11963,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10239,
+								10239
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 0.938125,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 5313.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "workspace/themes/active/xsl/events.xsl",
+					"settings":
+					{
+						"buffer_size": 26315,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12088,
+								12088
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/XML/XSL.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 543.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -807,7 +1172,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 36.0
 	},
 	"input":
 	{
@@ -833,7 +1198,7 @@
 		"cols":
 		[
 			0.0,
-			0.495072798295,
+			0.65,
 			1.0
 		],
 		"rows":
@@ -857,6 +1222,54 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"athey",
+				"workspace/themes/active/js/athey.js"
+			],
+			[
+				"wisdom",
+				"workspace/themes/active/less/wisdom.less"
+			],
+			[
+				"web",
+				"workspace/themes/active/less/webfonts.less"
+			],
+			[
+				"vents",
+				"workspace/themes/active/xsl/events.xsl"
+			],
+			[
+				"tool",
+				"workspace/utilities/toolkit.xsl"
+			],
+			[
+				"podca",
+				"workspace/pages/podcast.xsl"
+			],
+			[
+				"toolkit",
+				"workspace/utilities/toolkit.xsl"
+			],
+			[
+				"teachings",
+				"workspace/themes/active/xsl/teachings.xsl"
+			],
+			[
+				"search",
+				"workspace/themes/active/xsl/search.xsl"
+			],
+			[
+				"grunt",
+				"workspace/themes/active/grunt/grunt.js"
+			],
+			[
+				"responsive",
+				"workspace/bootstrap/less/responsive-utilities.less"
+			],
+			[
+				"master",
+				"workspace/utilities/master.xsl"
+			],
 			[
 				"template",
 				"workspace/themes/active/xsl/template.xsl"
@@ -882,10 +1295,6 @@
 				".htaccess"
 			],
 			[
-				"grunt",
-				"workspace/grunt/grunt.js"
-			],
-			[
 				".giti",
 				".gitignore"
 			],
@@ -904,14 +1313,6 @@
 			[
 				"erro",
 				"workspace/pages/error.xsl"
-			],
-			[
-				"master",
-				"workspace/utilities/master.xsl"
-			],
-			[
-				"tool",
-				"workspace/utilities/toolkit.xsl"
 			],
 			[
 				"c",
@@ -1038,10 +1439,6 @@
 				"workspace/bootstrap/docs/getting-started.html"
 			],
 			[
-				"teachings",
-				"theme: atheycreek/xsl/teachings.xsl"
-			],
-			[
 				"even",
 				"theme: atheycreek/xsl/events.xsl"
 			],
@@ -1056,10 +1453,6 @@
 			[
 				"teachigns",
 				"churchdeploy/workspace/data-sources/data.teachings_entries_by_series_filtered.php"
-			],
-			[
-				"athey",
-				"theme: atheycreek/less/athey.less"
 			],
 			[
 				"anchor",
@@ -1134,14 +1527,6 @@
 				"theme: atheycreek/xsl/featured.xsl"
 			],
 			[
-				"vents",
-				"theme: atheycreek/xsl/events.xsl"
-			],
-			[
-				"toolkit",
-				"churchdeploy/workspace/utilities/toolkit.xsl"
-			],
-			[
 				"pictos",
 				"theme: atheycreek/less/pictos.less"
 			],
@@ -1156,10 +1541,6 @@
 			[
 				"responsi",
 				"churchdeploy/workspace/js/responsimage.js"
-			],
-			[
-				"search",
-				"theme: atheycreek/xsl/search.xsl"
 			],
 			[
 				"navbar",
@@ -1352,22 +1733,6 @@
 			[
 				"compone",
 				"workspace/utilities/components.xsl"
-			],
-			[
-				"applicat",
-				"workspace/bootstrap/docs/assets/js/application.js"
-			],
-			[
-				"comm",
-				"workspace/themes/active/js/common.js"
-			],
-			[
-				"responsim",
-				"workspace/js/responsimage.js"
-			],
-			[
-				"type",
-				"workspace/themes/active/js/typekit.js"
 			]
 		],
 		"width": 0.0
@@ -1377,13 +1742,25 @@
 		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"dtrm",
+				"/Users/jdsimcoe/Sites/dtrmn/dtrmn.sublime-project"
+			],
+			[
+				"",
+				"/Users/jdsimcoe/Sites/dtrmn/dtrmn.sublime-project"
+			],
+			[
+				"dtr",
+				"/Users/jdsimcoe/Sites/dtrmn/dtrmn.sublime-project"
+			]
 		],
 		"width": 380.0
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 238.0,
 	"status_bar_visible": false
 }
