@@ -8,6 +8,7 @@
 *.sublime-project
 *.sublime-workspace
 favicon.ico
+symphony/favicon.ico
 install-log.txt
 manifest/*
 workspace/uploads/*
