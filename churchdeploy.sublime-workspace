@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"margin-",
+				"margin-top"
+			],
+			[
 				"fon",
 				"font-size"
 			],
@@ -30,10 +34,6 @@
 			[
 				"tex",
 				"text-shadow"
-			],
-			[
-				"margin-",
-				"margin-bottom"
 			],
 			[
 				"padd",
@@ -215,7 +215,7 @@
 			"file": "workspace/themes/active/less/athey.less",
 			"settings":
 			{
-				"buffer_size": 86526,
+				"buffer_size": 86944,
 				"line_ending": "Unix"
 			}
 		},
@@ -236,6 +236,14 @@
 			}
 		},
 		{
+			"file": "workspace/bootstrap/less/carousel.less",
+			"settings":
+			{
+				"buffer_size": 1960,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "workspace/themes/active/xsl/verses.xsl",
 			"settings":
 			{
@@ -247,7 +255,7 @@
 			"file": "workspace/themes/active/xsl/template.xsl",
 			"settings":
 			{
-				"buffer_size": 19049,
+				"buffer_size": 19055,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,7 +279,7 @@
 			"file": "workspace/themes/active/xsl/teachings.xsl",
 			"settings":
 			{
-				"buffer_size": 30527,
+				"buffer_size": 30967,
 				"line_ending": "Unix"
 			}
 		},
@@ -516,6 +524,9 @@
 	},
 	"file_history":
 	[
+		"/Users/jdsimcoe/Desktop/broadcast.html",
+		"/Users/jdsimcoe/Desktop/share.html",
+		"/Users/jdsimcoe/Sites/churchdeploy/.gitignore",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/wisdom.less",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/webfonts.less",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/widsom.less",
@@ -607,7 +618,6 @@
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/js/common.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/coffee/common.js",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/less/mask-image.less",
-		"/Users/jdsimcoe/Sites/churchdeploy/.gitignore",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/utilities/alerts.xsl",
 		"/Users/jdsimcoe/Dropbox/Apps/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/jdsimcoe/Sites/churchdeploy/workspace/themes/active/css/ie7.css",
@@ -641,17 +651,15 @@
 		"/Users/jdsimcoe/Sites/atheycreek/workspace/bootstrap/less/mixins.less",
 		"/Users/jdsimcoe/Sites/atheycreek/extensions/publishfiltering/assets/publishfiltering.publish.css",
 		"/Users/jdsimcoe/Sites/atheycreek/manifest/config.php",
-		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/xsl/images.xsl",
-		"/Users/jdsimcoe/Sites/atheycreek/workspace/utilities/master.xsl",
-		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/less/reftagger.less"
+		"/Users/jdsimcoe/Sites/atheycreek/workspace/themes/active/xsl/images.xsl"
 	],
 	"find":
 	{
-		"height": 37.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 95.0,
 		"where_history":
 		[
 			""
@@ -833,15 +841,15 @@
 					"file": "workspace/themes/active/less/athey.less",
 					"settings":
 					{
-						"buffer_size": 86526,
+						"buffer_size": 86944,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6354,
-								7203
+								4091,
+								4091
 							]
 						],
 						"settings":
@@ -853,7 +861,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2798.0,
+						"translation.y": 12608.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -884,7 +892,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 174.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -901,8 +909,8 @@
 						"selection":
 						[
 							[
-								545,
-								454
+								589,
+								589
 							]
 						],
 						"settings":
@@ -919,6 +927,37 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "workspace/bootstrap/less/carousel.less",
+					"settings":
+					{
+						"buffer_size": 1960,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1115,
+								1115
+							]
+						],
+						"settings":
+						{
+							"encoding_helper_confidence": 1.0,
+							"encoding_helper_encoding": "UTF-8",
+							"encoding_helper_encoding_sublime": "UTF-8",
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 866.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		},
@@ -927,7 +966,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "workspace/themes/active/xsl/verses.xsl",
 					"settings":
 					{
@@ -957,19 +996,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "workspace/themes/active/xsl/template.xsl",
 					"settings":
 					{
-						"buffer_size": 19049,
+						"buffer_size": 19055,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17768,
-								17768
+								9231,
+								9231
 							]
 						],
 						"settings":
@@ -981,13 +1020,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6638.0,
+						"translation.y": 2111.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "workspace/utilities/master.xsl",
 					"settings":
 					{
@@ -1017,7 +1056,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "workspace/themes/active/xsl/search.xsl",
 					"settings":
 					{
@@ -1047,19 +1086,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "workspace/themes/active/xsl/teachings.xsl",
 					"settings":
 					{
-						"buffer_size": 30527,
+						"buffer_size": 30967,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								26023,
-								26043
+								1627,
+								1627
 							]
 						],
 						"settings":
@@ -1071,13 +1110,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 13517.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "workspace/pages/podcast.xsl",
 					"settings":
 					{
@@ -1108,7 +1147,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
 					"file": "workspace/utilities/toolkit.xsl",
 					"settings":
 					{
@@ -1138,7 +1177,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "workspace/themes/active/xsl/events.xsl",
 					"settings":
 					{
@@ -1149,8 +1188,8 @@
 						"selection":
 						[
 							[
-								12088,
-								12088
+								2093,
+								2292
 							]
 						],
 						"settings":
@@ -1162,7 +1201,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 543.0,
+						"translation.y": 755.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1198,7 +1237,7 @@
 		"cols":
 		[
 			0.0,
-			0.65,
+			0.35,
 			1.0
 		],
 		"rows":
@@ -1222,6 +1261,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"carouse",
+				"workspace/bootstrap/less/carousel.less"
+			],
+			[
+				"git",
+				".gitignore"
+			],
+			[
+				"giti",
+				".gitignore"
+			],
 			[
 				"athey",
 				"workspace/themes/active/js/athey.js"
@@ -1296,10 +1347,6 @@
 			],
 			[
 				".giti",
-				".gitignore"
-			],
-			[
-				"giti",
 				".gitignore"
 			],
 			[
@@ -1535,10 +1582,6 @@
 				"churchdeploy/workspace/utilities/components.xsl"
 			],
 			[
-				"carouse",
-				"churchdeploy/workspace/bootstrap/less/carousel.less"
-			],
-			[
 				"responsi",
 				"churchdeploy/workspace/js/responsimage.js"
 			],
@@ -1729,10 +1772,6 @@
 			[
 				"dropdo",
 				"workspace/bootstrap/less/dropdowns.less"
-			],
-			[
-				"compone",
-				"workspace/utilities/components.xsl"
 			]
 		],
 		"width": 0.0
@@ -1743,11 +1782,15 @@
 		"selected_items":
 		[
 			[
-				"dtrm",
+				"",
 				"/Users/jdsimcoe/Sites/dtrmn/dtrmn.sublime-project"
 			],
 			[
-				"",
+				"m",
+				"/Users/jdsimcoe/Sites/dtrmn/dtrmn.sublime-project"
+			],
+			[
+				"dtrm",
 				"/Users/jdsimcoe/Sites/dtrmn/dtrmn.sublime-project"
 			],
 			[
