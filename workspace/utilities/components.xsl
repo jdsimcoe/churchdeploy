@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+
 <xsl:include href="../themes/active/xsl/alerts.xsl" />
 <xsl:include href="../themes/active/xsl/downloads.xsl" />
 <xsl:include href="../themes/active/xsl/events.xsl" />
@@ -17,9 +18,7 @@
 
 
 <xsl:template name="component">
-
 	<xsl:param name="xpath" />
-
 	<xsl:if test="count($xpath/item)">
 		<xsl:choose>
 			<xsl:when test="name($xpath) = 'column-full-width'">
@@ -46,14 +45,11 @@
 			</xsl:when>
 		</xsl:choose>
 	</xsl:if>
-
 </xsl:template>
 
 
 <xsl:template name="component-populate">
-
 	<xsl:param name="xpath" />
-
 	<xsl:for-each select="$xpath/item/label/@handle">
 		<xsl:if test=". = 'downloads'">
 			<xsl:call-template name="component-downloads">
@@ -228,7 +224,6 @@
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:for-each>
-
 </xsl:template>
 
 
@@ -236,14 +231,13 @@
 
 URL helpers  //////////////////////////////////////////////////////////////////////////////
 
+All URL helpers can now be replaced with "url-prefix"
+
 -->
 
 
 <xsl:template name="url-downloads">
-
 	<xsl:param name="node" select="." />
-
-
 	<xsl:choose>
 		<xsl:when test="$node/link != ''">
 			<xsl:attribute name="href">
@@ -259,15 +253,11 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 			</xsl:attribute>
 		</xsl:otherwise>
 	</xsl:choose>
-
-
 </xsl:template>
 
 
 <xsl:template name="url-events">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
@@ -278,14 +268,11 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		<xsl:value-of select="$node/name/@handle" />
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-events-recurring">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
@@ -294,58 +281,47 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		<xsl:value-of select="$node/name/@handle" />
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 <xsl:template name="url-events-recurring-home">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
 		<xsl:value-of select="//tags-all-entries/entry[tag/@handle = 'meetings']/@id" />
 		<xsl:text>/meetings/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-events-home">
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
 		<xsl:value-of select="//tags-all-entries/entry[tag/@handle = 'events']/@id" />
 		<xsl:text>/events/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-events-home-past">
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
 		<xsl:value-of select="//tags-all-entries/entry[tag/@handle = 'events']/@id" />
 		<xsl:text>/events/1/5/past/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-search-home">
-
 	<xsl:param name="url-only" select="false()" />
-
 	<xsl:variable name="url">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
 		<xsl:value-of select="//tags-all-entries/entry[tag/@handle = 'search']/@id" />
 		<xsl:text>/search/</xsl:text>
 	</xsl:variable>
-
 	<xsl:choose>
 		<xsl:when test="$url-only">
 			<xsl:value-of select="$url" disable-output-escaping="yes" />
@@ -356,14 +332,11 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 			</xsl:attribute>
 		</xsl:otherwise>
 	</xsl:choose>
-
 </xsl:template>
 
 
 <xsl:template name="url-tags">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
@@ -379,14 +352,11 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		</xsl:choose>
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-tags-by-text">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:param name="tag" />
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
@@ -396,14 +366,11 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		<xsl:value-of select="//tags-all-entries/entry[@id = $tag]/tag/@handle" />
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-teachings">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
@@ -414,14 +381,11 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		<xsl:value-of select="$node/title/@handle" />
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-teachings-series">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
@@ -432,14 +396,11 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		<xsl:value-of select="$node/title/@handle" />
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="url-teachings-tags">
-
 	<xsl:param name="node" select="." />
-
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
@@ -450,12 +411,10 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		<xsl:value-of select="$node/tags/@handle" />
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
 
 
 <xsl:template name="edit-entry">
-
 	<xsl:param name="component" />
 	<xsl:param name="link">
 		<xsl:value-of select="$root" />
@@ -466,7 +425,6 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 		<xsl:text>/</xsl:text>
 	</xsl:param>
 	<xsl:param name="class" />
-
 	<xsl:if test="$cookie-username">
 		<a href="{$link}" target="blank">
 			<xsl:attribute name="class">
@@ -478,19 +436,28 @@ URL helpers  ///////////////////////////////////////////////////////////////////
 			<span class="icon">p</span>
 		</a>
 	</xsl:if>
-
 </xsl:template>
 
 
 <xsl:template name="form-search-action">
-
 	<xsl:attribute name="action">
 		<xsl:value-of select="$root" />
 		<xsl:text>/</xsl:text>
 		<xsl:value-of select="//tags-all-entries/entry[tag/@handle = 'search']/@id" />
 		<xsl:text>/search/</xsl:text>
 	</xsl:attribute>
-
 </xsl:template>
+
+
+<xsl:template name="url-prefix">
+	<xsl:param name="handle" />
+	<xsl:value-of select="$root" />
+	<xsl:text>/</xsl:text>
+	<xsl:value-of select="//tags-all-entries/entry[tag/@handle = $handle]/@id" />
+	<xsl:text>/</xsl:text>
+	<xsl:value-of select="$handle" />
+	<xsl:text>/</xsl:text>
+</xsl:template>
+
 
 </xsl:stylesheet>
