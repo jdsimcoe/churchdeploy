@@ -1,5 +1,1 @@
-# Themes directory
-
-### Implementation is simple!
-
-To switch the theme, simply rename the folder to "active"
+To use the themes folder, simply add a theme like [anchor](https://github.com/anchorchurch/anchor) to this directory in a folder named `active`. Other themes are ignored.
