@@ -14,7 +14,10 @@
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
 
-		
+		public $dsParamFILTERS = array(
+				'233' => 'no',
+				'268' => 'no',
+		);
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'title',
@@ -35,7 +38,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-01-04T23:55:04+00:00'
+				'release-date' => '2013-01-05T21:36:57+00:00'
 			);
 		}
 
