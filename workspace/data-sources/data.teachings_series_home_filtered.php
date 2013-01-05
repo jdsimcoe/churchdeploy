@@ -19,7 +19,7 @@
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'title',
-				'poster',
+				'poster: image',
 				'teachings: title'
 		);
 
@@ -33,11 +33,11 @@
 			return array(
 				'name' => 'Teachings: Series home (filtered)',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://72.10.33.203',
-					'email' => 'kirk@strobeck.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-05-31T03:29:00+00:00'
+				'release-date' => '2013-01-04T23:57:07+00:00'
 			);
 		}
 

@@ -18,24 +18,7 @@
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'title',
-				'poster',
-				'teachings: title',
-				'teachings: slug',
-				'teachings: filename',
-				'teachings: current-id',
-				'teachings: book',
-				'teachings: chapter',
-				'teachings: description',
-				'teachings: speaker: first-name',
-				'teachings: speaker: last-name',
-				'teachings: date',
-				'teachings: poster',
-				'teachings: video: title',
-				'teachings: video: description',
-				'teachings: video: date',
-				'teachings: video: url',
-				'teachings: video: player',
-				'teachings: day'
+				'poster: image'
 		);
 
 
@@ -52,7 +35,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-12-21T21:44:28+00:00'
+				'release-date' => '2013-01-04T23:55:04+00:00'
 			);
 		}
 

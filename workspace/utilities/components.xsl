@@ -449,7 +449,7 @@ All URL helpers can now be replaced with "url-prefix"
 </xsl:template>
 
 
-<xsl:template name="url-prefix">
+<!-- <xsl:template name="url-prefix">
 	<xsl:param name="handle" />
 	<xsl:value-of select="$root" />
 	<xsl:text>/</xsl:text>
@@ -457,7 +457,7 @@ All URL helpers can now be replaced with "url-prefix"
 	<xsl:text>/</xsl:text>
 	<xsl:value-of select="$handle" />
 	<xsl:text>/</xsl:text>
-</xsl:template>
+</xsl:template> -->
 
 
 </xsl:stylesheet>

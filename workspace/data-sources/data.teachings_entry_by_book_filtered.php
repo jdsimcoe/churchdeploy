@@ -33,7 +33,7 @@
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
-				'poster',
+				'poster: image',
 				'video: url',
 				'video: player',
 				'video: id',
@@ -55,7 +55,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-08-14T17:05:55+00:00'
+				'release-date' => '2013-01-04T23:49:02+00:00'
 			);
 		}
 

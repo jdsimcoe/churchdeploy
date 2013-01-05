@@ -33,7 +33,7 @@
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
-				'poster',
+				'poster: image',
 				'video: url',
 				'video: player',
 				'video: id',
@@ -51,11 +51,11 @@
 			return array(
 				'name' => 'Teachings: Entries by year (filtered)',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
+					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
-					'email' => 'kirk@strobeck.com'),
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-06-22T18:14:03+00:00'
+				'release-date' => '2013-01-04T23:48:14+00:00'
 			);
 		}
 
