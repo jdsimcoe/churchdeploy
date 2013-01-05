@@ -3,8 +3,7 @@
 class Map
 
 
-  constructor: ->
-    @map()
+  constructor: -> @map()
 
 
   updateFormDate: =>
@@ -98,15 +97,4 @@ class Map
   toggleBounce: =>
     if marker.getAnimation() != null then marker.setAnimation(null)
     else marker.setAnimation(google.maps.Animation.BOUNCE)
-
-
-
-
-
-
-
-
-
-
-
 

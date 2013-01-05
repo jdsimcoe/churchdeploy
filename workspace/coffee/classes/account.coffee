@@ -3,8 +3,7 @@
 class Account
 
 
-  constructor: ->
-    @accountPage()
+  constructor: -> @accountPage()
 
 
   accountPage: =>
