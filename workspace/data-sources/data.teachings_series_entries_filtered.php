@@ -17,6 +17,7 @@
 		public $dsParamFILTERS = array(
 				'233' => 'no',
 				'232' => '(if value of ({$pt2}) is (teachings))',
+				'268' => 'no',
 		);
 
 		public $dsParamINCLUDEDELEMENTS = array(
@@ -54,7 +55,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-01-04T23:55:27+00:00'
+				'release-date' => '2013-01-10T01:17:35+00:00'
 			);
 		}
 
