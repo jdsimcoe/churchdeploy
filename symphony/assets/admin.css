@@ -187,7 +187,7 @@ tr.selecting .inactive {
 }
 .inactive,
 .inactive * {
-	color: #887;
+	color: #B4B4B4;
 }
 .irrelevant {
 	display: none;
@@ -381,7 +381,6 @@ fieldset.settings fieldset legend {
 	font-weight: normal;
 	line-height: 1.5;
 	text-indent: 0;
-	background: #fff;
 	color: #665;
 }
 
@@ -406,11 +405,10 @@ fieldset.settings fieldset legend {
 	margin-bottom: 1.5em;
 }
 .settings .duplicator fieldset {
-	border-top: 1px solid #eed;
+	border-top: 1px solid #b8b8b8;
 }
 .settings .duplicator legend {
-	background: #DDC;
-	color: #665;
+	color: #888;
 }
 .settings .duplicator .group label > i:hover {
 	white-space:normal;
@@ -506,8 +504,8 @@ button.button.delete:hover {
 }
 
 #notice.success a {
-	color: #4e5b39;
-	border-color: #a1bf7e;
+	color: #4e5b39 !important;
+	border-color: #a1bf7e !important;
 	-webkit-animation: successlink 0.5s ease-out 10s 1 forwards;
 	-moz-animation: successlink 0.5s ease-out 10s 1 forwards;
 	-ms-animation: successlink 0.5s ease-out 10s 1 forwards;
@@ -516,38 +514,38 @@ button.button.delete:hover {
 }
 
 #notice.success a:hover {
-	color: #333c25;
-	border-color: #4e5b39;
+	color: #333c25 !important;
+	border-color: #4e5b39 !important;
 }
 
 /* Errors messages */
 
 #notice.error {
-	background-color: #fff9a2;
-	border-color: #e7a973;
-	color: #bd7053;
+	background-color: #fff9a2 !important;
+	border-color: #e7a973 !important;
+	color: #bd7053 !important;
 }
 
 #notice.error a {
-	color: #b02d3c;
-	border-bottom: 1px solid #eed08a;
+	color: #b02d3c !important;
+	border-bottom: 1px solid #eed08a !important;
 }
 
 #notice.error a:hover {
-	color: #87232e;
-	border-bottom: 1px solid #b02d3c;
+	color: #87232e !important;
+	border-bottom: 1px solid #b02d3c !important;
 }
 #notice.silence {
-	background: #e4e4e0;
-	border-top-color: #979792;
-	border-bottom-color: #777;
-	color: #555;
+	background: #e4e4e0 !important;
+	border-top-color: #979792 !important;
+	border-bottom-color: #777 !important;
+	color: #555 !important;
 }
 #notice a:hover,
 #notice a:active,
 #notice a:focus {
-	color: #e4ece4;
-	border-color: #9b9b9b;
+	color: #e4ece4 !important;
+	border-color: #9b9b9b !important;
 }
 #notice button {
 	border: none;
@@ -576,24 +574,27 @@ body, html {
 	background: #282828;
 	padding: 24px 18px;
 	text-shadow: -1px 2px 3px #111;
-	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-	font-weight: bold;
-	text-transform: uppercase;
 	line-height: 1;
 	z-index: 10;
 	position: relative;
 }
-#header h1:after {
+#header h1:before {
+	color: #000;
+	text-shadow: 0 1px 0 #404040;
+	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
 	text-transform: none;
-	font-weight: 300;
+	font-weight: bold;
 	content: "a ChurchDeploy install";
+	font-size: 16px;
+	position: relative;
+	top: -2px;
 	float: right;
 }
 #header h1 a, #session a {
 	border: none;
 	text-decoration: none;
-	color: #000;
-	text-shadow: 0 1px 0 #404040;
+	color: #E6E6E6;
+	color: rgba(255, 255, 255, 0.85)
 }
 
 #header h1 a:hover, #header h1 a:focus,
@@ -1178,7 +1179,6 @@ fieldset.settings fieldset legend {
 	font-weight: normal;
 	line-height: 1.5;
 	text-indent: 0;
-	background: #fff;
 	color: #665;
 }
 
