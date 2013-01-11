@@ -482,23 +482,60 @@ button.button.delete:hover {
 
 #notice {
 	position: relative;
-	z-index: 2;
 	margin: 0;
-	border-top: 3px solid #979792;
-	border-bottom: 2px solid #777;
-	padding: 0.5em 0.83em;
-	background-color: #e4e4e0;
-	color: #555;
-	font-size: 90.91%;
-	line-height: 1.6;
+	padding: 4px 90px 3px 18px;
+	border-bottom: 1px solid #575757 !important;
+	color: #9b9b9b !important;
+	background: #383838 !important;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
-#notice.error {
-	background-color: #ffb;
-	border-top: 3px solid #cc8;
-}
+/* Success messages */
+
 #notice.success {
-	background-color: #ddf6bb;
-	border-top: 3px solid #90c349;
+	background-color: #bfdc96 !important;
+	border-color: #90c349 !important;
+	color: #6d7841 !important;
+	-webkit-animation: success 0.5s ease-out 10s 1 forwards;
+	-moz-animation: success 0.5s ease-out 10s 1 forwards;
+	-ms-animation: success 0.5s ease-out 10s 1 forwards;
+	-o-animation: success 0.5s ease-out 10s 1 forwards;
+	animation: success 0.5s ease-out 10s 1 forwards;
+}
+
+#notice.success a {
+	color: #4e5b39;
+	border-color: #a1bf7e;
+	-webkit-animation: successlink 0.5s ease-out 10s 1 forwards;
+	-moz-animation: successlink 0.5s ease-out 10s 1 forwards;
+	-ms-animation: successlink 0.5s ease-out 10s 1 forwards;
+	-o-animation: successlink 0.5s ease-out 10s 1 forwards;
+	animation: successlink 0.5s ease-out 10s 1 forwards;
+}
+
+#notice.success a:hover {
+	color: #333c25;
+	border-color: #4e5b39;
+}
+
+/* Errors messages */
+
+#notice.error {
+	background-color: #fff9a2;
+	border-color: #e7a973;
+	color: #bd7053;
+}
+
+#notice.error a {
+	color: #b02d3c;
+	border-bottom: 1px solid #eed08a;
+}
+
+#notice.error a:hover {
+	color: #87232e;
+	border-bottom: 1px solid #b02d3c;
 }
 #notice.silence {
 	background: #e4e4e0;
@@ -506,26 +543,11 @@ button.button.delete:hover {
 	border-bottom-color: #777;
 	color: #555;
 }
-#notice a,
-#notice button {
-	color: #999;
-	margin-left: 0.5em;
-}
 #notice a:hover,
-#notice button:hover {
-	color: #332;
-}
-#notice.error a,
-#notice.error button {
-	color: #d55;
-}
-#notice.error a:hover,
-#notice.error button:hover {
-	color: #912712;
-}
-#notice.success a:hover,
-#notice.success button:hover {
-	color: #111;
+#notice a:active,
+#notice a:focus {
+	color: #e4ece4;
+	border-color: #9b9b9b;
 }
 #notice button {
 	border: none;
