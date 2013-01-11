@@ -49,16 +49,25 @@ table {
 body {
 	font: 68.75%/1.5 Lucida Grande, Tahoma, Verdana, sans-serif;
 }
+
+/* Links */
+
 a {
-	color: #5072bf;
-	text-decoration: underline;
+	color: #3f69a5;
+	border-bottom: 1px solid rgba(63, 105, 165, 0.15);
 	cursor: pointer;
 }
-a:hover {
+
+a:hover,
+.inactive a:hover {
 	color: #000;
+	border-bottom-color: rgba(0, 0, 0, 0.3);
 }
-a:active, a:focus {
+
+a:active, a:focus,
+.inactive a:active, .inactive a:focus {
 	color: #d42;
+	border-bottom-color: rgba(221, 68, 34, 0.3);
 }
 h1, h2 {
 	font: 127.28% Lucida Grande, Leelawadee, Tahoma, Verdana, sans-serif;

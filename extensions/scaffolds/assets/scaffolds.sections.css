@@ -5,7 +5,7 @@
 #scaffolds-area {
 	position: absolute;
 	top: -2.7em;
-	right: 2em;
+	right: 4em;
 	z-index: 10;
 }
 
@@ -13,7 +13,6 @@
 		position: absolute;
 		top: 0;
 		left: 5.2em;
-		padding: .5em .75em .5em .5em;
 		border-radius: 0 1em 1em 0;
 		border-left: 1px solid #FFF;
 		background: #81B934;
@@ -54,7 +53,7 @@
 	#scaffolds.target li:first-child a {
 		border-radius: 1em 0 0 0;
 	}
-	
+
 #file,
 iframe {
 	position: absolute;
