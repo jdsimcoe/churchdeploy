@@ -917,8 +917,8 @@ ul.page li[title] {
 	color: #222;
 }
 ul.page a {
-	margin: 0 -0.67em;
-	padding: 0.67em;
+	margin: 0 -0.5em;
+	padding: 0.2em;
 	text-decoration: none;
 }
 
