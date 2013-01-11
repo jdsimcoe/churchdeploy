@@ -858,28 +858,13 @@ body, html {
 	padding-left: 12px;
 }
 #usr a {
-	display: inline-block;
-	min-height: 20px;
-	margin-left: 10px;
-	padding: 0 10px;
-	background-color: #efefed; color: rgba(85, 85, 85, 0.95);
-	background-image: -webkit-linear-gradient(top, #fbfbfa 0%, #fbfbfa 30%, #e3e3df 100%);
-	background-image: -moz-linear-gradient(top, #fbfbfa 0%, #fbfbfa 30%, #e3e3df 100%);
-	background-image: -ms-linear-gradient(top, #fbfbfa 0%, #fbfbfa 30%, #e3e3df 100%);
-	background-image: -o-linear-gradient(top, #fbfbfa 0%, #fbfbfa 30%, #e3e3df 100%);
-	background-image: linear-gradient(to bottom, #fbfbfa 0%, #fbfbfa 30%, #e3e3df 100%);
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	border-bottom-color: rgba(0, 0, 0, 0.3);
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-	line-height: 1.85;
-	text-decoration: none;
+	color: #888;
 	font-size: 11px;
+	border-bottom: 1px solid #ddd;
 }
 #usr a:hover {
-	color: #000;
+	color: #3F69A5;
+	border-bottom-color: rgba(0, 0, 0, 0.3);
 }
 
 /*-----------------------------------------------------------------------------
