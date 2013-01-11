@@ -20,7 +20,7 @@
 			return array(
 				array(
 					'page' => '/backend/',
-					'delegate' => 'InitaliseAdminPageHead',
+					'delegate' => 'AdminPagePreGenerate',
 					'callback' => '__appendAssets'
 				)
 			);

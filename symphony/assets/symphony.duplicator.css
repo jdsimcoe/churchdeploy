@@ -65,7 +65,7 @@
 	position: relative;
 }
 .duplicator > .controls {
-	background: #ddd;
+	background: #e9e9e9;
 	clear: left;
 	cursor: default;
 	padding: 0 1.75em;
@@ -136,7 +136,7 @@
 	opacity: 0.8;
 }
 .duplicator > .instance.ordering {
-	border-top: 1px solid #eeeedd;
+	border-top: 1px solid #b8b8b8;
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 	margin-top: -1px;
@@ -173,6 +173,9 @@
 	position: relative;
 	left: -5px;
 	content: "⇌";
+}
+.duplicator.collapsible > .controls > .collapser.compact:before {
+	content: "⇋";
 }
 .duplicator.collapsible > .controls > .collapser:hover {
 	color: #777;

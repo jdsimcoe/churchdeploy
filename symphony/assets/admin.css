@@ -199,7 +199,7 @@ tr.selecting .inactive {
 	color: #f2f2f2;
 }
 .help {
-	color: #887;
+	color: #888;
 }
 p.label {
 	margin: 0 0 2px;
@@ -350,7 +350,7 @@ fieldset.settings select {
 }
 fieldset.settings p.help {
 	margin: -0.5em 0 1.5em;
-	color: #887;
+	color: #888;
 }
 fieldset.settings li .label {
 	margin: 1em 0 1.25em;
