@@ -836,8 +836,8 @@ body, html {
 	left: 0;
 	right: 0;
 	margin: 0;
-	padding: 1.75em 19px;
-	background: #fff;
+	padding: 23.5px 19px;
+	background: #F4F4F4;
 	text-align: right;
 	color: #222;
 	border-top: 1px solid rgba(191, 191, 183, 0.65);
@@ -886,6 +886,8 @@ body, html {
 	padding: 0;
 }
 .index .actions {
+	position: relative;
+	top: 3px;
 	text-align: right;
 	padding: 1.75em 1.75em 0 0;
 	height: 38px;
@@ -905,7 +907,7 @@ body, html {
 }
 ul.page {
 	margin: 0;
-	padding: 20px 50px 0 19px;
+	padding: 25px 50px 12px 19px;
 	height: 36px;
 	color: #887;
 }
