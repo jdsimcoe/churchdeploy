@@ -886,10 +886,8 @@ body, html {
 	padding: 0;
 }
 .index .actions {
-	position: relative;
-	top: 3px;
 	text-align: right;
-	padding: 1.75em 1.75em 0 0;
+	padding: 1.9em 1.75em 0 0;
 	height: 38px;
 }
 .index .actions select {
