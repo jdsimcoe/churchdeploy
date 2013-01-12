@@ -887,7 +887,7 @@ body, html {
 }
 .index .actions {
 	text-align: right;
-	padding: 1.9em 1.75em 0 0;
+	padding: 1.75em 1.75em 1em 0;
 	height: 38px;
 }
 .index .actions select {
@@ -905,7 +905,7 @@ body, html {
 }
 ul.page {
 	margin: 0;
-	padding: 25px 50px 12px 19px;
+	padding: 10px 50px 12px 19px;
 	height: 36px;
 	color: #887;
 }
