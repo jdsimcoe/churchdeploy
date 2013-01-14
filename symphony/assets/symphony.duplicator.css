@@ -3,26 +3,37 @@
 -----------------------------------------------------------------------------*/
 
 .duplicator {
-	background: #444433;
-	border: 1px solid #999988;
 	margin: 0;
-	list-style: none;
+	padding: 0;
+	background: whiteSmoke;
+	float: left;
+	width: 100%;
+	-webkit-box-shadow: 0 1px 2px #E5E5E5;
+	box-shadow: 0 1px 2px #E5E5E5;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	min-height: 30px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: none;
+	border: 1px solid #b8b8b8;
 }
 .duplicator i {
-	color: #887;
+	color: #888 !important;
 }
 .invalid .duplicator {
 	border-color: #aa2211;
 }
 .duplicator > .instance {
 	clear: left;
-	background: #ddddcc;
-	border-bottom: 1px solid #eeeedd;
+	background: #whiteSmoke;
+	border-bottom: 1px solid #b8b8b8;
 }
 .duplicator > .instance > .header {
-	background: #ccccbb;
-	border-bottom: 1px solid #eeeedd;
-	color: #666655;
+	background: whiteSmoke;
+	border-bottom: 1px solid #b8b8b8;
+	color: #555;
 	margin: 0;
 	padding: 0.5em 1.75em;
 	position: relative;
@@ -33,20 +44,19 @@
 }
 .duplicator > .instance > .header .destructor {
 	font-weight: normal;
-	color: #333322;
+	color: #888;
 	margin: 0 1.75em;
 	padding: 0.5em 0;
 	position: absolute;
 	right: 0;
 	text-decoration: none;
 	top: 0;
-	text-shadow: 1px 1px #DDDDCC;
 }
 .duplicator > .instance > .header .destructor:hover {
-	color: #555544;
+	color: #888;
 }
 .duplicator > .instance > .header .destructor.disabled {
-	color: #333322;
+	color: #888 !important;
 	cursor: default;
 	opacity: 0.4;
 }
@@ -55,8 +65,8 @@
 	position: relative;
 }
 .duplicator > .controls {
+	background: #e9e9e9;
 	clear: left;
-	background: #aaaa99;
 	cursor: default;
 	padding: 0 1.75em;
 /*	position: relative;*/
@@ -71,7 +81,7 @@
 }
 .duplicator > .controls.top {
 	overflow: hidden;
-	border-bottom: 1px solid #eeeedd;
+	border-bottom: 1px solid #b8b8b8;
 }
 .duplicator > .controls.hidden {
 	display: none;
@@ -87,19 +97,29 @@
 	width: auto;
 }
 .duplicator > .controls > .constructor {
-	color: #f1f1f1;
+	color: #333;
 	cursor: pointer;
 	padding: 0.5em 0;
 	text-decoration: none;
-	text-shadow: 1px 1px #8E8E80;
+	border: none;
+	text-shadow: 0 1px 0 #fff;
+	font-weight: bold;
 }
 .duplicator > .controls > .constructor:hover {
-	color: #ffffee;
+	color: #777;
 }
 .duplicator > .controls > .constructor.disabled {
-	color: #eeeedd;
+	color: #888;
 	cursor: default;
 	opacity: 0.6;
+}
+
+.duplicator label.disabled {
+	color: #888;
+}
+
+.duplicator ul.tags {
+	color: #888;
 }
 
 /*-----------------------------------------------------------------------------
@@ -116,7 +136,7 @@
 	opacity: 0.8;
 }
 .duplicator > .instance.ordering {
-	border-top: 1px solid #eeeedd;
+	border-top: 1px solid #b8b8b8;
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 	margin-top: -1px;
@@ -143,15 +163,25 @@
 	float: left;
 	margin: 0;
 	padding: 0.5em 0;
-	color: #eeeedd;
+	color: #333;
 	text-decoration: none;
-	text-shadow: 1px 1px #8E8E80;
+	text-shadow: 0 1px 0 #fff;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.duplicator.collapsible > .controls > .collapser:before {
+	position: relative;
+	left: -5px;
+	content: "⇌";
+}
+.duplicator.collapsible > .controls > .collapser.compact:before {
+	content: "⇋";
 }
 .duplicator.collapsible > .controls > .collapser:hover {
-	color: #ffffee;
+	color: #777;
 }
 .duplicator.collapsible > .controls > .collapser.disabled {
-	color: #eeeedd;
+	color: #ededec;
 	cursor: default;
 	opacity: 0.6;
 }

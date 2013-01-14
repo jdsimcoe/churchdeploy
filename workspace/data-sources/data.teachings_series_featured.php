@@ -2,26 +2,26 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceteachings_series_home_filtered extends Datasource{
+	Class datasourceteachings_series_featured extends Datasource{
 
-		public $dsParamROOTELEMENT = 'teachings-series-home-filtered';
+		public $dsParamROOTELEMENT = 'teachings-series-featured';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '3';
+		public $dsParamLIMIT = '1';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'order';
-		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamHTMLENCODE = 'yes';
+		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
 
 		public $dsParamFILTERS = array(
+				'269' => 'yes',
 				'233' => 'no',
-				'268' => 'no',
 		);
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'title',
-				'poster: image',
-				'teachings: title'
+				'poster: image'
 		);
 
 
@@ -32,13 +32,13 @@
 
 		public function about(){
 			return array(
-				'name' => 'Teachings: Series home (filtered)',
+				'name' => 'Teachings: Series: Featured',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-01-05T22:07:05+00:00'
+				'release-date' => '2013-01-05T22:15:01+00:00'
 			);
 		}
 
