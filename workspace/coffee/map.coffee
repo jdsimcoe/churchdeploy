@@ -6,10 +6,6 @@ class Map
   constructor: -> @map()
 
 
-  updateFormDate: =>
-    $(".form-birthday").val("#{$(".birthday-date-year").val()}-#{$(".birthday-date-month").val()}-#{$(".birthday-date-day").val()}")
-
-
   map: =>
     styles = [
       {
@@ -97,4 +93,7 @@ class Map
   toggleBounce: =>
     if marker.getAnimation() != null then marker.setAnimation(null)
     else marker.setAnimation(google.maps.Animation.BOUNCE)
+
+
+if $(".map").exists() then new Map()
 

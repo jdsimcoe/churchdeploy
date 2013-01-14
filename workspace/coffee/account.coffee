@@ -21,3 +21,6 @@ class Account
   updateFormDate: =>
     $(".form-birthday").val("#{$(".birthday-date-year").val()}-#{$(".birthday-date-month").val()}-#{$(".birthday-date-day").val()}")
 
+
+if $(".layout-account").exists() then new Account()
+
