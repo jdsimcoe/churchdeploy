@@ -19,7 +19,7 @@ Download a zip of the default theme repo: [anchor](https://github.com/anchorchur
 
 Unzip and place the resulting unzipped folder directly into /churchdeploy/workspace/themes/
 
-Then rename that folder to '*active*'
+Then rename that folder to *active*
 
 
 #### Server requirements
