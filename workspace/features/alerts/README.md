@@ -1,0 +1,1 @@
+Remember if an alert has been closed with a cookie
