@@ -30,13 +30,25 @@ ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
 
 [Grunt](http://gruntjs.com/) is already installed and configured to compile `coffee` and `less` files and to combine `js` files.
  
-For development (uncompressed), run 
+To monitor `coffee` and `less` files for changes and compile on-save
 
+    # for development (uncompressed)
     grunt watch:jsdev & grunt watch:cssdev
     
-and for production (compressed), run
-
+    # for production (compressed)
     grunt watch:jsprod & grunt watch:cssprod
+
+To compile manually and not watch files
+
+    # for development (uncompressed)
+    grunt jsdev & grunt cssdev
+    
+    # for production (compressed)
+    grunt jsprod & grunt cssprod
+
+Any of the commands can be run without the `&`. For example
+
+	grunt cssdev
 
 ## Bug tracker
 
