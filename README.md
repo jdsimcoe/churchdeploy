@@ -26,6 +26,18 @@ Get your *auth token* by going to *System > Authors > Your-name*, then check the
 ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
 `725e2ffa` is your auth token to use in the cron jobs below.
 
+## Grunt
+
+[Grunt](http://gruntjs.com/) is already installed and configured.  
+ 
+For development (uncompressed), run 
+
+    grunt watch:jsdev & grunt watch:cssdev
+    
+and for production (compressed), run
+
+    grunt watch:jsprod & grunt watch:cssprod
+
 ## Bug tracker
 
 Have a bug? Please create an [issue](https://github.com/churchdeploy/churchdeploy/issues) here on GitHub that conforms with [necolas's guidelines](https://github.com/necolas/issue-guidelines).

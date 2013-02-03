@@ -2,6 +2,7 @@
 /*
 
 grunt watch:jsdev & grunt watch:cssdev
+grunt watch:jsprod & grunt watch:cssprod
 
 */
 
