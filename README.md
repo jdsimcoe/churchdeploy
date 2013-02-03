@@ -28,7 +28,7 @@ ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
 
 ## Grunt
 
-[Grunt](http://gruntjs.com/) is already installed and configured to compile `coffee` and `less` files, and to combine `js` files.
+[Grunt](http://gruntjs.com/) is already installed and configured to compile `coffee` and `less` files and to combine `js` files.
  
 For development (uncompressed), run 
 
