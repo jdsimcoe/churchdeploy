@@ -42,19 +42,19 @@ and for production (compressed), run
 
 Have a bug? Please create an [issue](https://github.com/churchdeploy/churchdeploy/issues) here on GitHub that conforms with [necolas's guidelines](https://github.com/necolas/issue-guidelines).
 
-# Components
+## Components
 
-## Downloads
+### Downloads
 
-## Images
+### Images
 
-## Locations
+### Locations
 
-## Tags
+### Tags
 
-## Text
+### Text
 
-## Twitter
+### Twitter
 
 Cron job
 
@@ -64,9 +64,9 @@ Cron job
 
 This will update *Content > Twitter*
 
-## Verses
+### Verses
 
-## Videos
+### Videos
 
 Cron job
 
@@ -76,27 +76,27 @@ Cron job
 
 This will update *Content > Videos*
 
-## Featured
+### Featured
 
-## Events
+### Events
 
-## Events: Recurring
+### Events: Recurring
 
-## Events: Types
+### Events: Types
 
-## Teachings
+### Teachings
 
-## Teachings: Series
+### Teachings: Series
 
-## Teachings: Tags
+### Teachings: Tags
 
-## Members
+### Members
 
-## Members: Roles
+### Members: Roles
 
-## Members: Roles: Types
+### Members: Roles: Types
 
-## UStream
+### UStream
 
 Cron job
 
@@ -109,7 +109,7 @@ This will update *Structure > Status > ustream-status*
 #### Alerts
 
 
-## Core
+### Core
 
 #### Layouts
 
@@ -166,7 +166,7 @@ You can update your local `churchdeploy` fork using the following commands ..
 ### Software recommendations
 
 - Mac OS X
-    - Local server: [MAMP Pro](http://www.mamp.info/en/mamp-pro/index.html) - MAMP is free, pro is $59.00
+    - Local server: [MAMP Pro](http://www.mamp.info/en/mamp-pro/index.html) - MAMP is free, pro is $59.00 (we recommend pro)
     - MySQL: [Sequel Pro](http://www.sequelpro.com/) - Donationware
     - Code editor: [Sublime 2](http://www.sublimetext.com/2) - Free demo, $59.00 to buy
     - FTP: [Transmit](http://panic.com/transmit/)
@@ -181,4 +181,4 @@ All of the components we used are free for you to use with Church Deploy as it i
 
 Please write [kirk@strobeck.com](mailto:kirk@strobeck.com), IM kirkstrobeck on AIM/Skype, or call (503) 427-8050 if you have any questions.
 
-**We are excited to see how you use Church Deploy and how the project grows!**
+**We can't wait to see how you use Church Deploy**
