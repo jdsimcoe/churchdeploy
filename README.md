@@ -1,52 +1,24 @@
-## Church Deploy is a robust [Symphony CMS](http://getsymphony.com/) ensemble (template)
+# Church Deploy
 
-The base installation of Church Deploy comes with all components. 
+A robust [Symphony CMS](http://getsymphony.com/) ensemble (template) for churches.
 
-## Installation
+## Quick install
 
-Use the example organization [anchorchurch](https://github.com/anchorchurch), which contains a [theme](https://github.com/anchorchurch/anchor) and a [site](https://github.com/anchorchurch/churchdeploy) project. The theme should be like the [anchor theme](https://github.com/anchorchurch/anchor) and the [site](https://github.com/anchorchurch/churchdeploy) should be a [fork](https://github.com/anchorchurch/churchdeploy) of [Church Deploy](https://github.com/churchdeploy/churchdeploy). This will enable you to push updates directly to your server by installing git via SSH and using `git pull` to update your live site. The site project is your theme combined with the core Church Deploy ensemble.
+1. [Download](https://github.com/churchdeploy/churchdeploy/archive/master.zip) the Church Deploy core
+3. [Download](https://github.com/anchorchurch/anchor/archive/master.zip) the example *Anchor* theme, rename the folder to `active`, and move it into `workspace/themes`
+4. Start a server using something like [MAMP](http://www.mamp.info/en/index.html)
+5. Connect to MAMP MySQL using something like [Sequel Pro](http://www.sequelpro.com/) and create a database with any name.
+6. Visit your new server homepage and follow the on-screen installation instructions.
 
-Once you fork [Church Deploy](https://github.com/churchdeploy/churchdeploy), you can update it
-
-    git remote add upstream https://github.com/churchdeploy/churchdeploy.git
-    git fetch upstream
-    git merge upstream/master
-    git push
-
-###Install default 'Anchor' theme
-
-Download a zip of the default theme repo: [anchor](https://github.com/anchorchurch/anchor)
-
-Unzip and place the resulting unzipped folder directly into /churchdeploy/workspace/themes/
-
-Then rename that folder to *active*
-
-
-#### Server requirements
-
-- PHP 5.3
-- PHP's LibXML module, with the XSLT extension enabled (--with-xsl)
-- MySQL 5.0 or later
-- Apache webserver with mod_rewrite
-
-#### Software recommendations
-
-- Mac OS X
-    - Local server: [MAMP Pro](http://www.mamp.info/en/mamp-pro/index.html) - MAMP is free, pro is $59.00
-    - MySQL: [Sequel Pro](http://www.sequelpro.com/) - Donationware
-    - Code editor: [Sublime 2](http://www.sublimetext.com/2) - Free demo, $59.00 to buy
-    - FTP: [Transmit](http://panic.com/transmit/)
-
-
-## Getting started (once installed)
+## Getting started
 
 Think of *Content > Tags* as Pages. A tag is a meeting place for content of all kinds. When the content comes together (has the same tag) then it gets displayed according to *Structure > Layouts*, which can be specified in the tag.
 
-If a field says *(internal)* then it won't show on the page, it's for internal reference only.
+If a field says *(internal)* then it won't show on the page, it's for your internal reference only.
 
 All text areas support [Markdown](http://whatismarkdown.com/) .. its awesome :)
 
-Go to `http://your-localhost/toolkit/images/` to [add images](http://see.kirkstrobeck.com/G7Xl) for use in text fields while utilizing [responsimage](http://responsimage.com/).
+Go to `http://your-host/toolkit/images/` to [add images](http://see.kirkstrobeck.com/G7Xl) for use in text fields while utilizing [responsimage](http://responsimage.com/).
 
 Cron jobs need to be added to use twitter, vimeo, and ustream .. see component documentation below for details. The cron job will push the data into the backend CMS automatically.
 
@@ -56,9 +28,7 @@ ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
 
 ## Bug tracker
 
-Have a bug? Please create an issue here on GitHub that conforms with [necolas's guidelines](https://github.com/necolas/issue-guidelines).
-
-https://github.com/churchdeploy/churchdeploy/issues
+Have a bug? Please create an [issue](https://github.com/churchdeploy/churchdeploy/issues) here on GitHub that conforms with [necolas's guidelines](https://github.com/necolas/issue-guidelines).
 
 # Components
 
@@ -160,7 +130,37 @@ We make no assumptions about how you will use Church Deploy. It is up to you to 
 - Retina-ready icon font, and [responsimage](http://responsimage.com/) image baked-in.
 - Front-end membership is already in-place, and we hope to enable registration soon.
 
-### Details and more info
+## Advanced installation
+
+Use the example organization [`anchorchurch`](https://github.com/anchorchurch), which consists of two projects ..
+
+1. [`anchor`](https://github.com/anchorchurch/anchor) *theme* — a custom theme bundle (similar to a WordPress theme) for a church we made up for example purposes only.
+2. [`churchdeploy`](https://github.com/anchorchurch/churchdeploy) *fork*  — a fork of [`churchdeploy`](https://github.com/churchdeploy/churchdeploy) with the above `anchor` project added as a [submodule](http://symphonyextensions.com/articles/on-git-submodules/) to the path `workspace/themes/active`. Forking the project and adding your theme will enable you to push updates by installing git via SSH on your server and using `git pull` to update your live site.
+
+You can update your local `churchdeploy` fork using the following commands ..
+
+    git remote add upstream https://github.com/churchdeploy/churchdeploy.git
+    git fetch upstream
+    git merge upstream/master
+    git push
+
+### Server requirements
+
+- PHP 5.3
+- PHP's LibXML module, with the XSLT extension enabled (--with-xsl)
+- MySQL 5.0 or later
+- Apache webserver with mod_rewrite
+
+### Software recommendations
+
+- Mac OS X
+    - Local server: [MAMP Pro](http://www.mamp.info/en/mamp-pro/index.html) - MAMP is free, pro is $59.00
+    - MySQL: [Sequel Pro](http://www.sequelpro.com/) - Donationware
+    - Code editor: [Sublime 2](http://www.sublimetext.com/2) - Free demo, $59.00 to buy
+    - FTP: [Transmit](http://panic.com/transmit/)
+
+## More
+
 We use the term `component` for a Church Deploy object (in Symphony, objects are called *sections*). All Church Deploy components have a template XSL file, which lives in the *workspace/themes/yourtheme* directory, with its component name.
 
 We made an out of the box template for you to work from called [anchor](https://github.com/anchorchurch/anchor) in which we use the name "Anchor Church." Church Deloy will use whatever theme that you title `active`. So if you want to switch templates, simply go to the templates directory and change the folder name. Church Deploy is designed to have all of the core functionalty in the parent project and let your theme template files only make the changes that are unique to your installation, but it isn't limiting in the least.
