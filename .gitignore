@@ -11,6 +11,5 @@ favicon.ico
 symphony/favicon.ico
 install-log.txt
 manifest/*
-workspace/uploads/*
-atheycreek*
+workspace/uploads/images/leaderboards/*
 .idea

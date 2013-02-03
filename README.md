@@ -5,10 +5,10 @@ A robust [Symphony CMS](http://getsymphony.com/) ensemble (template) for churche
 ## Quick install
 
 1. [Download](https://github.com/churchdeploy/churchdeploy/archive/master.zip) the Church Deploy core
-3. [Download](https://github.com/anchorchurch/anchor/archive/master.zip) the example *Anchor* theme, rename the folder to `active`, and move it into `workspace/themes`
-4. Start a server using something like [MAMP](http://www.mamp.info/en/index.html)
-5. Connect to MAMP MySQL using something like [Sequel Pro](http://www.sequelpro.com/) and create a database with any name.
-6. Visit your new server homepage and follow the on-screen installation instructions.
+2. [Download](https://github.com/anchorchurch/anchor/archive/master.zip) the example *Anchor* theme, rename the folder to `active`, and move it into `workspace/themes`
+3. Start a server using something like [MAMP](http://www.mamp.info/en/index.html)
+4. Connect to MAMP MySQL using something like [Sequel Pro](http://www.sequelpro.com/) and create a database with any name.
+5. Visit your new server homepage and follow the on-screen installation instructions.
 
 ## Getting started
 

@@ -31,7 +31,7 @@
 					rHeight *= 2;
 				}
 
-				rImage = rServer.replace('width', rWidth).replace('height', rHeight).replace('anchor', rAnchor).replace('filename', filename);
+				rImage = rServer.replace('width', rWidth).replace('height', rHeight).replace('responsimageanchor', rAnchor).replace('filename', filename);
 
 				if(filename !== 'disabled') {
 					rThis.attr('src', rImage);
@@ -49,8 +49,8 @@
 			}
 		});
 
-		window.onorientationchange = function() {      
-			setTimeout(responsimage, 0); 
+		window.onorientationchange = function() {
+			setTimeout(responsimage, 0);
 		};
 	});
 }(jQuery, window, Date));

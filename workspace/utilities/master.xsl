@@ -147,7 +147,7 @@
 			<meta name="msapplication-tooltip" content="{$page-title}" />
 			<meta name="msapplication-starturl" content="{$root}" />
 			<meta name="responsimage"
-				data-server="{$root}/image/2/width/height/anchor/0/uploads/images/leaderboards/filename"
+				data-server="{$root}/image/2/width/height/responsimageanchor/0/uploads/images/leaderboards/filename"
 				data-static="{$workspace}/img/spacer.gif"
 				data-loading="{$workspace}/img/loading.gif"
 			/>
