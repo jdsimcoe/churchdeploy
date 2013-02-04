@@ -1,0 +1,39 @@
+
+.modalLive {
+  width: 630px !important;
+}
+
+@media (max-width: 480px) { // iphone
+
+  .modalLive {
+    display: none;
+
+    .ustream-embed {
+      width: 420px !important;
+      height: 236px !important;
+
+      iframe {
+        width: 420px !important;
+        height: 236px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) { // iphone portrait
+
+  .modalLive {
+    display: none;
+    width: 280px !important;
+
+    .ustream-embed {
+      width: 240px !important;
+      height: 135px !important;
+
+      iframe {
+        width: 240px !important;
+        height: 135px !important;
+      }
+    }
+  }
+}

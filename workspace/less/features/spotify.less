@@ -1,0 +1,33 @@
+
+.spotify {
+  #font > #helvetica > .regular;
+
+  border-top: 1px solid #ccc;
+  color: #999;
+  font-size: 14px;
+  padding: @base * 1.5 0 @base 0;
+  margin-bottom: @base * 2;
+
+  .links {
+    margin-left: 10px;
+  }
+
+  a {
+    #font > #helvetica > .bold;
+    color: #6AAD2E;
+
+    &:hover {
+      color: darken(#6AAD2E, 10%);
+    }
+
+    span {
+      margin: 0 5px;
+      text-transform: uppercase;
+      color: #999;
+
+      &:hover {
+        color: #303030;
+      }
+    }
+  }
+}

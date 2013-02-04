@@ -1,12 +1,5 @@
-<?xml
-	version="1.0"
-	encoding="UTF-8"
-	?>
-
-<xsl:stylesheet
-	version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	>
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output
 	doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -32,20 +25,16 @@
 <xsl:param name="url-sections" />
 <xsl:param name="url-keywords" />
 
-<!-- <xsl:variable name="pt1" select="'43'" /> -->
 <xsl:variable name="events-entries-per-page" select="'5'" />
 <xsl:variable name="member-is-logged-in" select="boolean(//events/member-login-info/@logged-in = 'yes')" />
 
 
 <xsl:template match="/">
-
 	<xsl:call-template name="master"/>
-
 </xsl:template>
 
 
 <xsl:template name="master">
-
 	<xsl:comment><![CDATA[[if lt IE 7]> <html class="no-js ie6 oldie" lang="en" /> <![endif]]]></xsl:comment>
 	<xsl:comment><![CDATA[[if IE 7]> <html class="no-js ie7 oldie" lang="en" /> <![endif]]]></xsl:comment>
 	<xsl:comment><![CDATA[[if IE 8]> <html class="no-js ie8 oldie" lang="en" /> <![endif]]]></xsl:comment>
@@ -146,11 +135,20 @@
 			<meta name="application-name" content="{$website-name}" />
 			<meta name="msapplication-tooltip" content="{$page-title}" />
 			<meta name="msapplication-starturl" content="{$root}" />
-			<meta name="responsimage"
-				data-server="{$root}/image/2/width/height/responsimageanchor/0/uploads/images/leaderboards/filename"
-				data-static="{$workspace}/img/spacer.gif"
-				data-loading="{$workspace}/img/loading.gif"
-			/>
+			<meta name="responsimage">
+				<xsl:attribute name="data-server">
+					<xsl:value-of select="$root" disable-output-escaping="yes" />
+					<xsl:text>/image/2/width/height/responsimageanchor/0/uploads/images/leaderboards/filename</xsl:text>
+				</xsl:attribute>
+				<xsl:attribute name="data-static">
+					<xsl:value-of select="$workspace" disable-output-escaping="yes" />
+					<xsl:text>/img/spacer.gif</xsl:text>
+				</xsl:attribute>
+				<xsl:attribute name="data-loading">
+					<xsl:value-of select="$workspace" disable-output-escaping="yes" />
+					<xsl:text>/img/loading.gif</xsl:text>
+				</xsl:attribute>
+			</meta>
 			<meta property="og:type" content="website" />
 			<meta property="og:url" content="{$root}" />
 			<meta property="og:image" content="{$workspace}/themes/active/img/apple-touch-icon.png" />
@@ -158,9 +156,7 @@
 			<meta property="og:description" content="{//misc-all-entries/entry[name='meta-description']/content}" />
 			<link href="{$workspace}/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 			<link rel="apple-touch-icon-precomposed" href="{$workspace}/themes/active/img/apple-touch-icon.png" />
-
 			<xsl:call-template name="template-head" />
-			<!-- <xsl:comment><![CDATA[[if IE 6]><link rel="stylesheet" type="text/css" href="]]><xsl:value-of select="$root" /><![CDATA[/workspace/assets/css/ie6patches-1.0.css" media="screen" /><![endif]]]></xsl:comment> -->
 		</head>
 		<body>
 			<xsl:attribute name="class">
@@ -207,14 +203,11 @@
 			<xsl:call-template name="template-footer-outside-container" />
 		</body>
 	</html>
-
 </xsl:template>
 
 
 <xsl:template name="call-components">
-
 	<xsl:param name="xpath" />
-
 	<div class="row">
 		<div class="span12">
 			<xsl:call-template name="component">
@@ -230,16 +223,13 @@
 			<xsl:with-param name="xpath" select="$xpath/column-right" />
 		</xsl:call-template>
 	</div>
-
 </xsl:template>
 
 
 <xsl:template name="subnav-entry">
-
 	<xsl:variable name="active-parent" select="//tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
 	<xsl:variable name="realID" select="@id" />
 	<xsl:variable name="node" select="." />
-
 	<li>
 		<xsl:attribute name="class">
 			<xsl:text>entry</xsl:text>
@@ -249,7 +239,6 @@
 			<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 				<xsl:text> sub</xsl:text>
 			</xsl:if>
-
 			<xsl:choose>
 				<xsl:when test="position() mod 2 = 0">
 					<xsl:text> even</xsl:text>
@@ -282,12 +271,10 @@
 				</xsl:choose>
 			</xsl:if>
 		</xsl:attribute>
-
 		<a>
 			<xsl:call-template name="url-tags" />
 			<xsl:value-of select="tag" disable-output-escaping="yes" />
 		</a>
-
 		<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 			<ul class="dropdown-menu">
 				<xsl:for-each select="//tags-all-entries/entry[parent/item/@id = $realID]">
@@ -300,16 +287,12 @@
 				</xsl:for-each>
 			</ul>
 		</xsl:if>
-
 	</li>
-
 </xsl:template>
 
 
 <xsl:template name="subnav-group">
-
 	<xsl:param name="group" />
-
 	<xsl:if test="count($group)">
 		<div class="jumbotron masthead" id="overview">
 			<div class="subnav visible-desktop">
@@ -322,16 +305,13 @@
 			<div class="spacer"> </div>
 		</div>
 	</xsl:if>
-
 </xsl:template>
 
 
 <xsl:template name="subnav-entry-mobile">
-
 	<xsl:variable name="active-parent" select="//tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
 	<xsl:variable name="realID" select="@id" />
 	<xsl:variable name="node" select="." />
-
 	<li>
 		<xsl:attribute name="class">
 			<xsl:text>entry </xsl:text>
@@ -341,7 +321,6 @@
 			<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 				<xsl:text> sub</xsl:text>
 			</xsl:if>
-
 			<xsl:choose>
 				<xsl:when test="position() mod 2 = 0">
 					<xsl:text> even</xsl:text>
@@ -374,14 +353,11 @@
 				</xsl:choose>
 			</xsl:if>
 		</xsl:attribute>
-
 		<a>
 			<xsl:call-template name="url-tags" />
 			<xsl:value-of select="tag" disable-output-escaping="yes" />
 		</a>
-
 		<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
-
 			<ul class="dropdown-menu">
 				<xsl:for-each select="//tags-all-entries/entry[parent/item/@id = $realID]">
 					<li>
@@ -393,16 +369,12 @@
 				</xsl:for-each>
 			</ul>
 		</xsl:if>
-
 	</li>
-
 </xsl:template>
 
 
 <xsl:template name="subnav-mobile">
-
 	<xsl:param name="group" />
-
 	<xsl:if test="count($group)">
 		<ul class="nav nav-tabs nav-stacked">
 			<xsl:for-each select="$group">
@@ -411,17 +383,13 @@
 		</ul>
 		<hr class="soften" />
 	</xsl:if>
-
-
 </xsl:template>
 
 
 <xsl:template name="css-hide-all">
-
 	<style type="text/css">
 		* { display: none !important; }
 	</style>
-
 </xsl:template>
 
 

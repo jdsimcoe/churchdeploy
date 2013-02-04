@@ -1,0 +1,381 @@
+
+.component-events {
+
+  .component-images {
+
+    img {
+      width: 940px !important;
+      height: 598px !important;
+    }
+  }
+}
+
+.column-full-width,
+.column-center {
+
+  .row {
+
+    > .component-events {
+
+      &.recurring {
+
+        .share {
+          display: none;
+        }
+      }
+
+      .back {
+        margin: 30px 0 30px 0;
+
+        .link-large {
+          background: #e9e9e9;
+          color: #999;
+
+          &:hover {
+            background: #ccc;
+            color: #777;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .entries {
+        margin-top: 0;
+
+        .entry {
+          background: #fdfdfd;
+          border: @base solid #e9e9e9;
+          padding: 0;
+          position: relative;
+
+          &.even {
+            background: #fff;
+          }
+
+          a {
+            .border-radius(0 0 0 0);
+          }
+
+          .date {
+            font-style: italic;
+            color: #303030;
+            font-size: 18px;
+            clear: both;
+            margin: 0 0 @base @base * 1.5;
+            padding: 0;
+
+            .icon {
+              color: #878787;
+              font-size: 20px;
+              position: relative;
+              top: -1px;
+            }
+          }
+
+          .description {
+            padding: 0 @base * 1.5;
+
+            p {
+              margin-top: @base * 1.5;
+            }
+          }
+
+          .edit {
+            position: absolute;
+            top: @base;
+            right: @base;
+          }
+
+          .header {
+            text-transform: none;
+            font-size: 26px;
+            margin: @base 0 @base 0;
+            padding: 0 @base * 1.5 0 @base * 1.5;
+            line-height: 1.1;
+
+            a {
+              text-transform: none;
+              text-decoration: none;
+              color: #303030;
+
+              &:hover {
+                color: @color-accent;
+              }
+            }
+          }
+
+          .label {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: normal;
+            text-transform: uppercase;
+            padding: @base;
+            background: none;
+            color: @color-accent;
+            text-align: right;
+            border-bottom: 1px solid @color-gray-accent;
+            .border-radius(0);
+            text-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.column-right {
+
+  > .component-events {
+
+    .entries {
+      list-style: none;
+      margin: 0 0 @base * 2 0;
+      padding: 0;
+
+      @month-height: 16px;
+      @day-height: 32px;
+      @calendar-height: @month-height + @day-height;
+      @calendar-width: @calendar-height;
+      @calendar-padding: @base * 1.5;
+
+      .entry {
+        background: @color-gray-accent;
+        position: relative;
+        padding: 0 20px;
+        margin: 0;
+
+        a {
+          display: block;
+          height: 100%;
+          padding: @base * 1.5 @base @base * 1.5 0;
+          border-bottom: 1px solid darken(@color-gray-accent, 20%);
+          .clearfix;
+
+          &:hover {
+
+            .info {
+              color: @color-accent;
+            }
+          }
+
+          .date {
+            #font > #helvetica > .bold;
+            width: @calendar-width;
+            text-align: center;
+            position: absolute;
+            height: @calendar-height;
+            left: 15px;
+
+            .month {
+              background: @color-accent;
+              color: #fff;
+              font-size: 12px;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              line-height: @month-height;
+              height: @month-height;
+            }
+
+            .day {
+              background: #fff;
+              font-size: 26px;
+              color: @color-body-text;
+              line-height: @day-height;
+              height: @day-height;
+            }
+          }
+
+          .info {
+            #font > #helvetica > .regular;
+            font-size: 15px;
+            line-height: 1.3;
+            font-weight: normal;
+            float: left;
+            height: @calendar-height;
+            margin-left: @calendar-padding + @calendar-width;
+            color: @color-body-text;
+
+            .cel {
+
+              td {
+                vertical-align: middle;
+              }
+            }
+          }
+        }
+
+        &.last {
+
+          a {
+            border: none;
+          }
+        }
+
+        .header {
+          text-transform: none;
+          font-size: 26px;
+
+          a {
+            text-transform: none;
+            text-decoration: none;
+            color: @color-body-text;
+
+            &:hover {
+              color: #555;
+            }
+          }
+        }
+
+        .edit {
+          .edit-defaults;
+          top: @base;
+          right: @base;
+        }
+      }
+    }
+
+    .more  {
+
+      .icon {
+        margin-right: @base * .5;
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+}
+
+.profile {
+
+  .column-full-width {
+
+    .row {
+      padding-left: @base * 2;
+
+      > .component-events {
+
+        .back {
+          margin: 15px 0 30px 0;
+        }
+
+        > .entries {
+
+          .entry {
+            border: none;
+            padding: none;
+            margin: none !important;
+
+            .header,
+            .description,
+            .help-block {
+              padding-left: 0;
+              padding-right: 0;
+            }
+
+            .header {
+              margin: 0 0 @base 0;
+            }
+
+            .date {
+              margin: 0 0 @base 0;
+              line-height: 1.4;
+            }
+          }
+          .span4 {
+            background: none;
+            margin-top: 0;
+            padding-top: 0;
+          }
+
+          .component-members-roles {
+
+            .entry {
+              background: #eee;
+              padding-left: @base * 2;
+            }
+          }
+
+          .component-locations {
+
+            h3 {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 979px) { // tablets and below
+
+  .component-events {
+
+    .component-images {
+
+      img {
+        width: 724px !important;
+        height: 461px !important;
+      }
+
+      .padder {
+        margin-bottom: 461px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) { // iphone 5 landscape
+
+  .component-events {
+
+    .component-images {
+
+      img {
+        width: 600px !important;
+        height: 382px !important;
+      }
+
+      .padder {
+        margin-bottom: 382px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) { // iphone
+
+  .component-events {
+
+    .component-images {
+
+      img {
+        width: 440px !important;
+        height: 280px !important;
+      }
+
+      .padder {
+        margin-bottom: 280px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) { // iphone portrait
+
+  .component-events {
+
+    .component-images {
+
+      img {
+        width: 280px !important;
+        height: 178px !important;
+      }
+
+      .padder {
+        margin-bottom: 178px !important;
+      }
+    }
+  }
+}

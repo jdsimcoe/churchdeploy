@@ -1,0 +1,400 @@
+
+.layout-home {
+
+  .column-right,
+  & + .column-right {
+    margin-top: 0;
+
+    ul {
+      margin-top: 15px;
+    }
+  }
+
+  .component-teachings {
+    margin-top: 15px;
+  }
+
+  .component-events {
+
+    .entries {
+      margin-top: 15px;
+    }
+  }
+
+  .component-events {
+    margin: @base * 2 0;
+
+    .title-row {
+      border-bottom: 1px solid @color-gray-light;
+
+      a {
+        color: darken(@color-gray-light, 5%);
+
+        &:hover {
+          color: @color-gray-dark;
+        }
+      }
+    }
+
+    .span4 {
+      @month-height: 18px;
+      @day-height: 30px;
+      @calendar-height: @month-height + @day-height;
+      @calendar-width: @calendar-height;
+      @calendar-padding: @base * 1.5;
+      margin-top: @base;
+      position: relative;
+
+      .date {
+        #font > #helvetica > .bold;
+        width: @calendar-width;
+        text-align: center;
+        height: @calendar-height;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        position: relative;
+        top: 0px;
+
+        .month {
+          background: @color-accent;
+          color: @color-white;
+          font-size: 12px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          line-height: 25px;
+          height: @month-height;
+        }
+
+        .day {
+          background: @color-accent;
+          font-size: 26px;
+          color: @color-white;
+          line-height: 26px;
+          height: @day-height;
+        }
+      }
+
+      .label {
+        #font > #helvetica > .bold;
+        text-transform: uppercase;
+        border-bottom: 1px solid @color-gray-accent;
+        .border-radius(0);
+        .box-shadow(none);
+        text-shadow: none;
+        background: @color-accent;
+        color: @color-white;
+      }
+
+      h3 {
+        text-transform: none;
+        color: @color-gray-dark;
+        margin: @base 0 0 0;
+        line-height: 1.4;
+        text-align: center;
+
+        a {
+          color: @color-gray-dark;
+
+          &:hover {
+            color: @color-accent;
+          }
+        }
+      }
+
+      .description {
+        margin-top: @base;
+
+        p {
+          #font > #helvetica > .regular;
+          font-size: 16px;
+          line-height: 1.7;
+          color: @color-gray-dark;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .component-teachings {
+
+    .latest {
+
+      .video {
+        margin: 0 0 10px 0;
+      }
+
+      h2 {
+
+        a {
+          color: @color-white;
+        }
+      }
+
+      .verse {
+        color: @color-white;
+        border-color: @color-white;
+
+        a {
+          color: @color-white;
+        }
+      }
+
+      .teacher {
+        color: @color-white;
+      }
+
+      .date {
+        color: @color-white;
+      }
+
+      .description {
+
+        p {
+          color: darken(@color-accent, 20%);
+        }
+      }
+    }
+
+    .recent {
+
+      &.number3 a{
+        border-bottom: none;
+      }
+
+      &.number4 a,
+      &.number5 a,
+      &.number6 a {
+        border-bottom: 1px solid @color-gray-light;
+      }
+    }
+  }
+
+  .component-text {
+
+    .edit {
+      color: #fff !important;
+      position: relative;
+      top: @base * -19.5;
+      right: @base * -91.5;
+    }
+  }
+
+  .column-right {
+
+    > .component-events {
+
+      .entry {
+
+        &.last {
+          padding-bottom: 60px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 979px) { // tablets and below
+
+
+  .layout-home {
+
+    .component-series {
+      padding-bottom: @base * 2;
+    }
+
+    .main-container {
+
+      .component-text {
+
+        .edit {
+          top: @base * -17;
+          right: @base * -70.5;
+        }
+      }
+
+    }
+
+    .featured {
+
+      a {
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+
+    .column-right {
+
+      .component-events {
+
+        .entry {
+
+          &.last {
+            padding-bottom: 0;
+          }
+
+          a {
+            padding: @base * 1.2 0;
+
+            .info {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+
+    .podcast {
+      margin: 0;
+      padding: @base * 2 0 0 0;
+      border-top: 1px solid @color-gray-light;
+
+      .span7 {
+        width: 100%;
+        border: none;
+        padding-left: 0;
+
+        p {
+          border: none;
+        }
+      }
+
+      .span3 {
+        width: 100%;
+
+        .link {
+          width: 200px;
+          margin: @base * 2 auto 0 auto;
+          text-align: center;
+        }
+
+      }
+    }
+  }
+}
+
+@media (max-width: 979px) and (min-width: 768px) { // portrait tablet to default desktop
+
+  .layout-home {
+
+    .podcast {
+
+      .span7 {
+        border-left: none;
+        margin-left: 0;
+        padding-left: 0;
+      }
+    }
+
+    .component-teachings {
+
+      .recent {
+        height: 190px;
+      }
+    }
+  }
+}
+
+@media (max-width: 568px) { // iphone 5 landscape
+
+  .layout-home {
+
+    .component-events {
+
+      .row {
+
+        .span4 {
+
+          .date {
+            display: block;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            top: 0px;
+          }
+
+          .day,
+          .month {
+            margin: 0 auto;
+            width: 50px;
+          }
+
+          h3 {
+            margin: 20px 0 0 0;
+            height: auto;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .component-teachings {
+
+      .latest {
+
+        .video {
+          width: 528px !important;
+          height: 298px !important;
+        }
+      }
+
+      .component-series {
+
+        .span4 {
+          margin-bottom: @base * 2;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) { // iphone
+
+  .layout-home {
+
+    .component-text {
+
+      .edit {
+        top: @base * -31;
+        right: @base * -33;
+      }
+    }
+
+    .component-teachings {
+
+      .latest {
+
+        .video {
+          width: 440px !important;
+          height: 248px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) { // iphone portrait
+
+  .layout-home {
+
+    .component-text {
+
+      .edit {
+        top: @base * -20;
+        right: @base * -26;
+      }
+    }
+
+    .component-teachings {
+
+      .latest {
+
+        .video {
+          width: 280px !important;
+          height: 158px !important;
+        }
+      }
+    }
+  }
+}
+

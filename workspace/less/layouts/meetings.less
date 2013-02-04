@@ -1,0 +1,53 @@
+
+.layout-meetings {
+
+  .column-right,
+  & + .column-right {
+    margin-top: 0;
+
+    ul {
+      margin-top: 15px;
+    }
+  }
+
+  .component-teachings {
+    margin-top: 15px;
+  }
+
+  .component-events {
+
+    .entries {
+      margin-top: 15px;
+    }
+  }
+
+  .column-center {
+
+    > .component-text {
+
+      h2 {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .column-right {
+    margin-top: @base * 4;
+  }
+
+  .date {
+    font-style: italic;
+    color: #303030;
+    font-size: 18px;
+    clear: both;
+    margin: 5px 0 @base * 2 0;
+    padding: 0;
+
+    .icon {
+      color: #878787;
+      font-size: 20px;
+      position: relative;
+      top: -1px;
+    }
+  }
+}

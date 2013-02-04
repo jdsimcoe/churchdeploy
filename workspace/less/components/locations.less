@@ -1,0 +1,158 @@
+
+.component-locations {
+
+  margin-bottom: @base * 3;
+
+  .entry {
+    .entry-defaults;
+
+    @media (max-width: 480px)  { .map { height: 120px; } }
+    @media (max-width: 767px)  { .map { height: 150px; } }
+    @media (max-width: 979px)  { .map { height: 180px; } }
+    @media (max-width: 1200px) { .map { height: 200px; } }
+
+    &:hover {
+
+      .map {
+
+        .screen,
+        address {
+          display: block;
+        }
+      }
+
+      .link {
+        background: darken(@color-gray-accent, 40%);
+      }
+    }
+
+    .map {
+      position: relative;
+      border: 10px solid @color-gray-accent;
+      line-height: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 280px;
+
+      img {
+        height: 280px;
+      }
+
+      address {
+        display: none;
+        position: absolute;
+        left: @base * 1.75;
+        bottom: @base * 1.5;
+        margin: 0;
+
+        h4 {
+          text-transform: uppercase;
+          margin-top: 0;
+        }
+      }
+
+      .screen {
+        display: none;
+        background: #e9e9e9;
+        .opacity(75);
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+      }
+    }
+
+    .edit {
+      .edit-defaults;
+      bottom: @base;
+      right: @base;
+    }
+  }
+}
+
+@media (max-width: 979px) { // tablets and below
+
+  .component-locations {
+    width: 300px;
+    margin: 0 auto;
+
+    .entry {
+
+      .map {
+
+        .screen {
+          display: block;
+        }
+
+        address {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 979px) and (min-width: 768px) { // portrait tablet to default desktop
+
+  .column-right {
+
+    > .component-locations {
+      width: 228px;
+
+      .entry {
+        width: 228px;
+
+        .map {
+          width: 208px;
+          height: 208px;
+
+          img {
+            width: 208px;
+            height: 208px;
+          }
+
+          .screen {
+            width:208px;
+          }
+
+          address {
+            width: 208px;
+            left: @base * 0.75;
+            bottom: @base;
+
+            h4 {
+              font-size: 12px;
+              margin: 0;
+            }
+          }
+        }
+
+        .more {
+          width: 228px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 320px) { // iphone portrait
+
+  .component-locations {
+
+    .entry {
+
+      .map {
+        border: none;
+
+        .screen {
+          width: 280px;
+        }
+      }
+
+      .more {
+        width: 280px;
+      }
+    }
+  }
+}
