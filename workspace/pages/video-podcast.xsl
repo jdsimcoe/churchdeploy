@@ -44,7 +44,7 @@
                     <title>
                         <xsl:variable name="en-lowercase-letters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
                         <xsl:variable name="en-uppercase-letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
-                        <xsl:value-of select="title" />
+                        <xsl:value-of select="title" disable-output-escaping="yes" />
                         <xsl:text> (</xsl:text>
                         <xsl:value-of select="translate(filename,$en-lowercase-letters,$en-uppercase-letters)"/>
                         <xsl:text>)</xsl:text>
