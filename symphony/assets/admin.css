@@ -939,6 +939,8 @@ ul.page a {
 .secondary {
 	float: right;
 	width: 35%;
+	position: relative;
+	left: -2em;
 }
 .primary,
 .secondary {
