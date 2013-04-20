@@ -27,8 +27,8 @@
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
-				'audio-duration',
-				'audio-filesize',
+				'video-duration',
+				'video-filesize',
 				'hide'
 		);
 
@@ -43,10 +43,10 @@
 				'name' => 'iTunes Video Podcast',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
+					'website' => 'http://atheycreek.com',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-02-11T20:03:29+00:00'
+				'release-date' => '2013-04-11T17:37:09+00:00'
 			);
 		}
 
@@ -76,7 +76,7 @@
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
 
-			
+
 
 			return $result;
 		}

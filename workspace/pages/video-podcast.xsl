@@ -29,7 +29,7 @@
             <itunes:image>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$root" />
-                    <xsl:text>/workspace/themes/active/img/itunes-video-podcast.jpg</xsl:text>
+                    <xsl:text>/workspace/themes/active/img/video-podcast.jpg</xsl:text>
                 </xsl:attribute>
             </itunes:image>
             <!-- iTunes Browse Podcasts Category -->
@@ -39,7 +39,7 @@
             </itunes:category>
             <itunes:keywords>Brett Meador, Athey Creek Christian Fellowship, Athey Creek, Day by Day, Through the Bible, Scripture, Jesus, Portland, Wilsonville, Oregon, PDX</itunes:keywords>
             <!-- Start Sermon Information -->
-            <xsl:for-each select="//itunes-podcast/entry[hide = 'No']">
+            <xsl:for-each select="//itunes-video-podcast/entry[hide = 'No']">
                 <item>
                     <title>
                         <xsl:variable name="en-lowercase-letters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
@@ -67,7 +67,7 @@
                     <itunes:image>
                         <xsl:attribute name="href">
                             <xsl:value-of select="$root" />
-                            <xsl:text>/workspace/themes/active/img/itunes-video-podcast.jpg</xsl:text>
+                            <xsl:text>/workspace/themes/active/img/video-podcast.jpg</xsl:text>
                         </xsl:attribute>
                     </itunes:image>
                     <enclosure>
@@ -78,8 +78,8 @@
                         </xsl:attribute>
                         <xsl:attribute name="length">
                             <xsl:choose>
-                                <xsl:when test="audio-filesize">
-                                    <xsl:value-of select="audio-filesize" />
+                                <xsl:when test="video-filesize">
+                                    <xsl:value-of select="video-filesize" />
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:text>23456789</xsl:text>
@@ -105,8 +105,8 @@
                     </pubDate>
                     <itunes:duration>
                         <xsl:choose>
-                            <xsl:when test="audio-duration">
-                                <xsl:value-of select="audio-duration" />
+                            <xsl:when test="video-duration">
+                                <xsl:value-of select="video-duration" />
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:text>00:60:00</xsl:text>

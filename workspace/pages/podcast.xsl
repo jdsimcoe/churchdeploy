@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output method="xml"
-	doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
-	doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
-	omit-xml-declaration="yes"
-	encoding="UTF-8"
-	indent="yes" />
+    doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN"
+    doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+    omit-xml-declaration="yes"
+    encoding="UTF-8"
+    indent="yes" />
 
 <xsl:include href="../utilities/date-time-advanced.xsl"/>
 
 <xsl:template match="/">
 
-	<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+    <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
         <channel>
             <title>Athey Creek | Audio Podcast</title>
             <link><xsl:value-of select="$root" /></link>
@@ -29,7 +29,7 @@
             <itunes:image>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$root" />
-                    <xsl:text>/workspace/themes/active/img/itunes-podcast.jpg</xsl:text>
+                    <xsl:text>/workspace/img/itunes-podcast.jpg</xsl:text>
                 </xsl:attribute>
             </itunes:image>
             <!-- iTunes Browse Podcasts Category -->
@@ -44,7 +44,7 @@
                     <title>
                         <xsl:variable name="en-lowercase-letters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
                         <xsl:variable name="en-uppercase-letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
-                        <xsl:value-of select="title" disable-output-escaping="yes" />
+                        <xsl:value-of select="title" />
                         <xsl:text> (</xsl:text>
                         <xsl:value-of select="translate(filename,$en-lowercase-letters,$en-uppercase-letters)"/>
                         <xsl:text>)</xsl:text>
@@ -67,7 +67,7 @@
                     <itunes:image>
                         <xsl:attribute name="href">
                             <xsl:value-of select="$root" />
-                            <xsl:text>/workspace/themes/active/img/itunes-podcast.jpg</xsl:text>
+                            <xsl:text>/workspace/img/itunes-podcast.jpg</xsl:text>
                         </xsl:attribute>
                     </itunes:image>
                     <enclosure>
