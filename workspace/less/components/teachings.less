@@ -1,6 +1,30 @@
-
 .component-teachings,
 .component-series {
+
+  .nav-tabs {
+
+    li {
+      &.pull-right {
+
+        a {
+          padding-right: 0;
+
+          &:hover {
+            background: none;
+            border: 1px solid @color-white;
+            color: @color-accent !important;
+          }
+        }
+      }
+    }
+    .edit {
+
+      .icon {
+        font-size: 16px;
+        line-height: 16px;
+      }
+    }
+  }
 
   h4 {
     font-size: 16px;
@@ -12,29 +36,8 @@
     }
 
     .meta {
-      #font > #helvetica > .regular;
+      #font > #serif > .regular;
       color: #999;
-    }
-  }
-
-  img {
-    width: 300px !important;
-    height: 169px !important;
-  }
-
-  .poster {
-
-    img {
-      width: 940px !important;
-      height: 529px !important;
-    }
-  }
-
-  .avatar {
-
-    img {
-      width: 120px !important;
-      height: 120px !important;
     }
   }
 
@@ -45,15 +48,10 @@
       margin-bottom: @base * 4;
     }
 
-    .video {
-      width: 100%;
-      height: 349px;
-      margin: @base * .5 auto;
-    }
-
     h2 {
-      margin-top: 0;
-      #font > #helvetica > .bold;
+      margin-top: @base * 5.4;
+      font-size: 20px;
+      #font > #sans > .bold;
       text-transform: none;
       line-height: 1.2;
 
@@ -66,27 +64,10 @@
       }
     }
 
-    .actions {
-      margin-top: -11px;
-
-      .audiojs {
-        margin-left: 20px;
-      }
-
-      .action {
-        .download {
-          position: relative;
-          left: 0;
-        }
-
-      }
-
-    }
-
     .tags {
 
       a {
-        #font > #helvetica > .bold;
+        #font > #sans > .bold;
         text-transform: uppercase;
         font-size: 12px;
       }
@@ -99,7 +80,7 @@
         border-bottom: 1px solid @teaching-text;
         margin: @base 0;
         padding: @base * .7 0 @base * .6 0;
-        #font > #helvetica > .bold;
+        #font > #sans > .bold;
         text-transform: uppercase;
         color: @teaching-text;
 
@@ -118,7 +99,7 @@
         margin: @base 0 0 0;
       }
       .date {
-        #font > #helvetica > .regular;
+        #font > #serif > .regular;
         font-size: 16px;
         line-height: 1.7;
         color: @teaching-text;
@@ -166,7 +147,7 @@
     }
 
     .teacher {
-      #font > #helvetica > .bold;
+      #font > #sans > .bold;
       text-transform: uppercase;
 
       em {
@@ -194,7 +175,7 @@
     padding: 10px 0;
 
     a {
-      #font > #helvetica > .bold;
+      #font > #sans > .bold;
       font-size: 12px;
       color: #999;
 
@@ -204,8 +185,21 @@
     }
   }
 
-  .span8,
-  .span12 {
+  // main column
+
+  .span8, .span12 {
+
+    .teaching-actions {
+
+      .downloadPopover {
+        margin: 0 0 0 0;
+        padding: 8px 0 9px 0;
+        width: 20%;
+        text-align: center;
+        position: relative;
+        top: -6px;
+      }
+    }
 
     h4 {
       font-size: 16px;
@@ -242,7 +236,7 @@
         margin-bottom: @base;
 
         .verse {
-          #font > #helvetica > .regular;
+          #font > #sans > .regular;
           float: right;
           font-size: 14px;
           text-transform: uppercase;
@@ -300,12 +294,24 @@
       }
 
       .tags {
-        #font > #helvetica > .bold;
+        #font > #sans > .bold;
         text-transform: uppercase;
         font-size: 12px;
         border-color: #e9e9e9;
         border-bottom: none;
         padding: @base @base @base @base;
+      }
+
+      .download {
+
+        .link-small {
+          position: relative;
+          display: block;
+          text-align: right;
+          left: 0;
+          margin-bottom: 0;
+
+        }
       }
 
       .entry {
@@ -320,6 +326,7 @@
     }
 
     .recent {
+      min-height: 200px;
 
         &.number3 a,
         &.number4 a {
@@ -345,17 +352,24 @@
 
 
       h4 {
-        #font > #helvetica > .bold;
+        #font > #sans > .bold;
         font-size: 18px;
         color: @color-black;
         margin-top: @base;
+
+        .label {
+          position: relative;
+          top: -2px;
+          background: @color-accent;
+          margin-left: @base;
+        }
       }
 
       .meta {
         margin: 0;
 
         .teacher {
-          #font > #helvetica > .regular;
+          #font > #serif > .regular;
           text-transform: none;
         }
       }
@@ -389,15 +403,15 @@
       font-size: 16px;
 
       strong {
-        #font > #helvetica > .bold;
+        #font > #sans > .bold;
         text-transform: uppercase;
       }
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
-      margin: @base auto;
+      width: 140px;
+      height: 140px;
+      margin: @base * 2 auto;
 
       img {
         text-align: center;
@@ -411,8 +425,10 @@
     }
   }
 
+  // widget
+
   .widget {
-    #font > #helvetica > .regular;
+    #font > #serif > .regular;
     border: @base solid #E9E9E9;
     margin: @base 0 @base * 2 0;
 
@@ -421,13 +437,13 @@
       background: @color-gray-dark;
       padding: 10px;
       color: #fff;
-      #font > #helvetica > .bold;
+      #font > #sans > .bold;
       text-transform: uppercase;
       font-size: 14px;
     }
 
     h5 {
-      #font > #helvetica > .bold;
+      #font > #sans > .bold;
       position: relative;
       top: -@base;
       margin-bottom: 0;
@@ -461,7 +477,7 @@
     .more {
       display: block;
       background: darken(@color-gray-accent, 33.5%);
-      #font > #helvetica > .bold;
+      #font > #sans > .bold;
       font-size: 12px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -488,7 +504,7 @@
       }
 
       .keywords {
-        #font > #helvetica > .regular;
+        #font > #sans > .regular;
         color: #777;
         background: none;
         border: none;
@@ -504,13 +520,13 @@
 
         &::-webkit-input-placeholder  {
           color: #ccc;
-          #font > #helvetica > .regular;
+          #font > #sans > .regular;
           text-transform: uppercase;
         }
 
         &:-moz-placeholder {
           color: #ccc;
-          #font > #helvetica > .regular;
+          #font > #sans > .regular;
           text-transform: uppercase;
         }
       }
@@ -529,16 +545,10 @@
     .individual {
       border: none;
 
-      h1 {
-        #font > #helvetica > .extrabold;
+      h2 {
 
         .verse {
-          #font > #helvetica > .regular;
-          position: relative;
-          top: -20px;
-          font-size: 28px;
-          text-transform: uppercase;
-          color: #ccc;
+          color: #aaa;
         }
       }
 
@@ -555,9 +565,17 @@
         text-transform: uppercase;
         border-bottom: 1px solid @color-gray-light;
       }
+
+      .teaching-actions {
+
+        h3 {
+          padding-bottom: @base;
+        }
+      }
     }
   }
 }
+
 
 .component-series {
   margin-bottom: @base * 3;

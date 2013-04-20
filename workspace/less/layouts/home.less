@@ -1,6 +1,114 @@
 
 .layout-home {
 
+  .main-container {
+
+    .component-text {
+
+      .edit {
+        color: #fff !important;
+        position: relative;
+        top: @base * -19.5;
+        right: @base * -91.5;
+      }
+
+    }
+
+  }
+
+  .carousel {
+    margin-bottom: @base * 4;
+  }
+
+  .component-teachings {
+
+    .latest {
+      .video {
+        margin: 0 0 0 0;
+      }
+    }
+
+    .recent {
+
+      &.number3 a {
+        border-bottom: none;
+      }
+
+    }
+
+    .num2 {
+
+      .recent {
+
+        &.number1 a,
+        &.number2 a,
+        &.number3 a {
+          border-bottom: 1px solid @color-gray-light;
+        }
+      }
+    }
+  }
+
+  .column-right {
+
+    > .component-events {
+
+      .entry {
+
+        &.last {
+          padding-bottom: 60px;
+        }
+      }
+    }
+  }
+
+  .component-series {
+    margin: @base * 5 0 @base * 2 0;
+  }
+
+}
+
+.layout-home,
+.pageid-14097 {
+
+  .podcast {
+    margin: 0;
+    padding: @base * 5 0 0 0;
+
+    .span2 {
+      margin-left: 0;
+      width: 90px;
+    }
+    .span7 {
+      width: 549px;
+      border-left: 1px solid @color-gray-light;
+      padding: 0 0 0 20px;
+    }
+
+    .span3 {
+      width: 220px;
+    }
+
+    .link-big {
+      margin: 0;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+  }
+}
+
+.layout-home,
+.layout-events,
+.layout-meetings {
   .column-right,
   & + .column-right {
     margin-top: 0;
@@ -20,184 +128,44 @@
       margin-top: 15px;
     }
   }
+}
 
-  .component-events {
-    margin: @base * 2 0;
 
-    .title-row {
-      border-bottom: 1px solid @color-gray-light;
+@media (max-width: 979px) { // tablets and below
 
-      a {
-        color: darken(@color-gray-light, 5%);
+ .layout-home {
 
-        &:hover {
-          color: @color-gray-dark;
-        }
+    .component-images.front {
+      top: 0;
+
+      .padder {
+        margin-bottom: 500px;
       }
     }
 
-    .span4 {
-      @month-height: 18px;
-      @day-height: 30px;
-      @calendar-height: @month-height + @day-height;
-      @calendar-width: @calendar-height;
-      @calendar-padding: @base * 1.5;
-      margin-top: @base;
-      position: relative;
+    .component-events {
 
-      .date {
-        #font > #helvetica > .bold;
-        width: @calendar-width;
-        text-align: center;
-        height: @calendar-height;
-        display: block;
-        margin: 0 auto;
-        text-align: center;
-        position: relative;
-        top: 0px;
-
-        .month {
-          background: @color-accent;
-          color: @color-white;
-          font-size: 12px;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-          line-height: 25px;
-          height: @month-height;
-        }
-
-        .day {
-          background: @color-accent;
-          font-size: 26px;
-          color: @color-white;
-          line-height: 26px;
-          height: @day-height;
-        }
-      }
-
-      .label {
-        #font > #helvetica > .bold;
-        text-transform: uppercase;
-        border-bottom: 1px solid @color-gray-accent;
-        .border-radius(0);
-        .box-shadow(none);
-        text-shadow: none;
-        background: @color-accent;
-        color: @color-white;
-      }
-
-      h3 {
-        text-transform: none;
-        color: @color-gray-dark;
-        margin: @base 0 0 0;
-        line-height: 1.4;
-        text-align: center;
+      .span4 {
 
         a {
-          color: @color-gray-dark;
 
-          &:hover {
-            color: @color-accent;
+          h3 {
+            width: 208px;
+            font-size: 18px;
           }
         }
       }
 
-      .description {
-        margin-top: @base;
-
-        p {
-          #font > #helvetica > .regular;
-          font-size: 16px;
-          line-height: 1.7;
-          color: @color-gray-dark;
-          text-align: center;
-        }
-      }
-    }
-  }
-
-  .component-teachings {
-
-    .latest {
-
-      .video {
-        margin: 0 0 10px 0;
-      }
-
-      h2 {
+      .span6 {
 
         a {
-          color: @color-white;
-        }
-      }
 
-      .verse {
-        color: @color-white;
-        border-color: @color-white;
-
-        a {
-          color: @color-white;
-        }
-      }
-
-      .teacher {
-        color: @color-white;
-      }
-
-      .date {
-        color: @color-white;
-      }
-
-      .description {
-
-        p {
-          color: darken(@color-accent, 20%);
+          h3 {
+            width: 332px;
+          }
         }
       }
     }
-
-    .recent {
-
-      &.number3 a{
-        border-bottom: none;
-      }
-
-      &.number4 a,
-      &.number5 a,
-      &.number6 a {
-        border-bottom: 1px solid @color-gray-light;
-      }
-    }
-  }
-
-  .component-text {
-
-    .edit {
-      color: #fff !important;
-      position: relative;
-      top: @base * -19.5;
-      right: @base * -91.5;
-    }
-  }
-
-  .column-right {
-
-    > .component-events {
-
-      .entry {
-
-        &.last {
-          padding-bottom: 60px;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 979px) { // tablets and below
-
-
-  .layout-home {
 
     .component-series {
       padding-bottom: @base * 2;
@@ -241,13 +209,52 @@
             }
           }
         }
+
+      }
+    }
+  }
+
+  .layout-home,
+  .pageid-14097 {
+
+    .component-teachings {
+
+      .span4 {
+
+        &.number1 {
+
+          .label {
+            display: none;
+          }
+
+          h4 {
+            color: @color-accent;
+          }
+        }
+
+        h4 {
+          font-size: 16px;
+        }
+
+        .meta {
+
+          p {
+            font-size: 14px;
+          }
+        }
+
+        .description {
+
+          p {
+            font-size: 14px;
+          }
+        }
       }
     }
 
     .podcast {
       margin: 0;
-      padding: @base * 2 0 0 0;
-      border-top: 1px solid @color-gray-light;
+      padding: 0;
 
       .span7 {
         width: 100%;
@@ -257,6 +264,7 @@
         p {
           border: none;
         }
+
       }
 
       .span3 {
@@ -270,7 +278,52 @@
 
       }
     }
+
+    .mast {
+
+      .container {
+
+        .row {
+
+          .span12 {
+
+            .logo {
+              color: @color-white;
+            }
+          }
+        }
+      }
+    }
   }
+
+  .mast {
+    padding: @base * 4 0 0 0;
+
+    .container {
+
+      .row {
+        margin-top: 0;
+
+        .span12 {
+          text-align: center;
+
+          .logo {
+            display: block;
+            float: none;
+            margin: 0 auto;
+            padding-top: @base * 4;
+
+            .icon {
+              font-size: 140px;
+              position: relative;
+              left: -15px;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
 
 @media (max-width: 979px) and (min-width: 768px) { // portrait tablet to default desktop
@@ -292,6 +345,20 @@
         height: 190px;
       }
     }
+  }
+}
+
+@media (max-width: 767px) {
+
+  .layout-home {
+
+    .component-images.front {
+
+      .padder {
+        margin-bottom: 365px;
+      }
+    }
+
   }
 }
 
@@ -346,6 +413,7 @@
       }
     }
   }
+
 }
 
 @media (max-width: 480px) { // iphone
@@ -396,5 +464,6 @@
       }
     }
   }
+
 }
 

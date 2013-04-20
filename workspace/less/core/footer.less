@@ -1,14 +1,13 @@
 
 .footer {
-  background: darken(desaturate(@color-accent, 10%), 25%);
+  background: @color-gray-dark;
   position: absolute;
-  margin: @base * 6 0 0 0;
-  padding-bottom: @base * 3;
+  margin: 60px 0 80px 0;
   left: 0;
   width: 100%;
 
   em {
-    #font > #helvetica > .regular;
+    #font > #sans > .regular;
   }
 
   a {
@@ -19,12 +18,15 @@
     }
 
     &.give {
-      background: darken(desaturate(@color-accent, 15%), 30%) !important;
-      padding: 3px 6px;
       position: relative;
       top: -5px;
-      color: lighten(@color-accent, 15%);
+      color: @color-accent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      border: none;
       text-transform: uppercase;
+      text-shadow: none;
 
       &:hover {
         color: @color-white;
@@ -58,7 +60,7 @@
     }
 
     .nav-header {
-      #font > #helvetica > .bold;
+      #font > #sans > .bold;
       margin: 0;
       padding: 0;
       text-shadow: none;
@@ -103,7 +105,7 @@
 
           &.entry {
             padding: @base 0;
-            border-bottom: 2px solid darken(desaturate(@color-accent, 10%), 30%);
+            border-bottom: 2px solid darken(@color-gray-dark, 5%);
 
             &.first {
               padding-top: 0;
@@ -117,10 +119,12 @@
               text-decoration: underline;
             }
           }
+
         }
       }
     }
   }
+
 
   .active {
 
@@ -132,28 +136,27 @@
   }
 
   .baseline {
-    background: darken(@color-gray-light, 5%);
+    background-color: @color-baseline;
     position: relative;
-    top: @base * 3;
     left: 0;
-    padding: @base * 2 @base * 5;
-    color: darken(@color-gray-light, 35%);
+    bottom: -20px;
+    padding: @base * 2 @base * 2.5;
+    color: darken(desaturate(@color-baseline, 20%), 35%);
     font-size: 14px;
 
     em {
-      #font > #helvetica > .regular;
+      #font > #sans > .regular;
     }
+
 
     .facebook {
       line-height: 3;
 
       a {
-        #font > #helvetica > .bold;
-        color: darken(@color-gray-light, 35%);
+        #font > #sans > .bold;
+        color: darken(desaturate(@color-baseline, 20%), 35%);
         letter-spacing: 1px;
         text-transform: uppercase;
-        padding-bottom: @base * 0.6;
-        border-bottom: 1px solid darken(@color-gray-light, 15%);
 
         &:hover {
           color: @color-white;
@@ -162,7 +165,7 @@
     }
 
     a {
-      color: darken(@color-gray-light, 35%);
+      color: darken(desaturate(@color-baseline, 20%), 35%);
 
       &:hover {
         color: @color-white;
@@ -171,8 +174,67 @@
     }
 
     .copyright {
-      margin-bottom: 20px;
+
     }
+
+    .branding {
+      margin-top: @base;
+      font-size: 32px;
+
+      a {
+
+        .year {
+          position: relative;
+          top: -2px;
+          font-family: "LeagueGothic-Regular", "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
+          font-size: 20px;
+          margin: 0;
+
+          &.left {
+            left: 4px;
+          }
+
+          &.right {
+            right: 6px;
+            margin-right: -2px;
+          }
+        }
+
+        .icon {
+          position: relative;
+          top: -3px;
+          font-size: 40px;
+          padding-left: 7px;
+        }
+      }
+    }
+
+    .amp {
+      font-family: Baskerville, "Goudy Old Style", "Palatino", "Book Antiqua", "Warnock Pro", serif;
+      color: darken(@color-accent, 20%);
+      font-style: italic;
+      font-size: 18px;
+      margin: 0 5px;
+    }
+
+    .churchdeploy {
+      margin-top: 20px;
+
+      a {
+        color: darken(@color-accent, 15%);
+        font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        text-shadow: 0 1px 0 lighten(@color-accent, 10%);
+
+        &:hover {
+          color: lighten(@color-accent, 20%);
+          text-shadow: 0 1px 0 darken(@color-accent, 20%);
+        }
+      }
+
+    }
+
   }
 }
 
