@@ -32,11 +32,11 @@
 			return array(
 				'name' => 'Teachings: Series: Teachings for DS',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
+					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
-					'email' => 'kirk@strobeck.com'),
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-06-22T19:10:06+00:00'
+				'release-date' => '2013-04-22T15:33:07+00:00'
 			);
 		}
 
