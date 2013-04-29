@@ -40,7 +40,7 @@
 	<xsl:comment><![CDATA[[if IE 8]> <html class="no-js ie8 oldie" lang="en" /> <![endif]]]></xsl:comment>
 	<xsl:comment><![CDATA[[if gt IE 8]><!]]></xsl:comment><html class="no-js" lang="en"><xsl:comment><![CDATA[<![endif]]]></xsl:comment>
 		<head>
-			<xsl:comment>AtheyCreek.com is an installation of ChurchDeploy.com — The mission of Church Deploy is to build, as a community, the best church website framework possible and give it away, free of charge.</xsl:comment>
+			<xsl:comment>This is an installation of ChurchDeploy.com — The mission of Church Deploy is to build, as a community, the best church website framework possible and give it away, free of charge.</xsl:comment>
 			<xsl:if test="not($pt2) and number($pt1) and count(//events-entry-by-id/entry)">
 				<meta http-equiv="refresh">
 					<xsl:attribute name="content">
