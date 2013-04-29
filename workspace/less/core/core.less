@@ -626,6 +626,7 @@ hr.soften {
           z-index: 1000;
           height: 96px;
           width: 96px;
+          visibility: hidden;
 
           .icon {
             z-index: 30;
@@ -1293,15 +1294,6 @@ hr.soften {
             border-bottom: 2px solid @color-accent;
           }
 
-          &:hover {
-            color: darken(desaturate(@color-accent, 15%), 30%);
-            text-decoration: none;
-
-            span {
-              border-top: 2px solid lighten(@color-accent, 20%);
-              border-bottom: 2px solid lighten(@color-accent, 20%);
-            }
-          }
         }
       }
     }

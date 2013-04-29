@@ -109,13 +109,12 @@ module.exports = function(grunt) {
       core_js: {
         src: [
           "workspace/js/jquery.js",
-          "workspace/js/jquery.cookie.js",
-          "workspace/js/json2.js",
           "workspace/js/lodash.js",
-          "workspace/js/audio.js",
-          "workspace/js/mediaelement.js",
+          "<config:concat.bootstrap_js.src>",
           "workspace/js/responsimage.js",
-          "<config:concat.bootstrap_js.src>"
+          "workspace/js/jquery.cookie.js",
+          "workspace/js/mediaelement.js",
+          "workspace/js/themes/active/js/alertManager.js"
         ],
         dest: "grunt-temp/core_js.js"
       },
@@ -127,7 +126,8 @@ module.exports = function(grunt) {
       },
       theme_js: {
         src: [
-          theme_directory + "/js/**/*.js"
+          theme_directory + "/js/**/*.js",
+          theme_directory + "/js/alertManager.js"
         ],
         dest: "grunt-temp/theme_js.js"
       },
