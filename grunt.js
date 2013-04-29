@@ -113,8 +113,7 @@ module.exports = function(grunt) {
           "<config:concat.bootstrap_js.src>",
           "workspace/js/responsimage.js",
           "workspace/js/jquery.cookie.js",
-          "workspace/js/mediaelement.js",
-          "workspace/js/themes/active/js/alertManager.js"
+          "workspace/js/mediaelement.js"
         ],
         dest: "grunt-temp/core_js.js"
       },
@@ -126,8 +125,7 @@ module.exports = function(grunt) {
       },
       theme_js: {
         src: [
-          theme_directory + "/js/**/*.js",
-          theme_directory + "/js/alertManager.js"
+          theme_directory + "/js/**/*.js"
         ],
         dest: "grunt-temp/theme_js.js"
       },
