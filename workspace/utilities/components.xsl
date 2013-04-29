@@ -36,7 +36,7 @@
 				</div>
 			</xsl:when>
 			<xsl:when test="name($xpath) = 'column-right'">
-				<div class="span4 column-right">
+				<div id="side-content" class="span4 column-right">
 					<xsl:call-template name="template-column-right-top" />
 					<xsl:call-template name="component-populate">
 						<xsl:with-param name="xpath" select="$xpath" />
