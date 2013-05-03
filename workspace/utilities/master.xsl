@@ -234,7 +234,7 @@
 		<xsl:attribute name="class">
 			<xsl:text>entry</xsl:text>
 			<xsl:if test="$pt1 = @id or $active-parent = @id or //tags-all-entries/entry[ @id = $active-parent ]/parent/item/@id = @id">
-				<xsl:text>active</xsl:text>
+				<xsl:text> active</xsl:text>
 			</xsl:if>
 			<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 				<xsl:text> sub</xsl:text>
