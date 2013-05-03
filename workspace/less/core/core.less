@@ -612,7 +612,6 @@ hr.soften {
           z-index: 1000;
           height: 96px;
           width: 96px;
-          visibility: hidden;
 
           .icon {
             z-index: 30;
@@ -1364,25 +1363,6 @@ hr.soften {
     }
   }
 
-  // .navbar {
-
-  //   &.mobile {
-  //     display: block;
-
-  //     .navbar-inner {
-  //       padding: 0 @base;
-
-  //       .container {
-  //         width: 100%;
-  //       }
-  //     }
-  //   }
-
-  //   &.main {
-  //     display: none;
-  //   }
-  // }
-
   .subnav {
     display: none;
   }
@@ -1413,6 +1393,27 @@ hr.soften {
     background-color: none;
   }
 }
+
+// Pagination Custom Styling
+// -------------------------
+
+.pagination {
+
+  ul {
+
+    li {
+
+      a {
+        padding-top: 10px;
+        padding-bottom: 12px;
+      }
+    }
+  }
+}
+
+
+// RESPONSIVE
+// ==========
 
 @media (min-width: 980px) { // default desktop
 

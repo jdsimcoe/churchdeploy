@@ -76,7 +76,7 @@
     .alternatives,
     .suggestions,
     .filter {
-      #font > #sans > .regular;
+      #font > #serif > .regular;
       border: @base solid #E9E9E9;
       margin: @base 0 @base * 2 0;
 
@@ -138,6 +138,7 @@
           color: @color-accent;
           border-bottom: 2px solid @color-white;
         }
+
       }
     }
 
@@ -170,6 +171,7 @@
               &:hover {
                 color: @color-accent;
               }
+
             }
 
             &.active {
@@ -204,12 +206,32 @@
       border: @base solid #e9e9e9;
       padding: 0;
       display: block;
+      z-index: 10;
 
       &:hover,
       &:focus {
         color: @color-accent;
         background: lighten(@color-gray-light, 5%);
         border: @base solid @color-accent;
+      }
+
+      &.edit {
+        color: @color-gray-dark;
+        background: none;
+        display: inline;
+        border: none;
+        margin: 0;
+        float: right;
+        position: relative;
+        top: 15px;
+        right: 15px;
+        z-index: 20;
+
+        &:hover {
+          border: none;
+          background: none;
+          color: @color-accent !important;
+        }
       }
     }
 
@@ -219,13 +241,15 @@
       margin: 0;
       padding: @base;
       clear: both;
+      position: relative;
+      top: -5px;
 
       .label {
         margin-left: @base;
-        background: @color-gray-dark;
         .border-radius(0);
         padding: 3px 5px;
       }
+
     }
 
     .description {
@@ -235,7 +259,7 @@
     }
 
     .date {
-      font-style: italic;
+      #font > #serif > .italic;
       color: @color-gray-dark;
       position: relative;
       top: -@base;
@@ -274,4 +298,3 @@
     }
   }
 }
-
