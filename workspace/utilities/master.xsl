@@ -208,20 +208,22 @@
 
 <xsl:template name="call-components">
 	<xsl:param name="xpath" />
-	<div class="row">
-		<div class="span12">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<xsl:call-template name="component">
+					<xsl:with-param name="xpath" select="$xpath/column-full-width" />
+				</xsl:call-template>
+			</div>
+		</div>
+		<div class="row">
 			<xsl:call-template name="component">
-				<xsl:with-param name="xpath" select="$xpath/column-full-width" />
+				<xsl:with-param name="xpath" select="$xpath/column-center" />
+			</xsl:call-template>
+			<xsl:call-template name="component">
+				<xsl:with-param name="xpath" select="$xpath/column-right" />
 			</xsl:call-template>
 		</div>
-	</div>
-	<div class="row">
-		<xsl:call-template name="component">
-			<xsl:with-param name="xpath" select="$xpath/column-center" />
-		</xsl:call-template>
-		<xsl:call-template name="component">
-			<xsl:with-param name="xpath" select="$xpath/column-right" />
-		</xsl:call-template>
 	</div>
 </xsl:template>
 
