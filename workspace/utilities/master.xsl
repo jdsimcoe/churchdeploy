@@ -154,7 +154,7 @@
 			<meta property="og:image" content="{$workspace}/themes/active/img/apple-touch-icon.png" />
 			<meta property="og:title" content="{$page-title}" />
 			<meta property="og:description" content="{//misc-all-entries/entry[name='meta-description']/content}" />
-			<link href="{$workspace}/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+			<link href="{$workspace}/themes/active/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 			<link rel="apple-touch-icon-precomposed" href="{$workspace}/themes/active/img/apple-touch-icon.png" />
 			<xsl:call-template name="template-head" />
 		</head>
