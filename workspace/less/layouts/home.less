@@ -364,7 +364,54 @@
 
 @media (max-width: 568px) { // iphone 5 landscape
 
-  .layout-home {
+.layout-home {
+
+    .component-events {
+
+      .span4, .span6 {
+
+        a {
+
+          h3 {
+            width: 508px;
+            font-size: 20px;
+
+            span {
+              padding: @base * 2 0 @base * 3 0;
+            }
+          }
+        }
+      }
+    }
+
+    .component-teachings {
+
+      .teaching-actions {
+
+        .downloadPopover {
+          .text {
+            display: none;
+          }
+        }
+      }
+
+      .latest {
+
+        .video {
+          width: 528px !important;
+          height: 298px !important;
+        }
+
+      }
+
+      .component-series {
+
+        .span4 {
+          margin-bottom: @base * 2;
+        }
+      }
+
+    }
 
     .component-events {
 
@@ -391,27 +438,11 @@
             height: auto;
             text-align: center;
           }
+
         }
       }
     }
 
-    .component-teachings {
-
-      .latest {
-
-        .video {
-          width: 528px !important;
-          height: 298px !important;
-        }
-      }
-
-      .component-series {
-
-        .span4 {
-          margin-bottom: @base * 2;
-        }
-      }
-    }
   }
 
 }
@@ -439,19 +470,110 @@
       }
     }
   }
+
+  .layout-home {
+
+    .component-events {
+
+      .span4, .span6 {
+
+        a {
+
+          h3 {
+            width: 420px;
+            font-size: 20px;
+
+            span {
+              padding: @base * 2 0 @base * 3 0;
+            }
+          }
+        }
+      }
+    }
+
+    .main-container {
+
+      .component-text {
+
+        .edit {
+          top: @base * -31;
+          right: @base * -33;
+        }
+      }
+
+    }
+  }
 }
 
 @media (max-width: 320px) { // iphone portrait
 
   .layout-home {
 
-    .component-text {
+    .component-images.front {
 
-      .edit {
-        top: @base * -20;
-        right: @base * -26;
+      .padder {
+        margin-bottom: 303px;
       }
     }
+
+    .component-events {
+
+      .span4, .span6 {
+
+        a {
+
+          h3 {
+            width: 260px;
+            font-size: 20px;
+
+            span {
+              padding: @base * 2  0 @base * 3 0;
+            }
+          }
+
+          h4 {
+
+            &.date {
+              padding-top: @base * .7;
+            }
+          }
+        }
+      }
+    }
+
+    .main-container {
+
+      .component-text {
+
+        .edit {
+          top: @base * -20;
+          right: @base * -26;
+        }
+      }
+
+    }
+  }
+
+  .modalLive {
+    display: none;
+    width: 280px !important;
+
+    .ustream-embed {
+      width: 240px !important;
+      height: 135px !important;
+
+      iframe {
+        width: 240px !important;
+        height: 135px !important;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .layout-home {
 
     .component-teachings {
 
@@ -461,6 +583,7 @@
           width: 280px !important;
           height: 158px !important;
         }
+
       }
     }
   }
