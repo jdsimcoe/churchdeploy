@@ -16,7 +16,7 @@
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 
 		public $dsParamFILTERS = array(
-				'id' => '{$ds-events-recurring-entry-by-id},{$ds-events-entry-by-id}',
+				'id' => '{$ds-events-entry-by-id-preview},{$ds-events-recurring-entry-by-id},{$ds-events-entry-by-id}',
 				'211' => 'no',
 		);
 
@@ -28,18 +28,18 @@
 
 		public function __construct(&$parent, $env=NULL, $process_params=true){
 			parent::__construct($parent, $env, $process_params);
-			$this->_dependencies = array('$ds-events-recurring-entry-by-id', '$ds-events-entry-by-id');
+			$this->_dependencies = array('$ds-events-entry-by-id-preview', '$ds-events-recurring-entry-by-id', '$ds-events-entry-by-id');
 		}
 
 		public function about(){
 			return array(
 				'name' => 'Verses: Entry by ID',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://dev.atheycreek.com',
-					'email' => 'kirk@strobeck.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-09-05T20:41:24+00:00'
+				'release-date' => '2013-06-03T22:42:01+00:00'
 			);
 		}
 

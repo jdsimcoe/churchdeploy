@@ -9,14 +9,15 @@
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
-		public $dsParamREDIRECTONEMPTY = 'yes';
+		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamREQUIREDPARAM = '$pt3';
+		public $dsParamPARAMOUTPUT = 'verses';
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 
 		public $dsParamFILTERS = array(
-				'id' => '{$pt3}',
+				'id' => '{$pt1},{$pt3}',
 		);
 
 		public $dsParamINCLUDEDELEMENTS = array(
@@ -66,7 +67,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-06-03T22:24:35+00:00'
+				'release-date' => '2013-06-03T22:43:47+00:00'
 			);
 		}
 
