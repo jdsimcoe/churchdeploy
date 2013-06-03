@@ -23,6 +23,15 @@
 				'name',
 				'date',
 				'description',
+				'locations: name-formal',
+				'locations: name-casual',
+				'locations: description',
+				'locations: address',
+				'locations: city',
+				'locations: state',
+				'locations: zip',
+				'locations: latitude',
+				'locations: longitude',
 				'member-role: member: first-name',
 				'member-role: member: last-name',
 				'member-role: member: photo',
@@ -39,7 +48,8 @@
 				'images: image',
 				'images: height',
 				'images: color',
-				'images: background'
+				'images: background',
+				'verses: passage'
 		);
 
 
@@ -56,7 +66,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-10-16T21:41:11+00:00'
+				'release-date' => '2013-06-03T22:24:35+00:00'
 			);
 		}
 
