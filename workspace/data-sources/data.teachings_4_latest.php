@@ -11,7 +11,6 @@
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'date';
-		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 
 		public $dsParamFILTERS = array(
@@ -25,7 +24,7 @@
 				'current-id',
 				'book',
 				'chapter',
-				'description',
+				'description: raw',
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
@@ -55,7 +54,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-01-04T23:45:34+00:00'
+				'release-date' => '2013-06-05T17:52:35+00:00'
 			);
 		}
 
