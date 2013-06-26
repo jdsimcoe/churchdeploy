@@ -25,7 +25,7 @@
 	
 	Bitter::rule(
 		Bitter::id('xml-attribute'),
-		Bitter::capture('([a-z][a-z0-9_\-\:]*)(\s*=\s*)?(".*?"|\'.*?\')?', 'i'),
+		Bitter::capture('([a-z][a-z0-9_\-\:]*)(\s*=\s*)?(".*?"|\'.*?\')?', 'is'),
 		
 		Bitter::rule(
 			Bitter::id('xml-attribute-key'),
@@ -35,14 +35,14 @@
 		Bitter::rule(
 			Bitter::id('xml-attribute-value-single'),
 			Bitter::tag('value'),
-			Bitter::capture("'.*?'$"),
+			Bitter::capture("'.*?'$", 's'),
 			
 			Bitter::id('xml-entity')
 		),
 		Bitter::rule(
 			Bitter::id('xml-attribute-value-double'),
 			Bitter::tag('value'),
-			Bitter::capture('".*?"$'),
+			Bitter::capture('".*?"$', 's'),
 			
 			Bitter::id('xml-entity')
 		),
@@ -110,12 +110,12 @@
 	
 	Bitter::rule(
 		Bitter::id('xml-tag-open'),
-		Bitter::capture('<[a-z][a-z0-9_\-\:]*(([^>]+)?)>', 'i'),
+		Bitter::capture('<[a-z][a-z0-9_\-\:\.]*(([^>]+)?)>', 'i'),
 		Bitter::tag('tag open'),
 		
 		Bitter::rule(
 			Bitter::id('xml-tag-open-begin'),
-			Bitter::capture('^<[a-z][a-z0-9_\-\:]*', 'i'),
+			Bitter::capture('^<[a-z][a-z0-9_\-\:\.]*', 'i'),
 			Bitter::tag('begin')
 		),
 		Bitter::rule(
@@ -133,7 +133,7 @@
 		Bitter::rule(
 			Bitter::id('xml-tag-close-valid'),
 			Bitter::tag('tag close'),
-			Bitter::capture('</[a-z][a-z0-9_\-\:]*>', 'i')
+			Bitter::capture('</[a-z][a-z0-9_\-\:\.]*>', 'i')
 		),
 		Bitter::rule(
 			Bitter::id('xml-declaration-error'),

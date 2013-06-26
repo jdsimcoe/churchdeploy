@@ -54,6 +54,26 @@
 		background: hsl(210, 5%, 19%);
 	}
 
+	#type {
+		position: absolute;
+		background-color: #242628;
+		border-bottom: 1px solid #303335;
+		border-left: 1px solid #303335;
+		border-radius: 0 0 0 5px;
+		text-align: center;
+		height: 25px;
+		top: 0;
+		right: 0;
+		width: 120px;
+		padding: 4px;
+	}
+
+	#type span {
+		color: #AEB2B6;
+		text-shadow: 2px 2px 3px #0C0C0D;
+		cursor: pointer;
+	}
+
 	#output {
 		background: hsl(80, 100%, 50%);
 		border-bottom: 1px solid hsl(80, 100%, 75%);
@@ -113,8 +133,11 @@
 		display: table-cell;
 		padding: 0 10px 0 20px;
 		text-align: right;
-		-moz-user-select: none;
 		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		-o-user-select: none;
+		user-select: none;
 		width: 1%;
 		vertical-align: top;
 	}
@@ -130,10 +153,9 @@
 
 	#source pre line content .xpath-match,
 	#source pre line content .tag-match {
-		-moz-border-radius: 4px;
-		-webkit-border-radius: 4px;
-		-moz-box-shadow: 0 0 10px hsl(0, 0%, 5%);
+		border-radius: 4px;
 		-webkit-box-shadow: 0 0 10px hsl(0, 0%, 5%);
+		box-shadow: 0 0 10px hsl(0, 0%, 5%);
 		display: inline-block;
 		margin: -2px -2px;
 		padding: 1px 1px;
@@ -160,36 +182,36 @@
 		color: hsl(40, 100%, 5%) !important;
 	}
 
-	/*-----------------------------------------------------------------------------
-		Markup
-	-----------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------
+	Markup
+-----------------------------------------------------------------------------*/
 
-		#source .context-markup .declaration {
-			color: hsl(0, 0%, 80%);
-		}
+	#source .context-markup .declaration {
+		color: hsl(0, 0%, 80%);
+	}
 
-		#source .context-markup .tag {
-			color: hsl(0, 0%, 80%);
-		}
+	#source .context-markup .tag {
+		color: hsl(0, 0%, 80%);
+	}
 
-		#source .context-markup .attribute {
-			color: hsl(0, 0%, 80%);
-		}
+	#source .context-markup .attribute {
+		color: hsl(0, 0%, 80%);
+	}
 
-		#source .context-markup .entity {
-			color: hsl(80, 50%, 70%);
-		}
+	#source .context-markup .entity {
+		color: hsl(80, 50%, 70%);
+	}
 
-		#source .context-markup .value {
-			color: hsl(210, 50%, 70%);
-		}
+	#source .context-markup .value {
+		color: hsl(210, 50%, 70%);
+	}
 
-		/*-------------------------------------------------------------------------
-			XSL
-		-------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------
+	XSL
+-------------------------------------------------------------------------*/
 
-			#source .context-markup.xsl .xpath {
-				color: hsl(300, 50%, 70%);
-			}
+	#source .context-markup.xsl .xpath {
+		color: hsl(300, 50%, 70%);
+	}
 
 /*-------------------------------------------------------------------------------*/

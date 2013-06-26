@@ -10,19 +10,7 @@
 	 * Entries are typically created from the Symphony backend, but
 	 * can also be created using Events from the Frontend.
 	 */
-	Class Entry{
-
-		/**
-		 * The class that initialised the Entry, usually the EntryManager
-		 * @var mixed
-		 */
-		protected $_Parent;
-
-		/**
-		 * An instance of the Symphony class, either Frontend or Administration
-		 * @var Symphony
-		 */
-		protected $_engine;
+	Class Entry {
 
 		/**
 		 * An associative array of basic metadata/settings for this Entry
@@ -40,24 +28,10 @@
 		/**
 		 * An ISO 8601 representation of when this Entry was created
 		 * eg. `2004-02-12T15:19:21+00:00`
+		 * @deprecated Since Symphony 2.3.1, use $entry->get('creation_date') instead
 		 * @var string
 		 */
 		public $creationDate = null;
-
-		/**
-		 * Construct a new instance of an Entry.
-		 *
-		 * @param mixed $parent
-		 *	The class that created this Entry object, usually the EntryManager,
-		 *	passed by reference.
-		 */
-		public function __construct(&$parent){
-			$this->_Parent =& $parent;
-
-			if(class_exists('Administration')) $this->_engine = Administration::instance();
-			elseif(class_exists('Frontend')) $this->_engine = Frontend::instance();
-			else throw new Exception(__('No suitable engine object found'));
-		}
 
 		/**
 		 * Entries have some basic metadata settings such as the Entry ID, the Author ID
@@ -65,9 +39,9 @@
 		 * setting to a value overwriting any existing value for this setting
 		 *
 		 * @param string $setting
-		 *	the setting key.
+		 *  the setting key.
 		 * @param mixed $value
-		 *	the value of the setting.
+		 *  the value of the setting.
 		 */
 		public function set($setting, $value){
 			$this->_fields[$setting] = $value;
@@ -78,10 +52,10 @@
 		 * settings of this Entry instance are returned.
 		 *
 		 * @param string $setting (optional)
-		 *	the name of the setting to access the value for. This is optional and
-		 *	defaults to null in which case all settings are returned.
+		 *  the name of the setting to access the value for. This is optional and
+		 *  defaults to null in which case all settings are returned.
 		 * @return null|mixed|array
-		 *	the value of the setting if there is one, all settings if the input setting
+		 *  the value of the setting if there is one, all settings if the input setting
 		 * was omitted or null if the setting was supplied but there is no value
 		 * for that setting.
 		 */
@@ -102,8 +76,8 @@
 		 */
 		public function assignEntryId() {
 			$fields = $this->get();
-			$fields['creation_date'] = DateTimeObj::get('Y-m-d H:i:s');
-			$fields['creation_date_gmt'] = DateTimeObj::getGMT('Y-m-d H:i:s');
+			$fields['creation_date'] = $fields['modification_date'] = DateTimeObj::get('Y-m-d H:i:s');
+			$fields['creation_date_gmt'] = $fields['modification_date_gmt'] = DateTimeObj::getGMT('Y-m-d H:i:s');
 			$fields['author_id'] = is_null($this->get('author_id')) ? '1' : $this->get('author_id'); // Author_id cannot be null
 
 			Symphony::Database()->insert($fields, 'tbl_entries');
@@ -119,9 +93,9 @@
 		 * Set the data for a Field in this Entry, given the Field ID and it's data
 		 *
 		 * @param integer $field_id
-		 *	The ID of the Field this data is for
+		 *  The ID of the Field this data is for
 		 * @param mixed $data
-		 *	Often an array
+		 *  Often an array
 		 */
 		public function setData($field_id, $data){
 			$this->_data[$field_id] = $data;
@@ -135,23 +109,24 @@
 		 * the errors.
 		 *
 		 * @param array $data
-		 *	An associative array of the data for this entry where they key is the
-		 *	Field's handle for this Section and the value is the data from the form
-		 * @param array $error
-		 *	An array of errors, by reference. Defaults to empty
+		 *  An associative array of the data for this entry where they key is the
+		 *  Field's handle for this Section and the value is the data from the form
+		 * @param array $errors
+		 *  An associative array of errors, by reference. The key is the `field_id`, the value
+		 *  is the message text. Defaults to an empty array
 		 * @param boolean $simulate
-		 *	If $simulate is given as true, a dry run of this function will occur, where
-		 *	regardless of errors, an Entry will not be saved in the database. Defaults to
-		 *	false
+		 *  If $simulate is given as true, a dry run of this function will occur, where
+		 *  regardless of errors, an Entry will not be saved in the database. Defaults to
+		 *  false
 		 * @param boolean $ignore_missing_fields
-		 *	This parameter allows Entries to be updated, rather than replaced. This is
-		 *	useful if the input form only contains a couple of the fields for this Entry.
-		 *	Defaults to false, which will set Fields to their default values if they are not
-		 *	provided in the $data
+		 *  This parameter allows Entries to be updated, rather than replaced. This is
+		 *  useful if the input form only contains a couple of the fields for this Entry.
+		 *  Defaults to false, which will set Fields to their default values if they are not
+		 *  provided in the $data
 		 * @return integer
-		 *	Either `__ENTRY_OK__` or `__ENTRY_FIELD_ERROR__`
+		 *  Either `__ENTRY_OK__` or `__ENTRY_FIELD_ERROR__`
 		 */
-		public function setDataFromPost($data, &$error = null, $simulate = false, $ignore_missing_fields = false){
+		public function setDataFromPost($data, &$errors = null, $simulate = false, $ignore_missing_fields = false){
 			$status = __ENTRY_OK__;
 
 			// Entry has no ID, create it:
@@ -161,26 +136,23 @@
 				if (is_null($entry_id)) return __ENTRY_FIELD_ERROR__;
 			}
 
-			$SectionManager = new SectionManager($this->_engine);
-			$EntryManager = new EntryManager($this->_engine);
-
-			$section = $SectionManager->fetch($this->get('section_id'));
+			$section = SectionManager::fetch($this->get('section_id'));
 			$schema = $section->fetchFieldsSchema();
 
 			foreach($schema as $info){
 				$result = null;
-
-				$field = $EntryManager->fieldManager->fetch($info['id']);
+				$message = null;
+				$field = FieldManager::fetch($info['id']);
 
 				if($ignore_missing_fields && !isset($data[$field->get('element_name')])) continue;
 
 				$result = $field->processRawFieldData(
-					(isset($data[$info['element_name']]) ? $data[$info['element_name']] : null), $s, $simulate, $this->get('id')
+					(isset($data[$info['element_name']]) ? $data[$info['element_name']] : null), $s, $message, $simulate, $this->get('id')
 				);
 
 				if($s != Field::__OK__){
 					$status = __ENTRY_FIELD_ERROR__;
-					$error = array('field_id' => $info['id'], 'message' => $m);
+					$errors[$info['id']] = $message;
 				}
 
 				$this->setData($info['id'], $result);
@@ -201,18 +173,21 @@
 		 * assigned to this Entry will be returned.
 		 *
 		 * @param integer $field_id
-		 *	The ID of the Field whose data you want
+		 *  The ID of the Field whose data you want
 		 * @param boolean $asObject
-		 *	If true, the data will be returned as an object instead of an
-		 *	array. Defaults to false. Note that if a `$field_id` is not provided
-		 *	the result will always be an array.
+		 *  If true, the data will be returned as an object instead of an
+		 *  array. Defaults to false. Note that if a `$field_id` is not provided
+		 *  the result will always be an array.
 		 * @return array|object
-		 *	Depending on the value of `$asObject`, return the field's data
-		 *	as either an array or an object
+		 *  Depending on the value of `$asObject`, return the field's data
+		 *  as either an array or an object. If no data exists, null will be
+		 *  returned.
 		 */
 		public function getData($field_id=null, $asObject=false){
+			$fieldData = isset($this->_data[$field_id]) ? $this->_data[$field_id] : array();
+
 			if(!$field_id) return $this->_data;
-			return ($asObject == true ? (object)$this->_data[$field_id] : $this->_data[$field_id]);
+			return ($asObject == true ? (object)$fieldData : $fieldData);
 		}
 
 		/**
@@ -220,30 +195,27 @@
 		 * in this Entry's Section and call their `checkPostFieldData()` function.
 		 *
 		 * @param array $data
-		 *	An associative array of the data for this entry where they key is the
-		 *	Field's handle for this Section and the value is the data from the form
+		 *  An associative array of the data for this entry where they key is the
+		 *  Field's handle for this Section and the value is the data from the form
 		 * @param array $error
-		 *	An array of errors, by reference. Defaults to empty
+		 *  An array of errors, by reference. Defaults to empty
 		 * @param boolean $ignore_missing_fields
-		 *	This parameter allows Entries to be updated, rather than replaced. This is
-		 *	useful if the input form only contains a couple of the fields for this Entry.
-		 *	Defaults to false, which will check all Fields even if they are not
-		 *	provided in the $data
+		 *  This parameter allows Entries to be updated, rather than replaced. This is
+		 *  useful if the input form only contains a couple of the fields for this Entry.
+		 *  Defaults to false, which will check all Fields even if they are not
+		 *  provided in the $data
 		 * @return integer
-		 *	Either `__ENTRY_OK__` or `__ENTRY_FIELD_ERROR__`
+		 *  Either `__ENTRY_OK__` or `__ENTRY_FIELD_ERROR__`
 		 */
 		public function checkPostData($data, &$errors = null, $ignore_missing_fields=false){
 			$status = __ENTRY_OK__;
-			$SectionManager = new SectionManager($this->_engine);
-			$EntryManager = new EntryManager($this->_engine);
-
-			$section = $SectionManager->fetch($this->get('section_id'));
+			$section = SectionManager::fetch($this->get('section_id'));
 			$schema = $section->fetchFieldsSchema();
 
 			foreach($schema as $info){
 				$result = null;
-
-				$field = $EntryManager->fieldManager->fetch($info['id']);
+				$message = null;
+				$field = FieldManager::fetch($info['id']);
 
 				if($ignore_missing_fields && !isset($data[$field->get('element_name')])) continue;
 
@@ -257,43 +229,43 @@
 		}
 
 		/**
-		 * Iterates over all the Fields in this Entry calling their `processRawFieldData()`
-		 * function to set default values for this Entry.
+		 * Iterates over all the Fields in this Entry calling their
+		 * `processRawFieldData()` function to set default values for this Entry.
 		 *
 		 * @see toolkit.Field#processRawFieldData()
 		 */
 		public function findDefaultData(){
-
-			$SectionManager = new SectionManager($this->_engine);
-
-			$section = $SectionManager->fetch($this->get('section_id'));
+			$section = SectionManager::fetch($this->get('section_id'));
 			$schema = $section->fetchFields();
 
 			foreach($schema as $field){
 				if(isset($this->_data[$field->get('field_id')])) continue;
 
-				$result = $field->processRawFieldData(null, $status, false, $this->get('id'));
+				$result = $field->processRawFieldData(null, $status, $message, false, $this->get('id'));
 				$this->setData($field->get('field_id'), $result);
 			}
 
-			if(!$this->get('creation_date')) $this->set('creation_date', DateTimeObj::get('c'));
-			if(!$this->get('creation_date_gmt')) $this->set('creation_date_gmt', DateTimeObj::getGMT('c'));
+			$this->set('modification_date', DateTimeObj::get('Y-m-d H:i:s'));
+			$this->set('modification_date_gmt', DateTimeObj::getGMT('Y-m-d H:i:s'));
 
+			if(!$this->get('creation_date')) $this->set('creation_date', $this->get('modification_date'));
+			if(!$this->get('creation_date_gmt')) $this->set('creation_date_gmt', $this->get('modification_date_gmt'));
 		}
 
 		/**
-		 * Commits this Entry's data to the database, by utilising the EntryManager's
-		 * add/edit functions. The commit function first finds all the default data for this
-		 * before calling it's Manager
+		 * Commits this Entry's data to the database, by first finding the default
+		 * data for this `Entry` and then utilising the `EntryManager`'s
+		 * add or edit function. The `EntryManager::edit` function is used if
+		 * the current `Entry` object has an ID, otherwise `EntryManager::add`
+		 * is used.
 		 *
 		 * @see toolkit.Entry#findDefaultData()
 		 * @return boolean
-		 *	true if the commit was successful, false otherwise.
+		 *  true if the commit was successful, false otherwise.
 		 */
 		public function commit(){
 			$this->findDefaultData();
-			$EntryManager = new EntryManager($this->_engine);
-			return ($this->get('id') ? $EntryManager->edit($this) : $EntryManager->add($this));
+			return ($this->get('id') ? EntryManager::edit($this) : EntryManager::add($this));
 		}
 
 		/**
@@ -302,17 +274,17 @@
 		 * array. If there are no associated entries, null will be returned.
 		 *
 		 * @param array $associated_sections
-		 *	An associative array of sections to return the Entry counts from. Defaults to
-		 *	null, which will fetch all the associations of this Entry.
+		 *  An associative array of sections to return the Entry counts from. Defaults to
+		 *  null, which will fetch all the associations of this Entry.
 		 * @return array
-		 *	An associative array with the key being the associated Section's ID and the
-		 *	value being the number of entries associated with this Entry.
+		 *  An associative array with the key being the associated Section's ID and the
+		 *  value being the number of entries associated with this Entry.
 		 */
 		public function fetchAllAssociatedEntryCounts($associated_sections = null) {
 			if(is_null($this->get('section_id'))) return null;
 
 			if(is_null($associated_sections)) {
-				$section = $this->_Parent->sectionManager->fetch($this->get('section_id'));
+				$section = SectionManager::fetch($this->get('section_id'));
 				$associated_sections = $section->fetchAssociatedSections();
 			}
 
@@ -320,27 +292,25 @@
 
 			$counts = array();
 
-			foreach($associated_sections as $as){
-
-				$field = $this->_Parent->fieldManager->fetch($as['child_section_field_id']);
+			foreach($associated_sections as $as) {
+				$field = FieldManager::fetch($as['child_section_field_id']);
 
 				$parent_section_field_id = $as['parent_section_field_id'];
 				$search_value = null;
 
 				if(!is_null($parent_section_field_id)){
 					$search_value = $field->fetchAssociatedEntrySearchValue(
-							$this->getData($as['parent_section_field_id']),
-							$as['parent_section_field_id'],
-							$this->get('id')
+						$this->getData($as['parent_section_field_id']),
+						$as['parent_section_field_id'],
+						$this->get('id')
 					);
 				}
 
-				else{
+				else {
 					$search_value = $this->get('id');
 				}
 
 				$counts[$as['child_section_id']] = $field->fetchAssociatedEntryCount($search_value);
-
 			}
 
 			return $counts;

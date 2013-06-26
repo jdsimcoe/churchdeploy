@@ -2,42 +2,25 @@
 
 	Class extension_image_index_preview extends Extension {
 
-		public function about() {
+		public function getSubscribedDelegates() {
+
 			return array(
-				'name' => 'Image Index Preview',
-				'version' => '1.2.1',
-				'release-date' => '2011-06-14',
-				'author' => array(
-					'name' => 'Nils Hörrmann',
-					'website' => 'http://nilshoerrmann.de',
-					'email' => 'post@nilshoerrmann.de'
-				),
-				'description' => 'Display an image preview on the publish index.'
+
+				array('page'     => '/backend/',
+					  'delegate' => 'InitaliseAdminPageHead',
+					  'callback' => 'InitaliseAdminPageHead'),
 			);
 		}
 
-		public function getSubscribedDelegates(){
-			return array(
-				array(
-					'page' => '/backend/',
-					'delegate' => 'InitaliseAdminPageHead',
-					'callback' => '__appendAssets'
-				)
-			);
-		}
+ 		public function InitaliseAdminPageHead($context) {
 
-		/**
-		 * Append assets to the page head
-		 *
-		 * @param object $context
- 		 */
- 		public function __appendAssets($context) {
-			$callback = Symphony::Engine()->getPageCallback();
+			$callback = Administration::instance()->getPageCallback();
 
 			// Append styles for publish area
-			if($callback['driver'] == 'publish' && (($callback['context']['page'] == 'index') || ($callback['context']['page'] == 'edit'))) {
-				Administration::instance()->Page->addScriptToHead(URL . '/extensions/image_index_preview/assets/image_index_preview.publish.js', 100, false);
-				Administration::instance()->Page->addStylesheetToHead(URL . '/extensions/image_index_preview/assets/image_index_preview.publish.css', 'screen', 101, false);
+
+			if(in_array($callback['context']['page'], array('index', 'new', 'edit'))) {
+
+				Administration::instance()->Page->addScriptToHead(URL . '/extensions/image_index_preview/assets/image_index_preview.publish.js', null, false);
 			}
 		}
 

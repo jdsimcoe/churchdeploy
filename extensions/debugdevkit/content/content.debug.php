@@ -45,7 +45,7 @@
 			return parent::build();
 		}
 
-		protected function buildJump($wrapper) {
+		protected function buildJump(XMLElement $wrapper) {
 			$list = new XMLElement('ul');
 
 			$list->appendChild($this->buildJumpItem(
@@ -85,11 +85,11 @@
 			$wrapper->appendChild($list);
 		}
 
-		public function buildContent($wrapper) {
-			$this->addStylesheetToHead(URL . '/extensions/debugdevkit/assets/devkit.css', 'screen', 9126343);
-			$this->addScriptToHead(URL . '/symphony/assets/jquery.js', 9126342);
-			$this->addScriptToHead(URL . '/extensions/debugdevkit/assets/jquery.scrollto.js', 9126344);
-			$this->addScriptToHead(URL . '/extensions/debugdevkit/assets/devkit.js', 9126344);
+		public function buildContent(XMLElement $wrapper) {
+			$this->addStylesheetToHead(URL . '/extensions/debugdevkit/assets/devkit.css', 'screen', 10);
+			$this->addScriptToHead(SYMPHONY_URL . '/assets/js/jquery.js', 20);
+			$this->addScriptToHead(URL . '/extensions/debugdevkit/assets/jquery.scrollto.js', 30);
+			$this->addScriptToHead(URL . '/extensions/debugdevkit/assets/devkit.js', 40);
 
 			if ($this->_view == 'params') {
 				$wrapper->appendChild($this->__buildParams($this->_param));
@@ -99,6 +99,11 @@
 
 			} else if ($this->_view == 'result') {
 				$this->appendSource($wrapper, $this->_output, 'xml');
+
+			} else if ($this->_view == 'raw') {
+				header('Content-Type: application/xml');
+				echo $this->_xml;
+				die();
 
 			} else {
 				if ($_GET['debug'] == $this->__relativePath($this->_pagedata['filelocation'])) {
@@ -116,7 +121,7 @@
 			}
 		}
 
-		protected function appendSource($wrapper, $source, $language = 'xml') {
+		protected function appendSource(XMLElement $wrapper, $source, $language = 'xml') {
 			$bitter = new Bitter();
 			$bitter->loadFormat('symphony');
 			$bitter->loadLanguage($language);
@@ -125,8 +130,14 @@
 				'div', $bitter->process($source)
 			);
 			$inner->setAttribute('id', 'source');
-
 			$wrapper->appendChild($inner);
+
+			if($this->_view == 'xml') {
+				$viewRaw = Widget::Anchor('','?debug=raw');
+				$viewRaw->setAttribute('id', 'type');
+				$viewRaw->appendChild(new XMLElement('span',__('Plain XML')));
+				$wrapper->appendChild($viewRaw);
+			}
 		}
 
 		protected function __buildParams($params) {
@@ -218,4 +229,3 @@
 		}
 	}
 
-?>

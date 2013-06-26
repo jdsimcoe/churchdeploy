@@ -30,6 +30,10 @@
 	background-color: #fbfbfb;
 }
 
+.invalid #progress_report + #file_list p {
+  color: black;
+}
+
 #file_list p {
 	margin: 0px;
 	font-size: 0.9em;

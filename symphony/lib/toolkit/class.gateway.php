@@ -100,7 +100,7 @@
 		 * A URL encoded string of the `$_POST` fields, as built by
 		 * http_build_query()
 		 *
-		 * @link http://www.php.net/manual/en/function.http-build-query.php
+		 * @link http://php.net/manual/en/function.http-build-query.php
 		 * @var string
 		 */
 		private $_postfields = '';
@@ -127,7 +127,7 @@
 		 * An array of custom options for the CURL request, this
 		 * can be any option as listed on the PHP manual
 		 *
-		 * @link http://au2.php.net/manual/en/function.curl-setopt.php
+		 * @link http://php.net/manual/en/function.curl-setopt.php
 		 * @var array
 		 */
 		private $_custom_opt = array();
@@ -137,7 +137,7 @@
 		 * been executed. At minimum, regardless of if CURL or Sockets
 		 * are used, the HTTP Code, URL and Content Type will be returned
 		 *
-		 * @link http://au2.php.net/manual/en/function.curl-getinfo.php
+		 * @link http://php.net/manual/en/function.curl-getinfo.php
 		 */
 		private $_info_last = array();
 
@@ -182,7 +182,7 @@
 		 * such as 'URL', which will take a full formatted URL string and set any
 		 * authentication or SSL curl options automatically
 		 *
-		 * @link http://au2.php.net/manual/en/function.curl-setopt.php
+		 * @link http://php.net/manual/en/function.curl-setopt.php
 		 * @param string $opt
 		 *	A string representing a CURL constant. Symphony will intercept the
 		 *	following, URL, POST, POSTFIELDS, USERAGENT, HTTPHEADER,
@@ -234,14 +234,19 @@
 					break;
 
 				case 'POST':
-					$this->_method = ($value == 1 ? 'POST' : 'GET');
+				case 'GET':
+				case 'PUT':
+				case 'DELETE':
+					$this->_method = ($value == 1 ? $opt : 'GET');
 					break;
 
 				case 'POSTFIELDS':
 					if(is_array($value) && !empty($value)){
 						$this->_postfields = http_build_query($value);
-					}else
+					}
+					else {
 						$this->_postfields = $value;
+					}
 
 					break;
 
@@ -306,13 +311,24 @@
 					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 				}
 
-				if(is_array($this->_headers) && !empty($this->_headers)) {
-					curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_headers);
+				switch($this->_method) {
+					case 'POST':
+						curl_setopt($ch, CURLOPT_POST, 1);
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_postfields);
+						break;
+					case 'PUT':
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_postfields);
+						$this->setopt('HTTPHEADER', array('Content-Length:' => strlen($this->_postfields)));
+						break;
+					case 'DELETE':
+						curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+						curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_postfields);
+						break;
 				}
 
-				if($this->_method == 'POST') {
-					curl_setopt($ch, CURLOPT_POST, 1);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $this->_postfields);
+				if(is_array($this->_headers) && !empty($this->_headers)) {
+					curl_setopt($ch, CURLOPT_HTTPHEADER, $this->_headers);
 				}
 
 				if(is_array($this->_custom_opt) && !empty($this->_custom_opt)){
@@ -321,12 +337,13 @@
 					}
 				}
 
-				##Grab the result
+				// Grab the result
 				$result = curl_exec($ch);
 
 				$this->_info_last = curl_getinfo($ch);
+				$this->_info_last['curl_error'] = curl_errno($ch);
 
-				##Close the connection
+				// Close the connection
 				curl_close ($ch);
 
 				return $result;
@@ -338,7 +355,7 @@
 				$this->_port = (!is_null($this->_scheme) ? self::$ports[$this->_scheme] : 80);
 			}
 
-			##No CURL is available, use attempt to use normal sockets
+			// No CURL is available, use attempt to use normal sockets
 			$handle = @fsockopen($this->_host, $this->_port, $errno, $errstr, $this->_timeout);
 			if($handle === false) return false;
 
@@ -350,7 +367,7 @@
 			$query .= 'Content-length: ' . strlen($this->_postfields) . PHP_EOL;
 			$query .= 'Connection: close' . PHP_EOL . PHP_EOL;
 
-			if($this->_method == 'POST') $query .= $this->_postfields;
+			if(in_array($this->_method, array('PUT', 'POST', 'DELETE'))) $query .= $this->_postfields;
 
 			// send request
 			if(!@fwrite($handle, $query)) return false;
@@ -359,6 +376,7 @@
 			stream_set_timeout($handle, $this->_timeout);
 
 			$status = stream_get_meta_data($handle);
+			$response = $dechunked = '';
 
 			// get header
 			while (!preg_match('/\\r\\n\\r\\n$/', $header) && !$status['timed_out']) {
@@ -368,7 +386,7 @@
 
 			$status = socket_get_status($handle);
 
-			## Get rest of the page data
+			// Get rest of the page data
 			while (!feof($handle) && !$status['timed_out']){
 				$response .= fread($handle, 4096);
 				$status = stream_get_meta_data($handle);
@@ -433,7 +451,7 @@
 		 * the HTTP Code, Content Type, URL and Total Time of the resulting
 		 * request
 		 *
-		 * @link http://au2.php.net/manual/en/function.curl-getinfo.php
+		 * @link http://php.net/manual/en/function.curl-getinfo.php
 		 * @return array
 		 */
 		public function getInfoLast(){

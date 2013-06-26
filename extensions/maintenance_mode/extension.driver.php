@@ -2,29 +2,9 @@
 
 	Class extension_maintenance_mode extends Extension {
 
-		public function about() {
-			return array(
-				'name' => 'Maintenance Mode',
-				'version' => '1.5',
-				'release-date' => '2011-08-08',
-				'author' => array(
-					array(
-						'name' => 'Alistair Kearney',
-						'website' => 'http://pointybeard.com',
-						'email' => 'alistair@pointybeard.com'
-					),
-					array(
-						'name' => 'Symphony Team',
-						'website' => 'http://symphony-cms.com',
-						'email' => 'team@symphony-cms.com'
-					)
-				)
-			);
-		}
-
 		public function install() {
 			Symphony::Configuration()->set('enabled', 'no', 'maintenance_mode');
-			Administration::instance()->saveConfig();
+			return Symphony::Configuration()->write();
 		}
 
 		public function uninstall() {
@@ -123,10 +103,10 @@
 		public function __toggleMaintenanceMode() {
 			if($_REQUEST['action'] == 'toggle-maintenance-mode') {
 
-				// Toogle mode
+				// Toggle mode
 				$value = (Symphony::Configuration()->get('enabled', 'maintenance_mode') == 'no' ? 'yes' : 'no');
 				Symphony::Configuration()->set('enabled', $value, 'maintenance_mode');
-				Administration::instance()->saveConfig();
+				Symphony::Configuration()->write();
 
 				// Redirect
 				redirect((isset($_REQUEST['redirect']) ? SYMPHONY_URL . $_REQUEST['redirect'] : Administration::instance()->getCurrentPageURL() . '/'));
@@ -141,9 +121,6 @@
 		 *  delegate context
 		 */
 		public function __appendAlert($context) {
-
-			// Check for other alerts
-			if(!is_null($context['alert'])) return;
 
 			// Site in maintenance mode
 			if(Symphony::Configuration()->get('enabled', 'maintenance_mode') == 'yes') {
@@ -194,12 +171,14 @@
 			if(!Symphony::Engine()->isLoggedIn() && Symphony::Configuration()->get('enabled', 'maintenance_mode') == 'yes'){
 
 				// Find custom maintenance page
-				$context['row'] = Symphony::Database()->fetchRow(0,
-					"SELECT `tbl_pages`.* FROM `tbl_pages`, `tbl_pages_types`
-					 WHERE `tbl_pages_types`.page_id = `tbl_pages`.id
-					 AND tbl_pages_types.`type` = 'maintenance'
-					 LIMIT 1"
-				);
+				$row = PageManager::fetchPageByType('maintenance');
+
+				if (is_array($row) && isset($row[0])) {
+					// There's more than a `maintenance` page
+					$row = $row[0];
+				}
+
+				$context['row'] = $row;
 
 				// Default maintenance message
 				if(empty($context['row'])) {

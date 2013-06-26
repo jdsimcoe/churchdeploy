@@ -10,12 +10,19 @@
 		public function about() {
 			return array(
 				'name'			=> 'Profile Devkit',
-				'version'		=> '1.0.4',
-				'release-date'	=> '2010-03-19',
+				'version'		=> '1.2',
+				'release-date'	=> '2013-02-22',
 				'author'		=> array(
-					'name'			=> 'Rowan Lewis',
-					'website'		=> 'http://rowanlewis.com/',
-					'email'			=> 'me@rowanlewis.com'
+					array(
+						'name' => 'Symphony Team',
+						'website' => 'http://symphony-cms.com/',
+						'email' => 'team@symphony-cms.com'
+					),
+					array(
+						'name' => 'Rowan Lewis',
+						'website' => 'http://rowanlewis.com/',
+						'email' => 'me@rowanlewis.com'
+					)
 				)
 			);
 		}
@@ -54,5 +61,3 @@
 			$xml->documentElement->appendChild($item);
 		}
 	}
-	
-?>

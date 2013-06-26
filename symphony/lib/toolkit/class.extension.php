@@ -12,19 +12,6 @@
 	Abstract Class Extension{
 
 		/**
-		 * The end-of-line constant.
-		 * @var string
-		 * @deprecated This will be removed in the next version of Symphony
-		 */
-		const CRLF = PHP_EOL;
-
-		/**
-		 * The class that initialised the Entry, usually the EntryManager
-		 * @var mixed
-		 */
-		protected $_Parent;
-
-		/**
 		 * Determines that a new navigation group is to created in the Symphony backend
 		 * @var integer
 		 */
@@ -38,17 +25,9 @@
 		const NAV_CHILD = 0;
 
 		/**
-		 * The extension constructor takes an associative array of arguments
-		 * and sets the `$this->_Parent` variable using the 'parent' key. It appears that
-		 * this is the only key set in the `$args` array by Symphony
-		 *
-		 * @param array $args
-		 *  An associative array of arguments, but default this will contain one,
-		 *  'parent'.
+		 * Default constructor for an Extension, at this time it does nothing
 		 */
-		public function __construct(Array $args){
-			$this->_Parent =& $args['parent'];
-		}
+		public function __construct() {}
 
 		/**
 		 * Any logic that assists this extension in being installed such as
@@ -132,10 +111,14 @@
 		 *		),
 		 *		'description' => 'A description about this extension'
 		 * `
+		 * @deprecated Since Symphony 2.3, the `about()` function is deprecated for extensions
+		 *  in favour of the `extension.meta.xml` file. It will be removed in Symphony 2.4.
 		 * @return array
 		 *  An associative array describing this extension.
 		 */
-		abstract public function about();
+		public function about() {
+			return array();
+		}
 
 		/**
 		 * Extensions use delegates to perform logic at certain times
@@ -145,7 +128,7 @@
 		 * This method returns an array with the delegate name, delegate
 		 * namespace, and then name of the method that should be called.
 		 * The method that is called is passed an associative array containing
-		 * the current context which is the `$this->_Parent`, current page object
+		 * the current context which is the current page object
 		 * and any other variables that is passed via this delegate. eg.
 		 *
 		 * `array(
@@ -164,30 +147,104 @@
 
 		/**
 		 * When the Symphony navigation is being generated, this method will be
-		 * called to allow extension to inject any custom backend pages into the
-		 * navigation. If an extension wants to create a new group in the navigation
-		 * it is possible by returning an array with the group information and then an
-		 * array of links for this group. The extension can also inject link items into existing
+		 * called to allow extensions to inject any custom backend pages into the
+		 * navigation.
+		 *
+		 * The extension can also inject link items into existing
 		 * group's of the navigation using the 'location' key, which will accept a numeric
-		 * index of the existing group, or the handle of an existing group.  Navigation items
+		 * index of the existing group, or the handle of an existing group. Navigation items
 		 * in Symphony are initially provided from the `ASSETS . /navigation.xml` file
 		 * which defines the default Blueprints and System groups. The indexes for these
-		 * groups are 100 and 200 respectively. Groups cannot provide a link, this is done
-		 * by the children. All links are relative to the Extension by default
-		 * (ie. `EXTENSIONS . /extension_handle/`. An example of a returned navigation
-		 * array is provided below. Note that if an extension wants to edit the current navigation,
-		 * this is not possible through this function and rather it should be done using the
-		 * `NavigationPreRender` delegate.
+		 * groups are 100 and 200 respectively.
 		 *
-		 * `array(
-		 * 	'name' => 'New Group',
+		 * A simple case would look like this.
+		 *
+		 * `return array(
+		 *		array(
+		 *			'name' => 'Extension Name',
+		 *			'link' => '/link/relative/to/extension/handle/',
+		 *			'location' => 200
+		 *		)
+		 *	)
+		 * );`
+		 *
+		 * If an extension wants to create a new group in the navigation
+		 * it is possible by returning an array with the group information and then an
+		 * array of links for this group. Groups cannot provide a link, this is done
+		 * by the children. An example of a returned navigation
+		 * array is provided below.
+		 *
+		 * `return array(
+		 *		'name' => 'New Group',
 		 *		'children' => array(
 		 *			array(
 		 *				'name' => 'Extension Name',
 		 *				'link' => '/link/relative/to/extension/handle/'
 		 *			)
 		 *		)
-		 * )`
+		 * );`
+		 *
+		 * All links are relative to the Extension by default
+		 * (ie. `EXTENSIONS . /extension_handle/`. )
+		 * Set the 'relative' key to false tobe able to create links
+		 * relative to /symphony/.
+		 *
+		 * `return array(
+		 *		array(
+		 *			'name' => 'Extension Name',
+		 *			'link' => '/link/retative/to/symphony/',
+		 *			'relative' => false,
+		 *			'location' => 200
+		 *		)
+		 *	)
+		 * );`
+		 *
+		 * You can also set the `target` attribute on your links via the 'target' attribute.
+		 * This works both on links in standard menus and on child links of groups.
+		 *
+		 * `return array(
+		 *		array(
+		 *			'name' => 'Extension Name',
+		 *			'link' => '/.../',
+		 *			'target' => '_blank'
+		 *		)
+		 *	)
+		 * );`
+		 *
+		 * Links can also be hidden dynamicaly usign two other keys:
+		 * 'visible' and 'limit'. When 'visible' is set to 'no', the link
+		 * will not be rendered. Leave unset or set it dynamycally in order
+		 * to fit your needs
+		 *
+		 * `return array(
+		 *		array(
+		 *			'name' => 'Extension Name',
+		 *			'link' => '/.../',
+		 *			'visible' => $this->shouldWeOrNot() ? 'yes' : 'no'
+		 *		)
+		 *	)
+		 * );`
+		 *
+		 * The 'limit' key is specificaly designed to restrict the rendering process
+		 * of a link if the current user does not have access to it based on its role.
+		 * Symphony supports three basic roles witch are 'author', 'developer' and 'primary'.
+		 *
+		 * Note that setting 'visible' to 'no' will hide the link no matter what.
+		 *
+		 * `return array(
+		 *		array(
+		 *			'name' => 'Developers Only',
+		 *			'link' => '/developers-only/',
+		 *			'limit' => 'developer'
+		 *		)
+		 *	)
+		 * );`
+		 *
+		 * The 'limit' key is also available for navigation groups.
+		 *
+		 * Note that if an extension wants to edit the current navigation,
+		 * this is not possible through this function and rather it should be done using the
+		 * `NavigationPreRender` delegate.
 		 *
 		 * @link http://github.com/symphonycms/symphony-2/blob/master/symphony/assets/navigation.xml
 		 * @return array

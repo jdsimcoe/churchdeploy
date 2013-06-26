@@ -104,29 +104,51 @@
 		Bitter::rule(
 			Bitter::id('php-define-class-name'),
 			Bitter::capture('[a-z_][a-z0-9_]+$', 'i'),
-			Bitter::tag('keyword class')
+			Bitter::tag('class defined')
 		),
 		
 		Bitter::id('php-keyword')
 	);
 	Bitter::rule(
-		Bitter::id('php-keyword-class-alt'),
-		Bitter::capture('[a-z_][a-z0-9_]+(?=::)', 'i'),
-		Bitter::tag('keyword class')
-	);
-	Bitter::rule(
 		Bitter::id('php-keyword-function'),
-		Bitter::capture('[a-z_][a-z0-9_]*(?=[a-z0-9_]*\s*\()', 'i'),
+		Bitter::capture('\b(function)\s+[a-z_][a-z0-9_]+', 'i'),
 		
 		Bitter::rule(
-			Bitter::id('php-keyword-function-ignore'),
-			Bitter::capture('^array|catch|if|elseif$', 'i'),
-			Bitter::tag('keyword')
+			Bitter::id('php-keyword-function-name'),
+			Bitter::capture('[a-z_][a-z0-9_]+$', 'i'),
+			Bitter::tag('function defined')
+		),
+		
+		Bitter::id('php-keyword')
+	);
+	Bitter::rule(
+		Bitter::id('php-keyword-class-access'),
+		Bitter::capture('[a-z_][a-z0-9_]+::\$*[a-z_][a-z0-9_]*\(?', 'i'),
+		
+		Bitter::rule(
+			Bitter::id('php-keyword-class-access-name'),
+			Bitter::capture('^.+?(?=::)', 'i'),
+			Bitter::tag('keyword class')
 		),
 		Bitter::rule(
-			Bitter::id('php-keyword-function-other'),
-			Bitter::capture('.+'),
-			Bitter::tag('keyword function')
+			Bitter::id('php-keyword-class-access-variable'),
+			Bitter::capture('::\$+[a-z_][a-z0-9_]*', 'i'),
+			Bitter::tag('variable')
+		),
+		Bitter::rule(
+			Bitter::id('php-keyword-class-access-function'),
+			Bitter::capture('::[a-z_][a-z0-9_]*\(', 'i'),
+			
+			Bitter::rule(
+				Bitter::id('php-keyword-class-access-function-call'),
+				Bitter::capture('[^\(]+', 'i'),
+				Bitter::tag('function')
+			)
+		),
+		Bitter::rule(
+			Bitter::id('php-keyword-class-access-constant'),
+			Bitter::capture('::[a-z_][a-z0-9_]*\b', 'i'),
+			Bitter::tag('constant')
 		)
 	);
 	
@@ -136,19 +158,44 @@
 	
 	Bitter::rule(
 		Bitter::id('php-variable-normal'),
-		Bitter::capture('(->\$*|\$+)[a-z_][a-z0-9_]*(->\$*[a-z_][a-z0-9_]*)*', 'i'),
+		Bitter::capture('(->\$*|(::)?\$+)[a-z_][a-z0-9_]*(->\$*[a-z_][a-z0-9_]*)*', 'i'),
 		Bitter::tag('variable')
 	);
 	Bitter::rule(
 		Bitter::id('php-variable-function'),
-		Bitter::capture('(->\$*|\$+)[a-z_][a-z0-9_]*(->\$*[a-z_][a-z0-9_]*)*(?=[a-z0-9_]*\s*\()', 'i'),
+		Bitter::capture('(->\$*|(::)?\$+)[a-z_][a-z0-9_]*(->\$*[a-z_][a-z0-9_]*)*(?=[a-z0-9_]*\s*\()', 'i'),
 		Bitter::tag('variable'),
 		
 		Bitter::rule(
 			Bitter::id('php-variable-function-call'),
 			Bitter::capture('(\$+|->\$*)[a-z_][a-z0-9_]*$', 'i'),
-			Bitter::tag('function')
+			Bitter::tag('function called')
 		)
+	);
+	
+/*------------------------------------------------------------------------------
+	Functions
+------------------------------------------------------------------------------*/
+	
+	Bitter::rule(
+		Bitter::id('php-function'),
+		Bitter::capture('\b[a-z_][a-z0-9_]*\(', 'i'),
+		
+		Bitter::rule(
+			Bitter::id('php-function-call'),
+			Bitter::capture('[^\(]+', 'i'),
+			Bitter::tag('function called')
+		)
+	);
+	
+/*------------------------------------------------------------------------------
+	Constants
+------------------------------------------------------------------------------*/
+	
+	Bitter::rule(
+		Bitter::id('php-constant'),
+		Bitter::capture('\b[a-z_][a-z0-9_]*\b', 'i'),
+		Bitter::tag('constant')
 	);
 	
 /*------------------------------------------------------------------------------
@@ -172,9 +219,11 @@
 		Bitter::id('php-variable-function'),
 		Bitter::id('php-variable-normal'),
 		Bitter::id('php-keyword-class'),
-		Bitter::id('php-keyword-class-alt'),
+		Bitter::id('php-keyword-class-access'),
 		Bitter::id('php-keyword-function'),
-		Bitter::id('php-keyword')
+		Bitter::id('php-keyword'),
+		Bitter::id('php-function'),
+		Bitter::id('php-constant')
 	);
 	
 	Bitter::rule(

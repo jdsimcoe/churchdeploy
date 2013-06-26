@@ -7,8 +7,8 @@
 		Definition:
 	-------------------------------------------------------------------------*/
 		
-		public function __construct(&$parent) {
-			parent::__construct($parent);
+		public function __construct(){
+			parent::__construct();
 			
 			$this->_name = 'System Id';
 			$this->_required = false;
@@ -20,7 +20,7 @@
 		public function createTable() {
 			$field_id = $this->get('id');
 			
-			return $this->_engine->Database->query("
+			return Symphony::Database()->query("
 				CREATE TABLE IF NOT EXISTS `tbl_entries_data_{$field_id}` (
 					`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
 					`entry_id` INT(11) UNSIGNED NOT NULL,
@@ -89,7 +89,7 @@
 			return self::__OK__;
 		}
 		
-		public function processRawFieldData($data, &$status, $simulate = false, $entry_id = null) {
+		public function processRawFieldData($data, &$status, &$message=null, $simulate = false, $entry_id = null) {
 			$status = self::__OK__;
 			
 			return array(

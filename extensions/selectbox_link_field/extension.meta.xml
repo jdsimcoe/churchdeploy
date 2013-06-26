@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="selectbox_link_field" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Select Box Link Field</name>
+	<description>Linking two sections together</description>
+	<repo type="github">https://github.com/symphonycms/selectbox_link_field</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/473/</url>
+	<types>
+		<type>Field Types</type>
+	</types>
+	<authors>
+		<author>
+			<name github="symphonycms" symphony="team">Symphony Team</name>
+			<website>http://symphony-cms.com</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="1.26" date="2013-02-22" min="2.3.2">
+			- Implement the updated `ImportableField` interface
+			- Updated Russian language
+			- Handle sections that no longer exist
+		</release>
+		<release version="1.25" date="2012-10-29" min="2.3.1">
+			- [#30](https://github.com/symphonycms/selectbox_link_field/issues/30) Separate multiple values in the backend publish tables.
+			- [#29](https://github.com/symphonycms/selectbox_link_field/issues/29) Apply alternate SQL query for not: filters.
+			- [#20](https://github.com/symphonycms/selectbox_link_field/issues/20) Entries are now ordered the same way as their parent section.
+		</release>
+		<release version="1.24" date="2012-09-16" min="2.3.1">
+			- [#23](https://github.com/symphonycms/selectbox_link_field/pull/23) Fix invalid type error
+			- Add `ImportableField` and `ExportableField` support
+			- Fix issues where cached entries would not be unique (and therefore would no show in the backend)
+		</release>
+		<release version="1.23" date="2012-05-22" min="2.3">
+			- Updates for Symphony 2.3
+			- [#19](https://github.com/symphonycms/selectbox_link_field/issues/19) Add `sql-null-or-not:` filtering
+			- [#16](https://github.com/symphonycms/selectbox_link_field/issues/16) Ensure options are sorted by recency
+			- When a field is required, force users to select an option which is consistent with Symphony 2.3 behaviour
+			- Consistency updates with base core classes
+		</release>
+		<release version="1.22" date="2011-11-04" min="2.2" max="2.2.x">
+			- Implement `requiresSQLGrouping` function which prevents some oddities with pagination
+			- Preform some checks for `relation_id` to improve compatibility with extensions that extend the Select Box Link field.
+		</release>
+		<release version="1.21" date="2011-10-22" min="2.2">
+			- Correctly load information about entries that fall outside of the limit (but are still attached to an entry)
+			- Prevention for an edge case where empty ID's are thrown around
+		</release>
+		<release version="1.20" date="2011-08-01" min="2.2">
+			- Updates for Symphony 2.2
+			- Performance enhancements
+			- Don't allow grouping if multiple options are selected
+		</release>
+		<release version="1.19" date="2011-01-29" min="2.0.5" max="2.2">
+			- Allow the linked section's public column visibility to be toggled
+		</release>
+		<release version="1.18" date="2010-02-02" min="2.0.5">
+			- Prevent `null` Relations from appearing in the Output XML
+		</release>
+		<release version="1.17" date="2010-02-02" min="2.0.5">
+			- Added missing translation strings
+			- Added localisation files for Dutch, German, Portuguese (Brazil) and Russian
+		</release>
+		<release version="1.16" date="2010-01-25" min="2.0.5">
+			- Fixed sort order of entries in select box. Corrected to use the column sort order. A bug in 1.13+ caused this particular issue to reappear. This fix is based on code by Nick Dunn initially introduced in 1.12.
+		</release>
+		<release version="1.15" date="2010-01-14" min="2.0.5">
+			- `relation_id` can now be a `null` value. Fixes issue [#1](http://symphony-cms.com/download/extensions/issues/view/20054/1/)
+		</release>
+		<release version="1.14" date="2009-12-29" min="2.0">
+			- Made install and update functions more tolerant of existing tables
+			- Minor bug fixes for 2.0.7
+		</release>
+		<release version="1.13" date="2009-12-29" min="2.0">
+			- Added filtering by handle functionality. Thanks **@creativedutchmen**
+		</release>
+		<release version="1.12" date="2009-10-26" min="2.0">
+			- Fixed a couple of issues where 'related_field_id' was returning the wrong type. **@buzzomatic**
+			- In dropdown options, sort Sections by their Symphony order and sort Entries by their Symphony order (using EntryManager) **@nickdunn**
+			- Sort Sections in field's settings panel by Symphony order **@nickdunn**
+		</release>
+		<release version="1.11" date="2009-08-19" min="2.0">
+			- Fixed bug that triggered a database error in Symphony version greater than 2.0.6
+		</release>
+		<release version="1.10" date="2009-07-27" min="2.0">
+			- Added translations
+			- Possible to toggle values via publish tables
+		</release>
+		<release version="1.9" date="2009-03-03" min="2.0">
+			- Warnings about incorrect data type, origination from line 409, are now suppressed
+			- Fixed sorting to work when "random" is selected
+		</release>
+		<release version="1.8" date="2009-02-13" min="2.0">
+			- Fixed bug that caused no items to appear selected in publish area
+		</release>
+		<release version="1.7" date="2009-02-10" min="2.0">
+			- Updated `fetchAssociatedEntrySearchValue()` to make use of `entry_id` passed in, if available
+		</release>
+		<release version="1.6" date="2009-02-05" min="2.0">
+			Fixed problems with updating from a version earlier than 1.4
+		</release>
+		<release version="1.5" date="2009-01-27" min="2.0">
+			- Added a limit to the number of entries shown in select box
+			- Allowed selection of multiple source sections
+		</release>
+		<release version="1.4" date="2009-01-05" min="2.0">
+			- Enable Data Source param output for this field
+		</release>
+		<release version="1.3" date="2009-01-04" min="2.0">
+			- Fixed bug introduced in 1.2 that caused table values to disappear if the first field of the section is a "Select Box Link".
+		</release>
+		<release version="1.2" date="2009-01-03" min="2.0">
+			- Should correctly work with fields that do now use a `value` column in the database. This would cause an empty select box.
+		</release>
+		<release version="1.1" date="2009-01-03" min="2.0">
+			- Added ability to set field to required/not required.
+			- Added multi-select property (thanks to **@czheng**)
+		</release>
+	</releases>
+</extension>

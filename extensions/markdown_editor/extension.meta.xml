@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="markdown_editor" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Markdown Editor</name>
+	<description>Adds a markdown editor to every markdown textarea field on every entry page.</description>
+	<repo type="github">https://github.com/klaftertief/markdown_editor</repo>
+	<types>
+		<type>Text Formatters</type>
+	</types>
+	<authors>
+		<author>
+			<name github="klaftertief" symphony="klaftertief">Jonas Coch</name>
+			<website>http://klaftertief.de</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="1.0" date="2012-05-23" min="2.3">
+			First officially released version.
+		</release>
+	</releases>
+</extension>

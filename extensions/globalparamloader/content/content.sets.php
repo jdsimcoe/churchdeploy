@@ -14,8 +14,8 @@
 		protected $_uri = null;
 		protected $_valid = true;
 
-		public function __construct(&$parent){
-			parent::__construct($parent);
+		public function __construct(){
+			parent::__construct();
 
 			$this->_uri = URL . '/symphony/extension/globalparamloader';
 			$this->_driver = Symphony::ExtensionManager()->create('globalparamloader');
@@ -60,7 +60,8 @@
 		}
 
 		public function __actionEditNormal() {
-
+			if(!is_array($this->_params)) $this->_params = array();
+			
 		// Validate: ----------------------------------------------------------
 
 			if (empty($this->_fields['name'])) {
@@ -182,8 +183,9 @@
 			$this->setTitle(__('Symphony &ndash; Global Parameter Sets') . (
 				$this->_editing ? ' &ndash; ' . $this->_fields['name'] : null
 			));
-			$this->appendSubheading("<a href=\"{$this->_uri}/sets/\">" . __('Parameter Sets') . "</a> &mdash; " . (
-				$this->_editing ? $this->_fields['name'] : 'Untitled'
+			$this->appendSubheading($this->_editing ? $this->_fields['name'] : 'Untitled');
+			$this->insertBreadcrumbs(array(
+				Widget::Anchor(__('Parameter Sets'), $this->_uri . '/sets/'),
 			));
 
 		// Form: --------------------------------------------------------------
@@ -218,10 +220,11 @@
 			$fieldset->appendChild(new XMLElement('legend', __('Parameters')));
 
 			$div = new XMLElement('div');
-			$div->setAttribute('class', 'subsection');
-			$div->appendChild(new XMLElement('h3', __('Parameters')));
+			
 			$ol = new XMLElement('ol');
 			$ol->setAttribute('class', 'filters-duplicator');
+			$ol->setAttribute('data-add', __('Add parameter'));
+			$ol->setAttribute('data-remove', __('Remove parameter'));
 
 			// Add existing parameters:
 			if(isset($this->_params)) {
@@ -237,7 +240,8 @@
 			// Add parameter set:
 			$wrapper = new XMLElement('li');
 			$wrapper->setAttribute('class', 'template');
-
+			$wrapper->setAttribute('data-type', 'definiton');
+			
 			$this->displayParameter($wrapper, '-1', array(
 				'type' => __('Parameter definition')
 			));
@@ -291,7 +295,9 @@
 		}
 
 		protected function displayParameter(&$wrapper, $sortorder, $param) {
-			$wrapper->appendChild(new XMLElement('h4', ucwords($param['type'])));
+			$header = new XMLElement('header');
+			$header->appendChild(new XMLElement('h4', ucwords($param['type'])));
+			$wrapper->appendChild($header);
 			$wrapper->appendChild(Widget::Input("params[{$sortorder}][type]", $param['type'], 'hidden'));
 
 			if (!empty($param['id'])) {
@@ -332,21 +338,13 @@
 		}
 
 		public function viewIndexPages($context, $set_id = Null) {
-			$pages = Symphony::Database()->fetch("
-				SELECT
-					p.*
-				FROM
-					tbl_pages AS p
-				ORDER BY
-					p.sortorder ASC
-			");
+			$pages = PageManager::fetch();
 			$options = array();
 
 			foreach ($pages as $page) {
 				$selected = $this->_driver->isPageSelected($page['id'], $set_id);
-
 				$options[] = array(
-					$page['id'], $selected, '/' . Symphony::Engine()->resolvePagePath($page['id'])
+					$page['id'], $selected, '/' . PageManager::resolvePagePath($page['id'])
 				);
 			}
 
@@ -447,7 +445,7 @@
 			$table->setAttribute('class', 'selectable');
 
 			$this->Form->appendChild($table);
-
+			
 			$actions = new XMLElement('div');
 			$actions->setAttribute('class', 'actions');
 
@@ -456,8 +454,7 @@
 				array('delete', false, __('Delete'))
 			);
 
-			$actions->appendChild(Widget::Select('with-selected', $options));
-			$actions->appendChild(Widget::Input('action[apply]', __('Apply'), 'submit'));
+			$actions->appendChild(Widget::Apply($options));
 
 			$this->Form->appendChild($actions);
 		}

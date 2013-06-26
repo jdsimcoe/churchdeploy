@@ -1,7 +1,12 @@
 (function($) {
 	
         jQuery.fn.html5_upload = function(options) {
-
+          function get_file_name(file) {
+              return file.name || file.fileName;
+          }
+          function get_file_size(file) {
+              return file.size || file.fileSize;
+          }
                 var available_events = ['onChange', 'onStart', 'onStartOne', 'onProgress', 'onFinishOne', 'onFinish', 'onError'];
                 var options = jQuery.extend({
 						onChange: function(event, files) {
@@ -39,8 +44,8 @@
                         headers: {
                                 "Cache-Control":"no-cache",
                                 "X-Requested-With":"XMLHttpRequest",
-                                "X-File-Name": function(file){return file.fileName},
-                                "X-File-Size": function(file){return file.fileSize},
+                                "X-File-Name": function(file){return get_file_name(file)},
+                                "X-File-Size": function(file){return get_file_size(file)},
                                 "Content-Type": function(file){
                                         if (!options.sendBoundary) return 'multipart/form-data';
                                         return false;
@@ -78,7 +83,7 @@
                     	var $this = $(this);
                         var files = this.files;
                         var total = files.length;
-	                	$this.trigger('html5_upload.onChange', [this.files]);
+	                	$this.triggerHandler('html5_upload.onChange', [this.files]);
 
 						if (options.autostart == false && event.type == 'change') {
 							return false;							
@@ -92,7 +97,7 @@
                         this.html5_upload['continue_after_abort'] = true;
                         function upload_file(number) {
                                 if (number == total) {
-                                        $this.trigger('html5_upload.onFinish', [total]);
+                                        $this.triggerHandler('html5_upload.onFinish', [total]);
                                         options.setStatus(options.genStatus(1, true));
                                         $this.attr("disabled", false);
                                         if (options.autoclear) {
@@ -101,21 +106,21 @@
                                         return;
                                 }
                                 var file = files[number];
-                                if (!$this.triggerHandler('html5_upload.onStartOne', [file.fileName, number, total])) {
+                                if (!$this.triggerHandler('html5_upload.onStartOne', [get_file_name(file), number, total])) {
                                         return upload_file(number+1);
                                 }
                                 options.setStatus(options.genStatus(0));
-                                options.setName(options.genName(file.fileName, number, total));
-                                options.setProgress(options.genProgress(0, file.fileSize));
+                                options.setName(options.genName(get_file_name(file), number, total));
+                                options.setProgress(options.genProgress(0, get_file_size(file)));
                                 xhr.upload['onprogress'] = function(rpe) {
-                                        $this.trigger('html5_upload.onProgress', [rpe.loaded / rpe.total, file.fileName, number, total]);
+                                        $this.triggerHandler('html5_upload.onProgress', [rpe.loaded / rpe.total, get_file_name(file), number, total]);
                                         options.setStatus(options.genStatus(rpe.loaded / rpe.total));
                                         options.setProgress(options.genProgress(rpe.loaded, rpe.total));
                                 };
                                 xhr.onload = function(load) {
-                                        $this.trigger('html5_upload.onFinishOne', [xhr.responseText, file.fileName, number, total]);
+                                        $this.triggerHandler('html5_upload.onFinishOne', [xhr.responseText, get_file_name(file), number, total]);
                                         options.setStatus(options.genStatus(1, true));
-                                        options.setProgress(options.genProgress(file.fileSize, file.fileSize));
+                                        options.setProgress(options.genProgress(get_file_size(file), get_file_size(file)));
                                         upload_file(number+1);
                                 };
                                 xhr.onabort = function() {
@@ -130,7 +135,7 @@
                                         }
                                 };
                                 xhr.onerror = function(e) {
-                                        $this.trigger('html5_upload.onError', [file.fileName, e]);
+                                        $this.triggerHandler('html5_upload.onError', [get_file_name(file), e]);
                                         if (!options.stopOnFirstError) {
                                                 upload_file(number+1);
                                         }
@@ -166,7 +171,7 @@
                                                 builder += 'Content-Disposition: form-data; name="'+(typeof(options.fieldName) == "function" ? options.fieldName() : options.fieldName)+'"';
 
                                                 //thanks to oyejo...@gmail.com for this fix
-                                                fileName = unescape(encodeURIComponent(file.fileName)); //encode_utf8
+                                                fileName = unescape(encodeURIComponent(get_file_name(file))); //encode_utf8
 
                                                 builder += '; filename="' + fileName + '"';
                                                 builder += crlf;
@@ -204,10 +209,10 @@
                         };
                         for (event in available_events) {
                                 if (options[available_events[event]]) {
-                                        $(this).bind("html5_upload."+available_events[event], options[available_events[event]]);
+                                        $(this).on("html5_upload."+available_events[event], options[available_events[event]]);
                                 }
                         }
-						$(this).bind('change', {start: options.autostart}, upload);
+						$(this).on('change', {start: options.autostart}, upload);
 						                        // if (options.autostart) {
 						//                                 $(this).bind('change', upload);
 						//                         }
@@ -216,19 +221,19 @@
 						//                             // $(this).bind('change', $(this).trigger('html5_upload.onAdd', [this.files]));
 						// }
                         $(this)
-                                .bind('html5_upload.start', {start: true}, upload)
-                                .bind('html5_upload.cancelOne', function() {
+                                .on('html5_upload.start', {start: true}, upload)
+                                .on('html5_upload.cancelOne', function() {
                                         this.html5_upload['xhr'].abort();
                                 })
-                                .bind('html5_upload.cancelAll', function() {
+                                .on('html5_upload.cancelAll', function() {
                                         this.html5_upload['continue_after_abort'] = false;
                                         this.html5_upload['xhr'].abort();
                                 })
-                                .bind('html5_upload.destroy', function() {
+                                .on('html5_upload.destroy', function() {
                                         this.html5_upload['continue_after_abort'] = false;
                                         this.xhr.abort();
                                         delete this.html5_upload;
-                                        $(this).unbind('html5_upload.*').unbind('change', upload);
+                                        $(this).off('html5_upload.*').off('change', upload);
                                 });
                 });
         };

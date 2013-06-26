@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
-<extension id="order_entries">
+<extension id="order_entries" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	
 	<name>Order Entries</name>
 
 	<description lang="en">Allow drag-and-drop re-ordering of entries.</description>
 
-	<repo type="github">https://github.com/nickdunn/order_entries</repo>
+	<repo type="github">https://github.com/symphonists/order_entries</repo>
 	
 	<types>
 		<type>Workflow</type>
@@ -15,6 +14,9 @@
 	
 	<authors>
 		<author>
+			<name github="symphonists" symphony="community">Symphony Community</name>
+		</author>
+		<author>
 			<name github="nickdunn" symphony="nickdunn" twitter="nickdunn">Nick Dunn</name>
 			<email>nick@nick-dunn.co.uk</email>
 			<website>http://nick-dunn.co.uk</website>
@@ -22,6 +24,11 @@
 	</authors>
 	
 	<releases>
+		<release version="1.10.1" date="2012-03-11" min="2.3.x" />
+		<release version="1.10.0" date="2012-03-09" min="2.3.x" />
+		<release version="1.9.8" date="2011-12-19" min="2.2.2" max="2.2.x">
+			* Added `appendFormattedElement` and `getParameterPoolValue` methods to prevent bad default output (thanks DavidOliver!)
+		</release>
 		<release version="1.9.7" date="2011-10-12" min="2.2.2" />
 		<release version="1.9.6" date="2011-02-16" min="2.2" />
 		<release version="1.9.5" date="2011-05-21" min="2.0.3" max="2.1.x" />

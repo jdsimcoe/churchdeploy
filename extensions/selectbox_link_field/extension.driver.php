@@ -2,19 +2,6 @@
 
 	Class extension_selectbox_link_field extends Extension{
 
-		public function about(){
-			return array(
-				'name' => 'Field: Select Box Link',
-				'version' => '1.22',
-				'release-date' => '2011-11-04',
-				'author' => array(
-					'name' => 'Symphony Team',
-					'website' => 'http://www.symphony-cms.com',
-					'email' => 'team@symphony-cms.com'
-				)
-			);
-		}
-
 		public function install(){
 			try{
 				Symphony::Database()->query("
@@ -46,7 +33,7 @@
 			return false;
 		}
 
-		public function update($previousVersion){
+		public function update($previousVersion = false){
 			try{
 				if(version_compare($previousVersion, '1.6', '<')){
 					Symphony::Database()->query(

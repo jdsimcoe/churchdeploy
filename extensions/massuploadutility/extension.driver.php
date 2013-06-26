@@ -7,23 +7,9 @@
 		Definition:
 	-------------------------------------------------------------------------*/
 		
-		public function about() {
-			return array(
-				'name'			=> 'Mass Upload Utility',
-				'version'		=> '0.9.8',
-				'release-date'	=> '2011-05-31',
-				'author'		=> array(
-					'name'			=> 'Scott Tesoriere',
-					'website'		=> 'http://tesoriere.com',
-					'email'			=> 'scott@tesoriere.com'
-				),
-				'description'	=> 'Allows you to jam lots of Files (that already exist or you upload) into a section. The section must have an upload Field.'
-	 		);
-		}
-		
 		public function uninstall() {
 			Symphony::Configuration()->remove('massuploadutility');
-			Administration::instance()->saveConfig();
+			Symphony::Configuration()->write();
 		}
 		
 		public function install() {
@@ -68,19 +54,18 @@
 		}
 		
 		public function initaliseAdminPageHead($context) {
-			$page = $context['parent']->Page;
+			$page = $context['oPage'];
 			$assets_path = '/extensions/massuploadutility/assets/';
 			
 			// to check if it's an excluded section
-			$sectionManager = new SectionManager(Administration::instance());
-			$section_id = $sectionManager->fetchIDFromHandle($page->_context['section_handle']);
-			
+			$section_id = SectionManager::fetchIDFromHandle($page->_context['section_handle']);
+
 			if ($page instanceof contentPublish and $page->_context['page'] == 'new' and 
 				$this->validateSection($section_id) and $this->validateUser()) {   
 					   
-				$page->addStylesheetToHead(URL . $assets_path . 'massuploadutility.css', 'screen', 14145);
-				$page->addScriptToHead(URL . $assets_path . 'massuploadutility.publish.js',14156);
-				$page->addScriptToHead(URL . $assets_path . 'jquery.html5_upload.js',14156);
+				Administration::instance()->Page->addStylesheetToHead(URL . $assets_path . 'massuploadutility.css', 'screen', 14145);
+				Administration::instance()->Page->addScriptToHead(URL . $assets_path . 'massuploadutility.publish.js',14156);
+				Administration::instance()->Page->addScriptToHead(URL . $assets_path . 'jquery.html5_upload.js',14156);
 			}
 		}	
 
@@ -109,9 +94,7 @@
 			$label = Widget::Label(__('Excluded Sections'));
 			$options = array();
 	
-			$sm = new SectionManager(Administration::instance());
-
-			$sections = $sm->fetch();
+			$sections = SectionManager::fetch();
 			$excluded_sections = explode(',', Symphony::Configuration()->get('excluded-sections', 'massuploadutility'));
 
 			if(!empty($sections) && is_array($sections)){

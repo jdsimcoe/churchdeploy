@@ -593,7 +593,7 @@ $html = '<p>Simple block on one line:</p>
 <div>
 foo
 </div>
-<div style=">" />
+<div style=">"/>
 </div>
 <div>bar</div>
 </div>

@@ -5,8 +5,8 @@
 		public function about() {
 			return array(
 				'name' => 'Cross-Site Scripting (XSS) Filter',
-				'version' => '1.1',
-				'release-date' => '2011-06-29',
+				'version' => '1.1.1',
+				'release-date' => '2012-05-21',
 				'author' => array(
 					'name' => 'Symphony Team',
 					'website' => 'http://symphony-cms.com/',
@@ -109,8 +109,9 @@
 		public static function detectXSS($string) {
 			$contains_xss = FALSE;
 
-			if(!is_string($string)) {
-				throw new Exception(__('Passed parameter is not a string.'));
+			// Skip any null or non string values
+			if(is_null($string) || !is_string($string)) {
+				return $contains_xss;
 			}
 
 			// Keep a copy of the original string before cleaning up

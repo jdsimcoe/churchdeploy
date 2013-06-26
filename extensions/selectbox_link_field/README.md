@@ -1,23 +1,19 @@
 # Select Box Link Field
 
-- Version: 1.22
-- Author: Symphony Team (team@symphony-cms.com)
-- Build Date: 4th November 2011
-- Requirements: Symphony 2.2 or greater
-
+- Version: 1.26
+- Author: Symphony Team
+- Release Date: 22nd February 2012
+- Requirements: Symphony 2.3.2 or greater
 
 ## Installation
 
 1. Upload the `selectbox_link_field` folder in this archive to your Symphony 'extensions' folder.
-
 2. Enable it by selecting the "Field: Select Box Link", choose Enable from the with-selected menu, then click Apply.
-
 3. You can now add the "Select Box Link" field to your sections.
 
 ## Updating
 
-1. Be sure to visit the Extension page in the Symphony admin and
-   enable "Select Box Link Field" so the database is updated accordingly.
+1. Be sure to visit the Extension page in the Symphony admin and enable "Select Box Link Field" so the database is updated accordingly.
 
 ## Usage
 
@@ -25,104 +21,15 @@
 
 - Setting an instance of the field to be not required will cause an empty option to show up on the publish form.
 
+## Filtering options
 
-### Change Log
+The Select Box Link supports the following filtering options in your data sources:
 
-*1.22*
-- Implement `requiresSQLGrouping` function which prevents some oddities with pagination
-- Preform some checks for `relation_id` to improve compatibility with extensions that extend the Select Box Link field.
+- `Red Cats` or `not: Red Cats`: Return all entries where the linked entry has the value of `Red Cats` (or does not have the value `Red Cats`)
+- `red-cats` or `not: red-cats`: Return all entries where the linked entry has the handle of `red-cats` (or does not have the handle `red-cats`)
+- `1` or `not: 1`: Return all entries where the linked entry ID is `1`, (or is not `1`)
+- `sql-null-or-not: 1`: Return all entries where the linked entry ID is not 1 or the entry has no linked entries.
+- `sql: NULL`: Return all entries that do not have any linked entries
+- `sql: NOT NULL`: Return all entries that have a linked entry
 
-*1.21*
-
-- Correctly load information about entries that fall outside of the limit (but are still attached to an entry)
-- Prevention for an edge case where empty ID's are thrown around
-
-*1.20*
-
-- Updates for Symphony 2.2
-- Performance enhancements
-- Don't allow grouping if multiple options are selected
-
-*1.19*
-
-- Allow the linked section's public column visibility to be toggled
-
-*1.18*
-
-- Prevent `null` Relations from appearing in the Output XML
-
-*1.17*
-
-- Added missing translation strings
-- Added localisation files for Dutch, German, Portuguese (Brazil) and Russian
-
-*1.16*
-
-- Fixed sort order of entries in select box. Corrected to use the column sort order. A bug in 1.13+ caused this particular issue to reappear. This fix is based on code by Nick Dunn initially introduced in 1.12.
-
-*1.15*
-
-- `relation_id` can now be a `null` value. Fixes issue [#1](http://symphony-cms.com/download/extensions/issues/view/20054/1/)
-
-*1.14*
-
-- Made install and update functions more tolerant of existing tables
-- Minor bug fixes for 2.0.7
-
-*1.13*
-
-- Added filtering by handle functionality (@creativedutchmen)
-
-*1.12*
-
-- Fixed a couple of issues where 'related_field_id' was returning the wrong type. (@buzzomatic)
-- In dropdown options, sort Sections by their Symphony order and sort Entries by their Symphony order (using EntryManager) (@nickdunn)
-- Sort Sections in field's settings panel by Symphony order (@nickdunn)
-
-*1.11*
-
-- Fixed bug that triggered a database error in Symphony version greater than 2.0.6
-
-*1.10*
-
-- Added translations
-- Possible to toggle values via publish tables
-
-*1.9*
-
-- Warnings about incorrect data type, origination from line 409, are now suppressed
-- Fixed sorting to work when "random" is selected
-
-*1.8*
-
-- Fixed bug that caused no items to appear selected in publish area
-
-*1.7*
-
-- Updated `fetchAssociatedEntrySearchValue()` to make use of `entry_id` passed in, if available
-
-*1.6*
-
-- Fixed problems with updating from a version earlier than 1.4
-
-*1.5*
-
-- Added a limit to the number of entries shown in select box
-- Allowed selection of multiple source sections
-
-*1.4*
-
-- Enable Data Source param output for this field
-
-*1.3*
-
-- Fixed bug introduced in 1.2 that caused table values to disappear if the first field of the section is a "Select Box Link".
-
-*1.2*
-
-- Should correctly work with fields that do now use a `value` column in the database. This would cause an empty select box.
-
-*1.1*
-
-- Added ability to set field to required/not required.
-- Added multi-select property (thanks to @czheng)
+Please note that predicate filters, such as `not:` or `sql:`, will ignore all other [data source filters](http://symphony-cms.com/learn/concepts/view/data-source-filters/) for that field.

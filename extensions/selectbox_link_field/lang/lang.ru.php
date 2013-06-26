@@ -3,35 +3,37 @@
 	$about = array(
 		'name' => 'Русский',
 		'author' => array(
-			'name' => 'Igor Bogdanov',
-			'email' => 'i.bogdanov@ibcico.com',
-			'website' => false
+			'name' => 'Александр Бирюков',
+			'email' => 'info@alexbirukov.ru',
+			'website' => 'http://alexbirukov.ru'
 		),
-		'release-date' => '2009-11-27'
+		'release-date' => '2012-12-11'
 	);
-	
-	
-	/*
-	 * EXTENSION: Field: Select Box Link
-	 * Localisation strings
+
+	/**
+	 * Select Box Link Field
 	 */
-
 	$dictionary = array(
-	
-		'Select Box Link' => 
-		'Ссылка на сущность',
-		
-		'None' =>
-		false,
 
-		'Options' => 
-		'Опции',
+		'Allow selection of multiple options' => 
+		'Разрешить выбор нескольких опций.',
+
+		'Select Box Link' => 
+		'Ссылка на запись',
 
 		'Limit to the %s most recent entries' => 
 		'Ограничение на %s последних записей.',
 
-		'Allow selection of multiple options' => 
-		'Разрешить выбор нескольких опций.'
+		'None' => 
+		'Нет',
+
+		'Options' => 
+		'Опции',
+
+		'Values' => 
+		'Значения',
+
+		'Limit to %s entries' => 
+		'Лимит записей %s',
 
 	);
-	

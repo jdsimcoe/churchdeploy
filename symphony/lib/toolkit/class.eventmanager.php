@@ -11,18 +11,19 @@
 	 */
 
 	require_once(TOOLKIT . '/class.event.php');
+	require_once(FACE . '/interface.fileresource.php');
 
-	Class EventManager extends Manager{
+	Class EventManager implements FileResource {
 
 		/**
 		 * Given the filename of an Event return it's handle. This will remove
 		 * the Symphony convention of `event.*.php`
 		 *
 		 * @param string $filename
-		 *	The filename of the Event
+		 *  The filename of the Event
 		 * @return string
 		 */
-		public function __getHandleFromFilename($filename){
+		public static function __getHandleFromFilename($filename){
 			return preg_replace(array('/^event./i', '/.php$/i'), '', $filename);
 		}
 
@@ -31,10 +32,10 @@
 		 * use an 'event' prefix.
 		 *
 		 * @param string $handle
-		 *	The Event handle
+		 *  The Event handle
 		 * @return string
 		 */
-		public function __getClassName($handle){
+		public static function __getClassName($handle){
 			return 'event' . $handle;
 		}
 
@@ -43,12 +44,12 @@
 		 * and in all installed extension folders and returns the path to it's folder.
 		 *
 		 * @param string $handle
-		 *	The handle of the Event free from any Symphony conventions
-		 *	such as `event.*.php`
+		 *  The handle of the Event free from any Symphony conventions
+		 *  such as `event.*.php`
 		 * @return mixed
-		 *	If the Event is found, the function returns the path it's folder, otherwise false.
+		 *  If the Event is found, the function returns the path it's folder, otherwise false.
 		 */
-		public function __getClassPath($handle){
+		public static function __getClassPath($handle){
 			if(is_file(EVENTS . "/event.$handle.php")) return EVENTS;
 			else{
 
@@ -69,14 +70,13 @@
 		 *
 		 * @see toolkit.EventManager#__getClassPath()
 		 * @param string $handle
-		 *	The handle of the Event free from any Symphony conventions
-		 *	such as event.*.php
+		 *  The handle of the Event free from any Symphony conventions
+		 *  such as event.*.php
 		 * @return string
 		 */
-		public function __getDriverPath($handle){
-			return $this->__getClassPath($handle) . "/event.$handle.php";
+		public static function __getDriverPath($handle){
+			return self::__getClassPath($handle) . "/event.$handle.php";
 		}
-
 
 		/**
 		 * Finds all available Events by searching the events folder in the workspace
@@ -84,30 +84,35 @@
 		 *
 		 * @see toolkit.Manager#about()
 		 * @return array
-		 *	Associative array of Events with the key being the handle of the Event
-		 *	and the value being the Event's `about()` information.
+		 *  Associative array of Events with the key being the handle of the Event
+		 *  and the value being the Event's `about()` information.
 		 */
-		public function listAll(){
-
+		public static function listAll(){
 			$result = array();
 			$structure = General::listStructure(EVENTS, '/event.[\\w-]+.php/', false, 'ASC', EVENTS);
 
 			if(is_array($structure['filelist']) && !empty($structure['filelist'])){
 				foreach($structure['filelist'] as $f){
-					$f = $this->__getHandleFromFilename($f);
+					$f = self::__getHandleFromFilename($f);
 
-					if($about = $this->about($f)){
-						$classname = $this->__getClassName($f);
+					if($about = self::about($f)){
+						$classname = self::__getClassName($f);
 						$can_parse = false;
 						$source = null;
+						$env = array();
+						$class = new $classname($env);
 
-						if(method_exists($classname,'allowEditorToParse')) {
-							$can_parse = call_user_func(array($classname, 'allowEditorToParse'));
+						try {
+							$method = new ReflectionMethod($classname, 'allowEditorToParse');
+							$can_parse = $method->invoke($class);
 						}
+						catch (ReflectionException $e) {}
 
-						if(method_exists($classname,'getSource')) {
-							$source = call_user_func(array($classname, 'getSource'));
+						try {
+							$method = new ReflectionMethod($classname, 'getSource');
+							$source = $method->invoke($class);
 						}
+						catch (ReflectionException $e) {}
 
 						$about['can_parse'] = $can_parse;
 						$about['source'] = $source;
@@ -127,9 +132,9 @@
 
 					if(is_array($tmp['filelist']) && !empty($tmp['filelist'])){
 						foreach($tmp['filelist'] as $f){
-							$f = $this->__getHandleFromFilename($f);
+							$f = self::__getHandleFromFilename($f);
 
-							if($about = $this->about($f)){
+							if($about = self::about($f)){
 								$about['can_parse'] = false;
 								$result[$f] = $about;
 							}
@@ -142,35 +147,53 @@
 			return $result;
 		}
 
+		public static function about($name) {
+			$classname = self::__getClassName($name);
+			$path = self::__getDriverPath($name);
+
+			if(!@file_exists($path)) return false;
+
+			require_once($path);
+
+			$handle = self::__getHandleFromFilename(basename($path));
+			$env = array();
+			$class = new $classname($env);
+
+			try {
+				$method = new ReflectionMethod($classname, 'about');
+				$about = $method->invoke($class);
+			}
+			catch (ReflectionException $e){
+				$about = array();
+			}
+
+			return array_merge($about, array('handle' => $handle));
+		}
+
 		/**
 		 * Creates an instance of a given class and returns it.
 		 *
 		 * @param string $handle
-		 *	The handle of the Event to create
+		 *  The handle of the Event to create
 		 * @param array $env
-		 *	The environment variables from the Frontend class which includes
-		 *	any params set by Symphony or Datasources or by other Events
+		 *  The environment variables from the Frontend class which includes
+		 *  any params set by Symphony or Datasources or by other Events
 		 * @return Event
 		 */
-		public function &create($handle, Array $env = array()){
-
-			$classname = $this->__getClassName($handle);
-			$path = $this->__getDriverPath($handle);
+		public static function create($handle, array $env = null){
+			$classname = self::__getClassName($handle);
+			$path = self::__getDriverPath($handle);
 
 			if(!is_file($path)){
 				throw new Exception(
-					__(
-						'Could not find Event <code>%s</code>. If the Event was provided by an Extension, ensure that it is installed, and enabled.',
-						array($handle)
-					)
+					__('Could not find Event %s.', array('<code>' . $handle . '</code>'))
+					. ' ' . __('If it was provided by an Extension, ensure that it is installed, and enabled.')
 				);
 			}
 
-			if(!class_exists($classname))
-				require_once($path);
+			if(!class_exists($classname)) require_once($path);
 
-			return new $classname($this->_Parent, $env);
-
+			return new $classname($env);
 		}
 
 	}

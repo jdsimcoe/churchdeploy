@@ -25,7 +25,7 @@
 			// Might fail in non-standard uses, will then return an
 			// empty string.
 			$gateway_class = $trace[1]['class']?' (' . $trace[1]['class'] . ')':'';
-			Symphony::$Log->pushToLog(__('Email Gateway Error') . $gateway_class  . ': ' . $message, $code, true);
+			Symphony::Log()->pushToLog(__('Email Gateway Error') . $gateway_class  . ': ' . $message, $code, true);
 			parent::__construct($message);
 		}
 	}
@@ -61,7 +61,17 @@
 		protected $_text_encoding = 'quoted-printable';
 
 		/**
-		 * @return void
+		 * Indicates whether the connection to the SMTP server should be
+		 * kept alive, or closed after sending each email. Defaults to false.
+		 *
+		 * @since Symphony 2.3.1
+		 * @var boolean
+		 */
+		protected $_keepalive = false;
+
+		/**
+		 * The constructor sets the `_boundary_mixed` and `_boundary_alter` variables
+		 * to be unique hashes based off PHP's `uniqid` function.
 		 */
 		public function __construct(){
 			$this->_boundary_mixed = '=_mix_'.md5(uniqid());
@@ -69,13 +79,39 @@
 		}
 
 		/**
-		 * Sends the actual email.
-		 * This function should be set on the email-gateway itself.
+		 * Sends the actual email. This function should be implemented in the
+		 * Email Gateway itself and should return true or false if the email
+		 * was successfully sent.
 		 * See the default gateway for an example.
 		 *
-		 * @return void
+		 * @return boolean
 		 */
-		public function send(){
+		public function send() {
+			return false;
+		}
+
+		/**
+		 * Open new connection to the email server.
+		 * This function is used to allow persistent connections.
+		 *
+		 * @since Symphony 2.3.1
+		 * @return boolean
+		 */
+		public function openConnection(){
+			$this->_keepalive = true;
+			return true;
+		}
+
+		/**
+		 * Close the connection to the email Server.
+		 * This function is used to allow persistent connections.
+		 *
+		 * @since Symphony 2.3.1
+		 * @return boolean
+		 */
+		public function closeConnection(){
+			$this->_keepalive = false;
+			return true;
 		}
 
 		/**
@@ -95,6 +131,7 @@
 		/**
 		 * Sets the sender-email.
 		 *
+		 * @throws EmailValidationException
 		 * @param string $email
 		 *  The email-address emails will be sent from.
 		 * @return void
@@ -109,6 +146,7 @@
 		/**
 		 * Sets the sender-name.
 		 *
+		 * @throws EmailValidationException
 		 * @param string $name
 		 *  The name emails will be sent from.
 		 * @return void
@@ -130,7 +168,8 @@
 		public function setRecipients($email){
 			//TODO: sanitizing and security checking
 			if(!is_array($email)){
-				$email = Array($email);
+				$email = explode(',',$email);
+				array_walk($email, create_function('&$val', '$val = trim($val);'));
 			}
 			$this->_recipients = $email;
 		}
@@ -171,6 +210,7 @@
 
 		/**
 		 * @todo Document this function
+		 * @throws EmailGatewayException
 		 * @param string $encoding
 		 *  Must be either `quoted-printable` or `base64`.
 		 */
@@ -185,7 +225,7 @@
 				$this->_text_encoding = false;
 			}
 			else{
-				throw new EmailGatewayException(__('%s is not a supported encoding type. Please use "quoted-printable" or "base64". You can also use false for no encoding.', array($encoding)));
+				throw new EmailGatewayException(__('%1$s is not a supported encoding type. Please use %2$s or %3$s. You can also use %4$s for no encoding.', array($encoding, '<code>quoted-printable</code>', '<code>base-64</code>', '<code>false</code>')));
 			}
 		}
 
@@ -204,6 +244,7 @@
 		/**
 		 * Sets the reply-to-email.
 		 *
+		 * @throws EmailValidationException
 		 * @param string $email
 		 *  The email-address emails should be replied to.
 		 * @return void
@@ -218,6 +259,7 @@
 		/**
 		 * Sets the reply-to-name.
 		 *
+		 * @throws EmailValidationException
 		 * @param string $name
 		 *  The name emails should be replied to.
 		 * @return void
@@ -230,9 +272,25 @@
 		}
 
 		/**
+		 * Sets all configuration entries from an array.
+		 * This enables extensions like the ENM to create email settings panes that work regardless of the email gateway.
+		 * Every gateway should extend this method to add their own settings.
+		 *
+		 * @throws EmailValidationException
+		 * @param array $configuration
+		 * @since Symphony 2.3.1
+		 *  All configuration entries stored in a single array. The array should have the format of the $_POST array created by the preferences HTML.
+		 * @return boolean
+		 */
+		public function setConfiguration($config){
+			return true;
+		}
+
+		/**
 		 * Appends a single header field to the header fields array.
 		 * The header field should be presented as a name/body pair.
 		 *
+		 * @throws EmailGatewayException
 		 * @param string $name
 		 *  The header field name. Examples are From, X-Sender and Reply-to.
 		 * @param string $body
@@ -241,7 +299,7 @@
 		 */
 		public function appendHeaderField($name, $body){
 			if(is_array($body)){
-				throw new EmailGatewayException(__('appendHeaderField accepts strings only; arrays are not allowed.'));
+				throw new EmailGatewayException(__('%s accepts strings only; arrays are not allowed.', array('<code>appendHeaderField</code>')));
 			}
 			$this->_header_fields[$name] = $body;
 		}
@@ -259,23 +317,22 @@
 				$this->appendHeaderField($name, $body);
 			}
 		}
+
 		/**
-		 * Check to see if all required data is set.
+		 * Makes sure the Subject, Sender Email and Recipients values are
+		 * all set and are valid. The message body is checked in
+		 * `prepareMessageBody`
 		 *
+		 * @see prepareMessageBody()
+		 * @throws EmailValidationException
 		 * @return boolean
 		 */
 		public function validate(){
-			/*
-			 * Make sure the Recipient, Sender Name and Sender Email values
-			 * are set.
-			 * The message body will be checked in the prepareMessage
-			 * function.
-			 */
 			if(strlen(trim($this->_subject)) <= 0){
 				throw new EmailValidationException(__('Email subject cannot be empty.'));
 			}
 
-			elseif(strlen(trim($this->_sender_email_address)) <= 0){
+			else if(strlen(trim($this->_sender_email_address)) <= 0){
 				throw new EmailValidationException(__('Sender email address cannot be empty.'));
 			}
 
@@ -284,8 +341,8 @@
 					if(strlen(trim($address)) <= 0){
 						throw new EmailValidationException(__('Recipient email address cannot be empty.'));
 					}
-					elseif(!filter_var($address, FILTER_VALIDATE_EMAIL)) {
-						throw new EmailValidationException(__('The email address "%s" is invalid.', array($address)));
+					else if(!filter_var($address, FILTER_VALIDATE_EMAIL)) {
+						throw new EmailValidationException(__('The email address ‘%s’ is invalid.', array($address)));
 					}
 				}
 			}
@@ -298,6 +355,7 @@
 		 * The result of this building is an updated body variable in the
 		 * gateway itself.
 		 *
+		 * @throws EmailGatewayException
 		 * @return boolean
 		 */
 		protected function prepareMessageBody(){
@@ -327,21 +385,21 @@
 				else {
 					$this->_body = $this->getSectionAttachments();
 				}
-				$this->_body	.= $this->finalBoundaryDelimiterLine('multipart/mixed');
+				$this->_body .= $this->finalBoundaryDelimiterLine('multipart/mixed');
 			}
 			else if (!empty($this->_text_plain) && !empty($this->_text_html)) {
 				$this->appendHeaderFields($this->contentInfoArray('multipart/alternative'));
-				$this->_body	 = $this->getSectionMultipartAlternative();
+				$this->_body = $this->getSectionMultipartAlternative();
 			}
 			else if (!empty($this->_text_plain)) {
 				$this->appendHeaderFields($this->contentInfoArray('text/plain'));
-				$this->_body	 = $this->getSectionTextPlain();
+				$this->_body = $this->getSectionTextPlain();
 			}
 			else if (!empty($this->_text_html)) {
 				$this->appendHeaderFields($this->contentInfoArray('text/html'));
-				$this->_body	 = $this->getSectionTextHtml();
+				$this->_body = $this->getSectionTextHtml();
 			}
-			else{
+			else {
 				throw new EmailGatewayException(__('No attachments or body text was set. Can not send empty email.'));
 			}
 		}
@@ -375,11 +433,13 @@
 		 */
 		protected function getSectionAttachments() {
 			$output = '';
-			foreach ($this->_attachments as $file) {
+			foreach ($this->_attachments as $filename => $file) {
+				if(is_numeric($filename)){
+					$filename = NULL;
+				}
 				$output .= $this->boundaryDelimiterLine('multipart/mixed')
-						 . $this->contentInfoString(NULL, $file)
-						 . EmailHelper::base64ContentTransferEncode(file_get_contents($file))
-				;
+						 . $this->contentInfoString(NULL, $file, $filename)
+						 . EmailHelper::base64ContentTransferEncode(file_get_contents($file));
 			}
 			return $output;
 		}
@@ -430,7 +490,7 @@
 		 * failure. Can be used to send to an email server directly.
 		 * @return string
 		 */
-		public function contentInfoArray($type = NULL, $file = NULL) {
+		public function contentInfoArray($type = NULL, $file = NULL, $filename = NULL) {
 			$description = array(
 				'multipart/mixed' => array(
 					"Content-Type" => 'multipart/mixed; boundary="'
@@ -450,11 +510,11 @@
 				),
 			);
 			$binary = array(
-				'Content-Type'				=> EmailHelper::getMimeType($file).'; name="'.basename($file).'"',
+				'Content-Type'				=> EmailHelper::getMimeType($file).'; name="'.(!is_null($filename)?$filename:basename($file)).'"',
 				'Content-Transfer-Encoding' => 'base64',
-				'Content-Disposition'		=> 'attachment; filename="'.basename($file).'"',
+				'Content-Disposition'		=> 'attachment; filename="' . (!is_null($filename)?$filename:basename($file)).'"',
 			);
-			return !empty($description[$type]) ? $description[$type] : ($file ? $binary : array());
+			return !empty($description[$type]) ? $description[$type] : ((!is_null($filename)?$filename:basename($file)) ? $binary : array());
 		}
 
 		/**
@@ -462,8 +522,8 @@
 		 *
 		 * @return string
 		 */
-		protected function contentInfoString($type = NULL, $file = NULL) {
-			$data = $this->contentInfoArray($type, $file);
+		protected function contentInfoString($type = NULL, $file = NULL, $filename = NULL) {
+			$data = $this->contentInfoArray($type, $file, $filename);
 			foreach ($data as $key => $value) {
 				$field[] = EmailHelper::fold(sprintf('%s: %s', $key, $value));
 			}
@@ -510,7 +570,7 @@
 				return $this->{'set'.$this->__toCamel($name, true)}($value);
 			}
 			else{
-				throw new EmailGatewayException(__('The %s gateway does not support the use of %s', array(get_class($this), $name)));
+				throw new EmailGatewayException(__('The %1$s gateway does not support the use of %2$s', array(get_class($this), $name)));
 			}
 		}
 
@@ -577,6 +637,10 @@
 			$string[0] = strtolower($string[0]);
 			$func = create_function('$c', 'return "_" . strtolower($c[1]);');
 			return preg_replace_callback('/([A-Z])/', $func, $str);
+		}
+
+		public function __destruct(){
+			$this->closeConnection();
 		}
 
 	}

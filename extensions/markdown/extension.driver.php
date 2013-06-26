@@ -4,8 +4,8 @@
 		public function about(){
 			return array(
 				'name' => 'Text Formatter: Markdown',
-				'version' => '1.13',
-				'release-date' => '2011-01-29',
+				'version' => '1.15',
+				'release-date' => '2013-02-03',
 				'author' => array(
 					'name' => 'Alistair Kearney',
 					'website' => 'http://symphony-cms.com',
@@ -15,41 +15,38 @@
 			);
 		}
 
-		public function update($previousVersion){
+		public function update($previousVersion = false){
+			if(version_compare($previousVersion, '1.10', '<')){
 
+				$conversion = array(
+					'pb_markdown' => 'markdown',
+					'pb_markdownextrasmartypants' => 'markdown_extra_with_smartypants',
+					'pb_markdownextra' => 'markdown_extra'
+				);
 
-				if(version_compare($previousVersion, '1.10', '<')){
+				foreach($conversion as $old => $new){
 
-					$conversion = array(
-						'pb_markdown' => 'markdown',
-						'pb_markdownextrasmartypants' => 'markdown_extra_with_smartypants',
-						'pb_markdownextra' => 'markdown_extra'
-					);
+					try{
+						Symphony::Database()->query(
+							sprintf("UPDATE `tbl_fields_textarea` SET `formatter` = '%s' WHERE `formatter` = '%s'", $new, $old)
+						);
+					}
+					catch(Exception $e){
+					}
 
-					foreach($conversion as $old => $new){
-
-						try{
-							Symphony::Database()->query(
-								sprintf("UPDATE `tbl_fields_textarea` SET `formatter` = '%s' WHERE `formatter` = '%s'", $new, $old)
-							);
-						}
-						catch(Exception $e){
-						}
-
-						try{
-							Symphony::Database()->query(
-								sprintf("UPDATE `tbl_fields_textbox` SET `text_formatter` = '%s' WHERE `text_formatter` = '%s'", $new, $old)
-							);
-						}
-						catch(Exception $e){
-						}
-
+					try{
+						Symphony::Database()->query(
+							sprintf("UPDATE `tbl_fields_textbox` SET `text_formatter` = '%s' WHERE `text_formatter` = '%s'", $new, $old)
+						);
+					}
+					catch(Exception $e){
 					}
 
 				}
 
-		  return true;
+			}
+
+			return true;
 		}
 
 	}
-

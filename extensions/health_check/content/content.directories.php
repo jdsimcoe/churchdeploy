@@ -6,8 +6,8 @@
 		
 		public function __viewIndex() {		
 			/* FETCH ALL ENTRIES WITH UPLOAD FIELDS */
-			$extensionManager = new ExtensionManager($this->_Parent);
-			if($extensionManager->fetchStatus('uniqueuploadfield') == EXTENSION_ENABLED) {
+			$fetchUniqueuploadfield = ExtensionManager::fetchStatus(array('handle' => 'uniqueuploadfield'));
+			if($fetchUniqueuploadfield[0] == EXTENSION_ENABLED) {
 				$destinations = Symphony::Database()->fetch("SELECT destination COLLATE utf8_general_ci AS destination FROM tbl_fields_upload UNION ALL SELECT destination FROM tbl_fields_uniqueupload ORDER BY destination ASC");
 			} else {
 				$destinations = Symphony::Database()->fetch("SELECT destination FROM tbl_fields_upload ORDER BY destination ASC");
@@ -18,23 +18,38 @@
 			$this->setTitle(__('Directory Health Check'));
 			$this->appendSubheading(__('Health Check'));
 			
+			$ul_actions = new XMLElement('form', null, array('method' => 'post', 'class' => 'actions'));
+			
 			/* APPEND DIRECTORY CREATION BUTTONS IF APPLICABLE */
 			if(is_dir(getcwd() . '/manifest/cache') == false || is_dir(getcwd() . '/manifest/tmp') == false) {
-				$button = new XMLElement('input');
-				$button->setAttribute('type','submit');
-				$button->setAttribute('class','button');
 				if(is_dir(getcwd() . '/manifest/cache') == false && is_dir(getcwd() . '/manifest/tmp') == false) {
+					$button = new XMLElement('button', 'Create Cache/Tmp folders');
 					$button->setAttribute('name','action[create-tmp-cache]');
-					$button->setAttribute('value',__('Create Cache/Tmp folders'));
 				} elseif(is_dir(getcwd() . '/manifest/cache') == false && is_dir(getcwd() . '/manifest/tmp') != false) {
+					$button = new XMLElement('button', 'Create Cache folder');
 					$button->setAttribute('name','action[create-cache]');
-					$button->setAttribute('value',__('Create Cache folder'));
 				} elseif(is_dir(getcwd() . '/manifest/cache') != false && is_dir(getcwd() . '/manifest/tmp') == false) {
+					$button = new XMLElement('button', 'Create Tmp folder');
 					$button->setAttribute('name','action[create-tmp]');
-					$button->setAttribute('value',__('Create Tmp folder'));
 				}
-				$this->Form->appendChild($button);
+				
+				$button->setAttribute('class','button');
+				$button->setAttribute('type','submit');
+				
+				$ul_actions->appendChild($button);
 			}
+			
+			if(is_dir(getcwd() . '/workspace/xml-importers') == false) {
+				$button = new XMLElement('button', 'Create XML Importers folder');
+				$button->setAttribute('name','action[create-importer]');
+				
+				$button->setAttribute('class','button');
+				$button->setAttribute('type','submit');
+				
+				$ul_actions->appendChild($button);
+			}
+			
+			$this->Context->appendChild($ul_actions);
 			
 			/* CREATE TABLE */
 			$table = new XMLElement('table');
@@ -168,7 +183,8 @@
 			
 			/* CREATE DIRECTORY ARRAY AND REMOVE DUPLICATES */
 			$directory = array('/manifest/cache','/manifest/tmp','/manifest/config.php','/workspace/data-sources/','/workspace/events/');
-			if($extensionManager->fetchStatus('xmlimporter') == EXTENSION_ENABLED) $directory[] =  '/workspace/xml-importers';
+			$fetchXmlimporter = ExtensionManager::fetchStatus(array('handle' => 'xmlimporter'));
+			if($fetchXmlimporter[0] == EXTENSION_ENABLED) $directory[] =  '/workspace/xml-importers';
 			foreach(remove_duplicates($destinations) as $destination) $directory[] = $destination['destination'];
 		   
 			/* FOREACH ITEM IN THE DIRECTORY ARRAY */
@@ -188,7 +204,7 @@
 					if(is_dir($d)) {
 						if($permissions != $result['directory']) {
 							$tableBody[] = Widget::TableRow(
-								array($td_directory, $td_permissions, $td_full), 'invalid'
+								array($td_directory, $td_permissions, $td_full), 'hc-invalid'
 							);
 						} else {
 							$tableBody[] = Widget::TableRow(
@@ -200,7 +216,7 @@
 					if(is_file($d)) {
 						if($permissions != $result['file']) {
 							$tableBody[] = Widget::TableRow(
-								array($td_directory, $td_permissions, $td_full), 'invalid'
+								array($td_directory, $td_permissions, $td_full), 'hc-invalid'
 							);
 						} else {
 							$tableBody[] = Widget::TableRow(
@@ -215,7 +231,7 @@
 					$td_permissions = Widget::TableData(General::sanitize(__('WARNING: This directory does not exist.')));
 					$td_full = Widget::TableData(General::sanitize(''));
 					$tableBody[] = Widget::TableRow(
-						array($td_directory, $td_permissions, $td_full), 'invalid'
+						array($td_directory, $td_permissions, $td_full), 'hc-invalid'
 					);
 				}
 			}
@@ -227,7 +243,7 @@
 			$recommendation_list->appendChild(new XMLElement('li', __('Directories: ').$result['directory']));
 			$recommendation_list->appendChild(new XMLElement('li', __('Files: ').$result['file']));
 			$recommendation->appendChild($recommendation_list);
-			$this->Contents->appendChild($recommendation);
+			$this->Contents->prependChild($recommendation);
 			
 			/* APPEND COLUMNS TO THE TABLE */
 			$table = Widget::Table(
@@ -242,19 +258,26 @@
 			/* CREATE SELECT BOX CONTAINING PERMISSIONS OPTIONS */
 			$actions = new XMLElement('div');
 			$actions->setAttribute('class', 'actions');
+			$fieldset = new XMLElement('fieldset', null, array('class' => 'apply'));
 			
 			$options = array(
 				array(null, false, __('With Selected...')),
 				array('0777', false, __('Update to 0777')),
+				array('0775', false, __('Update to 0775')),
 				array('0755', false, __('Update to 0755')),
 				array('0750', false, __('Update to 0750')),
+				array('0664', false, __('Update to 0664')),
 				array('0644', false, __('Update to 0644')),
 				array('0600', false, __('Update to 0600'))									
 			);
 
-			$actions->appendChild(Widget::Select(__('with-selected'), $options));
-			$actions->appendChild(Widget::Input('action[permissions]', 'Apply', 'submit'));
+			$div = new XMLElement('div');
+			$div->appendChild(Widget::Select(__('with-selected'), $options));
+			$button = new XMLElement('button', 'Apply', array('name' => 'action[permissions]', 'type' => 'submit'));
 			
+			$fieldset->appendChild($div);
+			$fieldset->appendChild($button);
+			$actions->appendChild($fieldset);
 			$this->Form->appendChild($actions);
 		}
 		
@@ -268,11 +291,17 @@
 							case '0777':
 								foreach ($checked as $item) chmod(getcwd() . $item, 0777);
 								break;
+							case '0775':
+								foreach ($checked as $item) chmod(getcwd() . $item, 0775);
+								break;
 							case '0755':
 								foreach ($checked as $item) chmod(getcwd() . $item, 0755);
 								break;
 							case '0750':
 								foreach ($checked as $item) chmod(getcwd() . $item, 0750);
+								break;
+							case '0664':
+								foreach ($checked as $item) chmod(getcwd() . $item, 0664);
 								break;
 							case '0644':
 								foreach ($checked as $item) chmod(getcwd() . $item, 0644);
@@ -298,6 +327,8 @@
 					mkdir(getcwd() . '/manifest/tmp', 0777);
 				}elseif(array_key_exists('create-cache', $_POST['action'])) {
 					mkdir(getcwd() . '/manifest/cache', 0777);
+				}elseif(array_key_exists('create-importer', $_POST['action'])) {
+					mkdir(getcwd() . '/workspace/xml-importers', 0777);
 				}
 			} catch (Exception $e) {
 				Administration::instance()->Page->pageAlert(

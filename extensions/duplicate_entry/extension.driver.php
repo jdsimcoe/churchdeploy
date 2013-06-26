@@ -4,19 +4,6 @@
 	
 	class Extension_Duplicate_Entry extends Extension {
 		
-		public function about() {
-			return array(
-				'name'			=> 'Duplicate Entry',
-				'version'		=> '1.2',
-				'release-date'	=> '2010-11-29',
-				'author'		=> array(
-					'name'			=> 'Nick Dunn',
-					'website'		=> 'http://nick-dunn.co.uk'
-				),
-				'description'	=> 'Duplicate an existing entry using a "Save as New" button'
-			);
-		}
-		
 		public function getSubscribedDelegates() {
 			return array(
 				array(
@@ -37,13 +24,17 @@
 		}
 
 		public function initaliseAdminPageHead($context) {
-			$page = $context['parent']->Page;
+			$page = Administration::instance()->Page;
 			
-			if ($page instanceof contentPublish and $page->_context['page'] == 'edit') {
+			if ($page instanceof contentPublish) {
+				
+				$callback = Administration::instance()->getPageCallback();
+				
+				if($callback['context']['page'] !== 'edit') return;
 				
 				$sm = new SectionManager(Administration::instance());
 				
-				$callback = Administration::instance()->getPageCallback();
+				
 				$current_section = $sm->fetch($sm->fetchIDFromHandle($callback['context']['section_handle']));
 				$current_section_hash = $this->serialiseSectionSchema($current_section);
 				

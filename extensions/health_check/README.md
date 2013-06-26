@@ -1,9 +1,9 @@
 # Health check
 
-- Version: 1.4
+- Version: 1.5
 - Author: Phill Gray
-- Build Date: 2011-07-18
-- Requirements: Symphony 2.2.1
+- Build Date: 2012-06-12
+- Requirements: Symphony 2.3
 
 ## Installation
 

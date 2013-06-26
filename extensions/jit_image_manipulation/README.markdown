@@ -1,26 +1,29 @@
 # JIT Image Manipulation #
 
-"Just in time" image manipulation for Symphony. It is part of the Symphony core download package.
+A simple way to manipulate images "just in time" via the URL. Supports caching, image quality settings and loading of offsite images.
 
-- Version: 1.14
-- Date: 11th November 2011
-- Requirements: Symphony 2.0.5 or later
+- Version: 1.18
+- Date: 24th March 2013
+- Requirements: Symphony 2.3.2 or later
 - Author: Alistair Kearney, alistair@symphony-cms.com
-- Contributors: [A list of contributors can be found in the commit history](http://github.com/symphonycms/jit_image_manipulation/commits/master)
 - GitHub Repository: <http://github.com/symphonycms/jit_image_manipulation>
 
-## Synopsis
-
-A simple way to manipulate images on the fly via the URL. Supports caching, image quality settings and loading of offsite images.
 
 ## Installation
 
-Information about [installing and updating extensions](http://symphony-cms.com/learn/tasks/view/install-an-extension/) can be found in the Symphony documentation at <http://symphony-cms.com/learn/>.
+Information about [installing and updating extensions](http://symphony-cms.com/learn/tasks/view/install-an-extension/) can be found in the [Symphony documentation](http://symphony-cms.com/learn/).
 
 ## Updating
 
-Due to some `.htaccess` changes in Symphony 2.0.6+, it is recommended that you edit your core Symphony `.htaccess` to remove anything
-before 'extensions/' in the JIT rewrite. It should look like the following regardless of where you installed Symphony:
+### 1.17
+
+This release raises the minimum requirement to Apache 2.2+.
+
+### 1.15
+
+Since version `1.15`, JIT configuration has moved from `/manifest/` to the `/workspace/` folder. This change will automatically happen when you update the extension from the "System > Extensions" page.
+
+Due to some `.htaccess` changes in Symphony 2.0.6+, it is recommended that you edit your core Symphony `.htaccess` to remove anything before 'extensions/' in the JIT rewrite. It should look like the following regardless of where you installed Symphony:
 
 	### IMAGE RULES
 	RewriteRule ^image\/(.+\.(jpg|gif|jpeg|png|bmp))$ extensions/jit_image_manipulation/lib/image.php?param=$1 [L,NC]
@@ -33,9 +36,9 @@ It is not absolutely necessary to do this, but may prevent problems with future 
 
 The image manipulation is controlled via the URL, eg.:
 
-	<img src="{$root}/image/2/80/80/5{image/@path}/{image/filename}" />
+	<img src="{$root}/image/2/80/80/5/fff/{image/@path}/{image/filename}" />
 
-The extension accepts four numeric settings for the manipulation:
+The extension accepts four numeric settings and one text setting for the manipulation.
 
 1. mode
 2. width
@@ -61,88 +64,32 @@ If you're using mode `2` or `3` for image cropping you need to specify the refer
 	| 7 | 8 | 9 |
 	+---+---+---+
 
-If you're using mode `2` or `3` for image cropping, there is an optional fifth background color setting. This can accept shorthand or full hex colors.
+If you're using mode `2` or `3` for image cropping, there is an optional fifth parameter for background color. This can accept shorthand or full hex colors.
 
 - *For `.jpg` images, it is advised to use this if the crop size is larger than the original, otherwise the extra canvas will be black.*
 - *For transparent `.png` or `.gif` images, supplying the background color will fill the image. This is why the setting is optional*
 
-The extra fifth setting makes the url look like this:
+The extra fifth parameter makes the URL look like this:
 
 	<img src="{$root}/image/2/80/80/5/fff/{image/@path}/{image/filename}" />
 
 - *If you wish to crop and maintain the aspect ratio of an image but only have one fixed dimension (that is, width or height), simply set the other dimension to 0*
 
-### Trusted Sites
+### External sources & Trusted Sites
 
-In order pull images from external sources, you must set up a white-list of trusted sites. To do this, goto "System > Preferences" and add rules to the "JIT Image Manipulation" rules textarea. To match anything use a single asterisk (*).
+In order pull images from external sources, you must set up a white-list of trusted sites. To do this, go to "System > Preferences" and add rules to the "JIT Image Manipulation" rules textarea. To match anything use a single asterisk (`*`).
 
-## Change Log
+The URL then requires a sixth parameter, external, (where the fourth and fifth parameter may be optional), which is simply `1` or `0`. By default, this parameter is `0`, which means the image is located on the same domain as JIT. Setting it to `1` will allow JIT to process external images provided they are on the Trusted Sites list.
 
-**Version 1.14**
-- More robust detection of a temp directory
-- More robust installation
+	<img src="{$root}/image/1/80/80/1/{full/path/to/image}" />
+	                                ^ External parameter
 
-**Version 1.13**
-- Add a new mode, Resize to Fit, that will conditionally resize your image if it is above the desired width/height otherwise it will leave the image as it. (thanks @21studios)
-- Output the correct file path in 404 errors (thanks @michael-e)
-- Fixes error in the error message when connecting to an external site
-- No longer serves 304 headers when `CACHING` is disabled in the configuration
+### Recipes
 
-**Version 1.12**
+Recipes are named rules for the JIT settings which help improve security and are more convenient. They can be edited on the preferences page in the JIT section and are saved in  `/workspace/jit-image-manipulation/recipes.php`. A recipe URL might look like:
 
-- Fixes issue where cached images would be delivered even though the original file was removed (thanks @michael-e)
-- Fixes direct display mode (thanks @michael-e)
-- Output errors and correctly set 404 headers when things go wrong
+	<img src="{$root}/image/thumbnail{image/@path}/{image/filename}" />
 
-**Version 1.11**
+When JIT parses a URL like this, it will check the recipes file for a recipe with a handle of `thumbnail` and apply it's rules. You can completely disable dynamic JIT rules and choose to use recipes only which will prevent a malicious user from hammering your server with large or multiple JIT requests.
 
-- Allow external images to be cached (thanks @michael-e)
-- Fixes PNG and GIF transparency issues (thanks to @designermonkey)
-- Background color on crop becomes optional
-
-**Version 1.10**
-
-- Compatibility with Symphony 2.2
-
-**Version 1.09**
-
-- Sending `ETag` header with response
-- Added support for `HTTP_IF_MODIFIED_SINCE` and `HTTP_IF_NONE_MATCH` request headers, which will mean a `304 Not Modified` header can be set (Thanks to Nick Dunn for helping on this one)
-- Added Portuguese and Italian translations (Thanks to Rainer Borene & Simone Economo for those)
-
-**Version 1.08**
-
-- Added French localisation
-- Adjusted German localisation
-- Fixed a Symphony 2.0.7RC2 compatibility issue.
-
-**Version 1.07**
-
-- Added localisation files for Dutch, German, Portuguese (Brazil) and Russian
-- `trusted()` will look for the `jit-trusted-sites` before attempting to return its contents. This prevents warnings from showing up in the logs.
-
-**Version 1.06**
-
-- Code responsible for `.htaccess` update will no longer try to append the rewrite base to for path to extensions folder
-
-**Version 1.05**
-
-- Fixed bug introduced by usage of the imageAntiAlias() function
-- Errors and warnings are logged in the main Symphony log
-- A dump of internal params are logged in addition to any errors
-
-**Version 1.04**
-
-- Adding support for alpha masked images.
-
-**Version 1.03**
-
-- Minor changes to how `DOCROOT`` is determined
-
-**Version 1.02**
-
-- Disabling extension will remove rule from `.htaccess`
-
-**Version 1.01**
-
-- Updated to work with 2.0.2 config changes
+Recipes can be copied between installations and changes will be reflected by every image using this recipe.

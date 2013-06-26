@@ -3,15 +3,17 @@
 	/**
 	 * @package toolkit
 	 */
+
+	require_once FACE . '/interface.exportablefield.php';
+	require_once FACE . '/interface.importablefield.php';
+
 	/**
 	 * A simple Date field that stores a full ISO date. Symphony will attempt
 	 * to localize the date on a per Author basis. The field essentially maps to
 	 * PHP's `strtotime`, so it is very flexible in terms of what an Author can
 	 * input into it.
 	 */
-
-	Class fieldDate extends Field{
-
+	class FieldDate extends Field implements ExportableField, ImportableField {
 		const SIMPLE = 0;
 		const REGEXP = 1;
 		const RANGE = 3;
@@ -19,11 +21,13 @@
 
 		private $key;
 
-		public function __construct(&$parent) {
-			parent::__construct($parent);
+		public function __construct() {
+			parent::__construct();
 			$this->_name = __('Date');
+			$this->_required = true;
 			$this->key = 1;
 
+			$this->set('required', 'no');
 			$this->set('location', 'sidebar');
 		}
 
@@ -32,10 +36,6 @@
 	-------------------------------------------------------------------------*/
 
 		public function canFilter() {
-			return true;
-		}
-
-		public function canImport() {
 			return true;
 		}
 
@@ -65,12 +65,12 @@
 				  `id` int(11) unsigned NOT NULL auto_increment,
 				  `entry_id` int(11) unsigned NOT NULL,
 				  `value` varchar(80) default NULL,
-				  `local` int(11) default NULL,
-				  `gmt` int(11) default NULL,
+				  `date` DATETIME default NULL,
 				  PRIMARY KEY  (`id`),
 				  UNIQUE KEY `entry_id` (`entry_id`),
-				  KEY `value` (`value`)
-				) ENGINE=MyISAM;
+				  KEY `value` (`value`),
+				  KEY `date` (`date`)
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 			");
 		}
 
@@ -199,13 +199,15 @@
 				$later = $parts['end'];
 
 				// Switch between earlier than and later than logic
+				// The earlier/later range is defined by MySQL's support. RE: #1560
+				// @link http://dev.mysql.com/doc/refman/5.0/en/datetime.html
 				switch($match[2]) {
 					case 'later':
-						$string = $later . ' to 2038-01-01 23:59:59';
+						$string = $later . ' to 9999-12-31 23:59:59';
 						break;
 
 					case 'earlier':
-						$string = '0000-01-01 to ' . $earlier;
+						$string = '1000-01-01 00:00:00 to ' . $earlier;
 						break;
 				}
 			}
@@ -268,8 +270,8 @@
 			if($andOperation) {
 				foreach($data as $date) {
 					$joins .= " LEFT JOIN `tbl_entries_data_$field_id` AS `t$field_id".$this->key."` ON `e`.`id` = `t$field_id".$this->key."`.entry_id ";
-					$where .= " AND (DATE_FORMAT(`t$field_id".$this->key."`.value, '%Y-%m-%d %H:%i:%s') >= '" . DateTimeObj::get('Y-m-d H:i:s', $date['start']) . "'
-								AND DATE_FORMAT(`t$field_id".$this->key."`.value, '%Y-%m-%d %H:%i:%s') <= '" . DateTimeObj::get('Y-m-d H:i:s', $date['end']) . "') ";
+					$where .= " AND (`t$field_id".$this->key."`.date >= '" . DateTimeObj::getGMT('Y-m-d H:i:s', $date['start']) . "'
+								AND `t$field_id".$this->key."`.date <= '" . DateTimeObj::getGMT('Y-m-d H:i:s', $date['end']) . "') ";
 
 					$this->key++;
 				}
@@ -279,8 +281,8 @@
 				$tmp = array();
 
 				foreach($data as $date) {
-					$tmp[] = "(DATE_FORMAT(`t$field_id".$this->key."`.value, '%Y-%m-%d %H:%i:%s') >= '" . DateTimeObj::get('Y-m-d H:i:s', $date['start']) . "'
-								AND DATE_FORMAT(`t$field_id".$this->key."`.value, '%Y-%m-%d %H:%i:%s') <= '" . DateTimeObj::get('Y-m-d H:i:s', $date['end']) . "') ";
+					$tmp[] = "`t$field_id".$this->key."`.date >= '" . DateTimeObj::getGMT('Y-m-d H:i:s', $date['start']) . "'
+								AND `t$field_id".$this->key."`.date <= '" . DateTimeObj::getGMT('Y-m-d H:i:s', $date['end']) . "' ";
 				}
 
 				$joins .= " LEFT JOIN `tbl_entries_data_$field_id` AS `t$field_id".$this->key."` ON `e`.`id` = `t$field_id".$this->key."`.entry_id ";
@@ -290,53 +292,31 @@
 			}
 		}
 
-		/**
-		 * @deprecated This function is never called by Symphony as all filtering is a range
-		 * now that time is taken into consideration. This will be removed in the next major version
-		 */
-		public function buildSimpleFilterSQL($data, &$joins, &$where, $andOperation=false) {
-			$field_id = $this->get('id');
-
-			if($andOperation) {
-				foreach($data as $date) {
-					$joins .= " LEFT JOIN `tbl_entries_data_$field_id` AS `t$field_id".$this->key."` ON `e`.`id` = `t$field_id".$this->key."`.entry_id ";
-					$where .= " AND DATE_FORMAT(`t$field_id".$this->key."`.value, '%Y-%m-%d %H:%i:%s') = '".DateTimeObj::get('Y-m-d H:i:s', $date)."' ";
-
-					$this->key++;
-				}
-			}
-
-			else {
-				$tmp = array();
-				foreach($data as $date) {
-					$tmp[] = DateTimeObj::get('Y-m-d H:i:s', $date);
-				}
-
-				$joins .= " LEFT JOIN `tbl_entries_data_$field_id` AS `t$field_id".$this->key."` ON `e`.`id` = `t$field_id".$this->key."`.entry_id ";
-				$where .= " AND DATE_FORMAT(`t$field_id".$this->key."`.value, '%Y-%m-%d %H:%i:%s') IN ('".implode("', '", $tmp)."') ";
-				$this->key++;
-			}
-		}
-
 	/*-------------------------------------------------------------------------
 		Settings:
 	-------------------------------------------------------------------------*/
 
-		public function findDefaults(&$fields) {
-			if(!isset($fields['pre_populate'])) $fields['pre_populate'] = 'yes';
+		public function findDefaults(array &$settings) {
+			if(!isset($settings['pre_populate'])) $settings['pre_populate'] = 'yes';
 		}
 
-		public function displaySettingsPanel(&$wrapper, $errors = null) {
+		public function displaySettingsPanel(XMLElement &$wrapper, $errors = null) {
 			parent::displaySettingsPanel($wrapper, $errors);
 
-			$div = new XMLElement('div', NULL, array('class' => 'compact'));
+			$div = new XMLElement('div', NULL, array('class' => 'two columns'));
+			$this->appendRequiredCheckbox($div);
+			$this->appendShowColumnCheckbox($div);
+			$wrapper->appendChild($div);
+
+			$div = new XMLElement('div', NULL, array('class' => 'two columns'));
+
 			$label = Widget::Label();
+			$label->setAttribute('class', 'column');
 			$input = Widget::Input('fields['.$this->get('sortorder').'][pre_populate]', 'yes', 'checkbox');
 			if($this->get('pre_populate') == 'yes') $input->setAttribute('checked', 'checked');
-			$label->setValue(__('%s Pre-populate this field with today’s date', array($input->generate())));
+			$label->setValue(__('%s Pre-populate with current date', array($input->generate())));
 			$div->appendChild($label);
 
-			$this->appendShowColumnCheckbox($div);
 			$wrapper->appendChild($div);
 		}
 
@@ -349,28 +329,26 @@
 
 			$fields = array();
 
-			$fields['field_id'] = $id;
 			$fields['pre_populate'] = ($this->get('pre_populate') ? $this->get('pre_populate') : 'no');
 
-			Symphony::Database()->query("DELETE FROM `tbl_fields_" . $this->handle() . "` WHERE `field_id` = '$id' LIMIT 1");
-			Symphony::Database()->insert($fields, 'tbl_fields_' . $this->handle());
+			return FieldManager::saveSettings($id, $fields);
 		}
 
 	/*-------------------------------------------------------------------------
 		Publish:
 	-------------------------------------------------------------------------*/
 
-		public function displayPublishPanel(&$wrapper, $data = null, $error = null, $prefix = null, $postfix = null) {
+		public function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null) {
 			$name = $this->get('element_name');
 			$value = null;
 
 			// New entry
-			if(is_null($data) && is_null($error) && $this->get('pre_populate') == 'yes') {
+			if((is_null($data) || empty($data)) && is_null($flagWithError) && $this->get('pre_populate') == 'yes') {
 				$value = DateTimeObj::format('now', DateTimeObj::getSetting('datetime_format'));
 			}
 
 			// Error entry, display original data
-			else if(!is_null($error)) {
+			else if(!is_null($flagWithError)) {
 				$value = $_POST['fields'][$name];
 			}
 
@@ -380,30 +358,39 @@
 			}
 
 			$label = Widget::Label($this->get('label'));
-			$label->appendChild(Widget::Input("fields{$prefix}[{$name}]", $value));
+			if($this->get('required') != 'yes') $label->appendChild(new XMLElement('i', __('Optional')));
+			$label->appendChild(Widget::Input("fields{$fieldnamePrefix}[{$name}]", $value));
 			$label->setAttribute('class', 'date');
 
-			if(!is_null($error)) {
-				$label = Widget::wrapFormElementWithError($label, $error);
+			if(!is_null($flagWithError)) {
+				$label = Widget::Error($label, $flagWithError);
 			}
 
 			$wrapper->appendChild($label);
 		}
 
 		public function checkPostFieldData($data, &$message, $entry_id=NULL) {
-			if(empty($data)) return self::__OK__;
 			$message = NULL;
+
+			// If this field is required
+			if($this->get('required') == 'yes' && strlen(trim($data)) == 0){
+				$message = __('‘%s’ is a required field.', array($this->get('label')));
+				return self::__MISSING_FIELDS__;
+			}
+			else if(empty($data)) {
+				return self::__OK__;
+			}
 
 			// Handle invalid dates
 			if(!DateTimeObj::validate($data)) {
-				$message = __("The date specified in '%s' is invalid.", array($this->get('label')));
+				$message = __('The date specified in ‘%s’ is invalid.', array($this->get('label')));
 				return self::__INVALID_FIELDS__;
 			}
 
 			return self::__OK__;
 		}
 
-		public function processRawFieldData($data, &$status, $simulate=false, $entry_id=NULL) {
+		public function processRawFieldData($data, &$status, &$message=null, $simulate = false, $entry_id = null) {
 			$status = self::__OK__;
 			$timestamp = null;
 
@@ -423,8 +410,7 @@
 			if(!is_null($timestamp)) {
 				return array(
 					'value' => DateTimeObj::get('c', $timestamp),
-					'local' => $timestamp,
-					'gmt' => DateTimeObj::getGMT('U', $timestamp)
+					'date' => DateTimeObj::getGMT('Y-m-d H:i:s', $timestamp)
 				);
 			}
 
@@ -432,8 +418,7 @@
 			else {
 				return array(
 					'value' => null,
-					'local' => null,
-					'gmt' => null
+					'date' => null
 				);
 			}
 		}
@@ -442,8 +427,8 @@
 		Output:
 	-------------------------------------------------------------------------*/
 
-		public function appendFormattedElement($wrapper, $data, $encode = false) {
-			if(isset($data['value']) && !is_null($data['value'])) {
+		public function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = null, $entry_id = null) {
+			if(isset($data['value'])) {
 
 				// Get date
 				if(is_array($data['value'])) {
@@ -468,8 +453,104 @@
 			return parent::prepareTableValue(array('value' => $value), $link, $entry_id = null);
 		}
 
-		public function getParameterPoolValue($data, $entry_id = null) {
+		public function getParameterPoolValue(array $data, $entry_id=NULL){
 			return DateTimeObj::get('Y-m-d H:i:s', $data['value']);
+		}
+
+	/*-------------------------------------------------------------------------
+		Import:
+	-------------------------------------------------------------------------*/
+
+		public function getImportModes() {
+			return array(
+				'getValue' =>		ImportableField::STRING_VALUE,
+				'getPostdata' =>	ImportableField::ARRAY_VALUE
+			);
+		}
+
+		public function prepareImportValue($data, $mode, $entry_id = null) {
+			$value = $status = $message = null;
+			$modes = (object)$this->getImportModes();
+
+			// Prepopulate date:
+			if ($data === null || $data === '') {
+				if ($this->get('pre_populate') == 'yes') {
+					$timestamp = time();
+				}
+			}
+
+			// DateTime to timestamp:
+			else if ($data instanceof DateTime) {
+				$timestamp = $data->getTimestamp();
+			}
+
+			// Convert given date to timestamp:
+			else if (DateTimeObj::validate($data)) {
+				$timestamp = DateTimeObj::get('U', $data);
+			}
+
+			// Valid date found:
+			if (isset($timestamp)) {
+				$value = DateTimeObj::get('c', $timestamp);
+			}
+			
+			if($mode === $modes->getValue) {
+				return $value;
+			}
+			else if($mode === $modes->getPostdata) {
+				return $this->processRawFieldData($data, $status, $message, true, $entry_id);
+			}
+
+			return null;
+		}
+
+	/*-------------------------------------------------------------------------
+		Export:
+	-------------------------------------------------------------------------*/
+
+		/**
+		 * Return a list of supported export modes for use with `prepareExportValue`.
+		 *
+		 * @return array
+		 */
+		public function getExportModes() {
+			return array(
+				'getObject' =>		ExportableField::OBJECT,
+				'getPostdata' =>	ExportableField::POSTDATA
+			);
+		}
+
+		/**
+		 * Give the field some data and ask it to return a value using one of many
+		 * possible modes.
+		 *
+		 * @param mixed $data
+		 * @param integer $mode
+		 * @param integer $entry_id
+		 * @return DateTime|null
+		 */
+		public function prepareExportValue($data, $mode, $entry_id = null) {
+			$modes = (object)$this->getExportModes();
+
+			if ($mode === $modes->getObject) {
+				$timezone = Symphony::Configuration()->get('timezone', 'region');
+				$date = new DateTime(
+					isset($data['value'])
+						? $data['value']
+						: 'now'
+				);
+				$date->setTimezone(new DateTimeZone($timezone));
+
+				return $date;
+			}
+
+			else if ($mode === $modes->getPostdata) {
+				return isset($data['value'])
+					? $data['value']
+					: null;
+			}
+
+			return null;
 		}
 
 	/*-------------------------------------------------------------------------
@@ -477,23 +558,27 @@
 	-------------------------------------------------------------------------*/
 
 		public function buildDSRetrievalSQL($data, &$joins, &$where, $andOperation=false) {
-			if(self::isFilterRegex($data[0])) return parent::buildDSRetrievalSQL($data, $joins, $where, $andOperation);
-
-			$parsed = array();
-
-			// For the filter provided, loop over each piece
-			foreach($data as $string) {
-				$type = self::parseFilter($string);
-
-				if($type == self::ERROR) return false;
-
-				if(!is_array($parsed[$type])) $parsed[$type] = array();
-
-				$parsed[$type][] = $string;
+			if(self::isFilterRegex($data[0])) {
+				$this->buildRegexSQL($data[0], array('value'), $joins, $where);
 			}
 
-			foreach($parsed as $value) {
-				$this->buildRangeFilterSQL($value, $joins, $where, $andOperation);
+			else {
+				$parsed = array();
+
+				// For the filter provided, loop over each piece
+				foreach($data as $string) {
+					$type = self::parseFilter($string);
+
+					if($type == self::ERROR) return false;
+
+					if(!is_array($parsed[$type])) $parsed[$type] = array();
+
+					$parsed[$type][] = $string;
+				}
+
+				foreach($parsed as $value) {
+					$this->buildRangeFilterSQL($value, $joins, $where, $andOperation);
+				}
 			}
 
 			return true;
@@ -514,7 +599,7 @@
 						FROM tbl_entries_data_%d AS `ed`
 						WHERE entry_id = e.id
 					) %s',
-					'`ed`.value',
+					'`ed`.date',
 					$this->get('id'),
 					$order
 				);

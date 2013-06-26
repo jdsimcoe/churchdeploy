@@ -26,7 +26,7 @@
 		// this should theoretically support any upload field
 		fileField = $("input[type='file']");
 		form = fileField.parents('form');
-		urlBase = window.location.protocol + '//' + window.location.hostname + window.location.pathname.replace(/(.*)\/symphony\/.*/i,'$1');
+		urlBase = window.location.protocol + '//' + window.location.host + window.location.pathname.replace(/(.*)\/symphony\/.*/i,'$1');
 		urlMuu = "/symphony/extension/massuploadutility/"
 		urlAssets = urlBase + '/extensions/massuploadutility/assets';
 		source = window.location.pathname.replace(/.*\/symphony\/publish\/(.*)\/new\//i,'$1');
@@ -83,25 +83,25 @@
 						});
 					}
 				},
-		        onStart: function(event, total) {
+		    onStart: function(event, total) {
 					// should never even get here, but just incase!
 					if (total <= 0) {
 						return false;
 					}
 					return true;
-		        },
-		        setName: function(text) {
-		            $("#progress_report_name").text(text);
-		        },
-		        setStatus: function(text) {
-		            $("#progress_report_status").text(text);
-		        },
-		        setProgress: function(val) {
-		            $("#progress_report_bar").css('width', Math.ceil(val*100)+"%");
-		        },
-		        onFinishOne: function(event, response, name, number, total) {
+		    },
+		    setName: function(text) {
+		        $("#progress_report_name").text(text);
+		    },
+		    setStatus: function(text) {
+		        $("#progress_report_status").text(text);
+		    },
+		    setProgress: function(val) {
+		        $("#progress_report_bar").css('width', Math.ceil(val*100)+"%");
+		    },
+		    onFinishOne: function(event, response, name, number, total) {
 					// change errorsInQueue to true if you want errors shown in the queue and not on the fields themselves
-					errorsInQueue = false;
+          // errorsInQueue = false;
 					json = $.parseJSON(response);
 					id = idSafeFilename(name);
 					p = "<p id='"+id+"'>";
@@ -110,20 +110,12 @@
 						p += "<img src='"+urlAssets + "/images/"+css+".png' />&nbsp;" + name + "&nbsp;<small id='MUU-list' class="+css+">";
 						if (json.status == "error") {
 							$.each(json.errors, function(k,v) {
-									field = $("form div[id='field-"+k+"'] input");
-									if (errorsInQueue || field.attr('type') == 'file') {
-										p += v + "&nbsp;";
-									}
-									else {
-									// highlight the fields that have errors
-									// if (v._type == "missing") {
-										field = field.parents("label");
-										// console.log(field);
-										if (field.parent().attr('id') != 'error') {
-											// field.children(":first").attr("name") + " " + v;
-											field.wrap("<div id=\"error\" class=\"invalid\"></div>");
-											field.parent().append("<p>" + v + "</p>");
-										}
+								  p += v + "&nbsp;";
+									field = $("form div[id='field-"+k+"'] label");
+									if (!field.parent().hasClass('invalid')) {
+										// field.children(":first").attr("name") + " " + v;
+										field.wrap("<div class=\"invalid\"></div>");
+                    // field.parent().append("<p>" + v + "</p>");
 									}
 								}
 							);
@@ -141,7 +133,7 @@
 					failed = $("#MUU-list.failure").size();
 					total = failed + $("#MUU-list.success").size();
 					success = total - failed;
-					p = "<p id=\"notice\" class=\"";
+					p = "<div class=\"notifier\" style=\"height:23px\"><p id=\"notice\" class=\"notice active ";
 					if (failed == 0 && success > 0) {
 						p += "success\">" +  Symphony.Language.get('Successfully added a whole slew of entries, {$total} to be exact.', { 'total': total });
 						p += " \
@@ -157,29 +149,31 @@
 						.animate({ backgroundColor: "#eeee55", opacity: 1.0 }, 200)
 				      	.animate({ backgroundColor: "transparent", opacity: 1.0}, 350);
 					}
-					p += "</p>";
-					$("p#notice").remove();
+					p += "</p></div>";
+					$("div.notifier").remove();
 					$("#header").prepend(p);
 					$('html, body').animate({ scrollTop: $("p#notice").offset().top }, 300)
 				}
 		   	});
-			form.submit(function() {
-				if (fileField.attr('files').length > 1) {
+			form.on('submit', function(e) {
+  			fileField = $("input[type='file']");
+				if (fileField.get(0).files.length > 1) {
 					// remove error classes for viewability
 					$("#file_list").empty();
-					if ($("#error.invalid").size() > 0) {
-						$.each($("#error.invalid"), function(k,v) {
+					if ($(".invalid").size() > 0) {
+						$.each($(".invalid"), function(k,v) {
 							$(v).children("p").remove();
 							$(v).replaceWith($(v).contents());						
 						});
 						setTimeout(function() {
 							// this exists because it caused issues when the event would fire up before the error div's would be removed
-							fileField.trigger("html5_upload.start");										
+							fileField.triggerHandler("html5_upload.start");										
 						}, 100);
 					}
 					else {
-						fileField.trigger("html5_upload.start");
+						fileField.triggerHandler("html5_upload.start");
 					}
+					e.preventDefault();
 					return false;
 				}
 			});

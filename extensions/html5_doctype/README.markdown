@@ -1,9 +1,9 @@
 # HTML5 Doctype #
 
-This is an extension for [Symphony 2](http://symphony-cms.com/): A cludge to enforce a basic HTML5 doctype regardless of your XSLT output.
+This is an extension for [Symphony 2](http://getsymphony.com/): A cludge to enforce a basic HTML5 doctype regardless of your XSLT output.
 
-- Version: 1.2.5
-- Date: 5 November 2011
+- Version: 1.3.1
+- Date: 11 February 2013
 - Requirements: Symphony 2
 - Author: Nick Dunn
 - Constributors: Stephen Bau, Michael Eichelsdoerfer
@@ -61,10 +61,23 @@ However, because the extension hijacks the output of every page, it might be goo
 
 ## Installation & Updating
 
-Information about [installing and updating extensions](http://symphony-cms.com/learn/tasks/view/install-an-extension/) can be found in the Symphony documentation at <http://symphony-cms.com/learn/>.
+Information about [installing and updating extensions](http://getsymphony.com/learn/tasks/view/install-an-extension/) can be found in the Symphony documentation at <http://getsymphony.com/learn/>.
 
 
 ## Change Log
+
+**Version 1.3.1**
+
+- Add Russian language translation
+
+**Version 1.3**
+
+- Modified the regexp so the meta charset is replaced regardless of XSL output method (mlathrom)
+- Enable configuration setting to exclude page types from being processed with HTML5 doctype (iwyg)
+
+**Version 1.2.6**
+
+- Compatibility update for Symphony 2.3: Add extension.meta.xml file
 
 **Version 1.2.5**
 
@@ -95,7 +108,7 @@ Information about [installing and updating extensions](http://symphony-cms.com/l
 
 **Version 1.1**
 
-- Modify Nick Dunn's HTML5 Doctype hack to include regex to fix the html and meta charset elements http://symphony-cms.com/discuss/thread/43003/3/#position-56 (Stephen Bau)
+- Modify Nick Dunn's HTML5 Doctype hack to include regex to fix the html and meta charset elements http://getsymphony.com/discuss/thread/43003/3/#position-56 (Stephen Bau)
 
 **Version 1.0**
 

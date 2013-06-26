@@ -8,27 +8,7 @@
 	-------------------------------------------------------------------------*/
 
 		public static $params = array();
-
-		public function about() {
-			return array(
-				'name'			=> 'Global Parameter Loader',
-				'version'		=> '1.3',
-				'release-date'	=> '2011-10-31',
-				'author'		=> array(
-					array(
-						'name'			=> 'Carsten de Vries',
-						'website'		=> 'http://www.vrieswerk.nl',
-						'email'			=> 'carsten@vrieswerk.nl'
-					),
-					array(
-						'name'			=> 'Brendan Abbott',
-						'email'			=> 'brendan@bloodbone.ws'
-					)
-					),
-				'description'	=> 'Allows you to add parameters, PHP evaluated or not, to Symphony\'s parameter pool.'
-	 		);
-		}
-
+		
 		public function uninstall() {
 			Symphony::Configuration()->remove('globalparamloader');
 			Administration::instance()->saveConfig();
@@ -83,7 +63,7 @@
 		public function fetchNavigation() {
 			return array(
 				array(
-					'location'	=> 200,
+					'location'	=> __('Blueprints'),
 					'name'	=> __('Global Parameters'),
 					'link'	=> '/sets/'
 				)
@@ -167,14 +147,7 @@
 		}
 
 		public function getPages() {
-			$pages = Symphony::Database()->fetch("
-				SELECT
-					p.path, p.handle, p.id
-				FROM
-					`tbl_pages` AS p
-				ORDER BY
-					`sortorder` ASC
-			");
+			$pages = PageManager::fetch(FALSE, array('path', 'handle', 'id'));
 			$result = array();
 
 			foreach ($pages as $page) {

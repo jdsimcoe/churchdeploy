@@ -9,37 +9,37 @@
 	Class fieldSubsectiontabs extends Field {
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#__construct
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#__construct
 		 */
-		public function __construct(&$parent) {
-			parent::__construct($parent);
+		public function __construct() {
+			parent::__construct();
 			$this->_name = __('Subsection Tabs');
 			$this->_required = true;
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#mustBeUnique
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#mustBeUnique
 		 */
 		public function mustBeUnique(){
 			return true;
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#canFilter
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#canFilter
 		 */
 		public function canFilter(){
 			return true;
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#canPrePopulate
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#canPrePopulate
 		 */
 		public function canPrePopulate() {
 			return true;
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#displaySettingsPanel
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#displaySettingsPanel
 		 */
 		public function displaySettingsPanel(&$wrapper, $errors=NULL) {
 
@@ -48,8 +48,7 @@
 			$div = new XMLElement('div', NULL, array('class' => 'group'));
 
 			// Subsection
-			$sectionManager = new SectionManager(Symphony::Engine());
-			$sections = $sectionManager->fetch(NULL, 'ASC', 'name');
+			$sections = SectionManager::fetch(NULL, 'ASC', 'name');
 			$options = array();
 
 			// Options
@@ -82,7 +81,7 @@
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#commit
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#commit
 		 */
 		public function commit(){
 
@@ -106,7 +105,7 @@
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#displayPublishPanel
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#displayPublishPanel
 		 */
 		function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL, $entry_id=NULL) {
 
@@ -279,9 +278,9 @@
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#processRawFieldData
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#processRawFieldData
 		 */
-		public function processRawFieldData($data, &$status, $simulate=false, $entry_id=NULL) {
+		public function processRawFieldData($data, &$status, &$message=null, $simulate=false, $entry_id=null) {
 			$status = self::__OK__;
 			if(empty($data)) return NULL;
 
@@ -294,8 +293,7 @@
 
 			// Delete removed tab entries
 			if(is_array($data['delete'])) {
-				$entryManager = new EntryManager(Symphony::Engine());
-				$entryManager->delete($data['delete']);
+				EntryManager::delete($data['delete']);
 				unset($data['delete']);
 			}
 
@@ -304,14 +302,13 @@
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#fetchIncludableElements
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#fetchIncludableElements
 		 */
 		public function fetchIncludableElements() {
 			$includable = array();
 
 			// Fetch subsection fields
-			$sectionManager = new SectionManager(Symphony::Engine());
-			$section = $sectionManager->fetch($this->get('subsection_id'));
+			$section = SectionManager::fetch($this->get('subsection_id'));
 			$fields = $section->fetchFields();
 
 			foreach($fields as $field) {
@@ -332,7 +329,7 @@
 		 * to store subsection fields and extension_subsectionmanager::preloadSubsectionEntries()
 		 * to preload subsection entries.
 		 *
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#appendFormattedElement
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#appendFormattedElement
 		 */
 		public function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $context) {
 
@@ -342,7 +339,6 @@
 			if(!is_array($data['relation_id'])) $data['relation_id'] = array($data['relation_id']);
 
 			// Create tabs
-			$entryManager = new EntryManager(Symphony::Engine());
 			$subsection = new XMLElement($this->get('element_name'));
 
 			for($i = 0; $i < count($data['name']); $i++) {
@@ -360,7 +356,7 @@
 
 				// Fetch missing entries
 				if(empty($entry)) {
-					$entry = $entryManager->fetch($entry_id, $this->get('subsection_id'));
+					$entry = EntryManager::fetch($entry_id, $this->get('subsection_id'));
 
 					// Store entry
 					$entry = $entry[0];
@@ -371,7 +367,7 @@
 				if(!empty($entry) && !empty(extension_subsectionmanager::$storage['fields'][$context][$this->get('id')])) {
 					foreach(extension_subsectionmanager::$storage['fields'][$context][$this->get('id')] as $field_id => $modes) {
 						$entry_data = $entry->getData($field_id);
-						$field = $entryManager->fieldManager->fetch($field_id);
+						$field = FieldManager::fetch($field_id);
 
 						// No modes
 						if(empty($modes) || empty($modes[0])) {
@@ -391,11 +387,9 @@
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#prepareTableValue
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#prepareTableValue
 		 */
 		public function prepareTableValue($data, XMLElement $link = null) {
-			$entryManager = new EntryManager(Symphony::Engine());
-
 			// Prepare data
 			if(!is_array($data['name'])) $data['name'] = array($data['name']);
 			if(!is_array($data['relation_id'])) $data['relation_id'] = array($data['relation_id']);
@@ -420,7 +414,7 @@
 					ORDER BY `sortorder`
 					LIMIT 1"
 				);
-				$entry = $entryManager->fetch($data['relation_id'][0], $this->get('subsection_id'));
+				$entry = EntryManager::fetch($data['relation_id'][0], $this->get('subsection_id'));
 				if(is_object($entry[0])){
 					$title = $entry[0]->getData($field_id);
 				}
@@ -442,7 +436,7 @@
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#displayDatasourceFilterPanel
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#displayDatasourceFilterPanel
 		 */
 		public function displayDatasourceFilterPanel(XMLElement &$wrapper, $data = null, $errors = null, $fieldnamePrefix = null, $fieldnamePostfix = null) {
 			$wrapper->appendChild(new XMLElement('h4', $this->get('label') . ' <i>' . $this->Name() . '</i>'));
@@ -475,14 +469,14 @@
 
 		/**
 		 * Keep compatibility with Symphony pre 2.2.1 for a little longer.
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#buildDSRetrivalSQL
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#buildDSRetrivalSQL
 		 */
 		public function buildDSRetrivalSQL($data, &$joins, &$where, $andOperation=false) {
 			return $this->buildDSRetrievalSQL($data, $joins, $where, $andOperation);
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#buildDSRetrievalSQL
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#buildDSRetrievalSQL
 		 */
 		public function buildDSRetrievalSQL($data, &$joins, &$where, $andOperation = false) {
 			$field_id = $this->get('id');
@@ -573,7 +567,7 @@
 		}
 
 		/**
-		 * @see http://symphony-cms.com/learn/api/2.2/toolkit/field/#createTable
+		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/field/#createTable
 		 */
 		public function createTable(){
 			return Symphony::Database()->query(

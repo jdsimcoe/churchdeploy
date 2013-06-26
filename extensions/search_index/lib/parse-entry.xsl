@@ -4,11 +4,11 @@
 	<xsl:output encoding="UTF-8" indent="no" method="text" omit-xml-declaration="yes" />
 
 	<xsl:template match="/">
-		<xsl:apply-templates select="//entry" />
+		<xsl:apply-templates select="//entry"/>
 	</xsl:template>
 	
 	<xsl:template match="*">
-		<xsl:apply-templates select="* | text()" />
+		<xsl:apply-templates select="* | text()"/>
 		<xsl:text> </xsl:text>
 	</xsl:template>
 

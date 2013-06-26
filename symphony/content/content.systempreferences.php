@@ -14,24 +14,29 @@
 
 	class contentSystemPreferences extends AdministrationPage {
 
-		## Overload the parent 'view' function since we dont need the switchboard logic
+		public $_errors = array();
+
+		// Overload the parent 'view' function since we dont need the switchboard logic
 		public function view() {
 			$this->setPageType('form');
-			$this->setTitle(__('%1$s &ndash; %2$s', array(__('Symphony'), __('Preferences'))));
-			
+			$this->setTitle(__('%1$s &ndash; %2$s', array(__('Preferences'), __('Symphony'))));
+
 			$this->appendSubheading(__('Preferences'));
 
 			$bIsWritable = true;
 			$formHasErrors = (is_array($this->_errors) && !empty($this->_errors));
 
 			if (!is_writable(CONFIG)) {
-				$this->pageAlert(__('The Symphony configuration file, <code>/manifest/config.php</code>, is not writable. You will not be able to save changes to preferences.'), Alert::ERROR);
+				$this->pageAlert(__('The Symphony configuration file, %s, is not writable. You will not be able to save changes to preferences.', array('<code>/manifest/config.php</code>')), Alert::ERROR);
 				$bIsWritable = false;
-
-			} else if ($formHasErrors) {
-				$this->pageAlert(__('An error occurred while processing this form. <a href="#error">See below for details.</a>'), Alert::ERROR);
-
-			} else if (isset($this->_context[0]) && $this->_context[0] == 'success') {
+			}
+			else if ($formHasErrors) {
+				$this->pageAlert(
+					__('An error occurred while processing this form. See below for details.')
+					, Alert::ERROR
+				);
+			}
+			else if (isset($this->_context[0]) && $this->_context[0] == 'success') {
 				$this->pageAlert(__('Preferences saved.'), Alert::SUCCESS);
 			}
 
@@ -59,11 +64,11 @@
 				$this->Form->appendChild($group);
 			}
 
-			//Get available EmailGateways
+			// Get available EmailGateways
 			$email_gateway_manager = new EmailGatewayManager($this);
 			$email_gateways = $email_gateway_manager->listAll();
 			if(count($email_gateways) >= 1){
-				$group = new XMLElement('fieldset', NULL, array('class' => 'settings picker'));
+				$group = new XMLElement('fieldset', NULL, array('class' => 'settings condensed'));
 				$group->appendChild(new XMLElement('legend', __('Default Email Settings')));
 				$label = Widget::Label(__('Gateway'));
 
@@ -71,13 +76,13 @@
 				ksort($email_gateways);
 
 				$default_gateway = $email_gateway_manager->getDefaultGateway();
-				$selected_is_installed = $email_gateway_manager->__find($default_gateway);
+				$selected_is_installed = $email_gateway_manager->__getClassPath($default_gateway);
 
 				$options = array();
 				foreach($email_gateways as $handle => $details) {
 					$options[] = array($handle, (($handle == $default_gateway) || (($selected_is_installed == false) && $handle == 'sendmail')), $details['name']);
 				}
-				$select = Widget::Select('settings[Email][default_gateway]', $options);
+				$select = Widget::Select('settings[Email][default_gateway]', $options, array('class' => 'picker'));
 				$label->appendChild($select);
 				$group->appendChild($label);
 				// Append email gateway selection
@@ -100,8 +105,13 @@
 			 * '/system/preferences/'
 			 * @param XMLElement $wrapper
 			 *  An XMLElement of the current page
+			 * @param array $errors
+			 *  An array of errors
 			 */
-			Symphony::ExtensionManager()->notifyMembers('AddCustomPreferenceFieldsets', '/system/preferences/', array('wrapper' => &$this->Form));
+			Symphony::ExtensionManager()->notifyMembers('AddCustomPreferenceFieldsets', '/system/preferences/', array(
+				'wrapper' => &$this->Form,
+				'errors' => $this->_errors
+			));
 
 			$div = new XMLElement('div');
 			$div->setAttribute('class', 'actions');
@@ -114,13 +124,13 @@
 		}
 
 		public function action() {
-			##Do not proceed if the config file is read only
+			// Do not proceed if the config file is read only
 			if (!is_writable(CONFIG)) redirect(SYMPHONY_URL . '/system/preferences/');
 
 			/**
-			 * This is where Extensions can hook on to custom actions they may need to provide
-			 * as a result of adding some custom actions through the `AddCustomPreferenceFieldsets`
-			 * delegate
+			 * Extensions can listen for any custom actions that were added
+			 * through `AddCustomPreferenceFieldsets` or `AddCustomActions`
+			 * delegates.
 			 *
 			 * @delegate CustomActions
 			 * @param string $context
@@ -133,7 +143,7 @@
 
 				/**
 				 * Just prior to saving the preferences and writing them to the `CONFIG`
-				 * Allows extensions to preform custom validaton logic on the settings.
+				 * Allows extensions to preform custom validation logic on the settings.
 				 *
 				 * @delegate Save
 				 * @param string $context
@@ -147,15 +157,11 @@
 
 				if (!is_array($this->_errors) || empty($this->_errors)) {
 
-					if(is_array($settings) && !empty($settings)){
-						foreach($settings as $set => $values) {
-							foreach($values as $key => $val) {
-								Symphony::Configuration()->set($key, $val, $set);
-							}
-						}
+					if(is_array($settings) && !empty($settings)) {
+						Symphony::Configuration()->setArray($settings, false);
 					}
 
-					Administration::instance()->saveConfig();
+					Symphony::Configuration()->write();
 
 					redirect(SYMPHONY_URL . '/system/preferences/success/');
 				}

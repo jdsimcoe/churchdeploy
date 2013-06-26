@@ -2,23 +2,10 @@
 
 	Class extension_health_check extends Extension{
 	
-		public function about(){
-			return array(
-				'name' => 'Health Check',
-				'version' => '1.4',
-				'release-date' => '2011-07-18',
-				'author' => array(
-				 		'name' => 'Phill Gray',
-						'email' => 'phill@randb.com.au'
-					),
-				'description' => 'Checks if your writable directories are in fact writable.'
-		 		);
-		}
-		
 		public function fetchNavigation() {
 			return array(
 				array(
-					'location' => 'Blueprints',
+					'location' => 'System',
 					'name'	=> 'Health Check',
 					'link'	=> '/directories/',
 				),
@@ -29,17 +16,12 @@
 				array(
 					'page' => '/backend/',
 					'delegate' => 'InitaliseAdminPageHead',
-					'callback' => 'initaliseAdminPageHead'
+					'callback' => 'addToHead'
 				),
 		        array(
 		            'page'      => '/backend/',
 		            'delegate'  => 'DashboardPanelRender',
 		            'callback'  => 'render_panel'
-		        ),
-		        array(
-		            'page'      => '/backend/',
-		            'delegate'  => 'DashboardPanelOptions',
-		            'callback'  => 'dashboard_panel_options'
 		        ),
 		        array(
 		            'page'      => '/backend/',
@@ -49,12 +31,12 @@
 			);
 		}
 		
-		public function initaliseAdminPageHead($context) {
-			$callback = Symphony::Engine()->getPageCallback();
+		public function addToHead($context) {
+			$callback = Administration::instance()->getPageCallback();
 
 			// Append assets
 			if($callback['driver'] == 'directories' || $callback['classname'] == 'contentExtensionDashboardIndex') {
-				Symphony::Engine()->Page->addStylesheetToHead(URL . '/extensions/health_check/assets/healthcheck.publish.css', 'screen');
+				Administration::instance()->Page->addStylesheetToHead(URL . '/extensions/health_check/assets/healthcheck.publish.css', 'screen');
 			}
 		}
 		
@@ -62,18 +44,12 @@
 		    $context['types']['health_check_panel'] = __('Health Check Panel');
 		}
 		
-		public function dashboard_panel_options($context) {
-		    // make sure it's your own panel type, as this delegate fires for all panel types!
-		    if ($context['type'] != 'health_check_panel') return;
-
-		    $config = $context['existing_config'];
-		}
-		
 		public function render_panel($context) {
 		    if ($context['type'] != 'health_check_panel') return;
 
-			$extensionManager = new ExtensionManager($this->_Parent);
-			if($extensionManager->fetchStatus('uniqueuploadfield') == EXTENSION_ENABLED) {
+			$fetchUniqueuploadfield = ExtensionManager::fetchStatus(array('handle' => 'uniqueuploadfield'));
+
+			if($fetchUniqueuploadfield[0] == EXTENSION_ENABLED) {
 				$destinations = Symphony::Database()->fetch("SELECT destination COLLATE utf8_general_ci AS destination FROM tbl_fields_upload UNION ALL SELECT destination FROM tbl_fields_uniqueupload ORDER BY destination ASC");
 			} else {
 				$destinations = Symphony::Database()->fetch("SELECT destination FROM tbl_fields_upload ORDER BY destination ASC");
@@ -154,9 +130,11 @@
 
 			$div = new XMLElement('div');
 			$table = new XMLElement('table');
+			
+			$fetchXmlimporter = ExtensionManager::fetchStatus(array('handle' => 'xmlimporter'));
 
 			$directory = array('/manifest/cache','/manifest/tmp','/manifest/config.php','/workspace/data-sources/','/workspace/events/');
-			if($extensionManager->fetchStatus('xmlimporter') == EXTENSION_ENABLED) $directory[] =  '/workspace/xml-importers';
+			if($fetchXmlimporter[0] == EXTENSION_ENABLED) $directory[] =  '/workspace/xml-importers';
 			foreach(remove_duplicates($destinations) as $destination) $directory[] = $destination['destination'];
 
 		   	foreach($directory as $dir) {
@@ -168,7 +146,7 @@
 					$td_permissions = Widget::TableData(General::sanitize($permissions));
 					if(is_dir($d)) {
 						if($permissions != $result['directory']) {
-							$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions),'invalid'));
+							$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions),'hc-invalid'));
 						} else {
 							$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions)));
 						}
@@ -176,7 +154,7 @@
 					// File check to recommend correct permissions
 					if(is_file($d)) {
 						if($permissions != $result['file']) {
-							$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions),'invalid'));
+							$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions),'hc-invalid'));
 						} else {
 							$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions)));
 						}
@@ -184,11 +162,14 @@
 				} else {
 					$td_directory = Widget::TableData(General::sanitize(__($dir)));
 					$td_permissions = Widget::TableData(General::sanitize(__('WARNING: This directory does not exist.')));
-					$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions),'invalid'));
+					$table->appendChild(Widget::TableRow(array($td_directory, $td_permissions),'hc-invalid'));
 				}
 			}
+			
+			$button = new XMLElement('a', 'Go to directory page', array('class' => 'button hc-button', 'href' => SYMPHONY_URL . '/extension/health_check/directories/'));
 		   
 			$div->appendChild($table);
+			$div->appendChild($button);
 
 			$context['panel']->appendChild($div);
 		}

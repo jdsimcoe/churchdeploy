@@ -18,33 +18,47 @@
 		// Templates
 		public static $templates = array(
 			'plain' => array(
-				'text' =>	'<li data-value="{$value}" data-drop="{$droptext}">
+				'text' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="instance">
 								<input type="hidden" value="{$value}" />
-								<span>{$caption}</span>
+								<header>{$caption}</header>
+								<div class="content"></div>
 							 </li>',
-				'image' =>	'<li data-value="{$value}" data-drop="{$droptext}">
+				'image' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="instance">
 								<input type="hidden" value="{$value}" />
-								<a href="{$href}" class="image file handle">{$caption}</a>
+								<header>
+									{$caption}
+								</header>
+								<div class="content"></div>
 							 </li>',
-				'file' =>	'<li data-value="{$value}" data-drop="{$droptext}">
+				'file' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="instance">
 								<input type="hidden" value="{$value}" />
-								<a href="{$href}" class="file handle">{$caption}</a>
+								<header>
+									<a href="{$href}" class="file handle">{$caption}</a>
+								</header>
+								<div class="content"></div>
 							 </li>'
 			),
 			'preview' => array(
-				'text' =>	'<li data-value="{$value}" data-drop="{$droptext}">
+				'text' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="instance">
 								<input type="hidden" value="{$value}" />
-								<span>{$caption}</span>
+								<header>{$caption}</header>
+								<div class="content"></div>
 							 </li>',
-				'image' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="preview">
+				'image' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="instance preview">
 								<input type="hidden" value="{$value}" />
-								<img src="{$url}/image/2/40/40/5{$preview}" width="40" height="40" class="handle" />
-								<a href="{$href}" class="image file handle">{$caption}</a>
+								<header>
+									<img src="{$url}/image/2/40/40/5{$preview}" width="40" height="40" class="handle" />
+									{$caption}
+								</header>
+								<div class="content"></div>
 							 </li>',
-				'file' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="preview">
+				'file' =>	'<li data-value="{$value}" data-drop="{$droptext}" class="instance preview">
 								<input type="hidden" value="{$value}" />
-								<strong class="file">{$type}</strong>
-								<a href="{$href}" class="file handle">{$caption}</a>
+								<header>
+									<strong class="file">.{$type}</strong>
+									<a href="{$href}" class="file handle">{$caption}</a>
+								</header>
+								<div class="content"></div>
 							 </li>'
 			),
 			'index' => array(
@@ -80,8 +94,7 @@
 			}
 
 			// Fetch entry data
-			$sectionManager = new SectionManager(Symphony::Engine());
-		  	$subsection = $sectionManager->fetch($subsection_id, 'ASC', 'name');
+		  	$subsection = SectionManager::fetch($subsection_id, 'ASC', 'name');
 		  	$fields = $subsection->fetchFields();
 		  	$entries = $this->__filterEntries($subsection_id, $fields, $meta[0]['filter_tags'], $items, ($flags & self::GETALLITEMS));
 		  	$droptext = $meta[0]['droptext'];
@@ -112,8 +125,7 @@
 		private function __filterEntries($subsection_id, $fields, $filter = '', $items = NULL, $full = false) {
 
 			// Fetch entry data
-			$entryManager = new EntryManager(Symphony::Engine());
-			$entries = $entryManager->fetch(($full ? NULL : (isset($items['relation_id']) ? $items['relation_id'] : $items)), $subsection_id);
+			$entries = EntryManager::fetch(($full ? NULL : (isset($items['relation_id']) ? $items['relation_id'] : $items)), $subsection_id);
 
 			// Return early if there were no $entries found
 			if(empty($entries) || !is_array($entries)) {
@@ -303,7 +315,7 @@
 				// Generate HTML only when needed
 				if(!($flags & self::GETHTML)) continue;
 
-				// Create stage template
+				// Create template
 				if($type == 'image') {
 					$template = str_replace('{$url}', URL, self::$templates[$mode]['image']);
 					$template = str_replace('{$preview}', $preview, $template);

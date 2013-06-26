@@ -529,7 +529,7 @@
 		};
 
 		// Initialize on first focus:
-		input.focus().bind('focus', function() {
+		input.bind('focus', function() {
 			self.initialiseXPathMatcher();
 		});
 
@@ -557,7 +557,7 @@
 
 		source.bind('sessionupdate', self.refresh);
 	};
-
+	
 /*---------------------------------------------------------------------------*/
 
 	jQuery(document).ready(function() {

@@ -1,33 +1,77 @@
+jQuery(document).ready(function($) {
 
-(function($) {
-	
-	/**
-	 * This plugin adds image preview to the publish pages.
-	 *
-	 * @author: Nils Hörrmann, post@nilshoerrmann.de
-	 * @source: http://github.com/nilshoerrmann/image_index_preview
-	 */
-	$(document).ready(function() {
-		$('table td[class*="upload"], fieldset div[class*="upload"]').addClass('upload').find('a').each(function() {
-			var link = $(this),
-				href = link.attr('href'),
-                size = (Symphony.Context.get('env')['page'] == 'index' ? '40/40' : '0/150')
-				file = href.replace(Symphony.Context.get('root') + '/workspace/', '');
+	 /**
+		* This plugin adds image preview to the publish pages.
+		*
+		* @author: Symphony Community
+		* @source: https://github.com/symphonists/image_index_preview
+		*/
 
-			// Append preview
-			if(file) {
-				if(file.match(/\.(?:bmp|gif|jpe?g|png)$/i)) {
-					
-					// Remove file name
-					link.text('');
-					
-					// Add image
-					$('<img />', {
-						src: Symphony.Context.get('root') + '/image/2/' + size + '/5/' + file
-					}).prependTo(link);
-				}
+	 var root, page, link, path, file, size;
+
+	 var defaultSize = 140;
+
+	 root = Symphony.Context.get('root');
+	 page = Symphony.Context.get('env')['page'];
+
+	 function getDimensions(src) {
+			img = document.createElement('img');
+			img.src = src;
+
+			img.onload = function() {
+				 return { width: this.width, height: this.height };
+			};
+
+			var ratio;
+			var w = img.onload().width;
+			var h = img.onload().height;
+
+			if (h > w) {
+				 ratio = w / h;
+				 size = parseInt(defaultSize * ratio) + '/' + 0;
+			} else {
+				 ratio = h / w;
+				 size = 0 + '/' + parseInt(defaultSize * ratio);
 			}
-		});
-	});
-		
-})(jQuery.noConflict());
+
+			return { s: size, r: ratio, h: h, w: w };
+	 }
+
+	 $('table td[class*="upload"] a, fieldset div[class*="upload"] a', '#contents').each(function() {
+
+			link = $(this);
+
+			if (page == 'index') {
+
+				 path = link.data('path');
+				 filename = link.text();
+				 file = path.replace(root, '').replace('/workspace/','') + '/' + filename;
+				 attr = getDimensions(path + '/' + filename);
+
+			} else {
+
+				 path = link.attr('href');
+				 file = path.replace(root, '').replace('/workspace/','');
+
+				 attr = getDimensions(path);
+			}
+
+			if (path) {
+
+				 if (file.match(/\.(?:bmp|gif|jpe?g|png)$/i)) {
+
+						// remove file name
+
+						link.text('');
+
+						// add preview
+
+						$('<img />', {
+
+							 src: root + '/image/1/' + attr.s + '/' + file
+
+						}).prependTo(link);
+				 }
+			}
+	 });
+});

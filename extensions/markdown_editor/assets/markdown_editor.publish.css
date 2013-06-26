@@ -1,0 +1,82 @@
+.markdowneditor label {
+	margin-bottom: 2px;
+}
+.markdowneditor textarea {
+	margin-top: 0;
+	border-radius: 0 0 2px 2px;
+}
+.markdowneditor-function-bar {
+	position: relative;
+	background-color: #f5f5f5;
+	border-radius: 2px 2px 0 0;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	border-bottom-width: 0;
+}
+.markdowneditor-function-buttons {
+	padding: 5px 5px 0 5px;
+}
+	.markdowneditor-function-buttons a {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		margin: 0 3px 5px 0;
+		overflow: hidden;
+		vertical-align: top;
+		background: #f7f7f7;
+		border: 1px solid #ddd;
+		border-radius: 3px;
+		color: #333;
+		font-size: 12px;
+		line-height: 25px;
+		text-align: center;
+		text-shadow: 0 1px 0 #fff;
+		background: -webkit-linear-gradient(top, #fafafa, #eaeaea);
+		background: -moz-linear-gradient(top, #fafafa, #eaeaea);
+	}
+	.markdowneditor-function-buttons a:hover {
+		color: #fff;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+		text-decoration: none;
+		border-color: #4D78B4;
+		background: -webkit-linear-gradient(top, #668abe, #5c83ba);
+		background: -moz-linear-gradient(top, #668abe, #5c83ba);
+	}
+	.markdowneditor-function-buttons a.function-hr,
+	.markdowneditor-function-buttons a.function-ol {
+		font-size: 10px;
+		line-height: 12px;
+	}
+	.markdowneditor-function-buttons a.function-ul {
+		font-size: 10px;
+		line-height: 8px;
+	}
+	.markdowneditor-function-buttons a.function-blockquote {
+		font-size: 22px;
+		line-height: 12px;
+	}
+	.markdowneditor-function-buttons a.function-link,
+	.markdowneditor-function-buttons a.function-image {
+		font-size: 16px;
+	}
+	.markdowneditor-function-buttons a.function-bold {
+		font-size: 14px;
+		font-weight: bold;
+	}
+	.markdowneditor-function-buttons a.function-italic {
+		font-size: 14px;
+		font-style: italic;
+	}
+.markdowneditor-dialog {
+	padding: 5px;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	background-color: #e8e8e8;
+}
+	.markdowneditor-dialog .column {
+		margin-bottom: 5px;
+	}
+.markdowneditor-dialog-actions {
+	text-align: right;
+}
+	.markdowneditor-dialog-actions button {
+		margin: 0 0 0 10px;
+	}

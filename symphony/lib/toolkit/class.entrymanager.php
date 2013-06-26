@@ -4,7 +4,7 @@
 	 * @package toolkit
 	 */
 	/**
-	 * The EntryManager is responsible for all Entry objects in Symphony.
+	 * The `EntryManager` is responsible for all `Entry` objects in Symphony.
 	 * Entries are stored in the database in a cluster of tables. There is a
 	 * parent entry row stored in `tbl_entries` and then each field's data is
 	 * stored in a separate table, `tbl_entries_data_{field_id}`. Where Field ID
@@ -12,65 +12,23 @@
 	 * add, edit, delete and fetching methods for Entries.
 	 */
 
-	include_once(TOOLKIT . '/class.sectionmanager.php');
-	include_once(TOOLKIT . '/class.textformattermanager.php');
-	include_once(TOOLKIT . '/class.entry.php');
+	require_once(TOOLKIT . '/class.entry.php');
 
-	Class EntryManager{
-
-		/**
-		 * The class that initialised the Entry, usually the EntryManager
-		 * @var mixed
-		 */
-		protected $_Parent;
-
-		/**
-		 * An instance of the TextFormatterManager
-		 * @var TextFormatterManager
-		 */
-		public $formatterManager;
-
-		/**
-		 * An instance of the SectionManager
-		 * @var SectionManager
-		 */
-		public $sectionManager;
-
-		/**
-		 * An instance of the FieldManager
-		 * @var FieldManager
-		 */
-		public $fieldManager;
+	Class EntryManager {
 
 		/**
 		 * The Field ID that will be used to sort when fetching Entries, defaults
 		 * to null, which implies the Entry ID (id column in `tbl_entries`)
 		 * @var integer
 		 */
-		protected $_fetchSortField = null;
+		protected static $_fetchSortField = null;
 
 		/**
 		 * The direction that entries should be sorted in, available options are
 		 * RAND, ASC or DESC. Defaults to null, which implies ASC
 		 * @var string
 		 */
-		protected $_fetchSortDirection = null;
-
-		/**
-		 * The constructor initialises the formatterManager, sectionManager and
-		 * fieldManager variables and sets the `$this->_Parent` to the param provided.
-		 *
-		 * @param Administration $parent
-		 *  The Administration object that this page has been created from
-		 *  passed by reference
-		 */
-		public function __construct($parent){
-			$this->_Parent = $parent;
-
-			$this->formatterManager = new TextformatterManager($this->_Parent);
-			$this->sectionManager = new SectionManager($this->_Parent);
-			$this->fieldManager = new FieldManager($this->_Parent);
-		}
+		protected static $_fetchSortDirection = null;
 
 		/**
 		 * Setter function for the default sorting direction of the Fetch
@@ -80,10 +38,10 @@
 		 *  The direction that entries should be sorted in, available options
 		 *  are RAND, ASC or DESC.
 		 */
-		public function setFetchSortingDirection($direction){
+		public static function setFetchSortingDirection($direction){
 			$direction = strtoupper($direction);
 			if($direction == 'RANDOM') $direction = 'RAND';
-			$this->_fetchSortDirection = (in_array($direction, array('RAND', 'ASC', 'DESC')) ? $direction : null);
+			self::$_fetchSortDirection = (in_array($direction, array('RAND', 'ASC', 'DESC')) ? $direction : null);
 		}
 
 		/**
@@ -93,8 +51,8 @@
 		 * @param integer $field_id
 		 *  The ID of the Field that should be sorted on
 		 */
-		public function setFetchSortingField($field_id){
-			$this->_fetchSortField = $field_id;
+		public static function setFetchSortingField($field_id){
+			self::$_fetchSortField = $field_id;
 		}
 
 		/**
@@ -109,9 +67,9 @@
 		 *  The direction that entries should be sorted in, available options
 		 *  are RAND, ASC or DESC. Defaults to ASC
 		 */
-		public function setFetchSorting($field_id, $direction='ASC'){
-			$this->setFetchSortingField($field_id);
-			$this->setFetchSortingDirection($direction);
+		public static function setFetchSorting($field_id, $direction='ASC'){
+			self::setFetchSortingField($field_id);
+			self::setFetchSortingDirection($direction);
 		}
 
 		/**
@@ -120,10 +78,10 @@
 		 *
 		 * @return StdClass
 		 */
-		public function getFetchSorting(){
+		public static function getFetchSorting(){
 			return (object)array(
-				'field' => $this->_fetchSortField,
-				'direction' => $this->_fetchSortDirection
+				'field' => self::$_fetchSortField,
+				'direction' => self::$_fetchSortDirection
 			);
 		}
 
@@ -135,8 +93,7 @@
 		 *  An Entry object to insert into the database
 		 * @return boolean
 		 */
-		public function add(Entry $entry){
-
+		public static function add(Entry $entry) {
 			$fields = $entry->get();
 
 			Symphony::Database()->insert($fields, 'tbl_entries');
@@ -155,7 +112,6 @@
 				$fields = array();
 
 				foreach($field as $key => $value){
-
 					if(is_array($value)){
 						foreach($value as $ii => $v) $fields[$ii][$key] = $v;
 					}
@@ -174,7 +130,6 @@
 			$entry->set('id', $entry_id);
 
 			return true;
-
 		}
 
 		/**
@@ -184,12 +139,23 @@
 		 *  An Entry object
 		 * @return boolean
 		 */
-		public function edit(Entry $entry){
+		public static function edit(Entry $entry) {
+			// Update modification date.
+			Symphony::Database()->update(array(
+					'modification_date' => $entry->get('modification_date'),
+					'modification_date_gmt' => $entry->get('modification_date_gmt')
+				),
+				'tbl_entries',
+				sprintf(' `id` = %d', $entry->get('id'))
+			);
+
+			// Iterate over all data for this entry, deleting existing data first
+			// then inserting a new row for the data
 			foreach ($entry->getData() as $field_id => $field) {
 				if (empty($field_id)) continue;
 
 				try{
-					Symphony::Database()->delete('tbl_entries_data_' . $field_id, " `entry_id` = '".$entry->get('id')."'");
+					Symphony::Database()->delete('tbl_entries_data_' . $field_id, sprintf(' `entry_id` = %d', $entry->get('id')));
 				}
 				catch(Exception $e){
 					// Discard?
@@ -218,11 +184,9 @@
 				}
 
 				Symphony::Database()->insert($fields, 'tbl_entries_data_' . $field_id);
-
 			}
 
 			return true;
-
 		}
 
 		/**
@@ -240,7 +204,7 @@
 		 *  multiple sections.
 		 * @return boolean
 		 */
-		public function delete($entries, $section_id = null){
+		public static function delete($entries, $section_id = null){
 			$needs_data = true;
 
 			if(!is_array($entries)) {
@@ -249,15 +213,17 @@
 
 			// Get the section's schema
 			if(!is_null($section_id)) {
-				$section = $this->sectionManager->fetch($section_id);
+				$section = SectionManager::fetch($section_id);
 				if($section instanceof Section) {
 					$fields = $section->fetchFields();
 					$data = array();
+
 					foreach($fields as $field) {
 						$reflection = new ReflectionClass($field);
 						// This field overrides the default implementation, so pass it data.
 						$data[$field->get('element_name')] = $reflection->getMethod('entryDataCleanup')->class == 'Field' ? false : true;
 					}
+
 					$data = array_filter($data);
 					if(empty($data)) {
 						$needs_data = false;
@@ -279,14 +245,14 @@
 					$entries = $chunk;
 				}
 				else if($needs_data) {
-					$entries = $this->fetch($chunk, $section_id);
+					$entries = self::fetch($chunk, $section_id);
 				}
 
 				if($needs_data) {
 					foreach($entries as $id) {
 						// Handles the case where `section_id` was not provided
 						if(is_null($section_id)) {
-							$e = $this->fetch($id);
+							$e = self::fetch($id);
 							$e = current($e);
 							if(!$e instanceof Entry) continue;
 						}
@@ -302,7 +268,7 @@
 						// been provided
 						$entry_data = $e->getData();
 						foreach($entry_data as $field_id => $data){
-							$field = $this->fieldManager->fetch($field_id);
+							$field = FieldManager::fetch($field_id);
 							$field->entryDataCleanup($id, $data);
 						}
 					}
@@ -334,7 +300,7 @@
 		 * @param integer $start
 		 *  The starting offset of the entries to return
 		 * @param string $where
-		 *  Any custom WHERE clauses
+		 *  Any custom WHERE clauses. The tbl_entries alias is `e`
 		 * @param string $joins
 		 *  Any custom JOIN's
 		 * @param boolean $group
@@ -355,47 +321,49 @@
 		 *  If `$buildentries` is true, this function will return an array of Entry objects,
 		 *  otherwise it will return an associative array of Entry data from `tbl_entries`
 		 */
-		public function fetch($entry_id = null, $section_id = null, $limit = null, $start = null, $where = null, $joins = null, $group = false, $buildentries = true, $element_names = null, $enable_sort = true){
+		public static function fetch($entry_id = null, $section_id = null, $limit = null, $start = null, $where = null, $joins = null, $group = false, $buildentries = true, $element_names = null, $enable_sort = true){
 			$sort = null;
 
 			if (!$entry_id && !$section_id) return false;
 
-			if (!$section_id) $section_id = $this->fetchEntrySectionID($entry_id);
-
-			$section = $this->sectionManager->fetch($section_id);
-
+			if (!$section_id) $section_id = self::fetchEntrySectionID($entry_id);
+			$section = SectionManager::fetch($section_id);
 			if (!is_object($section)) return false;
 
-			## SORTING
+			// SORTING
 			// A single $entry_id doesn't need to be sorted on, or if it's explicitly disabled
 			if ((!is_array($entry_id) && !is_null($entry_id) && is_int($entry_id)) || !$enable_sort) {
 				$sort = null;
 			}
 			// Check for RAND first, since this works independently of any specific field
-			else if($this->_fetchSortDirection == 'RAND'){
+			else if(self::$_fetchSortDirection == 'RAND'){
 				$sort = 'ORDER BY RAND() ';
 			}
 
-			else if ($this->_fetchSortField == 'date') {
-				$sort = 'ORDER BY `e`.`creation_date` ' . $this->_fetchSortDirection;
+			else if (self::$_fetchSortField === 'date' || self::$_fetchSortField === 'system:creation-date') {
+				$sort = 'ORDER BY `e`.`creation_date_gmt` ' . self::$_fetchSortDirection;
 			}
 
-			else if ($this->_fetchSortField == 'id') {
-				$sort = 'ORDER BY `e`.`id`' . $this->_fetchSortDirection;
+			else if (self::$_fetchSortField === 'system:modification-date') {
+				$sort = 'ORDER BY `e`.`modification_date_gmt` ' . self::$_fetchSortDirection;
 			}
 
-			else if ($this->_fetchSortField && $field = $this->fieldManager->fetch($this->_fetchSortField)) {
-				$field->buildSortingSQL($joins, $where, $sort, $this->_fetchSortDirection);
-				if (!$group) $group = $field->requiresSQLGrouping();
+			else if (self::$_fetchSortField == 'id') {
+				$sort = 'ORDER BY `e`.`id`' . self::$_fetchSortDirection;
 			}
 
-			else if ($section->get('entry_order') && $field = $this->fieldManager->fetch($section->get('entry_order'))) {
-				$field->buildSortingSQL($joins, $where, $sort, $section->get('entry_order_direction'));
-				if (!$group) $group = $field->requiresSQLGrouping();
+			else if (self::$_fetchSortField && $field = FieldManager::fetch(self::$_fetchSortField)) {
+				if($field->isSortable()) $field->buildSortingSQL($joins, $where, $sort, self::$_fetchSortDirection);
+				if(!$group) $group = $field->requiresSQLGrouping();
+			}
+
+			else if ($section->getSortingField() && $field = FieldManager::fetch($section->getSortingField())) {
+				if($field->isSortable()) $field->buildSortingSQL($joins, $where, $sort, $section->getSortingOrder());
+				if(!$group) $group = $field->requiresSQLGrouping();
 			}
 
 			else {
-				$sort = 'ORDER BY `e`.`id`' . $this->_fetchSortDirection;
+				$sort = 'ORDER BY `e`.`id`' . self::$_fetchSortDirection;
 			}
 
 			if ($entry_id && !is_array($entry_id)) $entry_id = array($entry_id);
@@ -403,7 +371,8 @@
 			$sql = "
 				SELECT  ".($group ? 'DISTINCT ' : '')."`e`.id,
 						`e`.section_id, e.`author_id`,
-						UNIX_TIMESTAMP(e.`creation_date`) AS `creation_date`
+						UNIX_TIMESTAMP(e.`creation_date`) AS `creation_date`,
+						UNIX_TIMESTAMP(e.`modification_date`) AS `modification_date`
 				FROM `tbl_entries` AS `e`
 				$joins
 				WHERE 1
@@ -415,7 +384,7 @@
 
 			$rows = Symphony::Database()->fetch($sql);
 
-			return ($buildentries && (is_array($rows) && !empty($rows)) ? $this->__buildEntries($rows, $section_id, $element_names) : $rows);
+			return ($buildentries && (is_array($rows) && !empty($rows)) ? self::__buildEntries($rows, $section_id, $element_names) : $rows);
 		}
 
 		/**
@@ -437,44 +406,14 @@
 		 * @return array
 		 *  An array of Entry objects
 		 */
-		public function __buildEntries(Array $rows, $section_id, $element_names = null){
+		public static function __buildEntries(array $rows, $section_id, $element_names = null){
 			$entries = array();
 
 			if (empty($rows)) return $entries;
 
-			// choose whether to get data from a subset of fields or all fields in a section
-			if (!is_null($element_names) && is_array($element_names)){
+			$schema = FieldManager::fetchFieldIDFromElementName($element_names, $section_id);
+			if(is_int($schema)) $schema = array($schema);
 
-				// allow for pseudo-fields containing colons (e.g. Textarea formatted/unformatted)
-				foreach ($element_names as $index => $name) {
-					$parts = explode(':', $name, 2);
-
-					if(count($parts) == 1) continue;
-
-					unset($element_names[$index]);
-
-					// Prevent attempting to look up 'system', which will arise
-					// from `system:pagination`, `system:id` etc.
-					if($parts[0] == 'system') continue;
-
-					$element_names[] = trim($parts[0]);
-				}
-
-				$schema_sql = empty($element_names) ? null : sprintf(
-					"SELECT `id` FROM `tbl_fields` WHERE `parent_section` = %d AND `element_name` IN ('%s')",
-					$section_id,
-					implode("', '", array_unique($element_names))
-				);
-
-			}
-			else{
-				$schema_sql = sprintf(
-					"SELECT `id` FROM `tbl_fields` WHERE `parent_section` = %d",
-					$section_id
-				);
-			}
-
-			$schema = is_null($schema_sql) ? array() : Symphony::Database()->fetch($schema_sql);
 			$raw = array();
 			$rows_string = '';
 
@@ -486,8 +425,7 @@
 			$rows_string = trim($rows_string, ',');
 
 			// Append field data:
-			foreach ($schema as $f) {
-				$field_id = $f['id'];
+			if(is_array($schema)) foreach ($schema as $field_id) {
 
 				try{
 					$row = Symphony::Database()->fetch("SELECT * FROM `tbl_entries_data_{$field_id}` WHERE `entry_id` IN ($rows_string) ORDER BY `id` ASC");
@@ -543,12 +481,21 @@
 
 			// Loop over the array of entry data and convert it to an array of Entry objects
 			foreach ($raw as $entry) {
-				$obj = $this->create();
+				$obj = self::create();
 
-				$obj->creationDate = DateTimeObj::get('c', $entry['meta']['creation_date']);
 				$obj->set('id', $entry['meta']['id']);
 				$obj->set('author_id', $entry['meta']['author_id']);
 				$obj->set('section_id', $entry['meta']['section_id']);
+				$obj->set('creation_date', DateTimeObj::get('c', $entry['meta']['creation_date']));
+
+				if(isset($entry['meta']['modification_date'])) {
+					$obj->set('modification_date', DateTimeObj::get('c', $entry['meta']['modification_date']));
+				}
+				else {
+					$obj->set('modification_date', $obj->get('creation_date'));
+				}
+
+				$obj->creationDate = $obj->get('creation_date');
 
 				if(isset($entry['fields']) && is_array($entry['fields'])){
 					foreach ($entry['fields'] as $field_id => $data) $obj->setData($field_id, $data);
@@ -569,7 +516,7 @@
 		 * @return integer
 		 *  The Section ID for this Entry's section
 		 */
-		public function fetchEntrySectionID($entry_id){
+		public static function fetchEntrySectionID($entry_id){
 			return Symphony::Database()->fetchVar('section_id', 0, "SELECT `section_id` FROM `tbl_entries` WHERE `id` = '$entry_id' LIMIT 1");
 		}
 
@@ -586,22 +533,20 @@
 		 *  Whether the entries need to be grouped by Entry ID or not
 		 * @return integer
 		 */
-		public function fetchCount($section_id = null, $where = null, $joins = null, $group = false){
+		public static function fetchCount($section_id = null, $where = null, $joins = null, $group = false){
 			if(is_null($section_id)) return false;
 
-			$section = $this->sectionManager->fetch($section_id);
+			$section = SectionManager::fetch($section_id);
 
 			if(!is_object($section)) return false;
 
-			$sql = "
+			return Symphony::Database()->fetchVar('count', 0, "
 				SELECT count(".($group ? 'DISTINCT ' : '')."`e`.id) as `count`
 				FROM `tbl_entries` AS `e`
 				$joins
 				WHERE `e`.`section_id` = '$section_id'
 				$where
-			";
-
-			return Symphony::Database()->fetchVar('count', 0, $sql);
+			");
 		}
 
 		/**
@@ -639,15 +584,14 @@
 		 *  the total entries, the start position, the entries per page and the
 		 *  Entry objects
 		 */
-		public function fetchByPage($page = 1, $section_id, $entriesPerPage, $where = null, $joins = null, $group = false, $records_only = false, $buildentries = true, Array $element_names = null){
-
+		public static function fetchByPage($page = 1, $section_id, $entriesPerPage, $where = null, $joins = null, $group = false, $records_only = false, $buildentries = true, array $element_names = null){
 			if($entriesPerPage != NULL && !is_string($entriesPerPage) && !is_numeric($entriesPerPage)){
 				throw new Exception(__('Entry limit specified was not a valid type. String or Integer expected.'));
 			}
 			else if($entriesPerPage == NULL) {
-				$records = $this->fetch(NULL, $section_id, NULL, NULL, $where, $joins, $group, $buildentries, $element_names);
+				$records = self::fetch(NULL, $section_id, NULL, NULL, $where, $joins, $group, $buildentries, $element_names);
 
-				$count = $this->fetchCount($section_id, $where, $joins, $group);
+				$count = self::fetchCount($section_id, $where, $joins, $group);
 
 				$entries = array(
 					'total-entries' => $count,
@@ -664,12 +608,12 @@
 			else {
 				$start = (max(1, $page) - 1) * $entriesPerPage;
 
-				$records = ($entriesPerPage == '0' ? NULL : $this->fetch(NULL, $section_id, $entriesPerPage, $start, $where, $joins, $group, $buildentries, $element_names));
+				$records = ($entriesPerPage == '0' ? NULL : self::fetch(NULL, $section_id, $entriesPerPage, $start, $where, $joins, $group, $buildentries, $element_names));
 
 				if($records_only) return array('records' => $records);
 
 				$entries = array(
-					'total-entries' => $this->fetchCount($section_id, $where, $joins, $group),
+					'total-entries' => self::fetchCount($section_id, $where, $joins, $group),
 					'records' => $records,
 					'start' => max(1, $start),
 					'limit' => $entriesPerPage
@@ -681,7 +625,6 @@
 
 				return $entries;
 			}
-
 		}
 
 		/**
@@ -689,9 +632,8 @@
 		 *
 		 * @return Entry
 		 */
-		public function create(){
-			$obj = new Entry($this);
-			return $obj;
+		public static function create(){
+			return new Entry;
 		}
 
 	}

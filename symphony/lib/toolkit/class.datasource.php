@@ -17,21 +17,27 @@
 	 * Symphony backend, which uses a Datasource template defined in
 	 * `TEMPLATE . /datasource.tpl`.
 	 */
-	Class DataSource{
+
+	Class DataSource {
 
 		/**
-		 * The end-of-line constant.
-		 * @var string
-		 * @deprecated This will be removed in the next version of Symphony
+		 * A constant that represents if this filter is an AND filter in which
+		 * an Entry must match all these filters. This filter is triggered when
+		 * the filter string contains a ` + `.
+		 *
+		 * @since Symphony 2.3.2
+		 * @var integer
 		 */
-		const CRLF = PHP_EOL;
+		const FILTER_AND = 1;
 
 		/**
-		 * An instance of the Administration class
-		 * @var Administration
-		 * @see core.Administration
+		 * A constant that represents if this filter is an OR filter in which an
+		 * entry can match any or all of these filters
+		 *
+		 * @since Symphony 2.3.2
+		 * @var integer
 		 */
-		protected $_Parent;
+		const FILTER_OR = 2;
 
 		/**
 		 * Holds all the environment variables which include parameters set by
@@ -66,10 +72,7 @@
 		 * Constructor for the datasource sets the parent, if `$process_params` is set,
 		 * the `$env` variable will be run through `Datasource::processParameters`.
 		 *
-         * @see toolkit.Datasource#processParameters()
-		 * @param Administration $parent
-		 *  The Administration object that this page has been created from
-		 *  passed by reference
+		 * @see toolkit.Datasource#processParameters()
 		 * @param array $env
 		 *  The environment variables from the Frontend class which includes
 		 *  any params set by Symphony or Events or by other Datasources
@@ -77,8 +80,16 @@
 		 *  If set to true, `Datasource::processParameters` will be called. By default
 		 *  this is true
 		 */
-		public function __construct(&$parent, Array $env = null, $process_params=true){
-			$this->_Parent = $parent;
+		public function __construct(array $env = null, $process_params=true){
+			// Support old the __construct (for the moment anyway).
+			// The old signature was array/array/boolean
+			// The new signature is array/boolean
+			$arguments = func_get_args();
+
+			if(count($arguments) == 3 && is_bool($arguments[1]) && is_bool($arguments[2])) {
+				$env = $arguments[0];
+				$process_params = $arguments[1];
+			}
 
 			if($process_params){
 				$this->processParameters($env);
@@ -92,7 +103,7 @@
 		 * Datasource's `about()` information will be displayed.
 		 *
 		 * @return boolean
-		 *	 True if the Datasource can be edited, false otherwise. Defaults to false
+		 *   True if the Datasource can be edited, false otherwise. Defaults to false
 		 */
 		public function allowEditorToParse(){
 			return false;
@@ -129,15 +140,45 @@
 		}
 
 		/**
+		 * @deprecated This function has been renamed to `execute` as of
+		 *  Symphony 2.3.1, please use `execute()` instead.
+		 * @see execute()
+		 */
+		public function grab(array &$param_pool = null) {
+			return $this->execute($param_pool);
+		}
+
+		/**
 		 * The meat of the Datasource, this function includes the datasource
 		 * type's file that will preform the logic to return the data for this datasource
 		 * It is passed the current parameters.
 		 *
-		 * @param array $param
+		 * @param array $param_pool
 		 *  The current parameter pool that this Datasource can use when filtering
 		 *  and finding Entries or data.
+		 * @return XMLElement
+		 *  The XMLElement to add into the XML for a page.
 		 */
-		public function grab(array $param = array()) {}
+		public function execute(array &$param_pool = null) {
+			$result = new XMLElement($this->dsParamROOTELEMENT);
+
+			try{
+				$result = $this->execute($param_pool);
+			}
+			catch(FrontendPageNotFoundException $e){
+				// Work around. This ensures the 404 page is displayed and
+				// is not picked up by the default catch() statement below
+				FrontendPageNotFoundExceptionHandler::render($e);
+			}
+			catch(Exception $e){
+				$result->appendChild(new XMLElement('error', $e->getMessage()));
+				return $result;
+			}
+
+			if($this->_force_empty_result) $result = $this->emptyXMLSet();
+
+			return $result;
+		}
 
 		/**
 		 * By default, all Symphony filters are considering to be AND filters, that is
@@ -149,10 +190,11 @@
 		 *
 		 * @param string $value
 		 *  The filter string for a field.
-		 * @return DS_FILTER_OR or DS_FILTER_AND
+		 * @return integer
+		 *  DataSource::FILTER_OR or DataSource::FILTER_AND
 		 */
 		public function __determineFilterType($value){
-			return (strpos($value, '+') === false) ? DS_FILTER_OR : DS_FILTER_AND;
+			return preg_match('/\s+\+\s+/', $string) ? DataSource::FILTER_AND : DataSource::FILTER_OR;
 		}
 
 		/**
@@ -189,11 +231,11 @@
 		 *  The environment variables from the Frontend class which includes
 		 *  any params set by Symphony or Events or by other Datasources
 		 */
-		public function processParameters(Array $env = array()){
+		public function processParameters(array $env = null){
 
 			if($env) $this->_env = $env;
 
-			if((isset($this->_env) && is_array($this->_env)) && is_array($this->dsParamFILTERS) && !empty($this->dsParamFILTERS)){
+			if((isset($this->_env) && is_array($this->_env)) && isset($this->dsParamFILTERS) && is_array($this->dsParamFILTERS) && !empty($this->dsParamFILTERS)){
 				foreach($this->dsParamFILTERS as $key => $value){
 					$value = stripslashes($value);
 					$new_value = $this->__processParametersInString($value, $this->_env);
@@ -225,12 +267,47 @@
 				$this->dsParamINCLUDEDELEMENTS = null; // don't query any fields in this section
 			}
 
-			$this->_param_output_only = ((!is_array($this->dsParamINCLUDEDELEMENTS) || empty($this->dsParamINCLUDEDELEMENTS)) && !isset($this->dsParamGROUP));
+			$this->_param_output_only = ((!isset($this->dsParamINCLUDEDELEMENTS) || !is_array($this->dsParamINCLUDEDELEMENTS) || empty($this->dsParamINCLUDEDELEMENTS)) && !isset($this->dsParamGROUP));
 
-			if($this->dsParamREDIRECTONEMPTY == 'yes' && $this->_force_empty_result){
+			if(isset($this->dsParamREDIRECTONEMPTY) && $this->dsParamREDIRECTONEMPTY == 'yes' && $this->_force_empty_result){
 				throw new FrontendPageNotFoundException;
 			}
+		}
 
+		/**
+		 * This function will parse a string (usually a URL) and fully evaluate any
+		 * parameters (defined by {$param}) to return the absolute string value.
+		 *
+		 * @since Symphony 2.3
+		 * @param string $url
+		 *  The string (usually a URL) that contains the parameters (or doesn't)
+		 * @return string
+		 *  The parsed URL
+		 */
+		public function parseParamURL($url = null) {
+			if(!isset($url)) return null;
+
+			// urlencode parameters
+			$params = array();
+
+			if(preg_match_all('@{([^}]+)}@i', $url, $matches, PREG_SET_ORDER)){
+				foreach($matches as $m){
+					$params[$m[1]] = array(
+						'param' => preg_replace('/:encoded$/', NULL, $m[1]),
+						'encode' => preg_match('/:encoded$/', $m[1])
+					);
+				}
+			}
+
+			foreach($params as $key => $info){
+				$replacement = $this->__processParametersInString($info['param'], $this->_env, false);
+				if($info['encode'] == true){
+					$replacement = urlencode($replacement);
+				}
+				$url = str_replace("{{$key}}", $replacement, $url);
+			}
+
+			return $url;
 		}
 
 		/**
@@ -251,13 +328,13 @@
 		 *  them to the parameter. By default this is true, which means all parameters
 		 *  in the string already are surrounded by {}
 		 * @param boolean $escape
-		 *  If set to true, the resulting value will be urlencoded before being returned.
+		 *  If set to true, the resulting value will be `urlencode`'d before being returned.
 		 *  By default this is false
 		 * @return string
 		 *  The string will all parameters evaluated. If a parameter was not found, it will
 		 *  not be replaced at all.
 		 */
-		public function __processParametersInString($value, Array $env, $includeParenthesis=true, $escape=false){
+		public function __processParametersInString($value, array $env, $includeParenthesis=true, $escape=false){
 			if(trim($value) == '') return null;
 
 			if(!$includeParenthesis) $value = '{'.$value.'}';
@@ -348,12 +425,14 @@
 
 			return null;
 		}
-
 	}
 
 	/**
 	 * A constant that represents if this filter is an AND filter in which
 	 * an Entry must match all these filters
+	 *
+	 * @deprecated This constant has been deprecated and will be removed in
+	 *  Symphony 2.4. Use DataSource::FILTER_AND instead
 	 * @var integer
 	 */
 	define_safe('DS_FILTER_AND', 1);
@@ -361,6 +440,15 @@
 	/**
 	 * A constant that represents if this filter is an OR filter in which an
 	 * entry can match any or all of these filters
+	 *
+	 * @deprecated This constant has been deprecated and will be removed in
+	 *  Symphony 2.4. Use DataSource::FILTER_AND instead
 	 * @var integer
 	 */
 	define_safe('DS_FILTER_OR', 2);
+
+	require_once(TOOLKIT . '/data-sources/class.datasource.author.php');
+	require_once(TOOLKIT . '/data-sources/class.datasource.section.php');
+	require_once(TOOLKIT . '/data-sources/class.datasource.static.php');
+	require_once(TOOLKIT . '/data-sources/class.datasource.dynamic_xml.php');
+	require_once(TOOLKIT . '/data-sources/class.datasource.navigation.php');

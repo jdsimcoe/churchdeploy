@@ -30,6 +30,11 @@
 		Bitter::stop('\}'),
 		
 		Bitter::rule(
+			Bitter::id('css-property-proprietry'),
+			Bitter::tag('property proprietry'),
+			Bitter::capture('-(moz|ms|webkit|khtml|o)-[a-z\-]+(?=:)', 's')
+		),
+		Bitter::rule(
 			Bitter::id('css-property'),
 			Bitter::tag('property'),
 			Bitter::capture('[a-z\-]+(?=:)', 's')
@@ -43,7 +48,8 @@
 			Bitter::id('css-string-double'),
 			Bitter::id('css-number'),
 			Bitter::id('css-color'),
-			Bitter::id('css-keyword')
+			Bitter::id('css-keyword'),
+			Bitter::id('css-keyword-proprietry')
 		),
 		
 		Bitter::id('css-comment')
@@ -57,6 +63,12 @@
 		Bitter::id('css-keyword'),
 		Bitter::tag('keyword'),
 		Bitter::capture('(!important|\b(xx-small|xx-large|xor|x-small|x-large|wider|wait|w-resize|visual|visible|url|uppercase|upper-roman|upper-latin|upper-alpha|underline|ultra-expanded|ultra-condensed|transparent|top|thin|thick|textfield|textarea|text-top|text-bottom|text|table-row-group|table-row|table-header-group|table-footer-group|table-column-group|table-column|table-cell|table-caption|table|sw-resize|super|sub|status-bar|static|square-button|square|space|source-over|source-out|source-in|source-atop|solid|smaller|small-caption|small-caps|small|sliderthumb-vertical|sliderthumb-horizontal|slider-vertical|slider-horizontal|show|serif|separate|semi-expanded|semi-condensed|searchfield-results-decoration|searchfield-results-button|searchfield-decoration|searchfield-cancel-button|searchfield|se-resize|scrollbartrack-vertical|scrollbartrack-horizontal|scrollbarthumb-vertical|scrollbarthumb-horizontal|scrollbargripper-vertical|scrollbargripper-horizontal|scrollbarbutton-up|scrollbarbutton-right|scrollbarbutton-left|scrollbarbutton-down|scroll|sans-serif|s-resize|run-in|rtl|right|ridge|rgba|rgb|repeat-y|repeat-x|repeat|relative|rect|read-write-plaintext-only|read-write|read-only|radio|push-button|progress|pre|pointer|plus-lighter|plus-darker|overline|outside|outset|open-quote|oblique|nw-resize|nowrap|normal|none|no-repeat|no-open-quote|no-close-quote|ne-resize|narrower|n-resize|move|middle|message-box|menulist-textfield|menulist-text|menulist-button|menulist|menu|medium|ltr|lowercase|lower-roman|lower-latin|lower-greek|lower-alpha|logical|listitem|listbox|list-item|lines|line-through|lighter|left|larger|large|justify|italic|invert|inside|inset|inline-table|inline-block|inline|inherit|ignore|icon|hsla|hsl|highlight|hide|hidden|help|groove|georgian|fixed|extra-expanded|extra-condensed|expanded|embed|element|e-resize|double|dotted|discard|disc|destination-over|destination-out|destination-in|destination-atop|default|decimal-leading-zero|decimal|dashed|crosshair|counters|counter|copy|condensed|collapse|close-quote|clear|circle|checkbox|center|caret|caption|capitalize|button-bevel|button|bottom|both|bolder|bold|block|blink|bidi-override|baseline|auto|attr|armenian|after-white-space|absolute))\b')
+	);
+	
+	Bitter::rule(
+		Bitter::id('css-keyword-proprietry'),
+		Bitter::tag('keyword proprietry'),
+		Bitter::capture('(-(moz|ms|webkit|khtml|o)-[a-z\-]+)\b')
 	);
 	
 /*------------------------------------------------------------------------------

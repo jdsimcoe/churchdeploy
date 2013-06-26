@@ -4,7 +4,7 @@
 	 */
 
 	/**
-	 * This page controls the creation and maintainence of Symphony
+	 * This page controls the creation and maintenance of Symphony
 	 * Sections through the Section Index and Section Editor.
 	 */
 	require_once(TOOLKIT . '/class.administrationpage.php');
@@ -14,15 +14,14 @@
 
 	Class contentBlueprintsSections extends AdministrationPage{
 
-		public $_errors;
+		public $_errors = array();
 
 		public function __viewIndex(){
 			$this->setPageType('table');
-			$this->setTitle(__('%1$s &ndash; %2$s', array(__('Symphony'), __('Sections'))));
+			$this->setTitle(__('%1$s &ndash; %2$s', array(__('Sections'), __('Symphony'))));
 			$this->appendSubheading(__('Sections'), Widget::Anchor(__('Create New'), Administration::instance()->getCurrentPageURL().'new/', __('Create a section'), 'create button', NULL, array('accesskey' => 'c')));
 
-			$sectionManager = new SectionManager($this->_Parent);
-			$sections = $sectionManager->fetch(NULL, 'ASC', 'sortorder');
+			$sections = SectionManager::fetch(NULL, 'ASC', 'sortorder');
 
 			$aTableHead = array(
 				array(__('Name'), 'col'),
@@ -41,16 +40,16 @@
 			else{
 				foreach($sections as $s){
 
-					$entry_count = intval(Symphony::Database()->fetchVar('count', 0, "SELECT count(*) AS `count` FROM `tbl_entries` WHERE `section_id` = '".$s->get('id')."' "));
+					$entry_count = EntryManager::fetchCount($s->get('id'));
 
-					## Setup each cell
+					// Setup each cell
 					$td1 = Widget::TableData(Widget::Anchor($s->get('name'), Administration::instance()->getCurrentPageURL() . 'edit/' . $s->get('id') .'/', NULL, 'content'));
 					$td2 = Widget::TableData(Widget::Anchor("$entry_count", SYMPHONY_URL . '/publish/' . $s->get('handle') . '/'));
 					$td3 = Widget::TableData($s->get('navigation_group'));
 
 					$td3->appendChild(Widget::Input('items['.$s->get('id').']', 'on', 'checkbox'));
 
-					## Add a row to the body array, assigning each cell to the row
+					// Add a row to the body array, assigning each cell to the row
 					$aTableBody[] = Widget::TableRow(array($td1, $td2, $td3));
 
 				}
@@ -92,36 +91,59 @@
 				}
 			}
 
-			$tableActions->appendChild(Widget::Select('with-selected', $options));
-			$tableActions->appendChild(Widget::Input('action[apply]', __('Apply'), 'submit'));
+			/**
+			 * Allows an extension to modify the existing options for this page's
+			 * With Selected menu. If the `$options` parameter is an empty array,
+			 * the 'With Selected' menu will not be rendered.
+			 *
+			 * @delegate AddCustomActions
+			 * @since Symphony 2.3.2
+			 * @param string $context
+			 * '/blueprints/sections/'
+			 * @param array $options
+			 *  An array of arrays, where each child array represents an option
+			 *  in the With Selected menu. Options should follow the same format
+			 *  expected by `Widget::__SelectBuildOption`. Passed by reference.
+			 */
+			Symphony::ExtensionManager()->notifyMembers('AddCustomActions', '/blueprints/sections/', array(
+				'options' => &$options
+			));
 
-			$this->Form->appendChild($tableActions);
+			if(!empty($options)) {
+				$tableActions->appendChild(Widget::Apply($options));
+				$this->Form->appendChild($tableActions);
+			}
 		}
 
 		public function __viewNew(){
-
 			$this->setPageType('form');
-			$this->setTitle(__('%1$s &ndash; %2$s', array(__('Symphony'), __('Sections'))));
+			$this->setTitle(__('%1$s &ndash; %2$s', array(__('Sections'), __('Symphony'))));
 			$this->appendSubheading(__('Untitled'));
+			$this->insertBreadcrumbs(array(
+				Widget::Anchor(__('Sections'), SYMPHONY_URL . '/blueprints/sections/'),
+			));
 
-			$fieldManager = new FieldManager($this->_Parent);
 			$types = array();
 
-			$fields = is_array($_POST['fields']) ? $_POST['fields'] : array();
-			$meta = $_POST['meta'];
+			$fields = (isset($_POST['fields']) && is_array($_POST['fields'])) ? $_POST['fields'] : array();
+			$meta = (isset($_POST['meta']) && is_array($_POST['meta'])) ? $_POST['meta'] : array('name'=>null);
 
 			$formHasErrors = (is_array($this->_errors) && !empty($this->_errors));
 
-			if($formHasErrors) $this->pageAlert(__('An error occurred while processing this form. <a href="#error">See below for details.</a>'), Alert::ERROR);
+			if($formHasErrors) {
+				$this->pageAlert(
+					__('An error occurred while processing this form. See below for details.')
+					, Alert::ERROR
+				);
+			}
 
 			$showEmptyTemplate = (is_array($fields) && !empty($fields) ? false : true);
 
 			if(!$showEmptyTemplate) ksort($fields);
 
-			$meta['entry_order'] = (isset($meta['entry_order']) ? $meta['entry_order'] : 'date');
 			$meta['hidden'] = (isset($meta['hidden']) ? 'yes' : 'no');
-			
-			// Set navigation group, if not already set 
+
+			// Set navigation group, if not already set
 			if(!isset($meta['navigation_group'])) {
 				$meta['navigation_group'] = (isset($this->_navigation[0]['name']) ? $this->_navigation[0]['name'] : __('Content'));
 			}
@@ -130,28 +152,27 @@
 			$fieldset->setAttribute('class', 'settings');
 			$fieldset->appendChild(new XMLElement('legend', __('Essentials')));
 
-			$div = new XMLElement('div', NULL, array('class' => 'group'));
-			$namediv = new XMLElement('div', NULL);
+			$div = new XMLElement('div', NULL, array('class' => 'two columns'));
+			$namediv = new XMLElement('div', NULL, array('class' => 'column'));
 
 			$label = Widget::Label(__('Name'));
-			$label->appendChild(Widget::Input('meta[name]', General::sanitize($meta['name'])));
+			$label->appendChild(Widget::Input('meta[name]', (isset($meta['name']) ? General::sanitize($meta['name']) : null)));
 
-			if(isset($this->_errors['name'])) $namediv->appendChild(Widget::wrapFormElementWithError($label, $this->_errors['name']));
+			if(isset($this->_errors['name'])) $namediv->appendChild(Widget::Error($label, $this->_errors['name']));
 			else $namediv->appendChild($label);
 
 			$label = Widget::Label();
-			$input = Widget::Input('meta[hidden]', 'yes', 'checkbox', ($meta['hidden'] == 'yes' ? array('checked' => 'checked') : NULL));
+			$input = Widget::Input('meta[hidden]', 'yes', 'checkbox', ($meta['hidden'] == 'yes' ? array('checked' => 'checked') : null));
 			$label->setValue(__('%s Hide this section from the back-end menu', array($input->generate(false))));
 			$namediv->appendChild($label);
 			$div->appendChild($namediv);
 
-			$navgroupdiv = new XMLElement('div', NULL);
-			$sectionManager = new SectionManager($this->_Parent);
-			$sections = $sectionManager->fetch(NULL, 'ASC', 'sortorder');
-			$label = Widget::Label(__('Navigation Group') . ' <i>' . __('Created if does not exist') . '</i>');
+			$navgroupdiv = new XMLElement('div', NULL, array('class' => 'column'));
+			$sections = SectionManager::fetch(NULL, 'ASC', 'sortorder');
+			$label = Widget::Label(__('Navigation Group'));
 			$label->appendChild(Widget::Input('meta[navigation_group]', $meta['navigation_group']));
 
-			if(isset($this->_errors['navigation_group'])) $navgroupdiv->appendChild(Widget::wrapFormElementWithError($label, $this->_errors['navigation_group']));
+			if(isset($this->_errors['navigation_group'])) $navgroupdiv->appendChild(Widget::Error($label, $this->_errors['navigation_group']));
 			else $navgroupdiv->appendChild($label);
 
 			if(is_array($sections) && !empty($sections)){
@@ -199,17 +220,16 @@
 			$fieldset->setAttribute('class', 'settings');
 			$fieldset->appendChild(new XMLElement('legend', __('Fields')));
 
-			$div = new XMLElement('div');
-			$p = new XMLElement('p', __('Fields'));
-			$p->setAttribute('class', 'label');
-			$div->appendChild($p);
+			$div = new XMLElement('div', null, array('class' => 'frame'));
 
 			$ol = new XMLElement('ol');
 			$ol->setAttribute('id', 'fields-duplicator');
+			$ol->setAttribute('data-add', __('Add field'));
+			$ol->setAttribute('data-remove', __('Remove field'));
 
 			if(!$showEmptyTemplate){
 				foreach($fields as $position => $data){
-					if($input = $fieldManager->create($data['type'])){
+					if($input = FieldManager::create($data['type'])){
 						$input->setArray($data);
 
 						$wrapper = new XMLElement('li');
@@ -222,8 +242,8 @@
 				}
 			}
 
-			foreach ($fieldManager->fetchTypes() as $type) {
-				if ($type = $fieldManager->create($type)) {
+			foreach (FieldManager::listAll() as $type) {
+				if ($type = FieldManager::create($type)) {
 					$types[] = $type;
 				}
 			}
@@ -263,48 +283,48 @@
 
 			$section_id = $this->_context[1];
 
-			$sectionManager = new SectionManager($this->_Parent);
-
-			if(!$section = $sectionManager->fetch($section_id)) {
-				Administration::instance()->customError(__('Unknown Section'), __('The Section you are looking for could not be found.'));
+			if(!$section = SectionManager::fetch($section_id)) {
+				Administration::instance()->throwCustomError(
+					__('The Section, %s, could not be found.', array($section_id)),
+					__('Unknown Section'),
+					Page::HTTP_STATUS_NOT_FOUND
+				);
 			}
 			$meta = $section->get();
-
-			$fieldManager = new FieldManager($this->_Parent);
+			$section_id = $meta['id'];
 			$types = array();
 
 			$formHasErrors = (is_array($this->_errors) && !empty($this->_errors));
-			if($formHasErrors) $this->pageAlert(__('An error occurred while processing this form. <a href="#error">See below for details.</a>'), Alert::ERROR);
-
-			if(isset($this->_context[2])){
-				switch($this->_context[2]){
-
+			if($formHasErrors) {
+				$this->pageAlert(
+					__('An error occurred while processing this form. See below for details.')
+					, Alert::ERROR
+				);
+			}
+			// These alerts are only valid if the form doesn't have errors
+			else if(isset($this->_context[2])) {
+				switch($this->_context[2]) {
 					case 'saved':
 						$this->pageAlert(
-							__(
-								'Section updated at %1$s. <a href="%2$s" accesskey="c">Create another?</a> <a href="%3$s" accesskey="a">View all Sections</a>',
-								array(
-									DateTimeObj::getTimeAgo(__SYM_TIME_FORMAT__),
-									SYMPHONY_URL . '/blueprints/sections/new/',
-									SYMPHONY_URL . '/blueprints/sections/'
-								)
-							),
-							Alert::SUCCESS);
+							__('Section updated at %s.', array(DateTimeObj::getTimeAgo()))
+							. ' <a href="' . SYMPHONY_URL . '/blueprints/sections/new/" accesskey="c">'
+							. __('Create another?')
+							. '</a> <a href="' . SYMPHONY_URL . '/blueprints/sections/" accesskey="a">'
+							. __('View all Sections')
+							. '</a>'
+							, Alert::SUCCESS);
 						break;
 
 					case 'created':
 						$this->pageAlert(
-							__(
-								'Section created at %1$s. <a href="%2$s" accesskey="c">Create another?</a> <a href="%3$s" accesskey="a">View all Sections</a>',
-								array(
-									DateTimeObj::getTimeAgo(__SYM_TIME_FORMAT__),
-									SYMPHONY_URL . '/blueprints/sections/new/',
-									SYMPHONY_URL . '/blueprints/sections/'
-								)
-							),
-							Alert::SUCCESS);
+							__('Section created at %s.', array(DateTimeObj::getTimeAgo()))
+							. ' <a href="' . SYMPHONY_URL . '/blueprints/sections/new/" accesskey="c">'
+							. __('Create another?')
+							. '</a> <a href="' . SYMPHONY_URL . '/blueprints/sections/" accesskey="a">'
+							. __('View all Sections')
+							. '</a>'
+							, Alert::SUCCESS);
 						break;
-
 				}
 			}
 
@@ -313,7 +333,7 @@
 
 				if(is_array($_POST['fields']) && !empty($_POST['fields'])){
 					foreach($_POST['fields'] as $position => $data){
-						if($fields[$position] = $fieldManager->create($data['type'])){
+						if($fields[$position] = FieldManager::create($data['type'])){
 							$fields[$position]->setArray($data);
 							$fields[$position]->set('sortorder', $position);
 						}
@@ -321,9 +341,10 @@
 				}
 			}
 
-			else $fields = $fieldManager->fetch(NULL, $section_id);
-
-			$meta['entry_order'] = (isset($meta['entry_order']) ? $meta['entry_order'] : 'date');
+			else {
+				$fields = FieldManager::fetch(NULL, $section_id);
+				$fields = array_values($fields);
+			}
 
 			if(isset($_POST['meta'])){
 				$meta = $_POST['meta'];
@@ -333,20 +354,25 @@
 			}
 
 			$this->setPageType('form');
-			$this->setTitle(__('%1$s &ndash; %2$s &ndash; %3$s', array(__('Symphony'), __('Sections'), $meta['name'])));
-			$this->appendSubheading($meta['name']);
+			$this->setTitle(__('%1$s &ndash; %2$s &ndash; %3$s', array($meta['name'], __('Sections'), __('Symphony'))));
+			$this->appendSubheading($meta['name'],
+				Widget::Anchor(__('View Entries'), SYMPHONY_URL . '/publish/' . $section->get('handle'), __('View Section Entries'), 'button')
+			);
+			$this->insertBreadcrumbs(array(
+				Widget::Anchor(__('Sections'), SYMPHONY_URL . '/blueprints/sections/'),
+			));
 
 			$fieldset = new XMLElement('fieldset');
 			$fieldset->setAttribute('class', 'settings');
 			$fieldset->appendChild(new XMLElement('legend', __('Essentials')));
 
-			$div = new XMLElement('div', NULL, array('class' => 'group'));
-			$namediv = new XMLElement('div', NULL);
+			$div = new XMLElement('div', NULL, array('class' => 'two columns'));
+			$namediv = new XMLElement('div', NULL, array('class' => 'column'));
 
 			$label = Widget::Label(__('Name'));
 			$label->appendChild(Widget::Input('meta[name]', General::sanitize($meta['name'])));
 
-			if(isset($this->_errors['name'])) $namediv->appendChild(Widget::wrapFormElementWithError($label, $this->_errors['name']));
+			if(isset($this->_errors['name'])) $namediv->appendChild(Widget::Error($label, $this->_errors['name']));
 			else $namediv->appendChild($label);
 
 			$label = Widget::Label();
@@ -355,13 +381,12 @@
 			$namediv->appendChild($label);
 			$div->appendChild($namediv);
 
-			$navgroupdiv = new XMLElement('div', NULL);
-			$sectionManager = new SectionManager($this->_Parent);
-			$sections = $sectionManager->fetch(NULL, 'ASC', 'sortorder');
-			$label = Widget::Label(__('Navigation Group') . ' <i>' . __('Choose only one. Created if does not exist') . '</i>');
+			$navgroupdiv = new XMLElement('div', NULL, array('class' => 'column'));
+			$sections = SectionManager::fetch(NULL, 'ASC', 'sortorder');
+			$label = Widget::Label(__('Navigation Group'));
 			$label->appendChild(Widget::Input('meta[navigation_group]', $meta['navigation_group']));
 
-			if(isset($this->_errors['navigation_group'])) $navgroupdiv->appendChild(Widget::wrapFormElementWithError($label, $this->_errors['navigation_group']));
+			if(isset($this->_errors['navigation_group'])) $navgroupdiv->appendChild(Widget::Error($label, $this->_errors['navigation_group']));
 			else $navgroupdiv->appendChild($label);
 
 			if(is_array($sections) && !empty($sections)){
@@ -405,17 +430,15 @@
 				'errors' => &$this->_errors
 			));
 
-			$fieldset = new XMLElement('fieldset');
-			$fieldset->setAttribute('class', 'settings');
+			$fieldset = new XMLElement('fieldset', null, array('id' => 'fields', 'class' => 'settings'));
 			$fieldset->appendChild(new XMLElement('legend', __('Fields')));
 
-			$div = new XMLElement('div');
-			$p = new XMLElement('p', __('Fields'));
-			$p->setAttribute('class', 'label');
-			$div->appendChild($p);
+			$div = new XMLElement('div', null, array('class' => 'frame'));
 
 			$ol = new XMLElement('ol');
 			$ol->setAttribute('id', 'fields-duplicator');
+			$ol->setAttribute('data-add', __('Add field'));
+			$ol->setAttribute('data-remove', __('Remove field'));
 
 			if(is_array($fields) && !empty($fields)){
 				foreach($fields as $position => $field){
@@ -430,8 +453,8 @@
 				}
 			}
 
-			foreach ($fieldManager->fetchTypes() as $type) {
-				if ($type = $fieldManager->create($type)) {
+			foreach (FieldManager::listAll() as $type) {
+				if ($type = FieldManager::create($type)) {
 					array_push($types, $type);
 				}
 			}
@@ -471,11 +494,26 @@
 			$this->Form->appendChild($div);
 		}
 
-		public function __actionIndex(){
-
+		public function __actionIndex() {
 			$checked = (is_array($_POST['items'])) ? array_keys($_POST['items']) : null;
 
 			if(is_array($checked) && !empty($checked)){
+				/**
+				 * Extensions can listen for any custom actions that were added
+				 * through `AddCustomPreferenceFieldsets` or `AddCustomActions`
+				 * delegates.
+				 *
+				 * @delegate CustomActions
+				 * @since Symphony 2.3.2
+				 * @param string $context
+				 *  '/blueprints/sections/'
+				 * @param array $checked
+				 *  An array of the selected rows. The value is usually the ID of the
+				 *  the associated object. 
+				 */
+				Symphony::ExtensionManager()->notifyMembers('CustomActions', '/blueprints/sections/', array(
+					'checked' => $checked
+				));
 
 				if($_POST['with-selected'] == 'delete') {
 					/**
@@ -490,16 +528,14 @@
 					 */
 					Symphony::ExtensionManager()->notifyMembers('SectionPreDelete', '/blueprints/sections/', array('section_ids' => &$checked));
 
-					$sectionManager = new SectionManager($this->_Parent);
-					foreach($checked as $section_id) $sectionManager->delete($section_id);
+					foreach($checked as $section_id) SectionManager::delete($section_id);
 
 					redirect(SYMPHONY_URL . '/blueprints/sections/');
 				}
 
 				else if($_POST['with-selected'] == 'delete-entries') {
-					$entryManager = new EntryManager($this->_Parent);
 					foreach($checked as $section_id) {
-						$entries = $entryManager->fetch(NULL, $section_id, NULL, NULL, NULL, NULL, false, false, null, false);
+						$entries = EntryManager::fetch(NULL, $section_id, NULL, NULL, NULL, NULL, false, false, null, false);
 						$entry_ids = array();
 						foreach($entries as $entry) {
 							$entry_ids[] = $entry['id'];
@@ -516,19 +552,17 @@
 						 */
 						Symphony::ExtensionManager()->notifyMembers('Delete', '/publish/', array('entry_id' => &$entry_ids));
 
-						$entryManager->delete($entry_ids, $section_id);
+						EntryManager::delete($entry_ids, $section_id);
 					}
 
 					redirect(SYMPHONY_URL . '/blueprints/sections/');
 				}
 
 				else if(preg_match('/^set-navigation-group-/', $_POST['with-selected'])) {
-					$sectionManager = new SectionManager($this->_Parent);
-
 					$navigation_group = preg_replace('/^set-navigation-group-/', null, $_POST['with-selected']);
 
 					foreach($checked as $section_id) {
-						$sectionManager->edit($section_id, array('navigation_group' => urldecode($navigation_group)));
+						SectionManager::edit($section_id, array('navigation_group' => urldecode($navigation_group)));
 					}
 
 					redirect(SYMPHONY_URL . '/blueprints/sections/');
@@ -544,62 +578,59 @@
 				$edit = ($this->_context[0] == "edit");
 				$this->_errors = array();
 
-				$fields = $_POST['fields'];
+				$fields = isset($_POST['fields']) ? $_POST['fields'] : array();
 				$meta = $_POST['meta'];
-
-				$fieldManager = new FieldManager($this->_Parent);
 
 				if($edit) {
 					$section_id = $this->_context[1];
-					$sectionManager = new SectionManager($this->_Parent);
-					$existing_section = $sectionManager->fetch($section_id);
+					$existing_section = SectionManager::fetch($section_id);
 				}
 
-				## Check to ensure all the required section fields are filled
+				// Check to ensure all the required section fields are filled
 				if(!isset($meta['name']) || strlen(trim($meta['name'])) == 0){
-					$required = array('Name');
 					$this->_errors['name'] = __('This is a required field.');
 					$canProceed = false;
 				}
 
-				## Check for duplicate section handle
+				// Check for duplicate section handle
 				elseif($edit) {
+					$s = SectionManager::fetchIDFromHandle(Lang::createHandle($meta['name']));
 					if(
-						$meta['name'] != $existing_section->get('name')
-						&& Symphony::Database()->fetchRow(0, "SELECT * FROM `tbl_sections` WHERE `handle` = '" . Lang::createHandle($meta['name']) . "' AND `id` != {$section_id} LIMIT 1")
-					){
-						$this->_errors['name'] = __('A Section with the name <code>%s</code> name already exists', array($meta['name']));
+						$meta['name'] !== $existing_section->get('name')
+						&& !is_null($s) && $s !== $section_id
+					) {
+						$this->_errors['name'] = __('A Section with the name %s already exists', array('<code>' . $meta['name'] . '</code>'));
 						$canProceed = false;
 					}
 				}
-				elseif(Symphony::Database()->fetchRow(0, "SELECT * FROM `tbl_sections` WHERE `handle` = '" . Lang::createHandle($meta['name']). "' LIMIT 1")){
-					$this->_errors['name'] = __('A Section with the name <code>%s</code> name already exists', array($meta['name']));
+				elseif(!is_null(SectionManager::fetchIDFromHandle(Lang::createHandle($meta['name'])))) {
+					$this->_errors['name'] = __('A Section with the name %s already exists', array('<code>' . $meta['name'] . '</code>'));
 					$canProceed = false;
 				}
 
-				## Check to ensure all the required section fields are filled
+				// Check to ensure all the required section fields are filled
 				if(!isset($meta['navigation_group']) || strlen(trim($meta['navigation_group'])) == 0){
-					$required = array('Navigation Group');
 					$this->_errors['navigation_group'] = __('This is a required field.');
 					$canProceed = false;
 				}
 
-				## Basic custom field checking
+				// Basic custom field checking
 				if(is_array($fields) && !empty($fields)){
-
-					## Check for duplicate CF names
+					// Check for duplicate CF names
 					if($canProceed) {
 						$name_list = array();
 
 						foreach($fields as $position => $data){
-							if(trim($data['element_name']) == '')
-								$data['element_name'] = $fields[$position]['element_name'] = Lang::createHandle($data['label'], NULL, '-', false, true, array('@^[\d-]+@i' => ''));
+							if(trim($data['element_name']) == '') {
+								$data['element_name'] = $fields[$position]['element_name'] = $_POST['fields'][$position]['element_name'] = Lang::createHandle($data['label'], 255, '-', false, true, array('@^[\d-]+@i' => ''));
+							}
 
 							if(trim($data['element_name']) != '' && in_array($data['element_name'], $name_list)){
-								$this->_errors[$position] = array('label' => __('Two custom fields have the same element name. All element names must be unique.'));
+								$this->_errors[$position] = array('element_name' => __('A field with this handle already exists. All handle must be unique.'));
 								$canProceed = false;
 								break;
 							}
+
 							$name_list[] = $data['element_name'];
 						}
 					}
@@ -608,24 +639,25 @@
 						$unique = array();
 
 						foreach($fields as $position => $data){
-							$required = NULL;
-
-							$field = $fieldManager->create($data['type']);
+							$field = FieldManager::create($data['type']);
 							$field->setFromPOST($data);
+
+							if(isset($existing_section)) {
+								$field->set('parent_section', $existing_section->get('id'));
+							}
 
 							if($field->mustBeUnique() && !in_array($field->get('type'), $unique)) $unique[] = $field->get('type');
 							elseif($field->mustBeUnique() && in_array($field->get('type'), $unique)){
-								## Warning. cannot have 2 of this field!
+								// Warning. cannot have 2 of this field!
 								$canProceed = false;
-								$this->_errors[$position] = array('label' => __('There is already a field of type <code>%s</code>. There can only be one per section.', array($field->handle())));
+								$this->_errors[$position] = array('label' => __('There is already a field of type %s. There can only be one per section.', array('<code>' . $field->handle() . '</code>')));
 							}
 
 							$errors = array();
 
-							if(Field::__OK__ != $field->checkFields($errors, false, false) && !empty($errors)){
+							if(Field::__OK__ != $field->checkFields($errors, false) && !empty($errors)){
 								$this->_errors[$position] = $errors;
 								$canProceed = false;
-								break;
 							}
 						}
 					}
@@ -636,11 +668,8 @@
 
 					// If we are creating a new Section
 					if(!$edit) {
-						$next = Symphony::Database()->fetchVar('next', 0, 'SELECT MAX(`sortorder`) + 1 AS `next` FROM tbl_sections LIMIT 1');
 
-						$meta['sortorder'] = ($next ? $next : '1');
-
-						$sectionManager = new SectionManager($this->_Parent);
+						$meta['sortorder'] = SectionManager::fetchNextSortOrder();
 
 						/**
 						 * Just prior to saving the Section settings. Use with caution as
@@ -660,7 +689,7 @@
 						 */
 						Symphony::ExtensionManager()->notifyMembers('SectionPreCreate', '/blueprints/sections/', array('meta' => &$meta, 'fields' => &$fields));
 
-						if(!$section_id = $sectionManager->add($meta)){
+						if(!$section_id = SectionManager::add($meta)){
 							$this->pageAlert(__('An unknown database occurred while attempting to create the section.'), Alert::ERROR);
 						}
 					}
@@ -689,7 +718,7 @@
 						 */
 						Symphony::ExtensionManager()->notifyMembers('SectionPreEdit', '/blueprints/sections/', array('section_id' => $section_id, 'meta' => &$meta, 'fields' => &$fields));
 
-						if(!$sectionManager->edit($section_id, $meta)){
+						if(!SectionManager::edit($section_id, $meta)){
 							$canProceed = false;
 							$this->pageAlert(__('An unknown database occurred while attempting to create the section.'), Alert::ERROR);
 						}
@@ -697,7 +726,7 @@
 
 					if($section_id && $canProceed) {
 						if($edit) {
-							## Delete missing CF's
+							// Delete missing CF's
 							$id_list = array();
 							if(is_array($fields) && !empty($fields)){
 								foreach($fields as $position => $data){
@@ -709,15 +738,15 @@
 
 							if(is_array($missing_cfs) && !empty($missing_cfs)){
 								foreach($missing_cfs as $id){
-									$fieldManager->delete($id);
+									FieldManager::delete($id);
 								}
 							}
 						}
 
-						## Save each custom field
+						// Save each custom field
 						if(is_array($fields) && !empty($fields)){
 							foreach($fields as $position => $data){
-								$field = $fieldManager->create($data['type']);
+								$field = FieldManager::create($data['type']);
 								$field->setFromPOST($data);
 								$field->set('sortorder', (string)$position);
 								$field->set('parent_section', $section_id);
@@ -725,11 +754,9 @@
 								$newField = !(boolean)$field->get('id');
 
 								$field->commit();
-
 								$field_id = $field->get('id');
 
-								if($field_id){
-
+								if($field_id) {
 									if($newField) {
 										/**
 										 * After creation of a Field.
@@ -801,7 +828,6 @@
 
 			if(@array_key_exists("delete", $_POST['action'])){
 				$section_id = array($this->_context[1]);
-				$sectionManager = new SectionManager($this->_Parent);
 
 				/**
 				 * Just prior to calling the Section Manager's delete function
@@ -815,7 +841,7 @@
 				 */
 				Symphony::ExtensionManager()->notifyMembers('SectionPreDelete', '/blueprints/sections/', array('section_ids' => &$section_id));
 
-				foreach($section_id as $section) $sectionManager->delete($section);
+				foreach($section_id as $section) SectionManager::delete($section);
 				redirect(SYMPHONY_URL . '/blueprints/sections/');
 			}
 		}

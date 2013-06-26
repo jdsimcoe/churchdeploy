@@ -3,18 +3,21 @@
 	/**
 	 * @package toolkit
 	 */
+
+	require_once FACE . '/interface.exportablefield.php';
+	require_once FACE . '/interface.importablefield.php';
+
 	/**
 	 * Checkbox field simulates a HTML checkbox field, in that it represents a
-	 * simple yes/no field. Optionally a Developer can give a Checkbox field a
-	 * long description for the Publish page, as well as referencing the Checkbox
-	 * field with it's short name.
+	 * simple yes/no field.
 	 */
-	Class fieldCheckbox extends Field {
-
-		public function __construct(&$parent){
-			parent::__construct($parent);
+	class FieldCheckbox extends Field implements ExportableField, ImportableField {
+		public function __construct(){
+			parent::__construct();
 			$this->_name = __('Checkbox');
+			$this->_required = true;
 
+			$this->set('required', 'no');
 			$this->set('location', 'sidebar');
 		}
 	/*-------------------------------------------------------------------------
@@ -32,7 +35,7 @@
 			);
 		}
 
-		public function toggleFieldData($data, $newState){
+		public function toggleFieldData(array $data, $newState, $entry_id=null){
 			$data['value'] = $newState;
 			return $data;
 		}
@@ -41,15 +44,15 @@
 			return true;
 		}
 
-		public function canImport(){
-			return true;
-		}
-
 		public function isSortable(){
 			return true;
 		}
 
 		public function allowDatasourceOutputGrouping(){
+			return true;
+		}
+
+		public function allowDatasourceParamOutput(){
 			return true;
 		}
 
@@ -66,7 +69,7 @@
 				  PRIMARY KEY  (`id`),
 				  UNIQUE KEY `entry_id` (`entry_id`),
 				  KEY `value` (`value`)
-				) ENGINE=MyISAM;
+				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 			");
 		}
 
@@ -74,29 +77,26 @@
 		Settings:
 	-------------------------------------------------------------------------*/
 
-		public function findDefaults(&$fields){
-			if(!isset($fields['default_state'])) $fields['default_state'] = 'off';
+		public function findDefaults(array &$settings){
+			if(!isset($settings['default_state'])) $settings['default_state'] = 'off';
 		}
 
-		public function displaySettingsPanel(&$wrapper, $errors = null) {
+		public function displaySettingsPanel(XMLElement &$wrapper, $errors = null) {
 			parent::displaySettingsPanel($wrapper, $errors);
 
-			## Long Description
-			$label = Widget::Label(__('Long Description'));
-			$label->appendChild(new XMLElement('i', __('Optional')));
-			$label->appendChild(Widget::Input('fields['.$this->get('sortorder').'][description]', $this->get('description')));
-			$wrapper->appendChild($label);
+			$div = new XMLElement('div', NULL, array('class' => 'two columns'));
+			$this->appendRequiredCheckbox($div);
+			$this->appendShowColumnCheckbox($div);
+			$wrapper->appendChild($div);
 
-			$div = new XMLElement('div', NULL, array('class' => 'compact'));
-
-			## Checkbox Default State
+			// Checkbox Default State
+			$div = new XMLElement('div', NULL, array('class' => 'two columns'));
 			$label = Widget::Label();
+			$label->setAttribute('class', 'column');
 			$input = Widget::Input('fields['.$this->get('sortorder').'][default_state]', 'on', 'checkbox');
 			if($this->get('default_state') == 'on') $input->setAttribute('checked', 'checked');
 			$label->setValue(__('%s Checked by default', array($input->generate())));
 			$div->appendChild($label);
-
-			$this->appendShowColumnCheckbox($div);
 			$wrapper->appendChild($div);
 		}
 
@@ -109,22 +109,18 @@
 
 			$fields = array();
 
-			$fields['field_id'] = $id;
 			$fields['default_state'] = ($this->get('default_state') ? $this->get('default_state') : 'off');
-			if(trim($this->get('description')) != '') $fields['description'] = $this->get('description');
 
-			Symphony::Database()->query("DELETE FROM `tbl_fields_".$this->handle()."` WHERE `field_id` = '$id' LIMIT 1");
-			return Symphony::Database()->insert($fields, 'tbl_fields_' . $this->handle());
+			return FieldManager::saveSettings($id, $fields);
 		}
 
 	/*-------------------------------------------------------------------------
 		Publish:
 	-------------------------------------------------------------------------*/
 
-		public function displayPublishPanel(&$wrapper, $data=NULL, $flagWithError=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL, $entry_id = null){
-
+		public function displayPublishPanel(XMLElement &$wrapper, $data = null, $flagWithError = null, $fieldnamePrefix = null, $fieldnamePostfix = null, $entry_id = null){
 			if(!$data){
-				## TODO: Don't rely on $_POST
+				// TODO: Don't rely on $_POST
 				if(isset($_POST) && !empty($_POST)) $value = 'no';
 				elseif($this->get('default_state') == 'on') $value = 'yes';
 				else $value = 'no';
@@ -133,14 +129,34 @@
 			else $value = ($data['value'] == 'yes' ? 'yes' : 'no');
 
 			$label = Widget::Label();
+			if($this->get('required') != 'yes') $label->appendChild(new XMLElement('i', __('Optional')));
 			$input = Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, 'yes', 'checkbox', ($value == 'yes' ? array('checked' => 'checked') : NULL));
 
-			$label->setValue($input->generate(false) . ' ' . ($this->get('description') != NULL ? $this->get('description') : $this->get('label')));
+			$label->setValue($input->generate(false) . ' ' . $this->get('label'));
 
-			$wrapper->appendChild($label);
+			if($flagWithError != NULL) $wrapper->appendChild(Widget::Error($label, $flagWithError));
+			else $wrapper->appendChild($label);
 		}
 
-		public function processRawFieldData($data, &$status, $simulate=false, $entry_id=NULL){
+		public function checkPostFieldData($data, &$message, $entry_id = null){
+			$message = NULL;
+
+			// Check if any value was passed
+			$has_no_value = is_array($data) ? empty($data) : strlen(trim($data)) == 0;
+			// Check that the value passed was 'on' or 'yes', if it's not
+			// then the field has 'no value' in the context of being required. RE: #1569
+			$has_no_value = ($has_no_value === false) ? !in_array(strtolower($data), array('on', 'yes')) : false;
+
+			if ($this->get('required') == 'yes' && $has_no_value) {
+				$message = __('‘%s’ is a required field.', array($this->get('label')));
+
+				return self::__MISSING_FIELDS__;
+			}
+
+			return self::__OK__;
+		}
+
+		public function processRawFieldData($data, &$status, &$message=null, $simulate = false, $entry_id = null){
 			$status = self::__OK__;
 
 			return array(
@@ -152,21 +168,112 @@
 		Output:
 	-------------------------------------------------------------------------*/
 
-		public function appendFormattedElement(&$wrapper, $data, $encode=false, $mode=NULL, $entry_id=NULL) {
+		public function appendFormattedElement(XMLElement &$wrapper, $data, $encode = false, $mode = null, $entry_id = null) {
 			$value = ($data['value'] == 'yes' ? 'Yes' : 'No');
 
 			$wrapper->appendChild(new XMLElement($this->get('element_name'), ($encode ? General::sanitize($value) : $value)));
 		}
 
 		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id = null){
-			return ($data['value'] == 'yes' ? __('Yes') : __('No'));
+			return $this->prepareExportValue($data, ExportableField::VALUE, $entry_id);
+		}
+
+		public function getParameterPoolValue(array $data, $entry_id = null){
+			return $this->prepareExportValue($data, ExportableField::POSTDATA, $entry_id);
+		}
+
+	/*-------------------------------------------------------------------------
+		Import:
+	-------------------------------------------------------------------------*/
+
+		public function getImportModes() {
+			return array(
+				'getValue' =>		ImportableField::STRING_VALUE,
+				'getPostdata' =>	ImportableField::ARRAY_VALUE
+			);
+		}
+
+		public function prepareImportValue($data, $mode, $entry_id = null) {
+			$value = $status = $message = null;
+			$modes = (object)$this->getImportModes();
+
+			$value = $this->processRawFieldData($data, $status, $message, true, $entry_id);
+
+			if($mode === $modes->getValue) {
+				return $value['value'];
+			}
+			else if($mode === $modes->getPostdata) {
+				return $value;
+			}
+
+			return null;
+		}
+
+	/*-------------------------------------------------------------------------
+		Export:
+	-------------------------------------------------------------------------*/
+
+		/**
+		 * Return a list of supported export modes for use with `prepareExportValue`.
+		 *
+		 * @return array
+		 */
+		public function getExportModes() {
+			return array(
+				'getBoolean' =>		ExportableField::BOOLEAN,
+				'getValue' =>		ExportableField::VALUE,
+				'getPostdata' =>	ExportableField::POSTDATA
+			);
+		}
+
+		/**
+		 * Give the field some data and ask it to return a value using one of many
+		 * possible modes.
+		 *
+		 * @param mixed $data
+		 * @param integer $mode
+		 * @param integer $entry_id
+		 * @return string|boolean|null
+		 */
+		public function prepareExportValue($data, $mode, $entry_id = null) {
+			$modes = (object)$this->getExportModes();
+
+			// Export unformatted:
+			if ($mode === $modes->getPostdata) {
+				return (
+					isset($data['value'])
+					&& $data['value'] == 'yes'
+						? 'yes'
+						: 'no'
+				);
+			}
+
+			// Export formatted:
+			else if ($mode === $modes->getValue) {
+				return (
+					isset($data['value'])
+					&& $data['value'] == 'yes'
+						? __('Yes')
+						: __('No')
+				);
+			}
+
+			// Export boolean:
+			else if ($mode === $modes->getBoolean) {
+				return (
+					isset($data['value'])
+					&& $data['value'] == 'yes'
+				);
+			}
+
+			return null;
 		}
 
 	/*-------------------------------------------------------------------------
 		Filtering:
 	-------------------------------------------------------------------------*/
 
-		public function displayDatasourceFilterPanel(&$wrapper, $data=NULL, $errors=NULL, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
+		public function displayDatasourceFilterPanel(XMLElement &$wrapper, $data = null, $errors = null, $fieldnamePrefix=NULL, $fieldnamePostfix=NULL){
 			parent::displayDatasourceFilterPanel($wrapper, $data, $errors, $fieldnamePrefix, $fieldnamePostfix);
 
 			$existing_options = array('yes', 'no');
@@ -228,17 +335,17 @@
 
 				if(strpos($data, $default_state) !== false) {
 					$where .= "
-				    	AND (
-				    		t{$field_id}_{$this->_key}.value IN ('{$data}')
-				            OR
-				            t{$field_id}_{$this->_key}.value IS NULL
-				    	)
-				    ";
+						AND (
+							t{$field_id}_{$this->_key}.value IN ('{$data}')
+							OR
+							t{$field_id}_{$this->_key}.value IS NULL
+						)
+					";
 				}
 				else {
 					$where .= "
-				        AND (t{$field_id}_{$this->_key}.value IN ('{$data}'))
-				    ";
+						AND (t{$field_id}_{$this->_key}.value IN ('{$data}'))
+					";
 				}
 			}
 
@@ -272,7 +379,6 @@
 	-------------------------------------------------------------------------*/
 
 		public function groupRecords($records){
-
 			if(!is_array($records) || empty($records)) return;
 
 			$groups = array($this->get('element_name') => array());
@@ -302,7 +408,7 @@
 
 		public function getExampleFormMarkup(){
 			$label = Widget::Label($this->get('label'));
-			$label->appendChild(Widget::Input('fields['.$this->get('element_name').']', NULL, 'checkbox', ($this->get('default_state') == 'on' ? array('checked' => 'checked') : NULL)));
+			$label->appendChild(Widget::Input('fields['.$this->get('element_name').']', 'yes', 'checkbox', ($this->get('default_state') == 'on' ? array('checked' => 'checked') : NULL)));
 
 			return $label;
 		}

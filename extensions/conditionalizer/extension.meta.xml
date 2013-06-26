@@ -1,0 +1,43 @@
+<extension id="conditionalizer" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Conditionalizer</name>
+	<description>Conditionalizer allows to use expressions to conditionally filter a data source by URL parameters (`{$param}` syntax). The same expressions can also be used to conditionally prevent entries from being saved.</description>
+	<repo type="github">https://github.com/ahwayakchih/conditionalizer</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/774/</url>
+	<url type="issues">https://github.com/ahwayakchih/conditionalizer/issues</url>
+	<types>
+		<type>Data Sources</type>
+		<type>Field Types</type>
+		<type>Workflow</type>
+	</types>
+	<authors>
+		<author>
+			<name github="ahwayakchih" symphony="ahwayakchih">Marcin Konicki</name>
+			<email>ahwayakchih@neoni.net</email>
+			<website>http://ahwayakchih.neoni.net</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="1.2.2" date="2012-07-11" min="2.3">
+			- Fixed crash error reported by bzerangue.
+		</release>
+		<release version="1.2.1" date="2012-06-28" min="2.3">
+			- Fixed handling of whitespace inside values used in expression.
+			- Expression input fields are now textareas.
+			- Shows nice error box after conditions were not met for saving an entry.
+		</release>
+		<release version="1.2" date="2012-06-27" min="2.3">
+			- Update for Symphony 2.3. This drops compatibility with Symphony 2.2.
+			- Changed name from `filterfield` to `conditionalizer`.
+			- Fields are not required to set conditions for data-source.
+			- Conditions can be set for any type of data-source, e.g., Dynamic XML.
+		</release>
+		<release version="1.1" date="2011-04-25" min="2.0.2" max="2.2.x">
+			- Allow using an expression to prevent an entry from being saved.
+			- Value filtering expressions can now use {XPath}.
+			- Filter field will now store `yes` or `no` (when field expression evaluates to `false`) value in database.</release>
+		<release version="1.0" date="2009-03-12" min="2.0.2" max="2.2.x">Initial release.</release>
+	</releases>
+	<media>
+		<item type="image" url="https://github.com/ahwayakchih/conditionalizer/raw/master/screenshots/flyer.png">Screenshots.</item>
+	</media>
+</extension>
