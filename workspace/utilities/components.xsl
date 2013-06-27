@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:include href="../themes/active/xsl/alerts.xsl" />
-<xsl:include href="../themes/active/xsl/blog.xsl" />
-<xsl:include href="../themes/active/xsl/downloads.xsl" />
-<xsl:include href="../themes/active/xsl/events.xsl" />
-<xsl:include href="../themes/active/xsl/featured.xsl" />
-<xsl:include href="../themes/active/xsl/images.xsl" />
-<xsl:include href="../themes/active/xsl/locations.xsl" />
-<xsl:include href="../themes/active/xsl/members-roles.xsl" />
-<xsl:include href="../themes/active/xsl/search.xsl" />
-<xsl:include href="../themes/active/xsl/spacer.xsl" />
-<xsl:include href="../themes/active/xsl/teachings.xsl" />
-<xsl:include href="../themes/active/xsl/text.xsl" />
-<xsl:include href="../themes/active/xsl/verses.xsl" />
-<xsl:include href="../themes/active/xsl/videos.xsl" />
+<xsl:import href="../themes/active/xsl/alerts.xsl" />
+<xsl:import href="../themes/active/xsl/blog.xsl" />
+<xsl:import href="../themes/active/xsl/downloads.xsl" />
+<xsl:import href="../themes/active/xsl/events.xsl" />
+<xsl:import href="../themes/active/xsl/featured.xsl" />
+<xsl:import href="../themes/active/xsl/images.xsl" />
+<xsl:import href="../themes/active/xsl/locations.xsl" />
+<xsl:import href="../themes/active/xsl/members-roles.xsl" />
+<!-- <xsl:include href="../themes/active/xsl/search.xsl" /> -->
+<xsl:import href="../themes/active/xsl/spacer.xsl" />
+<xsl:import href="../themes/active/xsl/teachings.xsl" />
+<xsl:import href="../themes/active/xsl/text.xsl" />
+<xsl:import href="../themes/active/xsl/verses.xsl" />
+<xsl:import href="../themes/active/xsl/videos.xsl" />
 
 
 <xsl:template name="component">
@@ -145,12 +145,12 @@
 				<xsl:with-param name="entries" select="//members-roles-entries-by-tag/entry" />
 			</xsl:call-template>
 		</xsl:if>
-		<xsl:if test=". = 'search'">
+		<!-- <xsl:if test=". = 'search'">
 			<xsl:call-template name="component-search">
 				<xsl:with-param name="position" select="name($xpath)" />
 				<xsl:with-param name="entries" select="//search/entry" />
 			</xsl:call-template>
-		</xsl:if>
+		</xsl:if> -->
 		<xsl:if test=". = 'spacer'">
 			<xsl:call-template name="component-spacer" />
 		</xsl:if>
@@ -313,9 +313,8 @@ All URL helpers can now be replaced with "url-prefix"
 <xsl:template name="url-search-home">
 	<xsl:param name="url-only" select="false()" />
 	<xsl:variable name="url">
-    <xsl:call-template name="url-prefix">
-      <xsl:with-param name="handle" select="'search'" />
-    </xsl:call-template>
+    <xsl:value-of select="$root"/>
+		<xsl:text>/search/</xsl:text>
 	</xsl:variable>
 	<xsl:choose>
 		<xsl:when test="$url-only">
@@ -435,9 +434,8 @@ All URL helpers can now be replaced with "url-prefix"
 
 <xsl:template name="form-search-action">
 	<xsl:attribute name="action">
-    <xsl:call-template name="url-prefix">
-      <xsl:with-param name="handle" select="'search'" />
-    </xsl:call-template>
+   <xsl:value-of select="$root" />
+	 <xsl:text>/search/</xsl:text>
 	</xsl:attribute>
 </xsl:template>
 
