@@ -2,7 +2,7 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceteachings_6_latest extends Datasource{
+	Class datasourceteachings_6_latest extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-6-latest';
 		public $dsParamORDER = 'desc';
@@ -12,19 +12,22 @@
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'date';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		
 
 		public $dsParamFILTERS = array(
 				'216' => 'no',
+				'280' => 'no',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'title',
+				'title: unformatted',
 				'slug',
 				'filename',
 				'current-id',
 				'book',
 				'chapter',
-				'description: raw',
+				'description: unformatted',
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
@@ -36,41 +39,40 @@
 				'video: player',
 				'video: id',
 				'day',
-				'tags: tag',
 				'featured'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Teachings: 6 latest',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-06-05T18:48:03+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-06-27T15:17:38+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '13';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -83,8 +85,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}
