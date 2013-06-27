@@ -9,7 +9,6 @@
 <xsl:import href="../themes/active/xsl/images.xsl" />
 <xsl:import href="../themes/active/xsl/locations.xsl" />
 <xsl:import href="../themes/active/xsl/members-roles.xsl" />
-<!-- <xsl:include href="../themes/active/xsl/search.xsl" /> -->
 <xsl:import href="../themes/active/xsl/spacer.xsl" />
 <xsl:import href="../themes/active/xsl/teachings.xsl" />
 <xsl:import href="../themes/active/xsl/text.xsl" />
@@ -88,7 +87,6 @@
 				</xsl:when>
 				<!-- Current entries -->
 				<xsl:when test="$pt2 = 'events'">
-					<!-- <xsl:when test="count(//events-all-entries-filtered/entry)"> -->
 					<xsl:call-template name="component-events">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="//events-all-entries-filtered/entry" />
@@ -145,12 +143,6 @@
 				<xsl:with-param name="entries" select="//members-roles-entries-by-tag/entry" />
 			</xsl:call-template>
 		</xsl:if>
-		<!-- <xsl:if test=". = 'search'">
-			<xsl:call-template name="component-search">
-				<xsl:with-param name="position" select="name($xpath)" />
-				<xsl:with-param name="entries" select="//search/entry" />
-			</xsl:call-template>
-		</xsl:if> -->
 		<xsl:if test=". = 'spacer'">
 			<xsl:call-template name="component-spacer" />
 		</xsl:if>
