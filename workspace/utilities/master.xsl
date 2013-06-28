@@ -199,15 +199,15 @@
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:if>
-			<xsl:value-of select="data/misc-all-entries/entry[name='meta-page-title']/content" />
+			<xsl:value-of select="$main-pagetitle" />
 		</xsl:variable>
 		<title>
 			<xsl:value-of select="$page-title" />
 		</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="{data/misc-all-entries/entry[name='meta-description']/content}" />
-		<meta name="keywords" content="{data/misc-all-entries/entry[name='meta-keywords']/content}" />
+		<meta name="description" content="{$main-meta-description}" />
+		<meta name="keywords" content="{$main-meta-keywords}" />
 		<meta name="author" content="{$website-name}" />
 		<meta name="application-name" content="{$website-name}" />
 		<meta name="msapplication-tooltip" content="{$page-title}" />
@@ -230,7 +230,7 @@
 		<meta property="og:url" content="{$root}" />
 		<meta property="og:image" content="{$workspace}/themes/active/img/apple-touch-icon.png" />
 		<meta property="og:title" content="{$page-title}" />
-		<meta property="og:description" content="{//misc-all-entries/entry[name='meta-description']/content}" />
+		<meta property="og:description" content="{$main-meta-description}" />
 		<link href="{$workspace}/themes/active/img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		<link rel="apple-touch-icon-precomposed" href="{$workspace}/themes/active/img/apple-touch-icon.png" />
 		<xsl:call-template name="template-head" />
