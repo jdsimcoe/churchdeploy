@@ -23,9 +23,11 @@
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
+				'title: unformatted',
 				'filename',
 				'book',
 				'chapter',
+				'description: unformatted',
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
@@ -48,7 +50,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-06-28T15:26:26+00:00'
+				'release-date' => '2013-06-28T15:33:11+00:00'
 			);
 		}
 
