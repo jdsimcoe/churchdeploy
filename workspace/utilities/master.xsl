@@ -136,36 +136,51 @@
 			<xsl:call-template name="css-hide-all"/>
 		</xsl:if>
 		<xsl:if test="not(number($pt1)) and string-length($pt1) and not($pt1 = 'toolkit')">
-			<meta http-equiv="refresh">
-				<xsl:variable name="redirect-id" select="data/tags-all-entries/entry[tag/@handle = $pt1]/@id" />
-				<xsl:attribute name="content">
-					<xsl:text>0;url=</xsl:text>
-					<xsl:value-of select="$root" />
+			<xsl:variable name="redirect-id" select="data/tags-all-entries/entry[tag/@handle = $pt1]/@id" />
+			<xsl:variable name="redirect-URL">
+				<xsl:if test="string-length($redirect-id)">
+					<xsl:value-of select="$redirect-id" />
 					<xsl:text>/</xsl:text>
-					<xsl:if test="string-length($redirect-id)">
-						<xsl:value-of select="$redirect-id" />
+					<xsl:value-of select="$pt1" />
+					<xsl:text>/</xsl:text>
+					<xsl:if test="$pt2">
+						<xsl:value-of select="$pt2" />
 						<xsl:text>/</xsl:text>
-						<xsl:value-of select="$pt1" />
-						<xsl:text>/</xsl:text>
-						<xsl:if test="$pt2">
-							<xsl:value-of select="$pt2" />
-							<xsl:text>/</xsl:text>
-						</xsl:if>
-						<xsl:if test="$pt3">
-							<xsl:value-of select="$pt3" />
-							<xsl:text>/</xsl:text>
-						</xsl:if>
-						<xsl:if test="$pt4">
-							<xsl:value-of select="$pt4" />
-							<xsl:text>/</xsl:text>
-						</xsl:if>
-						<xsl:if test="$pt5">
-							<xsl:value-of select="$pt5" />
-							<xsl:text>/</xsl:text>
-						</xsl:if>
 					</xsl:if>
-				</xsl:attribute>
-			</meta>
+					<xsl:if test="$pt3">
+						<xsl:value-of select="$pt3" />
+						<xsl:text>/</xsl:text>
+					</xsl:if>
+					<xsl:if test="$pt4">
+						<xsl:value-of select="$pt4" />
+						<xsl:text>/</xsl:text>
+					</xsl:if>
+					<xsl:if test="$pt5">
+						<xsl:value-of select="$pt5" />
+						<xsl:text>/</xsl:text>
+					</xsl:if>
+				</xsl:if>
+			</xsl:variable>
+			<xsl:variable name="redirect-js">
+				<xsl:text>window.setTimeout(function(){window.location.href='</xsl:text>
+				<xsl:value-of select="$root" />
+				<xsl:text>/</xsl:text>
+				<xsl:value-of select="$redirect-URL"/>
+				<xsl:text>'},0);</xsl:text>
+			</xsl:variable>
+			<script>
+				<xsl:value-of select="$redirect-js"/>
+			</script>
+			<noscript>
+				<meta http-equiv="refresh">	
+					<xsl:attribute name="content">
+						<xsl:text>0;url=</xsl:text>
+						<xsl:value-of select="$root" />
+						<xsl:text>/</xsl:text>
+						<xsl:value-of select="$redirect-URL"/>
+					</xsl:attribute>
+				</meta>
+			</noscript>
 			<xsl:call-template name="css-hide-all"/>
 		</xsl:if>
 		<xsl:variable name="page-title">
