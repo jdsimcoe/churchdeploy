@@ -2,9 +2,9 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceitunes_podcast extends SectionDatasource {
+	Class datasourcepodcast_video extends SectionDatasource {
 
-		public $dsParamROOTELEMENT = 'itunes-podcast';
+		public $dsParamROOTELEMENT = 'podcast-video';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '1000';
@@ -17,6 +17,7 @@
 		
 
 		public $dsParamFILTERS = array(
+				'271' => 'yes',
 				'216' => 'no',
 				'280' => 'no',
 		);
@@ -31,8 +32,8 @@
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
-				'audio-duration',
-				'audio-filesize',
+				'video-duration',
+				'video-filesize',
 				'hide'
 		);
 		
@@ -44,13 +45,13 @@
 
 		public function about() {
 			return array(
-				'name' => 'iTunes Podcast',
+				'name' => 'Podcast: Video',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-06-28T15:33:11+00:00'
+				'release-date' => '2013-06-28T22:55:48+00:00'
 			);
 		}
 
