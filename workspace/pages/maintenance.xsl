@@ -12,7 +12,7 @@
 <xsl:template match="/">
     <style type="text/css" media="screen">
         body {
-            background: #9fc9d4;
+            background: #bfdae0;
         }
         .logo {
             height: 300px;
@@ -25,19 +25,19 @@
             font-size: 36px;
             font-weight: 300;
             line-height: 1.4;
+						padding: 0 20px;
             text-align: center;
             text-transform: uppercase;
-            width: 70%
-            text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+            text-shadow: 0 1px 2px #94bcc6;
         }
         h1 span {
             font-weight: bold;
         }
     </style>
     <div class="logo">
-        <img src="http://atheycreek.com/workspace/uploads/images/leaderboards/logo-big-4fbe1f82408e2.png" height="300px" width="300px" />
+        <img src="http://atheycreek.com/workspace/themes/active/img/apple-touch-icon.png" height="300px" width="300px" />
     </div>
-	<h1><span><xsl:value-of select="$page-title" /></span> is currently under contruction. Check back soon.</h1>
+	<h1><span>AtheyCreek.com</span> is currently under contruction.<br/>Please check back soon.</h1>
 </xsl:template>
 
 </xsl:stylesheet>
