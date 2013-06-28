@@ -48,7 +48,7 @@
       <itunes:image>
         <xsl:attribute name="href">
           <xsl:value-of select="$root" />
-          <xsl:text>/workspace/themes/active/img/itunes-podcast.jpg</xsl:text>
+          <xsl:text>/workspace/themes/active/img/podcast-audio.jpg</xsl:text>
         </xsl:attribute>
       </itunes:image>
       <!-- iTunes Browse Podcasts Category -->
@@ -87,7 +87,7 @@
           <itunes:image>
             <xsl:attribute name="href">
               <xsl:value-of select="$root" />
-              <xsl:text>/workspace/themes/active/img/itunes-podcast.jpg</xsl:text>
+              <xsl:text>/workspace/themes/active/img/podcast-audio.jpg</xsl:text>
             </xsl:attribute>
           </itunes:image>
           <enclosure>
