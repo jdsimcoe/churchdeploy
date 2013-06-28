@@ -47,7 +47,10 @@
                         <xsl:value-of select="title" />
                         <xsl:text> (</xsl:text>
                         <xsl:value-of select="translate(filename,$en-lowercase-letters,$en-uppercase-letters)"/>
-                        <xsl:text>)</xsl:text>
+                        <xsl:text>) by </xsl:text>
+                        <xsl:value-of select="speaker/item/first-name" />
+                        <xsl:text>&#160;</xsl:text>
+                        <xsl:value-of select="speaker/item/last-name" />
                     </title>
                     <itunes:author>
                         <xsl:value-of select="speaker/item/first-name" />
