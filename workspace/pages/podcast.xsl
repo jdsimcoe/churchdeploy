@@ -39,7 +39,7 @@
             </itunes:category>
             <itunes:keywords>Brett Meador, Athey Creek Christian Fellowship, Athey Creek, Day by Day, Through the Bible, Scripture, Jesus, Portland, Wilsonville, Oregon, PDX</itunes:keywords>
             <!-- Start Sermon Information -->
-            <xsl:for-each select="//itunes-podcast/entry[hide = 'No']">
+            <xsl:for-each select="//itunes-podcast/entry">
                 <item>
                     <title>
                         <xsl:variable name="en-lowercase-letters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
