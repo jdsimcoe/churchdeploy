@@ -1,191 +1,196 @@
-# Symphony 2
+# Church Deploy
 
-- Version: 2.3.2
-- Date: 24th March 2013
-- Release Notes: <http://getsymphony.com/download/releases/version/2.3.2/>
-- Github Repository: <http://github.com/symphonycms/symphony-2/tree/2.3.2>
+A robust [Symphony CMS](http://getsymphony.com/) ensemble (template) for churches.
 
+## Quick install
 
+1. [Download](https://github.com/churchdeploy/churchdeploy/archive/master.zip) the Church Deploy core
+2. [Download](https://github.com/anchorchurch/anchor/archive/master.zip) the example *Anchor* theme, rename the folder to `active`, and move it into `workspace/themes`
+3. Start a server using something like [MAMP](http://www.mamp.info/en/index.html)
+4. Connect to MAMP MySQL using something like [Sequel Pro](http://www.sequelpro.com/) and create a database with any name.
+5. Visit your new server homepage and follow the on-screen installation instructions.
 
-## Contents
+## Getting started
 
-* [Overview](#overview)
-* [Server requirements](#server-requirements)
-* [Installing](#installing)
-	* [Via Git](#via-git)
-	* [Via the old-fashioned way](#via-the-old-fashioned-way)
-	* [File permissions](#file-permissions)
-* [Updating from an older version](#updating-from-an-older-version)
-	* [Version-specific notes](#version-specific-notes)
-	* [Updating via Git](#updating-via-git)
-	* [Updating via the old-fashioned way](#updating-via-the-old-fashioned-way)
+Think of *Content > Tags* as Pages. A tag is a meeting place for content of all kinds. When the content comes together (has the same tag) then it gets displayed according to *Structure > Layouts*, which can be specified in the tag.
 
+If a field says *(internal)* then it won't show on the page, it's for your internal reference only.
 
-## Overview
+All text areas support [Markdown](http://whatismarkdown.com/) .. its awesome :)
 
-Symphony is a `PHP` & `MySQL` based CMS that utilises `XML` and `XSLT` as its core technologies. This repository represents version `2.3.2 Release Candidate 2` and is considered stable.
+Go to `http://your-host/toolkit/images/` to [add images](http://see.kirkstrobeck.com/G7Xl) for use in text fields while utilizing [responsimage](http://responsimage.com/).
 
-Visit [the Symphony website](http://getsymphony.com/), [the forum](http://getsymphony.com/discuss/) or learn how you can [contribute to Symphony](https://github.com/symphonycms/symphony-2/wiki/Contributing-to-Symphony).
+Cron jobs need to be added to use twitter, vimeo, and ustream .. see component documentation below for details. The cron job will push the data into the backend CMS automatically.
 
-## Server requirements
+Get your *auth token* by going to *System > Authors > Your-name*, then check the box next to
+ie. Allow remote login via http://atheycreek.com/symphony/login/725e2ffa/
+`725e2ffa` is your auth token to use in the cron jobs below.
 
-- PHP 5.2 or above (PHP 5.3 recommended)
-- PHP’s LibXML module, with the XSLT extension enabled (`--with-xsl`)
-- MySQL 5.0 or above
-- A webserver (known to be used with Apache, Litespeed, Nginx and Hiawatha)
-- Apache’s `mod_rewrite` module or equivalent
-- PHP’s built in `json` functions, which are enabled by default in PHP 5.2 and above; if they are missing, ensure PHP wasn’t compiled with `--disable-json`
+## Grunt
 
-### A note for Windows developers
+[Grunt](http://gruntjs.com/) is already installed and configured to compile `coffee` and `less` files and to combine `js` files.
+ 
+To monitor `coffee` and `less` files for changes and compile on-save
 
-While Windows is not officially supported for production, we understand many developers use WAMP for Symphony development before deploying to a production server. The Symphony team recommends that while using WAMP, developers use the latest PHP 5.3.x version during development to minimise any potential issues. PHP 5.3 provides numerous fixes and improvements to help minimise and standardise the result of several functions that behave slightly differently depending on the OS.
+    # for development (uncompressed)
+    grunt watch:jsdev & grunt watch:cssdev
+    
+    # for production (compressed)
+    grunt watch:jsprod & grunt watch:cssprod
 
+To compile manually and not watch files
 
+    # for development (uncompressed)
+    grunt jsdev & grunt cssdev
+    
+    # for production (compressed)
+    grunt jsprod & grunt cssprod
 
-## Installing
+Any of the commands can be run without the `&`. For example
 
-Before installation, see the [notes on file permissions](#file-permissions).
+	grunt cssdev
 
-### Via Git
+## Bug tracker
 
-1. Clone the git repository to the location you desire using:
+Have a bug? Please create an [issue](https://github.com/churchdeploy/churchdeploy/issues) here on GitHub that conforms with [necolas's guidelines](https://github.com/necolas/issue-guidelines).
 
-		git clone git://github.com/symphonycms/symphony-2.git
+## Components
 
-	The following repositories are included as submodules:
+### Downloads
 
-	[Markdown](http://github.com/symphonycms/markdown)  
-	[Maintenance Mode](http://github.com/symphonycms/maintenance_mode)  
-	[Select Box Link Field](http://github.com/symphonycms/selectbox_link_field)  
-	[JIT Image Manipulation](http://github.com/symphonycms/jit_image_manipulation)  
-	[Export Ensemble](http://github.com/symphonycms/export_ensemble)  
-	[Debug DevKit](http://github.com/symphonycms/debugdevkit/tree/master)  
-	[Profile DevKit](http://github.com/symphonycms/profiledevkit/tree/master)  
-	[XSS Filter](http://github.com/symphonycms/xssfilter/tree/master)
+### Images
 
-1. Run the following command to ensure the submodules are cloned:
+### Locations
 
-		git submodule update --init --recursive
+### Tags
 
-1. _(Optional)_ If you would like the [default ensemble](http://github.com/symphonycms/workspace/tree) installed as well,
-you will need to use the following command from within the Symphony 2 folder you just created:
+### Text
 
-		git clone git://github.com/symphonycms/workspace.git
+### Twitter
 
-1. Point your web browser at <http://example.com/install/> and provide
-details for establishing a database connection and about your server environment.
+Cron job
 
-1. Chuckle villainously and tap your fingertips together (or pet a cat) as your installation completes.
+    curl http://your-server.com/symphony/extension/xmlimporter/importers/run/twitter/?auth-token=725e2ffa
 
-1. Remove installer files:
+*Blueprints > XML Importers > Twitter* and check the radio button "Is unique" in the **ID** row under **Destination**
 
-	`rm -rf install/ workspace/install.sql`
+This will update *Content > Twitter*
 
-### Via the old-fashioned way
+### Verses
 
-**Note:** You can leave `/workspace` out if you do not want the default theme.
+### Videos
 
-1. This step assumes you downloaded a zip archive from the [Symphony website](http://getsymphony.com). Upload the following files and directories to the root directory of your website:
+Cron job
 
-	`index.php`  
-	`/install`  
-	`/symphony`  
-	`/workspace`  
-	`/extensions`
+    curl http://your-server.com/symphony/extension/xmlimporter/importers/run/vimeo/?auth-token=725e2ffa
 
-1. Point your web browser at <http://example.com/install/> and provide
-details on establishing a database connection and your server environment.
+*Blueprints > XML Importers > Vimeo* and check the radio button "Is unique" in the **ID** row under **Destination**
 
-1. Pose like you’re being filmed for a dramatic close-up while your installation completes.
+This will update *Content > Videos*
 
-1. Remove installer files:
+### Featured
 
-	`rm -rf install/ workspace/install.sql`
+### Events
 
-### File permissions
+### Events: Recurring
 
-1. Symphony’s installer will inform you if it needs write access to files that it doesn’t already have, but you can ensure it has the access it needs by temporarily setting files to world-writeable.
+### Events: Types
 
-	`cd /your/site/root`  
-	`chmod -R 777 .`
+### Teachings
 
-1. Once Symphony is successfully installed, you should change file permissions to something tighter for security reasons. Symphony recommends `755` for directories and `644` for files as a good default, but this may need to be changed depending on your server’s users and groups configuration. For example, you may need to change directories and files that Symphony needs to subsequently write to to `775` and `664` respectively.
+### Teachings: Series
 
-#### Useful commands
+### Teachings: Tags
 
-You may find these commands useful when adjusting file and directory permissions.
+### Members
 
-To recursively chmod directories only:
+### Members: Roles
 
-	find /your/site/root -type d -exec chmod 755 {} \;
+### Members: Roles: Types
 
-To recursively chmod files only:
+### UStream
 
-	find /your/site/root -type f -exec chmod 644 {} \;
+Cron job
 
+    curl http://your-server.com/symphony/extension/xmlimporter/importers/run/ustream/?auth-token=725e2ffa
 
+*Blueprints > XML Importers > UStream* and check the radio button "Is unique" in the **Name** row under **Destination**
 
-## Updating from an older version
+This will update *Structure > Status > ustream-status*
 
-### Version-specific notes
+#### Alerts
 
-#### Versions prior to 2.3
 
-Symphony `2.3` officially only supports updating from a `2.2.x` release. There are various changes between `2.1` and `2.3` that make this update unlikely to be successful. Symphony `2.3` also enforces that all authors have unique email addresses, so please ensure that this constraint is met before updating.
+### Core
 
-#### Versions prior to 2.2
+#### Layouts
 
-Symphony `2.2` introduces numerous improvements that may affect extension compatibility. Before updating, be sure to consult the [extension compatibility table](http://getsymphony.com/download/extensions/compatibility/) to verify that the extensions you’re using have all been updated for Symphony `2.2`.
+#### Sections
 
-#### Versions prior to 2.1
+#### Misc
 
-As of version `2.1`, Symphony stores passwords using the more secure [SHA1](http://php.net/sha1) algorithm (previous versions used MD5). When updating to `2.1`, the primary user’s login password will be reset (the new password will be displayed by the updater—please note it).
+#### Status
 
-Please also note that all other users’ passwords will no longer be valid and will require a manual reset through Symphony’s forgotten password feature. Alternatively, as an administrator, you can also change your users’ passwords on their behalf.
 
-We are now using [GitHub’s organisations feature](http://github.com/blog/674-introducing-organizations). As a result, all submodules—as well as the main Symphony 2 repo—are forks owned by the [Symphony CMS organisation](http://github.com/symphonycms/).
+## Walkthrough
 
-To fully update your Git-based installation, please edit your `.git/config` and the `.git/config` of each core extension (`debugdevkit`, `profiledevkit`, `markdown`, `maintenance_mode`, `selectbox_link_field`, `jit_image_manipulation` and `export_ensemble`) and change the URL of the remote repo from `symphony` or `pointybeard` to be `symphonycms`.
+We make no assumptions about how you will use Church Deploy. It is up to you to craft whatever solution is best for your use-case. We are doing our best to keep the core robust and controllable, so you can enable or disable different components.
 
-For example:
+## Features
 
-	[remote "origin"]
-		fetch = +refs/heads/*:refs/remotes/origin/*
-		url = git://github.com/pointybeard/markdown.git
+- Tag-based associations create content "meeting points," there aren't really any "pages" per se.
+    - All content is associated with a `tag`.
+    - Tags claim parents, so a second-tier tag is really just claiming a first-tier tag as its parent, but it is organized to communicate content relationships to the user.
+        - Tags can claim multiple parents, so you can position content in different sections, even groups of contant (if tag *A* claims *B* as a parent, then wherever *A* is shown, *B* is shown as a sub-page)
+    - Supports infinite nav levels, whether 3 or 300.
+- ID-anchored URLs let you change the readable text and not worry about migration issues.
+    - Nice URL slugs let you inform the user about the content
+    - ie. `site/4234/our-big-meeting/` could change to `site/4234/fun-times-ahead/` without any users lost or confused, as both URLs still function.
+- Internal templating, in the Symphony control panel, lets you reorganize content based on your needs. Content can be designed to react to its placement in the templates.
+    - ie. If an event is in `full-width` then it will have a more detailed and imformative view than the same event listed in `column-right`, the sidebar.
+- Component-based architecture lets you pick and choose your functionality and implementation. It also helps organize code to spot issues more easily.
+- Uses [Bootstrap](http://twitter.github.com/bootstrap/) for baseline styles and HTML.
+    - Out of the box template is built with many responsive considerations.
+- Retina-ready icon font, and [responsimage](http://responsimage.com/) image baked-in.
+- Front-end membership is already in-place, and we hope to enable registration soon.
 
-Change `git://github.com/pointybeard/markdown.git` to `git://github.com/symphonycms/markdown.git`
+## Advanced installation
 
-#### Versions prior to 2.0.5
+Use the example organization [`anchorchurch`](https://github.com/anchorchurch), which consists of two projects ..
 
-Version `2.0.5` introduced multiple includable elements in the Data Source Editor for a single field. After updating from `2.0.5` or lower, the DS editor will seem to “forget” about any `Textarea` fields selected when you are editing existing Data Sources. After updating, you must ensure you re-select them before saving. Note, this will only effect Data Sources that you edit and were created prior to `2.0.5`. Until that point, the field will still be included in any front-end XML.
+1. [`anchor`](https://github.com/anchorchurch/anchor) *theme* — a custom theme bundle (similar to a WordPress theme) for a church we made up for example purposes only.
+2. [`churchdeploy`](https://github.com/anchorchurch/churchdeploy) *fork*  — a fork of [`churchdeploy`](https://github.com/churchdeploy/churchdeploy) with the above `anchor` project added as a [submodule](http://symphonyextensions.com/articles/on-git-submodules/) to the path `workspace/themes/active`. Forking the project and adding your theme will enable you to push updates by installing git via SSH on your server and using `git pull` to update your live site.
 
-### Updating via Git
+You can update your local `churchdeploy` fork using the following commands ..
 
-1. Pull from the master branch at `git://github.com/symphonycms/symphony-2.git`
+    git remote add upstream https://github.com/churchdeploy/churchdeploy.git
+    git fetch upstream
+    git merge upstream/master
+    git push
 
-1. Use the following command to bring extensions up to date:
+### Server requirements
 
-		git submodule update --init --recursive
+- PHP 5.3
+- PHP's LibXML module, with the XSLT extension enabled (--with-xsl)
+- MySQL 5.0 or later
+- Apache webserver with mod_rewrite
 
-1. If updating from a version older than `2.0.5`, enable the [Debug DevKit](http://github.com/symphonycms/debugdevkit/tree/master) and [Profile DevKit](http://github.com/symphonycms/profiledevkit/tree/master) extensions.
+### Software recommendations
 
-1. Go to `http://example.com/install/` to complete the update process.
+- Mac OS X
+    - Local server: [MAMP Pro](http://www.mamp.info/en/mamp-pro/index.html) - MAMP is free, pro is $59.00 (we recommend pro)
+    - MySQL: [Sequel Pro](http://www.sequelpro.com/) - Donationware
+    - Code editor: [Sublime 2](http://www.sublimetext.com/2) - Free demo, $59.00 to buy
+    - FTP: [Transmit](http://panic.com/transmit/)
 
-1. You and your website are now in the future. Buy yourself a silver jumpsuit.
+## More
 
-### Updating via the old-fashioned way
+We use the term `component` for a Church Deploy object (in Symphony, objects are called *sections*). All Church Deploy components have a template XSL file, which lives in the *workspace/themes/yourtheme* directory, with its component name.
 
-Follow the instructions below if you are updating from Symphony 2.0 (not from Git)
+We made an out of the box template for you to work from called [anchor](https://github.com/anchorchurch/anchor) in which we use the name "Anchor Church." Church Deloy will use whatever theme that you title `active`. So if you want to switch templates, simply go to the templates directory and change the folder name. Church Deploy is designed to have all of the core functionalty in the parent project and let your theme template files only make the changes that are unique to your installation, but it isn't limiting in the least.
 
-**Note:** As of 2.0.6, there is no longer a need to backup `/symphony/.htaccess`.
+All of the components we used are free for you to use with Church Deploy as it is a combination of open-source projects. Thank you open source community!
 
-1. Upload `/symphony`, `/install` & `index.php`, replacing what is already on your server.
+Please write [kirk@strobeck.com](mailto:kirk@strobeck.com), IM kirkstrobeck on AIM/Skype, or call (503) 427-8050 if you have any questions.
 
-1. If you are updating from a version older than 2.0.5, download and install the Debug DevKit and Profile DevKit:
-
-	[Debug DevKit](http://github.com/symphonycms/debugdevkit/tree/master)  
-	[Profile DevKit](http://github.com/symphonycms/profiledevkit/tree/master)
-
-1. Go to `http://example.com/install/` to complete the update process.
-
-1. Call a friend and brag that your copy of Symphony is newer than theirs.
+**We can't wait to see how you use Church Deploy**
