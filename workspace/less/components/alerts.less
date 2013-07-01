@@ -1,40 +1,59 @@
 
+.alerts {
+  .opacity(85);
+  position:absolute;
+  top: 73px;
+  width: 100%;
+  z-index: 99;
+
+  .alert {
+    padding: 15px 30px 15px 35px;
+  }
+
+}
+
 .alert {
-  #font > #sans > .regular;
+  font-family: @font-family-serif;
   margin: 0;
   .box-shadow(none);
   .border-radius(0);
   position: relative;
-  padding-top: 7px;
-  padding-bottom: 7px;
   top: 0;
+
+  .close {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    right: -10px;
+    top: 1px;
+  }
 
   .mobileLink {
     display: none;
   }
 
   a {
-    #font > #sans > .bold;
-    text-transform: uppercase;
-    color: @warningText;
-    border-bottom: 2px solid @warningText;
+    border-bottom: 2px solid @state-warning-text;
+    color: @state-warning-text;
+    cursor: pointer;
+    font-family: @font-family-sans-serif;
     margin-left: @base;
+    text-transform: uppercase;
 
     &:hover {
-      color: darken(@warningText, 10%);
-      border-bottom-color: darken(@warningText, 10%);
+      color: darken(@state-warning-text, 10%);
+      border-bottom-color: darken(@state-warning-text, 10%);
+      text-decoration: none;
     }
   }
 
   &.alert-success {
 
     a {
-      color: @successText;
-      border-bottom-color: @successText;
+      color: @state-success-text;
+      border-bottom-color: @state-success-text;
 
       &:hover {
-        color: darken(@successText, 10%);
-        border-bottom-color: darken(@successText, 10%);
+        color: darken(@state-success-text, 10%);
+        border-bottom-color: darken(@state-success-text, 10%);
       }
     }
   }
@@ -42,12 +61,12 @@
   &.alert-info {
 
     a {
-      color: @infoText;
-      border-bottom-color: @infoText;
+      color: @state-info-text;
+      border-bottom-color: @state-info-text;
 
       &:hover {
-        color: darken(@infoText, 10%);
-        border-bottom-color: darken(@infoText, 10%);
+        color: darken(@state-info-text, 10%);
+        border-bottom-color: darken(@state-info-text, 10%);
       }
     }
   }
@@ -55,12 +74,12 @@
   &.alert-error {
 
     a {
-      color: @errorText;
-      border-bottom-color: @errorText;
+      color: @state-error-text;
+      border-bottom-color: @state-error-text;
 
       &:hover {
-        color: darken(@errorText, 10%);
-        border-bottom-color: darken(@errorText, 10%);
+        color: darken(@state-error-text, 10%);
+        border-bottom-color: darken(@state-error-text, 10%);
       }
     }
   }
@@ -72,23 +91,52 @@
   }
 
   span {
-    #font > #sans > .bold;
+    font-family: @font-family-sans-serif;
     text-transform: uppercase;
   }
 
   strong {
-    #font > #sans > .bold;
+    font-family: @font-family-sans-serif;
     text-transform: uppercase;
   }
 
   .btn {
-    #font > #sans > .regular;
+    font-family: @font-family-sans-serif;
     text-transform: uppercase;
     margin-top: 1px;
   }
 }
 
-@media (max-width: 480px) { // iphone
+
+// RESPONSIVE DESIGN
+// =================
+
+// Tablets & Below
+
+@media (max-width: 979px) {
+
+.alerts {
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 75px;
+  z-index: 3;
+}
+
+
+}
+
+// Tablet Portrait & Below
+
+@media (max-width: 767px) {
+
+
+
+}
+
+// iPhone 4/4S (Wide)
+
+@media (max-width: 480px) {
 
   .alerts {
 

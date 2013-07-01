@@ -1,301 +1,233 @@
-
 .footer {
-  background: @color-gray-dark;
-  position: absolute;
-  margin: 60px 0 80px 0;
-  left: 0;
-  width: 100%;
+  margin-top: 0;
+  padding-top: 30px;
+  background: lighten(desaturate(@color-primary, 20%), 45%);
+  color: lighten(desaturate(@color-primary, 20%), 30%);
 
-  em {
-    #font > #sans > .regular;
-  }
-
-  a {
-    color: @color-white;
+  .logo {
+    position: relative;
+    top: -10px;
+    text-align: left;
+    margin-left: 5px;
+    color: lighten(desaturate(@color-primary, 20%), 25%);
 
     &:hover {
-      color: @color-accent;
+      color: lighten(desaturate(@color-primary, 20%), 15%);
     }
 
-    &.give {
-      position: relative;
-      top: -5px;
-      color: @color-accent;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
-      border: none;
-      text-transform: uppercase;
-      text-shadow: none;
-
-      &:hover {
-        color: @color-white;
-      }
+    .icon-large {
+      line-height: 30px;
+      font-size: 54px;
     }
   }
 
-  address,
   p {
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    margin: 15px 0;
-  }
+    font-family: @font-family-serif;
+    font-size: 16px;
+    color: lighten(desaturate(@color-primary, 20%), 30%);
 
-  h4 {
-    font-size: 11px;
-    line-height: 18px;
-    text-transform: uppercase;
-  }
-
-  .footer-nav {
-    margin-top: @base * 2.5;
-    margin-bottom: @base;
-
-    * {
-      font-size: 13px;
-      color: @color-white;
-      background: none !important;
+    &.lead {
+      margin-bottom: 15px;
     }
 
-    .nav-header {
-      #font > #sans > .bold;
-      margin: 0;
-      padding: 0;
-      text-shadow: none;
-    }
+    .logo {
 
-    .nav-list {
-
-      > li {
-        margin: 0;
-        text-shadow: none;
-
-        &.first {
-          margin-top: @base;
-        }
-
-        > a {
-          padding: 0;
-          text-shadow: none;
-
-          &:hover {
-            background: none;
-          }
-        }
-      }
-
-      > .active {
-
-        > a {
-          color: @color-accent;
-        }
+      &.icon-black {
+        color: #202020;
+        text-shadow: 0 1px 0 lighten(@color-black, 7%), 0 -1px 0 darken(@color-black, 10%);
       }
     }
-
-    .twitter {
-
-      ul {
-        list-style: none;
-        margin: 0;
-
-        li {
-          list-style-type: none;
-
-          &.entry {
-            padding: @base 0;
-            border-bottom: 2px solid darken(@color-gray-dark, 5%);
-
-            &.first {
-              padding-top: 0;
-            }
-
-            &.last {
-              border-bottom: none;
-            }
-
-            a {
-              text-decoration: underline;
-            }
-          }
-
-        }
-      }
-    }
-  }
-
-
-  .active {
 
     a {
-      background: none;
-      color: @color-accent;
       text-shadow: none;
     }
+  }
+
+  .btn {
+    background: lighten(@color-primary, 40%);
+    border-color: lighten(@color-primary, 40%);
+
+    &:hover {
+      background: lighten(@color-primary, 30%);
+      border-color: lighten(@color-primary, 30%);
+    }
+  }
+
+  h5 {
+    color: lighten(desaturate(@color-primary, 20%), 25%);
+    margin-top: 15px;
+  }
+
+  .nav {
+    border: none;
+
+    &.nav-list {
+      background: transparent;
+      .box-shadow(none);
+
+      .nav-header {
+        text-shadow: 0 1px 0 lighten(@color-black, 10%);
+        color: #000;
+      }
+
+      li {
+
+
+        &.active {
+          a {
+            background: lighten(desaturate(@color-primary, 20%), 25%);
+            border: 1px solid lighten(desaturate(@color-primary, 20%), 25%);
+            .box-shadow(none);
+            color: lighten(desaturate(@color-primary, 20%), 45%);
+
+            &:hover {
+              background: lighten(desaturate(@color-primary, 20%), 25%);
+              border: 1px solid lighten(desaturate(@color-primary, 20%), 25%);
+              color: lighten(desaturate(@color-primary, 20%), 45%);
+            }
+          }
+        }
+
+        a {
+          border: none;
+          .border-radius(@border-radius-base);
+          color: lighten(desaturate(@color-primary, 20%), 25%);
+          font-weight: bold;
+          margin: 5px 0 10px 0;
+          text-transform: uppercase;
+          text-shadow: none;
+
+          .badge {
+            display: none;
+            background: @color-primary;
+            color: @color-black;
+            text-shadow: none;
+          }
+
+          &:hover {
+            color: desaturate(@color-primary, 20%);
+            background: none;
+            border:;
+          }
+        }
+      }
+    }
+
+  }
+
+  hr {
+    height: 1px;
+    background: lighten(desaturate(@color-primary, 20%), 40%);
+    border-bottom: 1px solid lighten(desaturate(@color-primary, 20%), 40%);
+    border: none;
+  }
+
+}
+
+.baseline {
+  background: lighten(desaturate(@color-primary, 20%), 35%);
+  padding: 22px 0 23px 0;
+
+  p {
+    color: lighten(desaturate(@color-primary, 20%), 20%);
+    font-size: @font-size-base;
+    font-weight: 300;
+    margin: 10px 0 15px;
+
+    a {
+      border-bottom: 1px solid lighten(desaturate(@color-primary, 20%), 40%);
+      color: lighten(desaturate(@color-primary, 20%), 20%);
+      padding-bottom: 2px;
+      text-decoration: none;
+
+      &:hover {
+        border-bottom: 1px solid lighten(desaturate(@color-primary, 20%), 45%);
+        color: lighten(desaturate(@color-primary, 20%), 10%);
+      }
+    }
+  }
+}
+
+// RESPONSIVE DESIGN
+// =================
+
+// Tablets & Below
+
+@media (max-width: 979px) {
+
+  .navbar {
+
+    .brand {
+      margin-left: 30px;
+    }
+
+    .btn-navbar {
+      margin-right: -10px;
+    }
+
+    .navbar-inner {
+      margin-right: 10px;
+      padding: 30px 0;
+    }
+  }
+
+  .footer,
+  .baseline {
+
+    .container {
+
+      .row {
+        margin: 0;
+
+        .span12 {
+          padding: 0;
+        }
+      }
+
+    }
+
   }
 
   .baseline {
-    background-color: @color-baseline;
-    position: relative;
-    left: 0;
-    bottom: -20px;
-    padding: @base * 2 @base * 2.5;
-    color: darken(desaturate(@color-baseline, 20%), 35%);
-    font-size: 14px;
 
-    em {
-      #font > #sans > .regular;
-    }
+    .copyright {
+      text-align: center;
 
-
-    .facebook {
-      line-height: 3;
-
-      a {
-        #font > #sans > .bold;
-        color: darken(desaturate(@color-baseline, 20%), 35%);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-
-        &:hover {
-          color: @color-white;
-        }
+      .pull-right {
+        display: block;
+        float: none;
+        margin-top: 15px;
       }
     }
 
-    a {
-      color: darken(desaturate(@color-baseline, 20%), 35%);
+  }
 
-      &:hover {
-        color: @color-white;
-        text-decoration: none;
-      }
-    }
+
+}
+
+// Tablet Portrait & Below
+
+@media (max-width: 767px) {
+
+  .footer,
+  .baseline {
+    margin: 0 -20px;
+  }
+
+}
+
+// Default Desktop
+
+@media (min-width: 980px) {
+
+  .baseline {
 
     .copyright {
 
-    }
-
-    .branding {
-      margin-top: @base;
-      font-size: 32px;
-
-      a {
-
-        .year {
-          position: relative;
-          top: -2px;
-          font-family: "LeagueGothic-Regular", "proxima-nova", "Helvetica Neue", Arial, Helvetica, sans-serif;
-          font-size: 20px;
-          margin: 0;
-
-          &.left {
-            left: 4px;
-          }
-
-          &.right {
-            right: 6px;
-            margin-right: -2px;
-          }
-        }
-
-        .icon {
-          position: relative;
-          top: -3px;
-          font-size: 40px;
-          padding-left: 7px;
-        }
+      .pull-right {
+        display: inline;
       }
-    }
-
-    .amp {
-      font-family: Baskerville, "Goudy Old Style", "Palatino", "Book Antiqua", "Warnock Pro", serif;
-      color: darken(@color-accent, 20%);
-      font-style: italic;
-      font-size: 18px;
-      margin: 0 5px;
-    }
-
-    .churchdeploy {
-      margin-top: 20px;
-
-      a {
-        color: darken(@color-accent, 15%);
-        font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-weight: 300;
-        font-size: 16px;
-        text-shadow: 0 1px 0 lighten(@color-accent, 10%);
-
-        &:hover {
-          color: lighten(@color-accent, 20%);
-          text-shadow: 0 1px 0 darken(@color-accent, 20%);
-        }
-      }
-
     }
 
   }
 }
-
-@media (max-width: 979px) { // tablets and below
-
-  .baseline {
-     text-align: center;
-    line-height: 1.7;
-
-    .facebook {
-      a {
-        line-height: 1.7;
-        float: none;
-      }
-    }
-  }
-}
-
-@media (min-width: 980px) { // default desktop
-
-  .twitter {
-
-    span {
-      font-size: 13px;
-    }
-  }
-
-  .copyright {
-    margin-bottom: 0;
-    line-height: 1.5;
-  }
-}
-
-@media (max-width: 480px) { // iphone
-
-  .footer {
-
-    .dev {
-      display: none;
-    }
-
-    .nav {
-
-      #page18 {
-        display: block;
-        padding: @base * 2 0;
-        border-bottom: 1px solid #ccc;
-      }
-
-      .entry {
-        display: none;
-      }
-    }
-
-    .span3 {
-      margin-top: @base * 2;
-    }
-
-    .span3 + .span3 {
-      margin-top: 0;
-    }
-  }
-}
-

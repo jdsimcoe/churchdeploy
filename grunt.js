@@ -109,11 +109,11 @@ module.exports = function(grunt) {
       core_js: {
         src: [
           "workspace/js/jquery.js",
-          "workspace/js/lodash.js",
-          "<config:concat.bootstrap_js.src>",
-          "workspace/js/responsimage.js",
           "workspace/js/jquery.cookie.js",
-          "workspace/js/mediaelement.js"
+          "workspace/js/json2.js",
+          "workspace/js/lodash.js",
+          "workspace/js/responsimage.js",
+          "<config:concat.bootstrap_js.src>"
         ],
         dest: "grunt-temp/core_js.js"
       },
@@ -133,17 +133,16 @@ module.exports = function(grunt) {
         src: [
           "workspace/bootstrap/js/bootstrap-transition.js",
           "workspace/bootstrap/js/bootstrap-alert.js",
-          "workspace/bootstrap/js/bootstrap-button.js",
-          "workspace/bootstrap/js/bootstrap-carousel.js",
-          "workspace/bootstrap/js/bootstrap-collapse.js",
-          "workspace/bootstrap/js/bootstrap-dropdown.js",
           "workspace/bootstrap/js/bootstrap-modal.js",
-          "workspace/bootstrap/js/bootstrap-tooltip.js",
-          "workspace/bootstrap/js/bootstrap-popover.js",
+          "workspace/bootstrap/js/bootstrap-dropdown.js",
           "workspace/bootstrap/js/bootstrap-scrollspy.js",
           "workspace/bootstrap/js/bootstrap-tab.js",
+          "workspace/bootstrap/js/bootstrap-tooltip.js",
+          "workspace/bootstrap/js/bootstrap-popover.js",
+          "workspace/bootstrap/js/bootstrap-button.js",
+          "workspace/bootstrap/js/bootstrap-collapse.js",
+          "workspace/bootstrap/js/bootstrap-carousel.js",
           "workspace/bootstrap/js/bootstrap-typeahead.js",
-          "workspace/bootstrap/js/bootstrap-affix.js"
         ],
         dest: "grunt-temp/bootstrap_js.js"
       }

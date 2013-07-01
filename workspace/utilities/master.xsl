@@ -39,7 +39,7 @@
 	<xsl:comment><![CDATA[[if IE 7]> <html class="no-js ie7 oldie" lang="en" /> <![endif]]]></xsl:comment>
 	<xsl:comment><![CDATA[[if IE 8]> <html class="no-js ie8 oldie" lang="en" /> <![endif]]]></xsl:comment>
 	<xsl:comment><![CDATA[[if gt IE 8]><!]]></xsl:comment><html class="no-js" lang="en"><xsl:comment><![CDATA[<![endif]]]></xsl:comment>
-	
+
 		<xsl:call-template name="template-header-main" />
 		<body>
 			<xsl:attribute name="class">
@@ -59,13 +59,13 @@
 					<xsl:text> profile</xsl:text>
 				</xsl:if>
 			</xsl:attribute>
-			
+
 			<xsl:call-template name="template-header-outside-container" />
-			
+
 
 				<xsl:call-template name="template-main-container" />
 
-			
+
 			<div class="container main-container">
 
 				<xsl:call-template name="template-header-inside-container" />
@@ -172,7 +172,7 @@
 				<xsl:value-of select="$redirect-js"/>
 			</script>
 			<noscript>
-				<meta http-equiv="refresh">	
+				<meta http-equiv="refresh">
 					<xsl:attribute name="content">
 						<xsl:text>0;url=</xsl:text>
 						<xsl:value-of select="$root" />
@@ -266,6 +266,9 @@
 	<xsl:variable name="node" select="." />
 	<li>
 		<xsl:attribute name="class">
+			<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
+				<xsl:text>dropdown </xsl:text>
+			</xsl:if>
 			<xsl:text>entry</xsl:text>
 			<xsl:if test="$pt1 = @id or $active-parent = @id or //tags-all-entries/entry[ @id = $active-parent ]/parent/item/@id = @id">
 				<xsl:text> active</xsl:text>
@@ -310,13 +313,33 @@
 			<xsl:value-of select="tag" disable-output-escaping="yes" />
 		</a>
 		<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
-			<ul class="dropdown-menu">
+			<ul class="dropdown-menu hidden-phone hidden-tablet" role="menu" aria-labelledby="dropdownMenu">
 				<xsl:for-each select="//tags-all-entries/entry[parent/item/@id = $realID]">
 					<li>
+						<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
+							<xsl:attribute name="class">
+								<xsl:text>dropdown-submenu</xsl:text>
+							</xsl:attribute>
+						</xsl:if>
 						<a>
 							<xsl:call-template name="url-tags" />
 							<xsl:value-of select="tag" disable-output-escaping="yes" />
 						</a>
+						<xsl:variable name="nestedID">
+							<xsl:value-of select="@id" />
+						</xsl:variable>
+						<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
+							<ul class="dropdown-menu">
+								<xsl:for-each select="//tags-all-entries/entry[parent/item/@id = $nestedID]">
+									<li>
+										<a>
+											<xsl:call-template name="url-tags" />
+											<xsl:value-of select="tag" disable-output-escaping="yes" />
+										</a>
+									</li>
+								</xsl:for-each>
+							</ul>
+						</xsl:if>
 					</li>
 				</xsl:for-each>
 			</ul>
@@ -328,16 +351,15 @@
 <xsl:template name="subnav-group">
 	<xsl:param name="group" />
 	<xsl:if test="count($group)">
-		<div class="jumbotron masthead" id="overview">
-			<div class="subnav visible-desktop">
-				<ul class="nav nav-pills">
-					<xsl:for-each select="$group">
-						<xsl:call-template name="subnav-entry" />
-					</xsl:for-each>
-				</ul>
-			</div>
-			<div class="spacer"> </div>
+
+		<div class="subnav visible-desktop">
+			<ul class="nav nav-pills nav-justified">
+				<xsl:for-each select="$group">
+					<xsl:call-template name="subnav-entry" />
+				</xsl:for-each>
+			</ul>
 		</div>
+
 	</xsl:if>
 </xsl:template>
 
@@ -410,12 +432,20 @@
 <xsl:template name="subnav-mobile">
 	<xsl:param name="group" />
 	<xsl:if test="count($group)">
-		<ul class="nav nav-tabs nav-stacked">
+		<div class="btn-group">
+      <button class="btn btn-large btn-block allcaps dropdown-toggle" data-toggle="dropdown">Navigate to... <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <xsl:for-each select="$group">
+					<xsl:call-template name="subnav-entry-mobile" />
+				</xsl:for-each>
+      </ul>
+     </div>
+<!-- 		<ul class="nav nav-tabs nav-stacked">
 			<xsl:for-each select="$group">
 				<xsl:call-template name="subnav-entry-mobile" />
 			</xsl:for-each>
 		</ul>
-		<hr class="soften" />
+		<hr /> -->
 	</xsl:if>
 </xsl:template>
 
