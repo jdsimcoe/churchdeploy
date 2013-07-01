@@ -2,29 +2,44 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourcefeatured_random extends SectionDatasource {
+	Class datasourcefeatured_teachings extends SectionDatasource {
 
-		public $dsParamROOTELEMENT = 'featured-random';
-		public $dsParamORDER = 'random';
-		public $dsParamPAGINATERESULTS = 'no';
-		public $dsParamLIMIT = '1000';
+		public $dsParamROOTELEMENT = 'featured-teachings';
+		public $dsParamORDER = 'desc';
+		public $dsParamPAGINATERESULTS = 'yes';
+		public $dsParamLIMIT = '1';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamSORT = 'system:creation-date';
+		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'262' => 'no',
-				'264' => 'later than {$today}, {$today}',
+				'192' => 'yes',
+				'216' => 'no',
 		);
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'url',
-				'image: image',
-				'expiration'
+				'slug',
+				'filename',
+				'current-id',
+				'book',
+				'chapter',
+				'speaker: first-name',
+				'speaker: last-name',
+				'date',
+				'poster: image',
+				'video: title',
+				'video: description',
+				'video: date',
+				'video: url',
+				'video: player',
+				'video: thumbnail',
+				'video: id',
+				'day'
 		);
 		
 
@@ -35,18 +50,18 @@
 
 		public function about() {
 			return array(
-				'name' => 'Featured: Random',
+				'name' => 'Featured: Teachings',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek-2',
+					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.3beta2',
-				'release-date' => '2013-06-26T21:34:41+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-01T16:14:14+00:00'
 			);
 		}
 
 		public function getSource() {
-			return '28';
+			return '13';
 		}
 
 		public function allowEditorToParse() {
