@@ -1,0 +1,41 @@
+.carousel {
+
+	.carousel-caption {
+		background: @color-accent !important;
+		display: inline !important;
+		-webkit-transition: visibility 300ms ease-in-out;
+		visibility: hidden;
+		padding: 0 15px;
+		position: absolute;
+		right: @base * 4;
+		bottom: auto;
+		top: 0;
+		left: auto;
+		min-width: 300px;
+		text-align: center;
+		text-shadow: none;
+		.box-shadow(1px 1px 0 rgba(0,0,0,0.1));
+
+		h4 {
+			color: @color-white;
+
+			em {
+				font-family: @font-family-serif;
+				text-transform: none;
+			}
+		}
+	}
+
+	&:hover {
+
+		.carousel-control {
+		  visibility: visible;
+		}
+
+		.carousel-caption {
+			visibility: visible;
+		}
+	}
+
+
+}
