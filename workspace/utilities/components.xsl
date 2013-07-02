@@ -418,7 +418,7 @@ All URL helpers can now be replaced with "url-prefix"
 					<xsl:value-of select="$class" />
 				</xsl:if>
 			</xsl:attribute>
-			<span class="icon">p</span>
+			<i class="glyphicon-pencil"></i>
 		</a>
 	</xsl:if>
 </xsl:template>
