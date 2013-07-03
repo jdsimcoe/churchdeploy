@@ -42,11 +42,14 @@
 				'member-role: member: last-name',
 				'member-role: member: photo',
 				'member-role: member: email',
+				'member-role: member: job-title: unformatted',
 				'member-role: member: phone-number',
 				'member-role: member: anonymize',
+				'member-role: role: role: unformatted',
 				'downloads: name: unformatted',
 				'downloads: file',
 				'downloads: link',
+				'tags: tag: unformatted',
 				'childcare',
 				'images: image',
 				'images: height',
@@ -69,7 +72,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T17:39:15+00:00'
+				'release-date' => '2013-07-03T17:54:48+00:00'
 			);
 		}
 
