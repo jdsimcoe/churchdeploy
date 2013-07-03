@@ -5,6 +5,7 @@
 	Class datasourceevents_entry_by_id_preview extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-entry-by-id-preview';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (preview))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
@@ -46,6 +47,7 @@
 				'member-role: member: anonymize',
 				'downloads: file',
 				'downloads: link',
+				'type: type: unformatted',
 				'childcare',
 				'images: image',
 				'images: height',
@@ -68,7 +70,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T16:09:21+00:00'
+				'release-date' => '2013-07-03T18:03:57+00:00'
 			);
 		}
 
