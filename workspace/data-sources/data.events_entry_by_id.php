@@ -5,6 +5,7 @@
 	Class datasourceevents_entry_by_id extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-entry-by-id';
+		public $dsParamConditionalizer = '(if value of ({$pt2}) is (events))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
@@ -26,7 +27,11 @@
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
+				'name: unformatted',
 				'date',
+				'description: formatted',
+				'locations: name-formal: unformatted',
+				'locations: name-casual: unformatted',
 				'locations: address',
 				'locations: city',
 				'locations: state',
@@ -39,6 +44,7 @@
 				'member-role: member: email',
 				'member-role: member: phone-number',
 				'member-role: member: anonymize',
+				'downloads: name: unformatted',
 				'downloads: file',
 				'downloads: link',
 				'childcare',
@@ -63,7 +69,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T15:55:11+00:00'
+				'release-date' => '2013-07-03T17:39:15+00:00'
 			);
 		}
 
