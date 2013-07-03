@@ -22,6 +22,7 @@
 
 		public $dsParamFILTERS = array(
 				'id' => '{$pt1},{$pt3}',
+				'213' => 'yes',
 		);
 		
 
@@ -67,7 +68,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T20:42:19+00:00'
+				'release-date' => '2013-07-03T15:54:10+00:00'
 			);
 		}
 

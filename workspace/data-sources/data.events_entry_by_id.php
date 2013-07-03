@@ -2,7 +2,7 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceevents_entry_by_id extends Datasource{
+	Class datasourceevents_entry_by_id extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-entry-by-id';
 		public $dsParamORDER = 'desc';
@@ -10,22 +10,23 @@
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamPARAMOUTPUT = 'verses';
+		public $dsParamPARAMOUTPUT = array(
+				'verses'
+		);
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
 				'id' => '{$pt1},{$pt3}',
+				'213' => 'no',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'name',
 				'date',
-				'description',
-				'locations: name-formal',
-				'locations: name-casual',
-				'locations: description',
 				'locations: address',
 				'locations: city',
 				'locations: state',
@@ -36,14 +37,10 @@
 				'member-role: member: last-name',
 				'member-role: member: photo',
 				'member-role: member: email',
-				'member-role: member: job-title',
 				'member-role: member: phone-number',
 				'member-role: member: anonymize',
-				'member-role: role: role',
-				'downloads: name',
 				'downloads: file',
 				'downloads: link',
-				'tags: tag',
 				'childcare',
 				'images: image',
 				'images: height',
@@ -51,38 +48,38 @@
 				'images: background',
 				'verses: passage'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Events: Entry by ID',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-10-16T21:36:45+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-03T15:55:11+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '6';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -95,8 +92,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}
