@@ -11,20 +11,21 @@
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'system:id';
+		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
 		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'233' => 'no',
 				'id' => '{$ds-search}',
+				'233' => 'no',
 		);
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'title: formatted',
+				'title: unformatted',
 				'description',
-				'teachings: title: formatted'
+				'teachings: title: unformatted'
 		);
 		
 
@@ -41,7 +42,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-06-27T21:11:48+00:00'
+				'release-date' => '2013-07-03T15:13:46+00:00'
 			);
 		}
 

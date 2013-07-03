@@ -5,9 +5,10 @@
 	Class datasourceevents_6_latest extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-6-latest';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is ())';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '6';
+		public $dsParamLIMIT = '3';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'date';
@@ -24,8 +25,9 @@
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'system:pagination',
-				'name: formatted',
+				'name: unformatted',
 				'date',
+				'tags: tag: unformatted',
 				'images: image'
 		);
 		
@@ -43,7 +45,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T04:31:30+00:00'
+				'release-date' => '2013-07-02T22:49:36+00:00'
 			);
 		}
 

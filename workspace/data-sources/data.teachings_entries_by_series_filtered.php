@@ -2,9 +2,10 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceteachings_entries_by_series_filtered extends Datasource{
+	Class datasourceteachings_entries_by_series_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-entries-by-series-filtered';
+		public $dsParamConditionalizer = '(if value of ({$pt3}) is (series))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '1';
@@ -14,21 +15,23 @@
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
 				'id' => '{$pt4}',
 				'233' => 'no',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'title',
-				'teachings: title',
+				'teachings: title: unformatted',
 				'teachings: slug',
 				'teachings: filename',
 				'teachings: current-id',
 				'teachings: book',
 				'teachings: chapter',
-				'teachings: description',
+				'teachings: description: unformatted',
 				'teachings: speaker: first-name',
 				'teachings: speaker: last-name',
 				'teachings: date',
@@ -36,40 +39,40 @@
 				'teachings: video: player',
 				'teachings: video: id',
 				'teachings: day',
-				'teachings: tags: tag'
+				'teachings: tags: tag: unformatted'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Teachings: Entries by series (filtered)',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-04-22T15:33:50+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-03T15:04:04+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '27';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -82,8 +85,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}

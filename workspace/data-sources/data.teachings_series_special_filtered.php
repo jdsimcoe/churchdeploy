@@ -2,39 +2,31 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourcepodcast_video extends SectionDatasource {
+	Class datasourceteachings_series_special_filtered extends SectionDatasource {
 
-		public $dsParamROOTELEMENT = 'podcast-video';
-		public $dsParamORDER = 'desc';
-		public $dsParamPAGINATERESULTS = 'no';
-		public $dsParamLIMIT = '1000';
+		public $dsParamROOTELEMENT = 'teachings-series-special-filtered';
+		public $dsParamConditionalizer = '(if any of ((if value of ({$pt1}) is ()), (if value of ({$pt2}) is (teachings))) is (yes))';
+		public $dsParamORDER = 'asc';
+		public $dsParamPAGINATERESULTS = 'yes';
+		public $dsParamLIMIT = '4';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamSORT = 'date';
+		public $dsParamSORT = 'order';
 		public $dsParamHTMLENCODE = 'yes';
-		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
 		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'271' => 'yes',
-				'216' => 'no',
-				'280' => 'no',
+				'268' => 'yes',
+				'233' => 'no',
 		);
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'title: unformatted',
-				'filename',
-				'book',
-				'chapter',
-				'description: unformatted',
-				'speaker: first-name',
-				'speaker: last-name',
-				'date',
-				'video-duration',
-				'video-filesize',
-				'hide'
+				'poster: image',
+				'teachings: title: unformatted'
 		);
 		
 
@@ -45,18 +37,18 @@
 
 		public function about() {
 			return array(
-				'name' => 'Podcast: Video',
+				'name' => 'Teachings: Series: Special (filtered)',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-06-28T22:55:48+00:00'
+				'release-date' => '2013-07-02T23:22:07+00:00'
 			);
 		}
 
 		public function getSource() {
-			return '13';
+			return '27';
 		}
 
 		public function allowEditorToParse() {
