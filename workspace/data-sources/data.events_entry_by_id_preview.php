@@ -46,6 +46,7 @@
 				'member-role: member: anonymize',
 				'downloads: file',
 				'downloads: link',
+				'tags: tag: unformatted',
 				'type: type: unformatted',
 				'childcare',
 				'images: image',
@@ -69,7 +70,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T18:05:11+00:00'
+				'release-date' => '2013-07-03T18:09:37+00:00'
 			);
 		}
 
