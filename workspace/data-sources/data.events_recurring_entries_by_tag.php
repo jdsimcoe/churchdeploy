@@ -2,7 +2,7 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceevents_recurring_entries_by_tag extends Datasource{
+	Class datasourceevents_recurring_entries_by_tag extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-recurring-entries-by-tag';
 		public $dsParamORDER = 'asc';
@@ -13,53 +13,52 @@
 		public $dsParamSORT = 'order';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
 				'243' => '{$pt1:43}',
 				'214' => 'no',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'system:pagination',
-				'name',
-				'frequency',
-				'description',
-				'locations: name-formal',
-				'locations: name-casual',
-				'tags: tag'
+				'name: unformatted',
+				'frequency: unformatted'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Events: Recurring: Entries by tag',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-10-30T20:27:50+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-02T23:31:34+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '21';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -72,8 +71,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}

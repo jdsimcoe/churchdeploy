@@ -2,9 +2,10 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceevents_recurring_all_entries_filtered extends Datasource{
+	Class datasourceevents_recurring_all_entries_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-recurring-all-entries-filtered';
+		public $dsParamConditionalizer = '(if any of ((if value of ({$pt2}) is (meetings)), (if value of ({$pt2}) is (events))) is (yes)) ';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
@@ -13,62 +14,58 @@
 		public $dsParamSORT = 'order';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
 				'214' => 'no',
-				'245' => '(if any of ((if value of ({$pt2}) is (meetings)), (if value of ({$pt2}) is (events))) is (yes)) ',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'system:pagination',
-				'name',
-				'frequency',
-				'locations: name-formal',
-				'locations: name-casual',
-				'downloads: name',
+				'name: unformatted',
+				'frequency: unformatted',
 				'downloads: file',
 				'images: image',
-				'images: caption',
 				'images: position',
 				'images: height',
 				'images: color',
-				'text: content',
 				'verses: passage',
-				'verses: tags: description',
-				'type: type'
+				'type: type: unformatted'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Events: Recurring: All entries (filtered)',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-11-21T00:07:32+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-02T22:57:21+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '21';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -81,8 +78,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}

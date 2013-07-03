@@ -2,9 +2,10 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceevents_3_latest extends Datasource{
+	Class datasourceevents_3_latest extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-3-latest';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is ())';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '3';
@@ -13,53 +14,54 @@
 		public $dsParamSORT = 'date';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
 				'35' => 'later than {$today}, {$today}',
 				'213' => 'no',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'system:pagination',
-				'name',
+				'name: unformatted',
 				'date',
-				'description',
-				'tags: tag',
-				'images: image',
-				'images: caption'
+				'tags: tag: unformatted',
+				'images: image'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Events: 3 latest',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-06-03T22:17:44+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-02T22:49:50+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '6';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -72,8 +74,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}

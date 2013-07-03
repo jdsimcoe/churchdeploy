@@ -112,12 +112,10 @@
 				<xsl:with-param name="entries" select="//events-recurring-entry-by-id/entry" />
 				<xsl:with-param name="single" select="true()" />
 			</xsl:call-template>
-			<xsl:if test="$pt2 = 'meetings'">
-				<xsl:call-template name="component-events">
-					<xsl:with-param name="position" select="name($xpath)" />
-					<xsl:with-param name="entries" select="//data/events-recurring-all-entries-filtered/entry [type/item/type/@handle = 'church-wide']" />
-				</xsl:call-template>
-			</xsl:if>
+			<xsl:call-template name="component-events">
+				<xsl:with-param name="position" select="name($xpath)" />
+				<xsl:with-param name="entries" select="//data/events-recurring-all-entries-filtered/entry [type/item/type/@handle = 'church-wide']" />
+			</xsl:call-template>
 			<xsl:call-template name="component-events">
 				<xsl:with-param name="position" select="name($xpath)" />
 				<xsl:with-param name="entries" select="//events-recurring-entries-by-tag/entry" />

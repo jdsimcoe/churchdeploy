@@ -2,9 +2,10 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceteachings_recent_filtered extends Datasource{
+	Class datasourceteachings_recent_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-recent-filtered';
+		public $dsParamConditionalizer = '(if value of ({$pt2}) is (teachings))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '10';
@@ -13,20 +14,20 @@
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
 				'192' => 'no',
-				'118' => '(if value of ({$pt2}) is (teachings))',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'title',
 				'slug',
 				'filename',
 				'current-id',
 				'book',
 				'chapter',
-				'description',
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
@@ -37,41 +38,40 @@
 				'video: url',
 				'video: player',
 				'video: id',
-				'day',
-				'tags: tag'
+				'day'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Teachings: Recent (filtered)',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2013-01-04T23:53:07+00:00'
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-02T22:39:28+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '13';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -84,8 +84,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}
