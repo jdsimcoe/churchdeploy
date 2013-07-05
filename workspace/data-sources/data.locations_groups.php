@@ -2,46 +2,51 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceteachings_4_latest extends SectionDatasource {
+	Class datasourcelocations_groups extends SectionDatasource {
 
-		public $dsParamROOTELEMENT = 'teachings-4-latest';
-		public $dsParamConditionalizer = '(if value of ({$pt2}) is (purchunkety))';
-		public $dsParamORDER = 'desc';
-		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '4';
+		public $dsParamROOTELEMENT = 'locations-groups';
+		public $dsParamConditionalizer = '(if value of ({$pt2}) is (homegroups))';
+		public $dsParamORDER = 'asc';
+		public $dsParamPAGINATERESULTS = 'no';
+		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamSORT = 'date';
+		public $dsParamSORT = 'city';
+		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'216' => 'no',
-				'280' => 'no',
+				'208' => 'no',
+				'286' => 'yes',
 		);
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'title: unformatted',
-				'slug',
-				'filename',
-				'current-id',
-				'book',
-				'chapter',
-				'description: unformatted',
-				'speaker: first-name',
-				'speaker: last-name',
-				'date',
-				'poster: image',
-				'video: title',
-				'video: description',
-				'video: date',
-				'video: url',
-				'video: player',
-				'video: id',
-				'day',
-				'featured'
+				'name-formal: unformatted',
+				'name-casual: unformatted',
+				'name-group: unformatted',
+				'frequency: unformatted',
+				'description: formatted',
+				'address',
+				'city',
+				'state',
+				'zip',
+				'latitude',
+				'longitude',
+				'tags: tag: unformatted',
+				'leaders: member: first-name',
+				'leaders: member: last-name',
+				'leaders: member: photo',
+				'leaders: member: email',
+				'leaders: member: job-title: unformatted',
+				'leaders: member: phone-number',
+				'leaders: member: hide',
+				'leaders: role: role: unformatted',
+				'leaders: role: context: unformatted',
+				'leaders: role: description: unformatted',
+				'full'
 		);
 		
 
@@ -52,18 +57,18 @@
 
 		public function about() {
 			return array(
-				'name' => 'Teachings: 4 latest',
+				'name' => 'Locations: Groups',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-04T15:41:53+00:00'
+				'release-date' => '2013-07-05T00:00:58+00:00'
 			);
 		}
 
 		public function getSource() {
-			return '13';
+			return '5';
 		}
 
 		public function allowEditorToParse() {

@@ -93,7 +93,7 @@ Global Pagination
 		<xsl:with-param name="show-range" select="5" />
 		<xsl:with-param name="label-previous" select="'← Previous'" />
 		<xsl:with-param name="label-next" select="'Next →'" />
-		<xsl:with-param name="class-pagination" select="'pagination'" />
+		<xsl:with-param name="class-pagination" select="'pagination pagination-large'" />
 		<xsl:with-param name="class-page" select="''" />
 		<xsl:with-param name="class-next" select="'next'" />
 		<xsl:with-param name="class-previous" select="'prev'" />

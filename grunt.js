@@ -131,18 +131,19 @@ module.exports = function(grunt) {
       },
       bootstrap_js: {
         src: [
-          "workspace/bootstrap/js/bootstrap-transition.js",
-          "workspace/bootstrap/js/bootstrap-alert.js",
-          "workspace/bootstrap/js/bootstrap-modal.js",
-          "workspace/bootstrap/js/bootstrap-dropdown.js",
-          "workspace/bootstrap/js/bootstrap-scrollspy.js",
-          "workspace/bootstrap/js/bootstrap-tab.js",
-          "workspace/bootstrap/js/bootstrap-tooltip.js",
-          "workspace/bootstrap/js/bootstrap-popover.js",
-          "workspace/bootstrap/js/bootstrap-button.js",
-          "workspace/bootstrap/js/bootstrap-collapse.js",
-          "workspace/bootstrap/js/bootstrap-carousel.js",
-          "workspace/bootstrap/js/bootstrap-typeahead.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-transition.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-alert.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-modal.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-dropdown.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-scrollspy.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-tab.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-tooltip.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-popover.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-button.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-collapse.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-carousel.js",
+          "workspace/bootstrap/docs/assets/js/bootstrap-typeahead.js",
+					"workspace/bootstrap/docs/assets/js/bootstrap-affix.js"
         ],
         dest: "grunt-temp/bootstrap_js.js"
       }

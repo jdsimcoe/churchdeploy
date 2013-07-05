@@ -5,7 +5,7 @@
 	Class datasourceteachings_6_latest extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-6-latest';
-		public $dsParamConditionalizer = '(if value of ({$pt1}) is ())';
+		public $dsParamConditionalizer = '(if any of ((if value of ({$pt1}) is ()), (if value of ({$pt2}) is (teachings))) is (yes))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '6';
@@ -58,7 +58,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:11:37+00:00'
+				'release-date' => '2013-07-04T15:43:45+00:00'
 			);
 		}
 

@@ -8,7 +8,7 @@
 		public $dsParamConditionalizer = '(if value of ({$pt1}) is ())';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '3';
+		public $dsParamLIMIT = '6';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'date';
@@ -45,7 +45,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:49:36+00:00'
+				'release-date' => '2013-07-04T06:12:44+00:00'
 			);
 		}
 

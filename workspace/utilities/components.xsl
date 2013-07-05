@@ -400,7 +400,7 @@ All URL helpers can now be replaced with "url-prefix"
 
 
 <xsl:template name="edit-entry">
-	<xsl:param name="component" />
+	<!-- <xsl:param name="component" />
 	<xsl:param name="link">
 		<xsl:value-of select="$root" />
 		<xsl:text>/symphony/publish/</xsl:text>
@@ -420,7 +420,7 @@ All URL helpers can now be replaced with "url-prefix"
 			</xsl:attribute>
 			<i class="glyphicon-pencil"></i>
 		</a>
-	</xsl:if>
+	</xsl:if> -->
 </xsl:template>
 
 
