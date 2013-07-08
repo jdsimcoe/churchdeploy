@@ -13,11 +13,11 @@ Toolkit
 	<xsl:if test="$pt1 = 'toolkit' and $pt2 = 'images'">
 		<h1>Responsive Image Toolkit</h1>
 		<hr class="soften" />
-		<xsl:if test="//images-create/message or //images-create/image/@message">
+		<xsl:if test="/data/images-create/message or /data/images-create/image/@message">
 			<p>
-				<b><xsl:value-of select="//images-create/message" /></b>
+				<b><xsl:value-of select="/data/images-create/message" /></b>
 				<br />
-				<xsl:value-of select="//images-create/image/@message" />
+				<xsl:value-of select="/data/images-create/image/@message" />
 			</p>
 		</xsl:if>
 		<br />
@@ -29,10 +29,10 @@ Toolkit
 		<br /><br />
 		<p class="center"><a href="{$root}/symphony/publish/images/new/" class="link link-small">OR use the multiple file uploader »</a></p>
 		<br />
-		<xsl:if test="//images-toolkit-all-entries-filtered/entry">
+		<xsl:if test="/data/images-toolkit-all-entries-filtered/entry">
 			<hr class="soften" />
 			<table border="1" style="border-collapse: collapse; width: 100%; border-color: #ededec; border: 1px solid #ededec;">
-				<xsl:for-each select="//images-toolkit-all-entries-filtered/entry">
+				<xsl:for-each select="/data/images-toolkit-all-entries-filtered/entry">
 					<tr>
 						<td style="padding: 10px">
 							<img src="{$root}/image/2/0/50/5/0{image/@path}/{image/filename}" style="border: #000 1px solid" />
