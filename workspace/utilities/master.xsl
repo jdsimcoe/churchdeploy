@@ -63,10 +63,12 @@
 			<xsl:call-template name="template-header-outside-container" />
 
 
-				<xsl:call-template name="template-main-container" />
+				
 
 
 			<div class="container main-container">
+				
+				<xsl:call-template name="template-main-container" />
 
 				<xsl:call-template name="template-header-inside-container" />
 

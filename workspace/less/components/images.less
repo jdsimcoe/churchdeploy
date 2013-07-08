@@ -1,17 +1,25 @@
-.flier-image {
-	position: relative;
-	top: -5px;
-	margin-bottom: 40px;
-}
-
 .component-images {
+	
+	img {
+		width: 100%;
+	}
 
-  .outer {
-    position: absolute;
-    left: 0;
-    top: 73px;
-    width: 100%;
-    z-index: -2;
+  .full-bleed {
+		position: absolute;
+		left: 0;
+		margin-bottom: 500px;
+		top: 73px;
+		width: 100%;
+		
+		img {
+			width: 100%;
+			height: 500px;
+		}
   }
+	
+	.padder {
+		height: 475px;
+		position: relative;
+	}
 
 }
