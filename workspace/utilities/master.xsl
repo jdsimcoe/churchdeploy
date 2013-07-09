@@ -55,7 +55,7 @@
 				<xsl:text> </xsl:text>
 				<xsl:text>layout-</xsl:text>
 				<xsl:value-of select="data/layouts-ds-tags-entries-by-tag/entry/name/@handle" />
-				<xsl:if test="data/events-entry-by-id-preview/entry or//events-entry-by-id/entry or //events-recurring-entry-by-id/entry">
+				<xsl:if test="data/events-entry-by-id-preview/entry or /data/events-entry-by-id/entry or /data/events-recurring-entry-by-id/entry or /data/events-recurring-entry-by-id-preview/entry">
 					<xsl:text> profile</xsl:text>
 				</xsl:if>
 			</xsl:attribute>

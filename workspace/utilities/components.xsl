@@ -96,6 +96,11 @@
 						<xsl:with-param name="entries" select="//data/events-recurring-entry-by-id/entry" />
 						<xsl:with-param name="single" select="true()" />
 					</xsl:call-template>
+					<xsl:call-template name="component-events">
+						<xsl:with-param name="position" select="name($xpath)" />
+						<xsl:with-param name="entries" select="//events-recurring-entry-by-id-preview/entry" />
+						<xsl:with-param name="single" select="true()" />
+					</xsl:call-template>
 				</xsl:when>
 				<!-- Tagged entries -->
 				<xsl:otherwise>
