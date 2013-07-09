@@ -2,52 +2,73 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceteachings_series_search extends SectionDatasource {
+	Class datasourcelocations_groups extends SectionDatasource {
 
-		public $dsParamROOTELEMENT = 'teachings-series-search';
-		public $dsParamORDER = 'desc';
+		public $dsParamROOTELEMENT = 'locations-groups';
+		public $dsParamConditionalizer = '(if value of ({$pt2}) is (homegroups))';
+		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamSORT = 'system:id';
+		public $dsParamSORT = 'city';
 		public $dsParamHTMLENCODE = 'yes';
-		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
+		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$ds-search}',
-				'233' => 'no',
+				'208' => 'no',
+				'286' => 'yes',
 		);
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'title: unformatted',
-				'description',
-				'teachings: title: unformatted'
+				'name-formal: unformatted',
+				'name-casual: unformatted',
+				'name-group: unformatted',
+				'frequency: unformatted',
+				'description: formatted',
+				'address',
+				'city',
+				'state',
+				'zip',
+				'latitude',
+				'longitude',
+				'tags: tag: unformatted',
+				'leaders: member: first-name',
+				'leaders: member: last-name',
+				'leaders: member: photo',
+				'leaders: member: email',
+				'leaders: member: job-title: unformatted',
+				'leaders: member: phone-number',
+				'leaders: member: hide',
+				'leaders: role: role: unformatted',
+				'leaders: role: context: unformatted',
+				'leaders: role: description: unformatted',
+				'full'
 		);
 		
 
 		public function __construct($env=NULL, $process_params=true) {
 			parent::__construct($env, $process_params);
-			$this->_dependencies = array('$ds-search');
+			$this->_dependencies = array();
 		}
 
 		public function about() {
 			return array(
-				'name' => 'Teachings: Series: Search',
+				'name' => 'Locations: Groups',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T15:13:46+00:00'
+				'release-date' => '2013-07-05T00:00:58+00:00'
 			);
 		}
 
 		public function getSource() {
-			return '27';
+			return '5';
 		}
 
 		public function allowEditorToParse() {
