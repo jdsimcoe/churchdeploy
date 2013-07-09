@@ -5,7 +5,7 @@
 	Class datasourcexml_apibibliacom extends DynamicXMLDatasource {
 
 		public $dsParamROOTELEMENT = 'xml-apibibliacom';
-		public $dsParamURL = 'http://api.biblia.com/v1/bible/content/kjv.xml?key=75a4b16582635a69f1194f670abfa9f0&passage={$ds-verses-entry-by-tag.passage}{$ds-verses-entry-by-id.passage}';
+		public $dsParamURL = 'http://api.biblia.com/v1/bible/content/kjv.xml?key=75a4b16582635a69f1194f670abfa9f0&passage={$ds-verses-entry-by-tag:encoded}{$ds-verses-entry-by-id:encoded}{$ds-verses-entry-by-id-preview:encoded}';
 		public $dsParamXPATH = '/response/text';
 		public $dsParamCACHE = '999999';
 		public $dsParamTIMEOUT = '6';
@@ -17,7 +17,7 @@
 
 		public function __construct($env=NULL, $process_params=true) {
 			parent::__construct($env, $process_params);
-			$this->_dependencies = array('$ds-verses-entry-by-tag.passage', '$ds-verses-entry-by-id.passage');
+			$this->_dependencies = array('$ds-verses-entry-by-tag', '$ds-verses-entry-by-id', '$ds-verses-entry-by-id-preview');
 		}
 
 		public function about() {
@@ -28,7 +28,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-08T23:53:35+00:00'
+				'release-date' => '2013-07-09T16:00:46+00:00'
 			);
 		}
 
