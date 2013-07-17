@@ -7,6 +7,7 @@
 *.geany
 *.sublime-project
 *.sublime-workspace
+*.sass-cache
 favicon.ico
 symphony/favicon.ico
 install-log.txt
