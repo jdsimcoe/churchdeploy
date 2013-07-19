@@ -1,32 +1,21 @@
 .navbar {
-  background: darken(@color-gray-dark, 5%) url(../img/texture-overlay-reverse.png) 0 100% repeat-x;
-  border: none;
-  .border-radius(0);
-  .box-shadow(none);
+  padding: 10px 0;
 
-  .navbar-inner {
-    padding: 15px 0 14px 0;
-  }
-
-  .brand {
-    margin-left: 5px;
-  }
-
-  .navbar-search {
-    margin-left: 10px;
-    margin-right: 0;
+  .navbar-brand {
+    font-family: @font-family-brand;
+    font-size: 38px;
     position: relative;
-    top: -3px;
+    top: 2px;
   }
 
   .nav {
 
+    &.navbar-nav {
+      font-size: 14px;
+      text-transform: uppercase;
+    }
 
     li {
-      font-family: @font-family-sans-serif;
-      font-size: 12px;
-      text-transform: uppercase;
-      .box-shadow(none);
 
       &:hover {
 
@@ -36,204 +25,7 @@
         }
 
       }
-
-      &.active {
-
-        .dropdown-menu {
-          border: none;
-          cursor: pointer;
-
-
-          li {
-            margin-left: 0;
-
-            a {
-              background: @color-white;
-              border: none;
-              .border-radius(0);
-              color: lighten(desaturate(@color-primary, 10%), 40%);
-              cursor: pointer;
-              text-shadow: none;
-
-              &:hover {
-                color: lighten(desaturate(@color-primary, 10%), 20%);
-              }
-            }
-          }
-        }
-
-
-        a {
-
-          color: lighten(@color-primary, 40%);
-          .box-shadow(none);
-
-          &:hover {
-
-            color: lighten(@color-primary, 50%);
-            .box-shadow(none);
-          }
-        }
-      }
-
-      a {
-        border: none;
-        .border-radius(@border-radius-base);
-        .box-shadow(none);
-        color: lighten(desaturate(@color-primary, 10%), 15%);
-        font-size: 14px;
-        font-weight: bold;
-        padding-bottom: 10px;
-        padding-top: 10px;
-        text-shadow: none;
-
-        .glyphicon-cog {
-          font-size: 20px;
-        }
-
-
-        &[data-toggle="dropdown"] {
-          height: 20px;
-        }
-
-        &:hover {
-          color: lighten(desaturate(@color-primary, 10%), 30%);
-        }
-
-
-      }
-
-
-      .dropdown-menu {
-        border: none;
-        cursor: pointer;
-        padding-top: 13px;
-        padding-bottom: 13px;
-        margin-top: -5px;
-
-        li {
-          margin-left: 0;
-
-          a {
-            background: @color-white;
-            border: none;
-            .border-radius(0);
-            color: lighten(desaturate(@color-primary, 10%), 40%);
-            cursor: pointer;
-            text-shadow: none;
-
-            &:hover {
-              color: lighten(desaturate(@color-primary, 10%), 20%);
-            }
-          }
-
-          .dropdown-menu {
-            .border-radius(0 @border-radius-base @border-radius-base 0);
-            left: 100%;
-            padding-top: 0;
-            padding-bottom: 13px;
-            right: auto;
-            top: 10px;
-            visibility: hidden;
-
-            li {
-              clear: both;
-              height: 40px;
-            }
-
-
-            &:before {
-              display: block;
-              float: left;
-              width: 0;
-              height: 0;
-              clear: both;
-              border-color:
-              transparent;
-              border-right-color:
-              #ffffff;
-              border-style: solid;
-              border-width: 7px 7px 7px 0;
-              content: " ";
-              position: relative;
-              top: 7px;
-              left: -7px;
-            }
-          }
-
-          &:hover {
-
-            .dropdown-menu {
-              visibility: visible;
-            }
-          }
-
-        }
-      }
-
     }
-
-    &.maint {
-
-      li {
-        margin-left: 15px;
-
-        a {
-          color: lighten(desaturate(@color-primary, 10%), 5%);
-
-          &:hover {
-            color: lighten(desaturate(@color-primary, 10%), 30%);
-          }
-        }
-
-        .dropdown-menu {
-          border: none;
-          cursor: pointer;
-
-
-          li {
-            margin-left: 0;
-
-            a {
-              background: @color-white;
-              border: none;
-              .border-radius(0);
-              color: lighten(desaturate(@color-primary, 10%), 40%);
-              cursor: pointer;
-              text-shadow: none;
-*
-              &:hover {
-                color: lighten(desaturate(@color-primary, 10%), 20%);
-              }
-            }
-          }
-        }
-      }
-
-    }
-
-  }
-
-}
-
-@media (max-width: 979px) {
-
-  .container.navbar-wrapper {
-    margin-bottom: 0;
-    width: auto;
-  }
-  .navbar-inner {
-    border-radius: 0;
-    margin: -20px 0;
-  }
-
-}
-
-
-@media (max-width: 767px) {
-
-  .navbar-inner {
-    margin: -20px;
   }
 
 }

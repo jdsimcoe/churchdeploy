@@ -29,127 +29,127 @@
           border-radius: @radius;
 }
 
-@color-body-text: #303030;
-@link-color: @color-accent;
-@border-radius-large: @border-radius-base;
-@border-radius-small: @border-radius-base;
-@btn-background-primary-highlight: darken(@btn-background-primary, 5%);
+// @color-body-text: #303030;
+// @link-color: @color-accent;
+// @border-radius-large: @border-radius-base;
+// @border-radius-small: @border-radius-base;
+// @btn-background-primary-highlight: darken(@btn-background-primary, 5%);
 
-.navbar {
+// .navbar {
 
-  .btn-navbar {
-    background: darken(@color-primary, 13%);
-    border-color: darken(@color-primary, 8%);
-    .border-radius(2px);
-    .box-shadow(none);
-    position: relative;
-    top: 0;
-    right: 10px;
+//   .btn-navbar {
+//     background: darken(@color-primary, 13%);
+//     border-color: darken(@color-primary, 8%);
+//     .border-radius(2px);
+//     .box-shadow(none);
+//     position: relative;
+//     top: 0;
+//     right: 10px;
 
-    .icon-bar {
-      .box-shadow(none);
-      color: darken(@color-white, 15%);
-    }
+//     .icon-bar {
+//       .box-shadow(none);
+//       color: darken(@color-white, 15%);
+//     }
 
-    &:hover {
-      background: darken(@color-primary, 17%);
-      border-color: darken(@color-primary, 8%);
-    }
-  }
+//     &:hover {
+//       background: darken(@color-primary, 17%);
+//       border-color: darken(@color-primary, 8%);
+//     }
+//   }
 
-  .nav-collapse {
+//   .nav-collapse {
 
-    &.in {
-      padding-top: 10px;
+//     &.in {
+//       padding-top: 10px;
 
-      .dropdown-menu {
-        li {
-          a {
-            background: darken(@color-primary, 8%);
-            .border-radius(@border-radius-base);
+//       .dropdown-menu {
+//         li {
+//           a {
+//             background: darken(@color-primary, 8%);
+//             .border-radius(@border-radius-base);
 
-            &:hover {
-              background: darken(@color-primary, 15%);
-            }
-          }
-        }
-      }
-    }
+//             &:hover {
+//               background: darken(@color-primary, 15%);
+//             }
+//           }
+//         }
+//       }
+//     }
 
-  }
+//   }
 
-}
+// }
 
-@btn-background: darken(@color-white, 15%);
-@btn-background-highlight: darken(@btn-background, 5%);
+// @btn-background: darken(@color-white, 15%);
+// @btn-background-highlight: darken(@btn-background, 5%);
 
-.btn {
-  background-image: none;
-  background: @btn-background;
-  border: 1px solid @btn-background;
-  .border-radius(0);
-  .box-shadow(none);
-  .box-sizing(border-box);
-  color: #fff;
-  text-shadow: none;
+// .btn {
+//   background-image: none;
+//   background: @btn-background;
+//   border: 1px solid @btn-background;
+//   .border-radius(0);
+//   .box-shadow(none);
+//   .box-sizing(border-box);
+//   color: #fff;
+//   text-shadow: none;
 
-  &:hover {
-    background: @btn-background-highlight;
-    border: 1px solid @btn-background-highlight;
-    color: #fff;
-  }
+//   &:hover {
+//     background: @btn-background-highlight;
+//     border: 1px solid @btn-background-highlight;
+//     color: #fff;
+//   }
 
-  &.btn-primary {
-    background: @btn-background-primary;
-    border: 1px solid @btn-background-primary;
+//   &.btn-primary {
+//     background: @btn-background-primary;
+//     border: 1px solid @btn-background-primary;
 
-    &:hover {
-      background: @btn-background-primary-highlight;
-      border: 1px solid @btn-background-primary-highlight;
-    }
-  }
+//     &:hover {
+//       background: @btn-background-primary-highlight;
+//       border: 1px solid @btn-background-primary-highlight;
+//     }
+//   }
 
-  &.btn-success {
-    background: @btn-background-success;
-    border: 1px solid @btn-background-success;
+//   &.btn-success {
+//     background: @btn-background-success;
+//     border: 1px solid @btn-background-success;
 
-    &:hover {
-      background: @btn-background-success-highlight;
-      border: 1px solid @btn-background-success-highlight;
-    }
-  }
+//     &:hover {
+//       background: @btn-background-success-highlight;
+//       border: 1px solid @btn-background-success-highlight;
+//     }
+//   }
 
-  &.btn-warning {
-    background: @btn-background-warning;
-    border: 1px solid @btn-background-warning;
+//   &.btn-warning {
+//     background: @btn-background-warning;
+//     border: 1px solid @btn-background-warning;
 
-    &:hover {
-      background: @btn-background-warning-highlight;
-      border: 1px solid @btn-background-warning-highlight;
-    }
-  }
+//     &:hover {
+//       background: @btn-background-warning-highlight;
+//       border: 1px solid @btn-background-warning-highlight;
+//     }
+//   }
 
-  &.btn-danger {
-    background: @btn-background-danger;
-    border: 1px solid @btn-background-danger;
+//   &.btn-danger {
+//     background: @btn-background-danger;
+//     border: 1px solid @btn-background-danger;
 
-    &:hover {
-      background: @btn-background-danger-highlight;
-      border: 1px solid @btn-background-danger-highlight;
-    }
-  }
-	
-	&.btn-inverse {
-    background: darken(@btn-background, 40%);
-    border: 1px solid darken(@btn-background, 40%);
-		
-    &:hover {
-      background: darken(@btn-background, 50%);
-      border: 1px solid darken(@btn-background, 50%);
-    }
-	}
+//     &:hover {
+//       background: @btn-background-danger-highlight;
+//       border: 1px solid @btn-background-danger-highlight;
+//     }
+//   }
 
-}
+// 	&.btn-inverse {
+//     background: darken(@btn-background, 40%);
+//     border: 1px solid darken(@btn-background, 40%);
+
+//     &:hover {
+//       background: darken(@btn-background, 50%);
+//       border: 1px solid darken(@btn-background, 50%);
+//     }
+// 	}
+
+// }
 
 // HTML ELEMENTS
 // =============
@@ -185,7 +185,7 @@ address,
   font-family: @font-family-serif;
   font-size: @body-text-height;
   line-height: 1.7;
-	
+
 	.badge {
 		font-family: @font-family-sans-serif;
 	}
@@ -223,7 +223,7 @@ address,
 }
 
 // Top padding
-// 
+//
 // .layout-events,
 // .layout-teachings {
 // 	padding-top: 140px;
