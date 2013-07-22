@@ -41,7 +41,7 @@
 	<xsl:comment><![CDATA[[if gt IE 8]><!]]></xsl:comment><html class="no-js" lang="en"><xsl:comment><![CDATA[<![endif]]]></xsl:comment>
 
 		<xsl:call-template name="template-header-main" />
-		<body>
+		<body class="antialiased off-canvas hide-extras">
 			<xsl:attribute name="class">
 				<xsl:text>pageid-</xsl:text>
 				<xsl:choose>
@@ -63,11 +63,11 @@
 			<xsl:call-template name="template-header-outside-container" />
 
 
-				
+
 
 
 			<div class="container main-container">
-				
+
 				<xsl:call-template name="template-main-container" />
 
 				<xsl:call-template name="template-header-inside-container" />
@@ -267,60 +267,37 @@
 	<xsl:variable name="realID" select="@id" />
 	<xsl:variable name="node" select="." />
 	<li>
-		<xsl:attribute name="class">
+<!-- 		<xsl:attribute name="class">
 			<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
-				<xsl:text>dropdown </xsl:text>
+				<xsl:text>has-dropdown</xsl:text>
 			</xsl:if>
-			<xsl:text>entry</xsl:text>
-			<xsl:if test="$pt1 = @id or $active-parent = @id or //tags-all-entries/entry[ @id = $active-parent ]/parent/item/@id = @id">
-				<xsl:text> active</xsl:text>
-			</xsl:if>
-			<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
-				<xsl:text> sub</xsl:text>
-			</xsl:if>
-			<xsl:choose>
-				<xsl:when test="position() mod 2 = 0">
-					<xsl:text> even</xsl:text>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:text> odd</xsl:text>
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:if test="position() = 1">
-				<xsl:text> first</xsl:text>
-			</xsl:if>
-			<xsl:if test="position() &gt; 1 and position() &lt; last()">
-				<xsl:text> middle</xsl:text>
-			</xsl:if>
-			<xsl:if test="position() = last()">
-				<xsl:text> last</xsl:text>
-			</xsl:if>
-			<xsl:for-each select="tags/item">
-				<xsl:text> category-</xsl:text>
-				<xsl:value-of select="@id" />
-			</xsl:for-each>
-			<xsl:if test="file">
-				<xsl:choose>
-					<xsl:when test="file/@type = 'application/pdf'">
-						<xsl:text> pdf</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text> unknown</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:if>
-		</xsl:attribute>
+		</xsl:attribute> -->
 		<a>
+			<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
+				<xsl:attribute name="data-dropdown">
+					<xsl:text>drop</xsl:text>
+					<xsl:value-of select="$realID"/>
+				</xsl:attribute>
+				<xsl:attribute name="data-options">
+					<xsl:text>is_hover:true</xsl:text>
+				</xsl:attribute>
+			</xsl:if>
 			<xsl:call-template name="url-tags" />
 			<xsl:value-of select="tag" disable-output-escaping="yes" />
 		</a>
 		<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
-			<ul class="dropdown-menu hidden-phone hidden-tablet" role="menu" aria-labelledby="dropdownMenu">
+			<ul class="f-dropdown content" data-dropdown-content="yes">
+
+				<xsl:attribute name="id">
+					<xsl:text>drop</xsl:text>
+					<xsl:value-of select="$realID"/>
+				</xsl:attribute>
+
 				<xsl:for-each select="/data/tags-all-entries/entry[parent/item/@id = $realID]">
 					<li>
 						<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 							<xsl:attribute name="class">
-								<xsl:text>dropdown-submenu</xsl:text>
+								<xsl:text>has-dropdown</xsl:text>
 							</xsl:attribute>
 						</xsl:if>
 						<a>
@@ -331,7 +308,7 @@
 							<xsl:value-of select="@id" />
 						</xsl:variable>
 						<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
-							<ul class="dropdown-menu">
+							<ul class="dropdown">
 								<xsl:for-each select="/data/tags-all-entries/entry[parent/item/@id = $nestedID]">
 									<li>
 										<a>
