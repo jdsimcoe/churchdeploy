@@ -1,11 +1,32 @@
 .navbar {
-  padding: 10px 0;
+  background: @color-white;
+  padding: 20px 0;
 
   .navbar-brand {
     font-family: @font-family-brand;
     font-size: 38px;
     position: relative;
     top: 2px;
+  }
+
+  .hidden-lg {
+
+    .mast {
+      font-family: @font-family-brand;
+      font-size: 36px;
+      font-weight: normal;
+      padding-left: 10px;
+      position: relative;
+      top: -7px;
+    }
+
+  }
+
+  .row {
+
+    &.menu {
+      margin: 20px 0;
+    }
   }
 
   .nav {
@@ -16,6 +37,7 @@
     }
 
     li {
+      font-size: 16px;
 
       &:hover {
 
@@ -26,6 +48,25 @@
 
       }
     }
+  }
+
+}
+
+.icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: @color-white;
+  border-radius: 1px;
+}
+.icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+
+@media (max-width: @screen-tablet-max) {
+
+  .navbar {
+    padding: 20px;
   }
 
 }

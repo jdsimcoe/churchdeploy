@@ -40,20 +40,11 @@ module.exports = function (grunt) {
       },
       dist: {
         src : [
-          'workspace/bootstrap/js/transition.js',
-          'workspace/bootstrap/js/alert.js',
-          'workspace/bootstrap/js/modal.js',
-          'workspace/bootstrap/js/dropdown.js',
-          // 'workspace/bootstrap/js/scrollspy.js',
-          'workspace/bootstrap/js/tab.js',
-          'workspace/bootstrap/js/tooltip.js',
-          'workspace/bootstrap/js/button.js',
-          'workspace/bootstrap/js/collapse.js',
-          'workspace/bootstrap/js/carousel.js',
-          // 'workspace/bootstrap/js/typeahead.js',
-          // 'workspace/bootstrap/js/affix.js',
+          'workspace/bootstrap/assets/js/jquery.js',
+          'workspace/bootstrap/dist/js/bootstrap.min.js',
           'workspace/js/responsimage.js',
-          '<config:jshint.all.files>'],
+          'workspace/js/offcanvasmenu.js',
+          'workspace/themes/active/js/main.js'],
         dest: 'workspace/themes/active/js/application.js'
       }
     },

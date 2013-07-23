@@ -41,7 +41,7 @@
 	<xsl:comment><![CDATA[[if gt IE 8]><!]]></xsl:comment><html class="no-js" lang="en"><xsl:comment><![CDATA[<![endif]]]></xsl:comment>
 
 		<xsl:call-template name="template-header-main" />
-		<body>
+		<body class="off-canvas-menu">
 			<xsl:attribute name="class">
 				<xsl:text>pageid-</xsl:text>
 				<xsl:choose>
@@ -60,43 +60,54 @@
 				</xsl:if>
 			</xsl:attribute>
 
-			<xsl:call-template name="template-header-outside-container" />
+			<div id="primary">
+				<xsl:call-template name="template-header-outside-container" />
 
+				<div class="container main-container">
 
-				
+					<xsl:call-template name="template-main-container" />
 
+					<xsl:call-template name="template-header-inside-container" />
 
-			<div class="container main-container">
-				
-				<xsl:call-template name="template-main-container" />
+					<xsl:choose>
+						<xsl:when test="$pt1 = 'toolkit' and $cookie-username">
+							<xsl:call-template name="toolkit" />
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose>
+								<xsl:when test="count(/data/layouts-ds-tags-entries-by-tag/entry)">
+									<xsl:call-template name="call-components">
+										<xsl:with-param name="xpath" select="/data/layouts-ds-tags-entries-by-tag/entry" />
+									</xsl:call-template>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:call-template name="call-components">
+										<xsl:with-param name="xpath" select="/data/layouts-default/entry" />
+									</xsl:call-template>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
 
-				<xsl:call-template name="template-header-inside-container" />
+					<xsl:call-template name="template-footer-inside-container" />
 
-				<xsl:choose>
-					<xsl:when test="$pt1 = 'toolkit' and $cookie-username">
-						<xsl:call-template name="toolkit" />
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:choose>
-							<xsl:when test="count(/data/layouts-ds-tags-entries-by-tag/entry)">
-								<xsl:call-template name="call-components">
-									<xsl:with-param name="xpath" select="/data/layouts-ds-tags-entries-by-tag/entry" />
-								</xsl:call-template>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:call-template name="call-components">
-									<xsl:with-param name="xpath" select="/data/layouts-default/entry" />
-								</xsl:call-template>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:otherwise>
-				</xsl:choose>
+				</div>
 
-				<xsl:call-template name="template-footer-inside-container" />
+				<xsl:call-template name="template-footer-outside-container" />
 
 			</div>
-
-			<xsl:call-template name="template-footer-outside-container" />
+			<div id="secondary">
+				<form action="get">
+          <xsl:call-template name="form-search-action" />
+          <input name="keywords" type="text" class="col-lg-12" placeholder="Search" autocomplete="off" onclick="this.select()">
+          </input>
+        </form>
+				<div class="nav">
+					<xsl:for-each select="//tags-all-entries/entry[ not(parent/item) and not(hide-from-header = 'Yes') ]">
+          	<xsl:call-template name="subnav-entry-mobile" />
+        	</xsl:for-each>
+				</div>
+		  </div>
 
 		</body>
 	</html>
@@ -370,51 +381,12 @@
 	<xsl:variable name="active-parent" select="/data/tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
 	<xsl:variable name="realID" select="@id" />
 	<xsl:variable name="node" select="." />
-	<li>
-		<xsl:attribute name="class">
-			<xsl:text>entry </xsl:text>
-			<xsl:if test="$pt1 = @id or $active-parent = @id or /data/tags-all-entries/entry[ @id = $active-parent ]/parent/item/@id = @id">
-				<xsl:text>active</xsl:text>
-			</xsl:if>
-			<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
-				<xsl:text> sub</xsl:text>
-			</xsl:if>
-			<xsl:choose>
-				<xsl:when test="position() mod 2 = 0">
-					<xsl:text> even</xsl:text>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:text> odd</xsl:text>
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:if test="position() = 1">
-				<xsl:text> first</xsl:text>
-			</xsl:if>
-			<xsl:if test="position() &gt; 1 and position() &lt; last()">
-				<xsl:text> middle</xsl:text>
-			</xsl:if>
-			<xsl:if test="position() = last()">
-				<xsl:text> last</xsl:text>
-			</xsl:if>
-			<xsl:for-each select="tags/item">
-				<xsl:text> category-</xsl:text>
-				<xsl:value-of select="@id" />
-			</xsl:for-each>
-			<xsl:if test="file">
-				<xsl:choose>
-					<xsl:when test="file/@type = 'application/pdf'">
-						<xsl:text> pdf</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text> unknown</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:if>
-		</xsl:attribute>
+	<h3 class="allcaps">
 		<a>
 			<xsl:call-template name="url-tags" />
 			<xsl:value-of select="tag" disable-output-escaping="yes" />
 		</a>
+		<hr />
 		<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 			<ul class="dropdown-menu">
 				<xsl:for-each select="/data/tags-all-entries/entry[parent/item/@id = $realID]">
@@ -425,9 +397,10 @@
 						</a>
 					</li>
 				</xsl:for-each>
+				<hr />
 			</ul>
 		</xsl:if>
-	</li>
+	</h3>
 </xsl:template>
 
 

@@ -28,14 +28,14 @@
 				</div>
 			</xsl:when>
 			<xsl:when test="name($xpath) = 'column-center'">
-				<div id="main-content" class="span8 column-center">
+				<div id="main-content" class="col-lg-8 column-center">
 					<xsl:call-template name="component-populate">
 						<xsl:with-param name="xpath" select="$xpath" />
 					</xsl:call-template>
 				</div>
 			</xsl:when>
 			<xsl:when test="name($xpath) = 'column-right'">
-				<div id="side-content" class="span4 column-right">
+				<div id="side-content" class="col-lg-4 column-right">
 					<xsl:call-template name="template-column-right-top" />
 					<xsl:call-template name="component-populate">
 						<xsl:with-param name="xpath" select="$xpath" />
