@@ -68,11 +68,11 @@ module.exports = function (grunt) {
     watch: {
       cssdev: {
         files: '**/*.less',
-        tasks: 'less:dev'
+        tasks: ['less:dev', 'growl:watch']
       },
       cssprod: {
         files: '<config:watch.cssdev.files>',
-        tasks: 'less:prod'
+         tasks: ['less:prod', 'growl:watch']
       }
     },
 
@@ -90,7 +90,7 @@ module.exports = function (grunt) {
 });
 
 // Main task
-grunt.registerTask('cssdev', ['less:dev', 'growl:watch']);
-grunt.registerTask('cssprod', ['less:prod', 'growl:watch']);
+grunt.registerTask('cssdev', ['less:dev', 'growl:main']);
+grunt.registerTask('cssprod', ['less:prod', 'growl:main']);
 grunt.registerTask('jsprod', ['jshint', 'concat', 'uglify:bootstrap', 'uglify:jquery']);
 grunt.registerTask('default', ['jshint', 'concat', 'uglify:bootstrap', 'uglify:jquery', 'less:prod', 'growl:main'])};
