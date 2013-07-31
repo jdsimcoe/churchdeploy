@@ -44,6 +44,7 @@ module.exports = function (grunt) {
           'workspace/bootstrap/dist/js/bootstrap.min.js',
           'workspace/js/responsimage.js',
           'workspace/js/offcanvasmenu.js',
+          'workspace/js/audio.js',
           'workspace/themes/active/js/main.js'],
         dest: 'workspace/themes/active/js/application.js'
       }

@@ -255,7 +255,7 @@
 	<xsl:param name="xpath" />
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="column-main">
 				<xsl:call-template name="component">
 					<xsl:with-param name="xpath" select="$xpath/column-full-width" />
 				</xsl:call-template>
