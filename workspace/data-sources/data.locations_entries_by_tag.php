@@ -10,7 +10,7 @@
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt1:43';
+		public $dsParamREQUIREDPARAM = '$pt1:home';
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
@@ -18,7 +18,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'142' => '{$pt1:43}',
+				'142' => '{$ds-tags-filtered.system-id:43}',
 				'208' => 'no',
 		);
 		
@@ -38,18 +38,18 @@
 
 		public function __construct($env=NULL, $process_params=true) {
 			parent::__construct($env, $process_params);
-			$this->_dependencies = array();
+			$this->_dependencies = array('$ds-tags-filtered.system-id');
 		}
 
 		public function about() {
 			return array(
 				'name' => 'Locations: Entries by tag',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T17:49:34+00:00'
+				'release-date' => '2013-07-31T19:23:41+00:00'
 			);
 		}
 

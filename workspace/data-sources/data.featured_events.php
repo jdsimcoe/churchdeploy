@@ -5,6 +5,7 @@
 	Class datasourcefeatured_events extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'featured-events';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is ())';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
@@ -12,11 +13,10 @@
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'system:id';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'35' => 'later than {$today}, {$today}',
+				'35' => 'later than now',
 				'213' => 'no',
 				'281' => 'yes',
 		);
@@ -43,7 +43,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-01T18:44:38+00:00'
+				'release-date' => '2013-08-01T18:42:48+00:00'
 			);
 		}
 

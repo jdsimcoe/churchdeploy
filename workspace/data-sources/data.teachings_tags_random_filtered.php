@@ -5,7 +5,7 @@
 	Class datasourceteachings_tags_random_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-tags-random-filtered';
-		public $dsParamConditionalizer = '(if value of ({$pt2}) is (teachings))';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (teachings))';
 		public $dsParamORDER = 'random';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '30';
@@ -37,11 +37,11 @@
 			return array(
 				'name' => 'Teachings: Tags: Random (filtered)',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T15:35:01+00:00'
+				'release-date' => '2013-07-24T10:57:47+00:00'
 			);
 		}
 

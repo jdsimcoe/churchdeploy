@@ -5,23 +5,22 @@
 	Class datasourceteachings_series_teachings_for_ds extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-series-teachings-for-ds';
-		public $dsParamConditionalizer = '(if all of ((if value of ({$pt2}) is (teachings)), (if value of ({$pt3}) is (series))) is (yes))';
+		public $dsParamConditionalizer = '(if all of ((if value of ({$pt1}) is (teachings)), (if value of ({$pt2}) is (series))) is (yes))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt4';
+		public $dsParamREQUIREDPARAM = '$pt3';
 		public $dsParamPARAMOUTPUT = array(
 				'teachings'
 		);
 		public $dsParamSORT = 'system:id';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$pt4}',
+				'id' => '{$pt3}',
 				'233' => 'no',
 		);
 		
@@ -41,7 +40,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:41:32+00:00'
+				'release-date' => '2013-08-01T20:02:39+00:00'
 			);
 		}
 

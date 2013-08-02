@@ -5,21 +5,20 @@
 	Class datasourceteachings_entries_by_year_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-entries-by-year-filtered';
-		public $dsParamConditionalizer = '(if all of ((if value of ({$pt2}) is (teachings)), (if value of ({$pt3}) is (year))) is (yes))';
+		public $dsParamConditionalizer = '(if all of ((if value of ({$pt1}) is (teachings)), (if value of ({$pt2}) is (year))) is (yes))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '{$pt6:10}';
-		public $dsParamSTARTPAGE = '{$pt5:1}';
+		public $dsParamLIMIT = '{$pt5:10}';
+		public $dsParamSTARTPAGE = '{$pt4:1}';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt4';
+		public $dsParamREQUIREDPARAM = '$pt3';
 		public $dsParamSORT = 'date';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'109' => '{$pt4}-01-01 to {$pt4}-12-01-31',
+				'109' => '{$pt3}-01-01 to {$pt3}-12-01-31',
 				'216' => 'no',
 		);
 		
@@ -53,7 +52,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T15:02:44+00:00'
+				'release-date' => '2013-08-01T20:33:16+00:00'
 			);
 		}
 

@@ -109,77 +109,74 @@
 		</xsl:variable>
 
 		<!-- Pagination -->
-		<div class="{$class-pagination}">
 
-			<ul>
+		<ul class="{$class-pagination}">
 
-				<!-- Previous link -->
-				<xsl:if test="$show-navigation = true()">
-					<li>
-						<xsl:attribute name="class">
-							<xsl:if test="$page-next = 2">
-								<xsl:value-of select="$class-disabled" />
-								<xsl:text> </xsl:text>
-							</xsl:if>
-							<xsl:value-of select="$class-previous" />
-						</xsl:attribute>
+			<!-- Previous link -->
+			<xsl:if test="$show-navigation = true()">
+				<li>
+					<xsl:attribute name="class">
+						<xsl:if test="$page-next = 2">
+							<xsl:value-of select="$class-disabled" />
+							<xsl:text> </xsl:text>
+						</xsl:if>
+						<xsl:value-of select="$class-previous" />
+					</xsl:attribute>
 
-						<a>
-							<xsl:if test="$page-next != 2 or $show-rotation = true()">
-								<xsl:attribute name="href">
-									<xsl:call-template name="pagination-url-replace">
-										<xsl:with-param name="string" select="$pagination-url" />
-										<xsl:with-param name="search" select="'$'" />
-										<xsl:with-param name="replace" select="string($page-previous)" />
-									</xsl:call-template>
-								</xsl:attribute>
-							</xsl:if>
-							<xsl:value-of select="$label-previous" />
-						</a>
-					</li>
-				</xsl:if>
+					<a>
+						<xsl:if test="$page-next != 2 or $show-rotation = true()">
+							<xsl:attribute name="href">
+								<xsl:call-template name="pagination-url-replace">
+									<xsl:with-param name="string" select="$pagination-url" />
+									<xsl:with-param name="search" select="'$'" />
+									<xsl:with-param name="replace" select="string($page-previous)" />
+								</xsl:call-template>
+							</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of select="$label-previous" />
+					</a>
+				</li>
+			</xsl:if>
 
-				<!-- Page range -->
-				<xsl:call-template name="pagination-numbers">
-					<xsl:with-param name="pagination-url" select="$pagination-url" />
-					<xsl:with-param name="page-first" select="$page-first" />
-					<xsl:with-param name="page-last" select="$page-last" />
-					<xsl:with-param name="page-current" select="$page-current" />
-					<xsl:with-param name="page-total" select="$pagination/@total-pages" />
-					<xsl:with-param name="class-page" select="$class-page" />
-					<xsl:with-param name="class-selected" select="$class-selected" />
-					<xsl:with-param name="class-ellipsis" select="$class-ellipsis" />
-					<xsl:with-param name="iterations" select="$page-last - $page-first" />
-				</xsl:call-template>
+			<!-- Page range -->
+			<xsl:call-template name="pagination-numbers">
+				<xsl:with-param name="pagination-url" select="$pagination-url" />
+				<xsl:with-param name="page-first" select="$page-first" />
+				<xsl:with-param name="page-last" select="$page-last" />
+				<xsl:with-param name="page-current" select="$page-current" />
+				<xsl:with-param name="page-total" select="$pagination/@total-pages" />
+				<xsl:with-param name="class-page" select="$class-page" />
+				<xsl:with-param name="class-selected" select="$class-selected" />
+				<xsl:with-param name="class-ellipsis" select="$class-ellipsis" />
+				<xsl:with-param name="iterations" select="$page-last - $page-first" />
+			</xsl:call-template>
 
-				<!-- Next link -->
-				<xsl:if test="$show-navigation = true()">
-					<li>
-						<xsl:attribute name="class">
-							<xsl:if test="$page-next = 1">
-								<xsl:value-of select="$class-disabled" />
-								<xsl:text> </xsl:text>
-							</xsl:if>
-							<xsl:value-of select="$class-next" />
-						</xsl:attribute>
-						<a>
-							<xsl:if test="$page-next != 1 or $show-rotation = true()">
-								<xsl:attribute name="href">
-									<xsl:call-template name="pagination-url-replace">
-										<xsl:with-param name="string" select="$pagination-url" />
-										<xsl:with-param name="search" select="'$'" />
-										<xsl:with-param name="replace" select="string($page-next)" />
-									</xsl:call-template>
-								</xsl:attribute>
-							</xsl:if>
-							<xsl:value-of select="$label-next" />
-						</a>
-					</li>
-				</xsl:if>
+			<!-- Next link -->
+			<xsl:if test="$show-navigation = true()">
+				<li>
+					<xsl:attribute name="class">
+						<xsl:if test="$page-next = 1">
+							<xsl:value-of select="$class-disabled" />
+							<xsl:text> </xsl:text>
+						</xsl:if>
+						<xsl:value-of select="$class-next" />
+					</xsl:attribute>
+					<a>
+						<xsl:if test="$page-next != 1 or $show-rotation = true()">
+							<xsl:attribute name="href">
+								<xsl:call-template name="pagination-url-replace">
+									<xsl:with-param name="string" select="$pagination-url" />
+									<xsl:with-param name="search" select="'$'" />
+									<xsl:with-param name="replace" select="string($page-next)" />
+								</xsl:call-template>
+							</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of select="$label-next" />
+					</a>
+				</li>
+			</xsl:if>
 
-			</ul>
-
-		</div>
+		</ul>
 
 	</xsl:if>
 

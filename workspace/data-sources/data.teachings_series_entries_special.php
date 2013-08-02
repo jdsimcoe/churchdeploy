@@ -5,7 +5,7 @@
 	Class datasourceteachings_series_entries_special extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-series-entries-special';
-		public $dsParamConditionalizer = '(if value of ({$pt3}) is (series))';
+		public $dsParamConditionalizer = '(if value of ({$pt2}) is (series))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
@@ -14,7 +14,6 @@
 		public $dsParamSORT = 'order';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -43,7 +42,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T23:13:31+00:00'
+				'release-date' => '2013-08-01T20:01:47+00:00'
 			);
 		}
 

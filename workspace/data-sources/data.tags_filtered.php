@@ -2,71 +2,51 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceteachings_entry_by_id extends SectionDatasource {
+	Class datasourcetags_filtered extends SectionDatasource {
 
-		public $dsParamROOTELEMENT = 'teachings-entry-by-id';
-		public $dsParamConditionalizer = '(if value of ({$pt1}) is (teachings))';
+		public $dsParamROOTELEMENT = 'tags-filtered';
 		public $dsParamORDER = 'desc';
-		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '1';
+		public $dsParamPAGINATERESULTS = 'no';
+		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
-		public $dsParamREDIRECTONEMPTY = 'no';
+		public $dsParamREDIRECTONEMPTY = 'yes';
+		public $dsParamPARAMOUTPUT = array(
+				'system:id'
+		);
 		public $dsParamSORT = 'system:id';
-		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$ds-tags-filtered.system-id:43},{$pt2}',
-				'216' => 'no',
+				'19' => '{$pt1:home}',
 		);
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
-				'title: unformatted',
-				'slug',
-				'filename',
-				'current-id',
-				'book',
-				'chapter',
-				'description: formatted',
-				'speaker: first-name',
-				'speaker: last-name',
-				'speaker: photo',
-				'speaker: about: formatted',
-				'date',
-				'poster: image',
-				'video: title',
-				'video: description',
-				'video: date',
-				'video: url',
-				'video: player',
-				'video: thumbnail',
-				'video: id',
-				'day',
-				'tags: tag: unformatted'
+				'tag: unformatted',
+				'slug'
 		);
 		
 
 		public function __construct($env=NULL, $process_params=true) {
 			parent::__construct($env, $process_params);
-			$this->_dependencies = array('$ds-tags-filtered.system-id');
+			$this->_dependencies = array();
 		}
 
 		public function about() {
 			return array(
-				'name' => 'Teachings: Entry by ID',
+				'name' => 'Tags: Filtered',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-08-01T19:52:39+00:00'
+				'release-date' => '2013-08-01T21:55:07+00:00'
 			);
 		}
 
 		public function getSource() {
-			return '13';
+			return '3';
 		}
 
 		public function allowEditorToParse() {

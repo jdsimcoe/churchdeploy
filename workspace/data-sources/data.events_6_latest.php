@@ -18,7 +18,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'35' => 'later than {$today}, {$today}',
+				'35' => 'later than now',
 				'213' => 'no',
 		);
 		
@@ -41,11 +41,11 @@
 			return array(
 				'name' => 'Events: 6 latest',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-04T06:12:44+00:00'
+				'release-date' => '2013-07-24T10:51:55+00:00'
 			);
 		}
 

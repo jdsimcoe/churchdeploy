@@ -5,11 +5,11 @@
 	Class datasourceevents_all_entries_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-all-entries-filtered';
-		public $dsParamConditionalizer = '(if value of ({$pt2}) is (events))';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (events))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '{$pt4:5}';
-		public $dsParamSTARTPAGE = '{$pt3:1}';
+		public $dsParamLIMIT = '{$pt3:5}';
+		public $dsParamSTARTPAGE = '{$pt2:1}';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'date';
 		public $dsParamHTMLENCODE = 'yes';
@@ -18,7 +18,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'35' => 'later than {$today}, {$today}',
+				'35' => 'later than now',
 				'213' => 'no',
 		);
 		
@@ -41,11 +41,11 @@
 			return array(
 				'name' => 'Events: All entries (filtered)',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:52:56+00:00'
+				'release-date' => '2013-07-24T10:52:49+00:00'
 			);
 		}
 

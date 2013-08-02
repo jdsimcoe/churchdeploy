@@ -5,7 +5,7 @@
 	Class datasourceevents_recurring_all_entries_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-recurring-all-entries-filtered';
-		public $dsParamConditionalizer = '(if any of ((if value of ({$pt2}) is (meetings)), (if value of ({$pt2}) is (events))) is (yes)) ';
+		public $dsParamConditionalizer = '(if any of ((if value of ({$pt1}) is (meetings)), (if value of ({$pt1}) is (events))) is (yes)) ';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
@@ -45,11 +45,11 @@
 			return array(
 				'name' => 'Events: Recurring: All entries (filtered)',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:57:21+00:00'
+				'release-date' => '2013-07-28T06:02:22+00:00'
 			);
 		}
 

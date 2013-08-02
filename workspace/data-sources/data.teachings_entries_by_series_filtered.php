@@ -5,21 +5,20 @@
 	Class datasourceteachings_entries_by_series_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-entries-by-series-filtered';
-		public $dsParamConditionalizer = '(if value of ({$pt3}) is (series))';
+		public $dsParamConditionalizer = '(if value of ({$pt2}) is (series))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '1';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt4';
+		public $dsParamREQUIREDPARAM = '$pt3';
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$pt4}',
+				'id' => '{$pt3}',
 				'233' => 'no',
 		);
 		
@@ -56,7 +55,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T15:04:04+00:00'
+				'release-date' => '2013-08-01T19:51:11+00:00'
 			);
 		}
 

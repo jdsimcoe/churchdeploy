@@ -116,7 +116,7 @@
 <xsl:template name="template-header-main">
 	<head>
 		<xsl:comment>This is an installation of ChurchDeploy.com — The mission of Church Deploy is to build, as a community, the best church website framework possible and give it away, free of charge.</xsl:comment>
-		<xsl:if test="not($pt2) and number($pt1) and count(/data/events-entry-by-id/entry)">
+<!-- 		<xsl:if test="not($pt2) and number($pt1) and count(/data/events-entry-by-id/entry)">
 			<meta http-equiv="refresh">
 				<xsl:attribute name="content">
 					<xsl:text>0;url=</xsl:text>
@@ -195,7 +195,7 @@
 				</meta>
 			</noscript>
 			<xsl:call-template name="css-hide-all"/>
-		</xsl:if>
+		</xsl:if> -->
 		<xsl:variable name="page-title">
 			<xsl:if test="string-length($pt1)">
 				<xsl:for-each select="/data/tags-all-entries/entry[@id = $pt1]">
@@ -274,7 +274,7 @@
 
 
 <xsl:template name="subnav-entry">
-	<xsl:variable name="active-parent" select="/data/tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
+	<xsl:variable name="active-parent" select="/data/tags-all-entries/entry[ @id = $ds-tags-filtered.system-id ]/parent/item/@id" />
 	<xsl:variable name="realID" select="@id" />
 	<xsl:variable name="node" select="." />
 	<li>

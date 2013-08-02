@@ -2,7 +2,7 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourcemembers_roles_entries_by_tag_api extends Datasource{
+	Class datasourcemembers_roles_entries_by_tag_api extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'members-roles-entries-by-tag-api';
 		public $dsParamORDER = 'asc';
@@ -14,52 +14,51 @@
 		public $dsParamSORT = 'order';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
-				'152' => '{$pt1:43}',
+				'152' => '{$ds-tags-filtered.system-id:43}',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'member: first-name',
 				'member: last-name',
-				'member: photo',
-				'member: job-title',
-				'member: about',
-				'role: role',
-				'role: description'
+				'member: photo'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
-			$this->_dependencies = array();
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
+			$this->_dependencies = array('$ds-tags-filtered.system-id');
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Members/Roles: Entries by tag (api)',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://72.10.33.203',
-					'email' => 'kirk@strobeck.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-06-24T03:35:38+00:00'
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-24T10:45:01+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '18';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -72,8 +71,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}

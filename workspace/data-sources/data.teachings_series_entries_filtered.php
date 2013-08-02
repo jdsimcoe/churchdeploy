@@ -5,7 +5,7 @@
 	Class datasourceteachings_series_entries_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-series-entries-filtered';
-		public $dsParamConditionalizer = '(if any of ((if value of ({$pt1}) is ()), (if value of ({$pt2}) is (teachings))) is (yes))';
+		public $dsParamConditionalizer = '(if any of ((if value of ({$pt1}) is ()), (if value of ({$pt1}) is (teachings))) is (yes))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '4';
@@ -14,7 +14,6 @@
 		public $dsParamSORT = 'order';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -56,7 +55,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-04T15:59:39+00:00'
+				'release-date' => '2013-08-01T20:01:31+00:00'
 			);
 		}
 

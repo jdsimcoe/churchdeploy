@@ -5,13 +5,13 @@
 	Class datasourceevents_entries_past_by_tag_related extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-entries-past-by-tag-related';
-		public $dsParamConditionalizer = '(if all of ((if value of ({$pt2}) is (events)), (if value of ({$pt5}) is (related)), (if value of ({$pt7}) is (past))) is (yes))';
+		public $dsParamConditionalizer = '(if all of ((if value of ({$pt1}) is (events)), (if value of ({$pt4}) is (related)), (if value of ({$pt6}) is (past))) is (yes))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '{$pt4:5}';
-		public $dsParamSTARTPAGE = '{$pt3:1}';
+		public $dsParamLIMIT = '{$pt3:5}';
+		public $dsParamSTARTPAGE = '{$pt2:1}';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt7';
+		public $dsParamREQUIREDPARAM = '$pt6';
 		public $dsParamSORT = 'date';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
@@ -20,7 +20,7 @@
 
 		public $dsParamFILTERS = array(
 				'35' => 'earlier than {$today}',
-				'137' => '{$pt6}',
+				'137' => '{$pt5}',
 				'213' => 'no',
 		);
 		
@@ -40,11 +40,11 @@
 			return array(
 				'name' => 'Events: Entries (past) by tag (related)',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:25:37+00:00'
+				'release-date' => '2013-07-28T05:57:15+00:00'
 			);
 		}
 

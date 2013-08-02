@@ -86,7 +86,7 @@
 					</xsl:call-template>
 				</xsl:when>
 				<!-- Current entries -->
-				<xsl:when test="$pt2 = 'events'">
+				<xsl:when test="$pt1 = 'events'">
 					<xsl:call-template name="component-events">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="/data/events-all-entries-filtered/entry" />
@@ -153,43 +153,43 @@
 		</xsl:if>
 		<xsl:if test=". = 'teachings'">
 			<xsl:choose>
-				<xsl:when test="number($pt3)">
+				<xsl:when test="number($pt2)">
 					<xsl:call-template name="component-teachings">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="/data/teachings-entry-by-id/entry" />
 					</xsl:call-template>
 				</xsl:when>
-				<xsl:when test="$pt2 = 'teachings' and $pt3 = 'book'">
+				<xsl:when test="$pt1 = 'teachings' and $pt2 = 'book'">
 					<xsl:call-template name="component-teachings">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="/data/teachings-entry-by-book-filtered/entry" />
 					</xsl:call-template>
 				</xsl:when>
-				<xsl:when test="$pt2 = 'series'">
+				<xsl:when test="$pt1 = 'series'">
 					<xsl:call-template name="component-teachings">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="/data/teachings-series-entries-filtered/entry/teachings/item" />
 					</xsl:call-template>
 				</xsl:when>
-				<xsl:when test="$pt2 = 'teachings' and $pt3 = 'series'">
+				<xsl:when test="$pt1 = 'teachings' and $pt2 = 'series'">
 					<xsl:call-template name="component-teachings">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="/data/teachings-entries-by-series-filtered/entry/teachings/item" />
 					</xsl:call-template>
 				</xsl:when>
-				<xsl:when test="$pt2 = 'teachings' and $pt3 = 'tag'">
+				<xsl:when test="$pt1 = 'teachings' and $pt2 = 'tag'">
 					<xsl:call-template name="component-teachings">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="/data/teachings-entry-by-tag-filtered/entry" />
 					</xsl:call-template>
 				</xsl:when>
-				<xsl:when test="$pt2 = 'teachings' and $pt3 = 'year'">
+				<xsl:when test="$pt1 = 'teachings' and $pt2 = 'year'">
 					<xsl:call-template name="component-teachings">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="/data/teachings-entries-by-year-filtered/entry" />
 					</xsl:call-template>
 				</xsl:when>
-				<xsl:when test="$pt2 = 'teachings'">
+				<xsl:when test="$pt1 = 'teachings'">
 					<xsl:call-template name="component-teachings">
 						<xsl:with-param name="position" select="name($xpath)" />
 						<xsl:with-param name="entries" select="." />
@@ -259,8 +259,10 @@ All URL helpers can now be replaced with "url-prefix"
 		<xsl:call-template name="url-prefix">
 			<xsl:with-param name="handle" select="'events'" />
 		</xsl:call-template>
+
 		<xsl:value-of select="$node/@id" />
 		<xsl:text>/</xsl:text>
+
 		<xsl:value-of select="$node/name/@handle" />
 		<xsl:text>/</xsl:text>
 	</xsl:attribute>
@@ -330,8 +332,9 @@ All URL helpers can now be replaced with "url-prefix"
 	<xsl:param name="node" select="." />
 	<xsl:attribute name="href">
 		<xsl:value-of select="$root" />
+		<!--
 		<xsl:text>/</xsl:text>
-		<xsl:value-of select="$node/@id" />
+		<xsl:value-of select="$node/@id" />-->
 		<xsl:text>/</xsl:text>
 		<xsl:choose>
 			<xsl:when test="string-length($node/slug)">
@@ -440,8 +443,10 @@ All URL helpers can now be replaced with "url-prefix"
 <xsl:template name="url-prefix">
 	<xsl:param name="handle" />
 	<xsl:value-of select="$root" />
+	<!--
 	<xsl:text>/</xsl:text>
 	<xsl:value-of select="/data/tags-all-entries/entry[tag/@handle = $handle]/@id" />
+	-->
 	<xsl:text>/</xsl:text>
 	<xsl:value-of select="$handle" />
 	<xsl:text>/</xsl:text>

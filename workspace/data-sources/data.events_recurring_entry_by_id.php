@@ -5,13 +5,13 @@
 	Class datasourceevents_recurring_entry_by_id extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-recurring-entry-by-id';
-		public $dsParamConditionalizer = '(if value of ({$pt2}) is (events))';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (events))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '1';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt3';
+		public $dsParamREQUIREDPARAM = '$pt2';
 		public $dsParamPARAMOUTPUT = array(
 				'verses'
 		);
@@ -22,7 +22,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$pt3}',
+				'id' => '{$pt2}',
 				'214' => 'no',
 		);
 		
@@ -65,11 +65,11 @@
 			return array(
 				'name' => 'Events: Recurring: Entry by ID',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T23:34:16+00:00'
+				'release-date' => '2013-07-28T06:00:52+00:00'
 			);
 		}
 

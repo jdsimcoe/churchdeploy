@@ -5,21 +5,20 @@
 	Class datasourceteachings_entry_by_tag_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-entry-by-tag-filtered';
-		public $dsParamConditionalizer = '(if all of ((if value of ({$pt2}) is (teachings)), (if value of ({$pt3}) is (tag))) is (yes))';
+		public $dsParamConditionalizer = '(if all of ((if value of ({$pt1}) is (teachings)), (if value of ({$pt2}) is (tag))) is (yes))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '{$pt6:10}';
-		public $dsParamSTARTPAGE = '{$pt5:1}';
+		public $dsParamLIMIT = '{$pt5:10}';
+		public $dsParamSTARTPAGE = '{$pt4:1}';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt4';
+		public $dsParamREQUIREDPARAM = '$pt3';
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'124' => '{$pt4}',
+				'124' => '{$pt3}',
 				'216' => 'no',
 		);
 		
@@ -53,7 +52,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T15:31:29+00:00'
+				'release-date' => '2013-08-01T20:00:36+00:00'
 			);
 		}
 
