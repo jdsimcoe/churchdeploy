@@ -7,7 +7,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-growl');
+  grunt.loadNpmTasks('grunt-notify');
 
 
   grunt.initConfig({
@@ -75,23 +75,12 @@ module.exports = function (grunt) {
         files: '<config:watch.cssdev.files>',
          tasks: ['less:prod', 'growl:watch']
       }
-    },
-
-    growl : {
-      main : {
-        title : 'Grunt.js',
-        message : 'Grunt was run successfully!'
-      },
-      watch : {
-        title : 'Grunt.js',
-        message : 'Grunt is watching your files...'
-      }
     }
 
 });
 
 // Main task
-grunt.registerTask('cssdev', ['less:dev', 'growl:main']);
-grunt.registerTask('cssprod', ['less:prod', 'growl:main']);
+grunt.registerTask('cssdev', ['less:dev']);
+grunt.registerTask('cssprod', ['less:prod']);
 grunt.registerTask('jsprod', ['jshint', 'concat', 'uglify:bootstrap', 'uglify:jquery']);
-grunt.registerTask('default', ['jshint', 'concat', 'uglify:bootstrap', 'uglify:jquery', 'less:prod', 'growl:main'])};
+grunt.registerTask('default', ['jshint', 'concat', 'uglify:bootstrap', 'uglify:jquery', 'less:prod'])};
