@@ -40,7 +40,7 @@ Class datasourcetwitter_search extends Datasource{
 		$cb->setBearerToken($token);
 		$cb->setReturnFormat(CODEBIRD_RETURNFORMAT_ARRAY);
 
-		$reply = $cb->search_tweets('q=from:atheycreek&count=32', true);
+		$reply = $cb->search_tweets('q=from:atheycreek&count=10', true);
 		$el = new XMLElement($this->dsParamROOTELEMENT);
 		General::array_to_xml($el, (array)$reply);
 		return $el;
