@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="twitter_search" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Twitter search</name>
+	<types>
+		<type>Twitter Api</type>
+	</types>
+	<authors>
+		<author>
+			<name github="creativedutchmen">Huib Keemink</name>
+		</author>
+	</authors>
+	<releases>
+		<release version="0.1" date="2013-06-06" min="2.3.1"></release>
+	</releases>
+</extension>
