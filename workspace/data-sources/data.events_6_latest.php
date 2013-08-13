@@ -8,7 +8,7 @@
 		public $dsParamConditionalizer = '(if value of ({$pt1}) is ())';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'yes';
-		public $dsParamLIMIT = '3';
+		public $dsParamLIMIT = '6';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'date';
@@ -18,7 +18,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'35' => 'later than {$today}, {$today}',
+				'35' => 'later than now',
 				'213' => 'no',
 		);
 		
@@ -41,11 +41,11 @@
 			return array(
 				'name' => 'Events: 6 latest',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:49:36+00:00'
+				'release-date' => '2013-07-24T10:51:55+00:00'
 			);
 		}
 

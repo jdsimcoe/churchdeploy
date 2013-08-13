@@ -39,33 +39,26 @@
 	<xsl:comment><![CDATA[[if IE 7]> <html class="no-js ie7 oldie" lang="en" /> <![endif]]]></xsl:comment>
 	<xsl:comment><![CDATA[[if IE 8]> <html class="no-js ie8 oldie" lang="en" /> <![endif]]]></xsl:comment>
 	<xsl:comment><![CDATA[[if gt IE 8]><!]]></xsl:comment><html class="no-js" lang="en"><xsl:comment><![CDATA[<![endif]]]></xsl:comment>
-	
+
 		<xsl:call-template name="template-header-main" />
 		<body>
 			<xsl:attribute name="class">
 				<xsl:text>pageid-</xsl:text>
-				<xsl:choose>
-					<xsl:when test="$pt1">
-						<xsl:value-of select="$pt1" />
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="data/tags-all-entries/entry[tag/@handle = 'home']/@id" />
-					</xsl:otherwise>
-				</xsl:choose>
+				<xsl:value-of select="$ds-tags-filtered.system-id"/>
 				<xsl:text> </xsl:text>
 				<xsl:text>layout-</xsl:text>
-				<xsl:value-of select="data/layouts-ds-tags-entries-by-tag/entry/name/@handle" />
-				<xsl:if test="data/events-entry-by-id-preview/entry or /data/events-entry-by-id/entry or /data/events-recurring-entry-by-id/entry or /data/events-recurring-entry-by-id-preview/entry">
+				<xsl:value-of select="/data/layouts-ds-tags-entries-by-tag/entry/name/@handle" />
+				<xsl:if test="/data/events-entry-by-id-preview/entry or /data/events-entry-by-id/entry or /data/events-recurring-entry-by-id/entry or /data/events-recurring-entry-by-id-preview/entry">
 					<xsl:text> profile</xsl:text>
 				</xsl:if>
 			</xsl:attribute>
-			
+
 			<xsl:call-template name="template-header-outside-container" />
-			
+
 
 				<xsl:call-template name="template-main-container" />
 
-			
+
 			<div class="container main-container">
 
 				<xsl:call-template name="template-header-inside-container" />
@@ -103,40 +96,40 @@
 <xsl:template name="template-header-main">
 	<head>
 		<xsl:comment>This is an installation of ChurchDeploy.com — The mission of Church Deploy is to build, as a community, the best church website framework possible and give it away, free of charge.</xsl:comment>
-		<xsl:if test="not($pt2) and number($pt1) and count(//events-entry-by-id/entry)">
+<!-- 		<xsl:if test="not($pt2) and number($pt1) and count(/data/events-entry-by-id/entry)">
 			<meta http-equiv="refresh">
 				<xsl:attribute name="content">
 					<xsl:text>0;url=</xsl:text>
 					<xsl:value-of select="$root" />
 					<xsl:text>/</xsl:text>
-					<xsl:value-of select="//tags-all-entries/entry[tag/@handle = 'events']/@id" />
+					<xsl:value-of select="/data/tags-all-entries/entry[tag/@handle = 'events']/@id" />
 					<xsl:text>/events/</xsl:text>
 					<xsl:value-of select="$pt1" />
 					<xsl:text>/</xsl:text>
-					<xsl:value-of select="//events-entry-by-id/entry/name/@handle" />
+					<xsl:value-of select="/data/events-entry-by-id/entry/name/@handle" />
 					<xsl:text>/</xsl:text>
 				</xsl:attribute>
 			</meta>
 			<xsl:call-template name="css-hide-all"/>
 		</xsl:if>
-		<xsl:if test="not($pt2) and number($pt1) and count(//teachings-entry-by-id/entry)">
+		<xsl:if test="not($pt2) and number($pt1) and count(/data/teachings-entry-by-id/entry)">
 			<meta http-equiv="refresh">
 				<xsl:attribute name="content">
 					<xsl:text>0;url=</xsl:text>
 					<xsl:value-of select="$root" />
 					<xsl:text>/</xsl:text>
-					<xsl:value-of select="//tags-all-entries/entry[tag/@handle = 'teachings']/@id" />
+					<xsl:value-of select="/data/tags-all-entries/entry[tag/@handle = 'teachings']/@id" />
 					<xsl:text>/teachings/</xsl:text>
 					<xsl:value-of select="$pt1" />
 					<xsl:text>/</xsl:text>
-					<xsl:value-of select="data/teachings-entry-by-id/entry/title/@handle" />
+					<xsl:value-of select="/data/teachings-entry-by-id/entry/title/@handle" />
 					<xsl:text>/</xsl:text>
 				</xsl:attribute>
 			</meta>
 			<xsl:call-template name="css-hide-all"/>
 		</xsl:if>
 		<xsl:if test="not(number($pt1)) and string-length($pt1) and not($pt1 = 'toolkit')">
-			<xsl:variable name="redirect-id" select="data/tags-all-entries/entry[tag/@handle = $pt1]/@id" />
+			<xsl:variable name="redirect-id" select="/data/tags-all-entries/entry[tag/@handle = $pt1]/@id" />
 			<xsl:variable name="redirect-URL">
 				<xsl:if test="string-length($redirect-id)">
 					<xsl:value-of select="$redirect-id" />
@@ -172,7 +165,7 @@
 				<xsl:value-of select="$redirect-js"/>
 			</script>
 			<noscript>
-				<meta http-equiv="refresh">	
+				<meta http-equiv="refresh">
 					<xsl:attribute name="content">
 						<xsl:text>0;url=</xsl:text>
 						<xsl:value-of select="$root" />
@@ -182,10 +175,10 @@
 				</meta>
 			</noscript>
 			<xsl:call-template name="css-hide-all"/>
-		</xsl:if>
+		</xsl:if> -->
 		<xsl:variable name="page-title">
 			<xsl:if test="string-length($pt1)">
-				<xsl:for-each select="data/tags-all-entries/entry[@id = $pt1]">
+				<xsl:for-each select="/data/tags-all-entries/entry[@id = $pt1]">
 					<xsl:choose>
 						<xsl:when test="string-length(description)">
 							<xsl:value-of select="description" />
@@ -261,7 +254,7 @@
 
 
 <xsl:template name="subnav-entry">
-	<xsl:variable name="active-parent" select="//tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
+	<xsl:variable name="active-parent" select="/data/tags-all-entries/entry[ @id = $ds-tags-filtered.system-id ]/parent/item/@id" />
 	<xsl:variable name="realID" select="@id" />
 	<xsl:variable name="node" select="." />
 	<li>
@@ -270,7 +263,7 @@
 			<xsl:if test="$pt1 = @id or $active-parent = @id or //tags-all-entries/entry[ @id = $active-parent ]/parent/item/@id = @id">
 				<xsl:text> active</xsl:text>
 			</xsl:if>
-			<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
+			<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 				<xsl:text> sub</xsl:text>
 			</xsl:if>
 			<xsl:choose>
@@ -343,7 +336,7 @@
 
 
 <xsl:template name="subnav-entry-mobile">
-	<xsl:variable name="active-parent" select="//tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
+	<xsl:variable name="active-parent" select="/data/tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
 	<xsl:variable name="realID" select="@id" />
 	<xsl:variable name="node" select="." />
 	<li>
@@ -391,9 +384,9 @@
 			<xsl:call-template name="url-tags" />
 			<xsl:value-of select="tag" disable-output-escaping="yes" />
 		</a>
-		<xsl:if test="//tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
+		<xsl:if test="/data/tags-all-entries/entry[@id]/parent[@items != 0]/item/@id = @id">
 			<ul class="dropdown-menu">
-				<xsl:for-each select="//tags-all-entries/entry[parent/item/@id = $realID]">
+				<xsl:for-each select="/data/tags-all-entries/entry[parent/item/@id = $realID]">
 					<li>
 						<a>
 							<xsl:call-template name="url-tags" />

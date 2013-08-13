@@ -5,7 +5,6 @@
 	Class datasourceteachings_6_latest extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-6-latest';
-		public $dsParamConditionalizer = '(if value of ({$pt1}) is ())';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '6';
@@ -54,11 +53,11 @@
 			return array(
 				'name' => 'Teachings: 6 latest',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:11:37+00:00'
+				'release-date' => '2013-07-24T14:22:24+00:00'
 			);
 		}
 

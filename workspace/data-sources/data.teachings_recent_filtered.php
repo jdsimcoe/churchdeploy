@@ -5,7 +5,7 @@
 	Class datasourceteachings_recent_filtered extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'teachings-recent-filtered';
-		public $dsParamConditionalizer = '(if value of ({$pt2}) is (teachings))';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (teachings))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '10';
@@ -14,7 +14,6 @@
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -55,7 +54,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:39:28+00:00'
+				'release-date' => '2013-08-01T20:00:43+00:00'
 			);
 		}
 

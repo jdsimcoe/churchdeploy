@@ -5,7 +5,7 @@
 	Class datasourcelocations_groups extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'locations-groups';
-		public $dsParamConditionalizer = '(if value of ({$pt2}) is (homegroups))';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (home-groups))';
 		public $dsParamORDER = 'asc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
@@ -14,12 +14,11 @@
 		public $dsParamSORT = 'city';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'208' => 'no',
 				'286' => 'yes',
+				'208' => 'no',
 		);
 		
 
@@ -63,7 +62,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-05T00:00:58+00:00'
+				'release-date' => '2013-08-01T19:41:10+00:00'
 			);
 		}
 

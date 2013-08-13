@@ -2,7 +2,7 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourcetags_entries_by_tag extends Datasource{
+	Class datasourcetags_entries_by_tag extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'tags-entries-by-tag';
 		public $dsParamORDER = 'desc';
@@ -10,47 +10,51 @@
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt1:43';
-		public $dsParamPARAMOUTPUT = 'layout';
+		public $dsParamREQUIREDPARAM = '$pt1:home';
+		public $dsParamPARAMOUTPUT = array(
+				'layout'
+		);
 		public $dsParamSORT = 'system:id';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$pt1:43}',
+				'19' => '{$pt1:home}',
 		);
+		
 
 		
 
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
 			$this->_dependencies = array();
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Tags: Entries by tag',
 				'author' => array(
-					'name' => 'Kirk Strobeck',
-					'website' => 'http://72.10.33.203',
-					'email' => 'kirk@strobeck.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-05-25T00:36:06+00:00'
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek.dev',
+					'email' => 'jdsimcoe@gmail.com'),
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-08-13T21:47:41+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '3';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -63,8 +67,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}

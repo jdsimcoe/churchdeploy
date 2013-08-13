@@ -5,13 +5,15 @@
 	Class datasourceevents_entry_by_id extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'events-entry-by-id';
-		public $dsParamConditionalizer = '(if value of ({$pt2}) is (events))';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (events))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'no';
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamPARAMOUTPUT = array(
+				'system:id',
+				'name',
 				'verses'
 		);
 		public $dsParamSORT = 'system:id';
@@ -21,7 +23,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$pt1},{$pt3}',
+				'id' => '{$ds-tags-filtered.system-id:43},{$pt2}',
 				'213' => 'no',
 		);
 		
@@ -61,18 +63,18 @@
 
 		public function __construct($env=NULL, $process_params=true) {
 			parent::__construct($env, $process_params);
-			$this->_dependencies = array();
+			$this->_dependencies = array('$ds-tags-filtered.system-id');
 		}
 
 		public function about() {
 			return array(
 				'name' => 'Events: Entry by ID',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-03T17:54:48+00:00'
+				'release-date' => '2013-07-31T19:40:17+00:00'
 			);
 		}
 

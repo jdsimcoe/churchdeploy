@@ -41,7 +41,7 @@
 					'website' => 'http://atheycreek',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-01T16:54:51+00:00'
+				'release-date' => '2013-07-04T15:31:01+00:00'
 			);
 		}
 

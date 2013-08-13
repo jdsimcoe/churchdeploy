@@ -2,7 +2,7 @@
 
 	require_once(TOOLKIT . '/class.datasource.php');
 
-	Class datasourceimages_entries_by_tag extends Datasource{
+	Class datasourceimages_entries_by_tag extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'images-entries-by-tag';
 		public $dsParamORDER = 'desc';
@@ -14,51 +14,53 @@
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
+		public $dsParamCACHE = '0';
+		
 
 		public $dsParamFILTERS = array(
-				'139' => '{$pt1:43}',
+				'139' => '{$ds-tags-filtered.system-id:43}',
 				'207' => 'no',
 		);
+		
 
 		public $dsParamINCLUDEDELEMENTS = array(
 				'image',
 				'position',
 				'height',
-				'color',
-				'background'
+				'full-bleed'
 		);
+		
 
-
-		public function __construct(&$parent, $env=NULL, $process_params=true){
-			parent::__construct($parent, $env, $process_params);
-			$this->_dependencies = array();
+		public function __construct($env=NULL, $process_params=true) {
+			parent::__construct($env, $process_params);
+			$this->_dependencies = array('$ds-tags-filtered.system-id');
 		}
 
-		public function about(){
+		public function about() {
 			return array(
 				'name' => 'Images: Entries by tag',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.2.5',
-				'release-date' => '2012-09-07T21:15:26+00:00'
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
+				'version' => 'Symphony 2.3.2',
+				'release-date' => '2013-07-24T10:23:49+00:00'
 			);
 		}
 
-		public function getSource(){
+		public function getSource() {
 			return '8';
 		}
 
-		public function allowEditorToParse(){
+		public function allowEditorToParse() {
 			return true;
 		}
 
-		public function grab(&$param_pool=NULL){
+		public function execute(array &$param_pool = null) {
 			$result = new XMLElement($this->dsParamROOTELEMENT);
 
 			try{
-				include(TOOLKIT . '/data-sources/datasource.section.php');
+				$result = parent::execute($param_pool);
 			}
 			catch(FrontendPageNotFoundException $e){
 				// Work around. This ensures the 404 page is displayed and
@@ -71,8 +73,6 @@
 			}
 
 			if($this->_force_empty_result) $result = $this->emptyXMLSet();
-
-			
 
 			return $result;
 		}

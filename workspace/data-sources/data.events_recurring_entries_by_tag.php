@@ -17,7 +17,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'243' => '{$pt1:43}',
+				'243' => '{$ds-tags-filtered.system-id:43}',
 				'214' => 'no',
 		);
 		
@@ -31,18 +31,18 @@
 
 		public function __construct($env=NULL, $process_params=true) {
 			parent::__construct($env, $process_params);
-			$this->_dependencies = array();
+			$this->_dependencies = array('$ds-tags-filtered.system-id');
 		}
 
 		public function about() {
 			return array(
 				'name' => 'Events: Recurring: Entries by tag',
 				'author' => array(
-					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
-					'email' => 'jdsimcoe@gmail.com'),
+					'name' => 'Brian Zerangue',
+					'website' => 'http://churchdeploy.site',
+					'email' => 'brian.zerangue@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T23:31:34+00:00'
+				'release-date' => '2013-07-24T10:44:40+00:00'
 			);
 		}
 
