@@ -14,7 +14,6 @@
 		public $dsParamSORT = 'order';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -27,6 +26,7 @@
 				'member: last-name',
 				'member: photo',
 				'member: email',
+				'member: about: formatted',
 				'member: phone-number',
 				'member: anonymize'
 		);
@@ -41,11 +41,11 @@
 			return array(
 				'name' => 'Members/Roles: Entries by tag',
 				'author' => array(
-					'name' => 'Brian Zerangue',
-					'website' => 'http://churchdeploy.site',
-					'email' => 'brian.zerangue@gmail.com'),
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek.dev',
+					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-24T10:29:34+00:00'
+				'release-date' => '2013-08-13T23:18:47+00:00'
 			);
 		}
 
