@@ -13,7 +13,6 @@
 		public $dsParamSORT = 'date';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -32,8 +31,10 @@
 				'speaker: first-name',
 				'speaker: last-name',
 				'date',
+				'poster: image',
 				'video-duration',
-				'video-filesize',
+				'video-540-filesize',
+				'video-720-filesize',
 				'hide'
 		);
 		
@@ -48,10 +49,10 @@
 				'name' => 'Podcast: Video',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
+					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-06-28T22:55:48+00:00'
+				'release-date' => '2013-08-14T16:42:19+00:00'
 			);
 		}
 
