@@ -41,7 +41,6 @@
         <img src="http://atheycreek.com/workspace/themes/active/img/apple-touch-icon.png" height="300px" width="300px" />
       </div>
       <h1><span>404 Error!</span><br/>The page you are looking for is no longer available.<br/><a href="{$root}">Return to AtheyCreek.com &#8594;</a></h1>
-      <h2><xsl:value-of select="substring($current-path,2,2)"/></h2>
     </body>
   </html>
 </xsl:template>
