@@ -11,6 +11,9 @@
 		public $dsParamLIMIT = '1';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
+		public $dsParamPARAMOUTPUT = array(
+				'video-podcast'
+		);
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
@@ -44,7 +47,8 @@
 				'video: thumbnail',
 				'video: id',
 				'day',
-				'tags: tag: unformatted'
+				'tags: tag: unformatted',
+				'video-podcast'
 		);
 		
 
@@ -58,10 +62,10 @@
 				'name' => 'Teachings: Entry by ID',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
+					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-08-01T19:52:39+00:00'
+				'release-date' => '2013-08-14T14:34:07+00:00'
 			);
 		}
 

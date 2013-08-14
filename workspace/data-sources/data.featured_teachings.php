@@ -10,10 +10,12 @@
 		public $dsParamLIMIT = '1';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
+		public $dsParamPARAMOUTPUT = array(
+				'video-podcast'
+		);
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -42,7 +44,8 @@
 				'video: thumbnail',
 				'video: id',
 				'day',
-				'tags: tag: formatted'
+				'tags: tag: formatted',
+				'video-podcast'
 		);
 		
 
@@ -56,10 +59,10 @@
 				'name' => 'Featured: Teachings',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
+					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T20:35:22+00:00'
+				'release-date' => '2013-08-14T14:39:49+00:00'
 			);
 		}
 

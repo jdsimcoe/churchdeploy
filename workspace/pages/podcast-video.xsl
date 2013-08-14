@@ -58,7 +58,7 @@
       </itunes:category>
       <itunes:keywords><xsl:value-of select="$podcast-video-keywords"/></itunes:keywords>
       <!-- Start Sermon Information -->
-      <xsl:for-each select="data/podcast-video/entry">
+      <xsl:for-each select="/data/podcast-video/entry">
 	      <item>
           <title>
             <xsl:variable name="en-lowercase-letters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
@@ -96,7 +96,7 @@
             <xsl:attribute name="url">
               <xsl:value-of select="$podcast-video-server"/>
               <xsl:value-of select="filename"/>
-              <xsl:text>.mp4</xsl:text>
+              <xsl:text>_540.mp4</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="length">
               <xsl:choose>
@@ -117,7 +117,7 @@
             <xsl:variable name="en-uppercase-letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
             <xsl:value-of select="$podcast-video-server"/>
             <xsl:value-of select="translate(filename,$en-uppercase-letters,$en-lowercase-letters)"/>
-            <xsl:text>.mp4</xsl:text>
+            <xsl:text>_540.mp4</xsl:text>
           </guid>
           <pubDate>
             <xsl:call-template name="format-date">
