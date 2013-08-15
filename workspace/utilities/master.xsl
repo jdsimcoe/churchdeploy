@@ -14,6 +14,9 @@
 <xsl:include href="../utilities/components.xsl" />
 <xsl:include href="../utilities/date-time-advanced.xsl" />
 <xsl:include href="../utilities/date-utilities.xsl" />
+<xsl:include href="../utilities/navigation.xsl" />
+<xsl:include href="../utilities/pages.xsl" />
+<xsl:include href="../utilities/footer.xsl" />
 <xsl:include href="../utilities/pagination.xsl" />
 <xsl:include href="../utilities/timespan-format.xsl" />
 <xsl:include href="../utilities/toolkit.xsl" />
@@ -54,7 +57,7 @@
 				</xsl:choose>
 				<xsl:text> </xsl:text>
 				<xsl:text>layout-</xsl:text>
-				<xsl:value-of select="data/layouts-ds-tags-entries-by-tag/entry/name/@handle" />
+				<xsl:value-of select="/data/layouts-ds-tags-entries-by-tag/entry/name/@handle" />
 				<xsl:if test="data/events-entry-by-id-preview/entry or /data/events-entry-by-id/entry or /data/events-recurring-entry-by-id/entry or /data/events-recurring-entry-by-id-preview/entry">
 					<xsl:text> profile</xsl:text>
 				</xsl:if>
@@ -63,7 +66,6 @@
 			<div id="primary">
 				<xsl:call-template name="template-header-outside-container" />
 
-				<div class="container main-container">
 
 					<xsl:call-template name="template-main-container" />
 
@@ -91,23 +93,10 @@
 
 					<xsl:call-template name="template-footer-inside-container" />
 
-				</div>
 
 				<xsl:call-template name="template-footer-outside-container" />
 
-			</div>
-			<div id="secondary">
-				<form action="get">
-          <xsl:call-template name="form-search-action" />
-          <input name="keywords" type="text" class="col-lg-12" placeholder="Search" autocomplete="off" onclick="this.select()">
-          </input>
-        </form>
-				<div class="nav">
-					<xsl:for-each select="//tags-all-entries/entry[ not(parent/item) and not(hide-from-header = 'Yes') ]">
-          	<xsl:call-template name="subnav-entry-mobile" />
-        	</xsl:for-each>
-				</div>
-		  </div>
+			</div> <!-- #primary -->
 
 		</body>
 	</html>
@@ -116,89 +105,9 @@
 <xsl:template name="template-header-main">
 	<head>
 		<xsl:comment>This is an installation of ChurchDeploy.com — The mission of Church Deploy is to build, as a community, the best church website framework possible and give it away, free of charge.</xsl:comment>
-<!-- 		<xsl:if test="not($pt2) and number($pt1) and count(/data/events-entry-by-id/entry)">
-			<meta http-equiv="refresh">
-				<xsl:attribute name="content">
-					<xsl:text>0;url=</xsl:text>
-					<xsl:value-of select="$root" />
-					<xsl:text>/</xsl:text>
-					<xsl:value-of select="/data/tags-all-entries/entry[tag/@handle = 'events']/@id" />
-					<xsl:text>/events/</xsl:text>
-					<xsl:value-of select="$pt1" />
-					<xsl:text>/</xsl:text>
-					<xsl:value-of select="/data/events-entry-by-id/entry/name/@handle" />
-					<xsl:text>/</xsl:text>
-				</xsl:attribute>
-			</meta>
-			<xsl:call-template name="css-hide-all"/>
-		</xsl:if>
-		<xsl:if test="not($pt2) and number($pt1) and count(/data/teachings-entry-by-id/entry)">
-			<meta http-equiv="refresh">
-				<xsl:attribute name="content">
-					<xsl:text>0;url=</xsl:text>
-					<xsl:value-of select="$root" />
-					<xsl:text>/</xsl:text>
-					<xsl:value-of select="/data/tags-all-entries/entry[tag/@handle = 'teachings']/@id" />
-					<xsl:text>/teachings/</xsl:text>
-					<xsl:value-of select="$pt1" />
-					<xsl:text>/</xsl:text>
-					<xsl:value-of select="/data/teachings-entry-by-id/entry/title/@handle" />
-					<xsl:text>/</xsl:text>
-				</xsl:attribute>
-			</meta>
-			<xsl:call-template name="css-hide-all"/>
-		</xsl:if>
-		<xsl:if test="not(number($pt1)) and string-length($pt1) and not($pt1 = 'toolkit')">
-			<xsl:variable name="redirect-id" select="/data/tags-all-entries/entry[tag/@handle = $pt1]/@id" />
-			<xsl:variable name="redirect-URL">
-				<xsl:if test="string-length($redirect-id)">
-					<xsl:value-of select="$redirect-id" />
-					<xsl:text>/</xsl:text>
-					<xsl:value-of select="$pt1" />
-					<xsl:text>/</xsl:text>
-					<xsl:if test="$pt2">
-						<xsl:value-of select="$pt2" />
-						<xsl:text>/</xsl:text>
-					</xsl:if>
-					<xsl:if test="$pt3">
-						<xsl:value-of select="$pt3" />
-						<xsl:text>/</xsl:text>
-					</xsl:if>
-					<xsl:if test="$pt4">
-						<xsl:value-of select="$pt4" />
-						<xsl:text>/</xsl:text>
-					</xsl:if>
-					<xsl:if test="$pt5">
-						<xsl:value-of select="$pt5" />
-						<xsl:text>/</xsl:text>
-					</xsl:if>
-				</xsl:if>
-			</xsl:variable>
-			<xsl:variable name="redirect-js">
-				<xsl:text>window.setTimeout(function(){window.location.href='</xsl:text>
-				<xsl:value-of select="$root" />
-				<xsl:text>/</xsl:text>
-				<xsl:value-of select="$redirect-URL"/>
-				<xsl:text>'},0);</xsl:text>
-			</xsl:variable>
-			<script>
-				<xsl:value-of select="$redirect-js"/>
-			</script>
-			<noscript>
-				<meta http-equiv="refresh">
-					<xsl:attribute name="content">
-						<xsl:text>0;url=</xsl:text>
-						<xsl:value-of select="$root" />
-						<xsl:text>/</xsl:text>
-						<xsl:value-of select="$redirect-URL"/>
-					</xsl:attribute>
-				</meta>
-			</noscript>
-			<xsl:call-template name="css-hide-all"/>
-		</xsl:if> -->
 		<xsl:variable name="page-title">
 			<xsl:if test="string-length($pt1)">
-				<xsl:for-each select="/data/tags-all-entries/entry[@id = $pt1]">
+				<xsl:for-each select="/data/tags-all-entries/entry[tag/@handle = $pt1]">
 					<xsl:choose>
 						<xsl:when test="string-length(description)">
 							<xsl:value-of select="description" />
@@ -208,7 +117,7 @@
 						</xsl:when>
 					</xsl:choose>
 					<xsl:if test="string-length(description) or string-length(tag)">
-						<xsl:text disable-output-escaping="yes"> | </xsl:text>
+						<xsl:text disable-output-escaping="yes"> • </xsl:text>
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:if>
@@ -252,24 +161,21 @@
 
 
 <xsl:template name="call-components">
+
 	<xsl:param name="xpath" />
-	<div class="container">
-		<div class="row">
-			<div class="column-main">
-				<xsl:call-template name="component">
-					<xsl:with-param name="xpath" select="$xpath/column-full-width" />
-				</xsl:call-template>
-			</div>
-		</div>
-		<div class="row">
-			<xsl:call-template name="component">
-				<xsl:with-param name="xpath" select="$xpath/column-center" />
-			</xsl:call-template>
-			<xsl:call-template name="component">
-				<xsl:with-param name="xpath" select="$xpath/column-right" />
-			</xsl:call-template>
-		</div>
-	</div>
+
+	<xsl:call-template name="component">
+		<xsl:with-param name="xpath" select="$xpath/column-full-width" />
+	</xsl:call-template>
+
+	<xsl:call-template name="component">
+		<xsl:with-param name="xpath" select="$xpath/column-center" />
+	</xsl:call-template>
+
+	<xsl:call-template name="component">
+		<xsl:with-param name="xpath" select="$xpath/column-right" />
+	</xsl:call-template>
+
 </xsl:template>
 
 
@@ -415,12 +321,6 @@
 				</xsl:for-each>
       </ul>
      </div>
-<!-- 		<ul class="nav nav-tabs nav-stacked">
-			<xsl:for-each select="$group">
-				<xsl:call-template name="subnav-entry-mobile" />
-			</xsl:for-each>
-		</ul>
-		<hr /> -->
 	</xsl:if>
 </xsl:template>
 

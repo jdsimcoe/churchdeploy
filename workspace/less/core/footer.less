@@ -1,232 +1,55 @@
-.footer {
-  margin-top: 0;
-  padding: 30px 0;
-  background: lighten(desaturate(@color-primary, 20%), 45%);
-  color: lighten(desaturate(@color-primary, 20%), 30%);
+.twitter {
 
-  .logo {
-    position: relative;
-    top: -10px;
-    text-align: left;
-    margin-left: 5px;
-    color: lighten(desaturate(@color-primary, 20%), 25%);
+  .horizon(@color-background: @color-accent);
 
-    &:hover {
-      color: lighten(desaturate(@color-primary, 20%), 15%);
-    }
-
-    .icon-large {
-      line-height: 30px;
-      font-size: 54px;
-    }
+  h3 {
+    color: @color-white;
   }
 
-  p {
+  h4 {
+    color: darken(desaturate(@color-accent, 10%), 25%);
     font-family: @font-family-serif;
-    font-size: 16px;
-    color: lighten(desaturate(@color-primary, 20%), 30%);
-
-    &.lead {
-      margin-bottom: 15px;
-    }
-
-    .logo {
-
-      &.icon-black {
-        color: #202020;
-        text-shadow: 0 1px 0 lighten(@color-black, 7%), 0 -1px 0 darken(@color-black, 10%);
-      }
-    }
-
-    a {
-      text-shadow: none;
-    }
+    letter-spacing: 0;
+    text-transform: none;
   }
 
-  .btn {
-    background: lighten(@color-primary, 40%);
-    border-color: lighten(@color-primary, 40%);
-
-    &:hover {
-      background: lighten(@color-primary, 30%);
-      border-color: lighten(@color-primary, 30%);
-    }
-  }
-
-  h5 {
-    color: lighten(desaturate(@color-primary, 20%), 25%);
-    margin-top: 15px;
-  }
-
-  .nav {
-    border: none;
-
-    &.nav-list {
-      background: transparent;
-      .box-shadow(none);
-
-      .nav-header {
-        text-shadow: 0 1px 0 lighten(@color-black, 10%);
-        color: #000;
-      }
-
-      li {
-
-
-        &.active {
-          a {
-            background: lighten(desaturate(@color-primary, 20%), 25%);
-            border: 1px solid lighten(desaturate(@color-primary, 20%), 25%);
-            .box-shadow(none);
-            color: lighten(desaturate(@color-primary, 20%), 45%);
-
-            &:hover {
-              background: lighten(desaturate(@color-primary, 20%), 25%);
-              border: 1px solid lighten(desaturate(@color-primary, 20%), 25%);
-              color: lighten(desaturate(@color-primary, 20%), 45%);
-            }
-          }
-        }
-
-        a {
-          border: none;
-          .border-radius(@border-radius-base);
-          color: lighten(desaturate(@color-primary, 20%), 25%);
-          margin: 10px 0;
-          text-transform: uppercase;
-          text-shadow: none;
-
-          .badge {
-            display: none;
-            background: @color-primary;
-            color: @color-black;
-            text-shadow: none;
-          }
-
-          &:hover {
-            color: desaturate(@color-primary, 20%);
-            background: none;
-            border:;
-          }
-        }
-      }
-    }
-
+  .lead {
+    color: darken(desaturate(@color-accent, 10%), 25%);
+    width: 50%;
   }
 
   hr {
-    height: 1px;
-    background: lighten(desaturate(@color-primary, 20%), 40%);
-    border-bottom: 1px solid lighten(desaturate(@color-primary, 20%), 40%);
-    border: none;
+    border-top: 1px solid darken(@color-accent, 10%);
   }
+
+  .btn-large {
+    .btn-bordered(@color-border: darken(@color-accent, 10%););
+  }
+
+}
+
+.footer {
+
+  .horizon(@color-background: @color-black);
 
 }
 
 .baseline {
-  background: lighten(desaturate(@color-primary, 20%), 35%);
-  padding: 22px 0 23px 0;
 
-  p {
-    color: lighten(desaturate(@color-primary, 20%), 20%);
-    font-size: @font-size-base;
-    font-weight: 300;
-    margin: 10px 0 15px;
+  @color-baseline: lighten(@color-black, 20%);
 
-    a {
-      border-bottom: 1px solid lighten(desaturate(@color-primary, 20%), 40%);
-      color: lighten(desaturate(@color-primary, 20%), 20%);
-      padding-bottom: 2px;
-      text-decoration: none;
+  .horizon(@color-background: @color-baseline);
+  .center();
 
-      &:hover {
-        border-bottom: 1px solid lighten(desaturate(@color-primary, 20%), 45%);
-        color: lighten(desaturate(@color-primary, 20%), 10%);
-      }
-    }
-  }
-}
+  a {
+    color: lighten(@color-baseline, 15%);
+    border-bottom: 2px solid darken(@color-baseline, 2%);
+    padding-bottom: 5px;
 
-// RESPONSIVE DESIGN
-// =================
-
-// Tablets & Below
-
-@media (max-width: 979px) {
-
-  .navbar {
-
-    .brand {
-      margin-left: 30px;
-    }
-
-    .btn-navbar {
-      margin-right: -10px;
-    }
-
-    .navbar-inner {
-      margin-right: 10px;
-      padding: 30px 0;
+    &:hover {
+      color: lighten(@color-baseline, 25%);
+      border-bottom: 2px solid darken(@color-baseline, 10%);
     }
   }
 
-  .footer,
-  .baseline {
-
-    .container {
-
-      .row {
-        margin: 0;
-
-        .col-lg-12 {
-          padding: 0;
-        }
-      }
-
-    }
-
-  }
-
-  .baseline {
-
-    .copyright {
-      text-align: center;
-
-      .pull-right {
-        display: block;
-        float: none;
-        margin-top: 15px;
-      }
-    }
-
-  }
-
-
-}
-
-// Tablet Portrait & Below
-
-@media (max-width: 767px) {
-
-  .footer,
-  .baseline {
-    margin: 0 -20px;
-  }
-
-}
-
-// Default Desktop
-
-@media (min-width: 980px) {
-
-  .baseline {
-
-    .copyright {
-
-      .pull-right {
-        display: inline;
-      }
-    }
-
-  }
 }

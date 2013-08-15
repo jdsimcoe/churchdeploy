@@ -10,7 +10,7 @@
 		public $dsParamLIMIT = '20';
 		public $dsParamSTARTPAGE = '1';
 		public $dsParamREDIRECTONEMPTY = 'no';
-		public $dsParamREQUIREDPARAM = '$pt1:43';
+		public $dsParamREQUIREDPARAM = '$pt1:home';
 		public $dsParamPARAMOUTPUT = array(
 				'layout'
 		);
@@ -19,7 +19,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'19' => '{$pt1:43}',
+				'19' => '{$pt1:home}',
 		);
 		
 
@@ -35,10 +35,10 @@
 				'name' => 'Tags: Entries by tag',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
+					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-08-01T19:35:00+00:00'
+				'release-date' => '2013-08-15T18:26:48+00:00'
 			);
 		}
 

@@ -4,22 +4,24 @@ body.off-canvas-menu {
     background: #333;
     display: block;
     height: 100%;
-    right: 100%;
+    left: 100%;
     margin: 0;
     position: absolute;
     top: 0;
-    width: 200px;
+    width: 250px;
 
     input {
       background: #222;
       border: none;
       .box-shadow(none);
       color: @color-white;
+      font-size: 12px;
       font-weight: bold;
       margin-bottom: 10px;
-      padding: 30px 10px 30px 20px;
+      padding: 15px 10px 15px 20px;
       text-transform: uppercase;
       .transition(none);
+      width: 100%;
 
       &:focus {
         border: none);
@@ -35,15 +37,21 @@ body.off-canvas-menu {
     }
 
     h3 {
-      font-size: 16px;
+      font-size: 12px;
       margin: 0;
+
+      .no-link {
+        color: darken(@color-white, 10%);
+        font-weight: bold;
+        padding: 0 20px;
+      }
 
       a {
         color: darken(@color-white, 10%);
         font-weight: bold;
         display: block;
         margin: 0;
-        padding: 10px 20px;
+        padding: 0 20px;
         text-decoration: none;
 
         &:hover {
@@ -56,22 +64,27 @@ body.off-canvas-menu {
         border: none;
         .box-shadow(none);
         display: block;
-        font-size: 14px;
-        margin: 0 0 10px 0;
+        font-size: 12px;
+        margin: 0;
         padding: 0;
         position: relative;
         text-indent: 20px;
         width: 100%;
 
         li {
+          font-family: @font-family-serif;
+          font-size: 14px;
+          font-weight: normal;
           margin: 0;
           padding: 0;
+          text-transform: none;
         }
 
         a {
           color: darken(@color-white, 30%);
           margin: 0;
-          padding: 5px 10px;
+          padding: 2px 10px;
+
 
           &:hover {
             color: @color-white;

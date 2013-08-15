@@ -13,34 +13,34 @@
 
 <xsl:template match="/">
 
-	<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
-	  <channel>
-      <title><xsl:value-of select="$podcast-video-title"/></title>
+  <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+    <channel>
+      <title><xsl:value-of select="$podcast-video-hd-title"/></title>
       <link><xsl:value-of select="$root" /></link>
       <itunes:summary><xsl:value-of select="$podcast-video-summary" disable-output-escaping="yes"/></itunes:summary>
       <itunes:subtitle><xsl:value-of select="$podcast-video-subtitle" disable-output-escaping="yes"/></itunes:subtitle>
       <itunes:author><xsl:value-of select="$podcast-video-author" disable-output-escaping="yes"/></itunes:author>
       <language>en-us</language>
       <copyright>
-				<xsl:choose>
-					<xsl:when test="$podcast-video-year &gt;= $this-year">
-						<xsl:text>©</xsl:text>
-						<xsl:value-of select="$this-year"/>
-						<xsl:text>. </xsl:text>
-						<xsl:value-of select="$website-name" />
-						<xsl:text>. All rights reserved.</xsl:text>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:text>©</xsl:text>
-						<xsl:value-of select="$podcast-video-year"/>
-						<xsl:text>-</xsl:text>
-						<xsl:value-of select="$this-year"/>
-						<xsl:text>. </xsl:text>
-						<xsl:value-of select="$website-name" />
-						<xsl:text>. All rights reserved.</xsl:text>
-					</xsl:otherwise>
-				</xsl:choose>
-			</copyright>
+        <xsl:choose>
+          <xsl:when test="$podcast-video-year &gt;= $this-year">
+            <xsl:text>©</xsl:text>
+            <xsl:value-of select="$this-year"/>
+            <xsl:text>. </xsl:text>
+            <xsl:value-of select="$website-name" />
+            <xsl:text>. All rights reserved.</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>©</xsl:text>
+            <xsl:value-of select="$podcast-video-year"/>
+            <xsl:text>-</xsl:text>
+            <xsl:value-of select="$this-year"/>
+            <xsl:text>. </xsl:text>
+            <xsl:value-of select="$website-name" />
+            <xsl:text>. All rights reserved.</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </copyright>
       <itunes:owner>
         <itunes:name><xsl:value-of select="$website-name" /></itunes:name>
         <itunes:email><xsl:value-of select="$podcast-video-email"/></itunes:email>
@@ -48,7 +48,7 @@
       <itunes:image>
         <xsl:attribute name="href">
           <xsl:value-of select="$root" />
-          <xsl:text>/workspace/themes/active/img/podcast-video.jpg</xsl:text>
+          <xsl:text>/workspace/themes/active/img/podcast-video-hd.jpg</xsl:text>
         </xsl:attribute>
       </itunes:image>
       <!-- iTunes Browse Podcasts Category -->
@@ -59,7 +59,7 @@
       <itunes:keywords><xsl:value-of select="$podcast-video-keywords"/></itunes:keywords>
       <!-- Start Sermon Information -->
       <xsl:for-each select="/data/podcast-video/entry">
-	      <item>
+        <item>
           <title>
             <xsl:variable name="en-lowercase-letters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
             <xsl:variable name="en-uppercase-letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
@@ -94,7 +94,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:value-of select="$root" />
-                  <xsl:text>/workspace/themes/active/img/podcast-video.jpg</xsl:text>
+                  <xsl:text>/workspace/themes/active/img/podcast-video-hd.jpg</xsl:text>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:attribute>
@@ -103,7 +103,7 @@
             <xsl:attribute name="url">
               <xsl:value-of select="$podcast-video-server"/>
               <xsl:value-of select="filename"/>
-              <xsl:text>_540.mp4</xsl:text>
+              <xsl:text>_720.mp4</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="length">
               <xsl:choose>
@@ -111,7 +111,7 @@
                   <xsl:value-of select="video-540-filesize" />
                 </xsl:when>
                 <xsl:otherwise>
-                  <xsl:text>609456789</xsl:text>
+                  <xsl:text>909456789</xsl:text>
                 </xsl:otherwise>
               </xsl:choose>
             </xsl:attribute>
@@ -124,7 +124,7 @@
             <xsl:variable name="en-uppercase-letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
             <xsl:value-of select="$podcast-video-server"/>
             <xsl:value-of select="translate(filename,$en-uppercase-letters,$en-lowercase-letters)"/>
-            <xsl:text>_540.mp4</xsl:text>
+            <xsl:text>_720.mp4</xsl:text>
           </guid>
           <pubDate>
             <xsl:call-template name="format-date">
@@ -135,18 +135,18 @@
           <itunes:duration>
             <xsl:choose>
               <xsl:when test="video-duration">
-              	<xsl:value-of select="video-duration" />
+                <xsl:value-of select="video-duration" />
               </xsl:when>
               <xsl:otherwise>
                 <xsl:text>00:60:00</xsl:text>
               </xsl:otherwise>
             </xsl:choose>
           </itunes:duration>
-	      </item>
+        </item>
       </xsl:for-each>
 
-	  </channel>
-	  </rss>
+    </channel>
+    </rss>
 
 </xsl:template>
 

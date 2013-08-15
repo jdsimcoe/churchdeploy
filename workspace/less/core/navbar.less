@@ -1,59 +1,29 @@
 .navbar {
   background: @color-white;
-  padding: 20px 0;
+  .border-radius(0);
+  margin: 0;
+  padding: 20px 0 40px 0;
 
-  .navbar-brand {
-    font-family: @font-family-brand;
-    font-size: 38px;
-    position: relative;
-    top: 2px;
-  }
+  .lead {
+    margin: 0 auto;
+    width: 85%;
 
-  .hidden-lg {
-
-    .mast {
-      font-family: @font-family-brand;
-      font-size: 36px;
-      font-weight: normal;
-      padding-left: 10px;
-      position: relative;
-      top: -7px;
-    }
-
-  }
-
-  .row {
-
-    &.menu {
-      margin: 20px 0;
+    &.large {
+      font-family: @font-family-sans-serif;
+      font-size: 3em;
+      font-weight: 300;
+      line-height: 1.2;
     }
   }
 
-  .nav {
-
-    &.navbar-nav {
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-
-    li {
-      font-size: 16px;
-
-      &:hover {
-
-        .dropdown-menu {
-          display: block;
-          top: 40px;
-        }
-
-      }
-    }
+  hr {
+    background: darken(@color-white, 10%);
+    width: 25%;
   }
-
 }
 
 .icon-bar-wrapper {
-  padding: 9px;
+  padding: 5px 25px 10px 10px;
   .transition(background 300ms ease-in-out);
 
   &:hover {
@@ -69,6 +39,8 @@
     height: 2px;
     background-color: lighten(@color-black, 50%);
     border-radius: 1px;
+
+    -webkit-transition: background-color 150ms ease-in-out;
   }
 
   .icon-bar + .icon-bar {
@@ -76,10 +48,11 @@
   }
 }
 
-@media (max-width: @screen-tablet-max) {
+.logo {
+  padding: 20px 0 0 0;
+  margin-left: 35px;
 
-  .navbar {
-    padding: 20px;
+  a {
+    color: lighten(@color-black, 5%);
   }
-
 }

@@ -1,156 +1,3 @@
-// VARIABLES
-// =========
-
-.small-grey-text {
-  font-family: @font-family-sans-serif;
-  display: block;
-  font-size: 12px;
-  text-transform: uppercase;
-  margin: 10px 0;
-  color: #999;
-}
-
-.small-serif-header {
-  font-family: @font-family-serif;
-  margin: @base * 4 0;
-  color: @color-body-text;
-  font-size: 16px;
-  text-align: center;
-  border: none;
-}
-
-
-// BOOTSTRAP OVERRIDES
-// ===================
-
-.border-radius(@radius) {
-  -webkit-border-radius: @radius;
-     -moz-border-radius: @radius;
-          border-radius: @radius;
-}
-
-// @color-body-text: #303030;
-// @link-color: @color-accent;
-// @border-radius-large: @border-radius-base;
-// @border-radius-small: @border-radius-base;
-// @btn-background-primary-highlight: darken(@btn-background-primary, 5%);
-
-// .navbar {
-
-//   .btn-navbar {
-//     background: darken(@color-primary, 13%);
-//     border-color: darken(@color-primary, 8%);
-//     .border-radius(2px);
-//     .box-shadow(none);
-//     position: relative;
-//     top: 0;
-//     right: 10px;
-
-//     .icon-bar {
-//       .box-shadow(none);
-//       color: darken(@color-white, 15%);
-//     }
-
-//     &:hover {
-//       background: darken(@color-primary, 17%);
-//       border-color: darken(@color-primary, 8%);
-//     }
-//   }
-
-//   .nav-collapse {
-
-//     &.in {
-//       padding-top: 10px;
-
-//       .dropdown-menu {
-//         li {
-//           a {
-//             background: darken(@color-primary, 8%);
-//             .border-radius(@border-radius-base);
-
-//             &:hover {
-//               background: darken(@color-primary, 15%);
-//             }
-//           }
-//         }
-//       }
-//     }
-
-//   }
-
-// }
-
-// @btn-background: darken(@color-white, 15%);
-// @btn-background-highlight: darken(@btn-background, 5%);
-
-// .btn {
-//   background-image: none;
-//   background: @btn-background;
-//   border: 1px solid @btn-background;
-//   .border-radius(0);
-//   .box-shadow(none);
-//   .box-sizing(border-box);
-//   color: #fff;
-//   text-shadow: none;
-
-//   &:hover {
-//     background: @btn-background-highlight;
-//     border: 1px solid @btn-background-highlight;
-//     color: #fff;
-//   }
-
-//   &.btn-primary {
-//     background: @btn-background-primary;
-//     border: 1px solid @btn-background-primary;
-
-//     &:hover {
-//       background: @btn-background-primary-highlight;
-//       border: 1px solid @btn-background-primary-highlight;
-//     }
-//   }
-
-//   &.btn-success {
-//     background: @btn-background-success;
-//     border: 1px solid @btn-background-success;
-
-//     &:hover {
-//       background: @btn-background-success-highlight;
-//       border: 1px solid @btn-background-success-highlight;
-//     }
-//   }
-
-//   &.btn-warning {
-//     background: @btn-background-warning;
-//     border: 1px solid @btn-background-warning;
-
-//     &:hover {
-//       background: @btn-background-warning-highlight;
-//       border: 1px solid @btn-background-warning-highlight;
-//     }
-//   }
-
-//   &.btn-danger {
-//     background: @btn-background-danger;
-//     border: 1px solid @btn-background-danger;
-
-//     &:hover {
-//       background: @btn-background-danger-highlight;
-//       border: 1px solid @btn-background-danger-highlight;
-//     }
-//   }
-
-// 	&.btn-inverse {
-//     background: darken(@btn-background, 40%);
-//     border: 1px solid darken(@btn-background, 40%);
-
-//     &:hover {
-//       background: darken(@btn-background, 50%);
-//       border: 1px solid darken(@btn-background, 50%);
-//     }
-// 	}
-
-// }
-
 // HTML ELEMENTS
 // =============
 
@@ -166,29 +13,55 @@ body {
   -webkit-text-size-adjust: none !important;
 }
 
-h1 {
-  font-size: 64px;
-  line-height: 1.2;
-  font-weight: 800;
-}
-
-h2 {
-  font-size: 28px;
-}
-
 p,
 address,
-.component-events .description ul,
-.component-events .description ul li,
-.component-events .description ol,
-.component-events .description ol li, {
+ul,
+ul li,
+ol,
+ol li, {
   font-family: @font-family-serif;
   font-size: @body-text-height;
   line-height: 1.7;
+}
 
-	.badge {
-		font-family: @font-family-sans-serif;
-	}
+
+a {
+  -webkit-transition: color 150ms ease-in-out, background 150ms ease-in-out, border-color 150ms ease-in-out;
+
+  &:hover {
+    color: darken(@link-color, 10%);
+    text-decoration: none;
+  }
+
+}
+
+
+// BOOTSTRAP BORDERED BUTTONS
+// ==========================
+
+.btn {
+  font-family: @font-family-sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  .box-shadow(none);
+
+  &.btn-large {
+    .btn-bordered(@color-border: darken(@color-white, 25%););
+  }
+}
+
+.btn-bordered(@color-border: #555, @color-background: transparent) {
+  background: @color-background;
+  border: 4px solid @color-border;
+  .box-shadow(none);
+  color: @color-border;
+  padding: 15px 30px;
+
+  &:hover {
+    border-color: darken(@color-border, 10%);
+    .box-shadow(none);
+    color: darken(@color-border, 10%);
+  }
 }
 
 // GLOBAL STYLE CLASSES
@@ -210,22 +83,17 @@ address,
 	text-align: center;
 }
 
-// .top-spacer {
-//   margin-top: 120px;
-// }
+.block {
+  display: block;
+}
 
 
 // MAIN CLASSES
 // ============
 
-.main-container {
-	padding: 0 0 60px 0;
-}
 
 
-// Top padding
-//
-// .layout-events,
-// .layout-teachings {
-// 	padding-top: 140px;
-// }
+
+
+
+

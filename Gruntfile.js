@@ -69,11 +69,11 @@ module.exports = function (grunt) {
     watch: {
       cssdev: {
         files: '**/*.less',
-        tasks: ['less:dev', 'growl:watch']
+        tasks: ['less:dev']
       },
       cssprod: {
         files: '<config:watch.cssdev.files>',
-         tasks: ['less:prod', 'growl:watch']
+         tasks: ['less:prod']
       }
     }
 
