@@ -39,28 +39,21 @@
 	<footer class="footer">
     <div class="container">
       <div class="row">
-				<div class="col-lg-3 col-lg-offset-3">
-					<h4>Athey Creek Christian Fellowship</h4>
+				<div class="location">
+					<h4>Our Location</h4>
 					<address>
 						27520 SW 95th Ave.<br />
 						Wilsonville, Oregon 97070<br />
 						<abbr title="Phone">P:</abbr> (971) 327-2120
 					</address>
+				</div>
+				<div class="hours">
 					<h4>Office Hours</h4>
 					<p>
 						9:00 AM to 5:00 PM — Tue., Thr., Fri.<br />
 						9:00 AM to 12:00 PM — Wed.<br />
 						Closed Monday
 					</p>
-				</div>
-				<div class="col-lg-3">
-					<h4>Main Services</h4>
-					<p>Saturday at 6:00 PM<br />
-					Sunday at 8:30 and 11:00 AM<br />
-					Wednesday at 7:00 PM</p>
-					<h4>Online Giving</h4>
-					<p>Athey Creek Christian Fellowship is supported solely through those who call Athey Creek their church home.</p>
-					<p><a href="/give/" class="give">Give →</a></p>
 				</div>
       </div>
     </div>

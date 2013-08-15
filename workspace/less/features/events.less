@@ -1,0 +1,47 @@
+// Setting up the horizon
+
+.horizon {
+
+  // EVENTS on the home page
+
+  &.events-home {
+    @color-events: darken(@color-white, 5%);
+    .horizon(@color-background: @color-events);
+
+    hr {
+      border-top: 1px solid darken(@color-events, 10%);
+    }
+
+    .btn-large {
+      .btn-bordered(@color-border: darken(@color-events, 20%));
+      margin-bottom: 40px;
+
+      small {
+        font-family: @font-family-serif;
+        font-size: 1.4;
+        font-style: italic;
+        font-weight: normal;
+        margin: 0;
+        text-transform: none;
+      }
+
+      h4 {
+        color: darken(@color-events, 40%);
+        font-family: @font-family-condensed;
+        font-size: 1.6em;
+        font-weight: normal;
+        margin-top: 18px;
+      }
+
+      p {
+        font-family: @font-family-serif;
+        font-size: 0.9em;
+        font-weight: normal;
+        letter-spacing: 0;
+        margin: 0;
+      }
+
+    }
+  }
+
+}

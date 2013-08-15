@@ -4,7 +4,7 @@
 
 <xsl:template name="page-home">
 
-  <div class="horizon events">
+  <div class="horizon events-home">
     <div class="container">
 <!--       <div class="center">
         <i class="glyphicon-calendar icon-medium"></i>

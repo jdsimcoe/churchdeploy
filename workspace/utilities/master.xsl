@@ -117,7 +117,7 @@
 						</xsl:when>
 					</xsl:choose>
 					<xsl:if test="string-length(description) or string-length(tag)">
-						<xsl:text disable-output-escaping="yes"> • </xsl:text>
+						<xsl:text disable-output-escaping="yes"> · </xsl:text>
 					</xsl:if>
 				</xsl:for-each>
 			</xsl:if>
