@@ -15,6 +15,7 @@
 				'layout'
 		);
 		public $dsParamSORT = 'system:id';
+		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
 		
 
@@ -23,6 +24,12 @@
 		);
 		
 
+		public $dsParamINCLUDEDELEMENTS = array(
+				'description: unformatted',
+				'content: formatted',
+				'image: image',
+				'image: tile'
+		);
 		
 
 		public function __construct($env=NULL, $process_params=true) {
@@ -38,7 +45,7 @@
 					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-08-15T18:26:48+00:00'
+				'release-date' => '2013-08-16T18:02:58+00:00'
 			);
 		}
 

@@ -5,16 +5,52 @@
   margin: 0;
   padding: 20px 0 40px 0;
 
-  .lead {
+  .center {
     margin: 0 auto;
     width: 85%;
 
-    &.large {
+    h2 {
       font-family: @font-family-sans-serif;
       font-size: 3em;
       font-weight: 300;
       line-height: 1.2;
     }
+
+    p {
+      font-size: 21px;
+    }
+  }
+
+  &.photo {
+
+    .logo a,
+    h2,
+    p, {
+      color: @color-white;
+    }
+
+    .icon-bar-wrapper {
+
+      &:hover {
+
+        .icon-bar {
+          background-color: fadeout(@color-white, 20%);
+        }
+      }
+
+      .icon-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: @color-white;
+        border-radius: 1px;
+      }
+
+      .icon-bar + .icon-bar {
+        margin-top: 4px;
+      }
+    }
+
   }
 
   hr {

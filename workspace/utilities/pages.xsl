@@ -4,9 +4,9 @@
 
 <xsl:template name="page-home">
 
-  <div class="horizon events-home">
+  <div class="events-home">
     <div class="container">
-<!--       <div class="center">
+      <!-- <div class="center">
         <i class="glyphicon-calendar icon-medium"></i>
       </div> -->
       <h3>Upcoming Events</h3>
@@ -17,18 +17,21 @@
     </div>
   </div>
 
-</xsl:template>
-
-
-<xsl:template name="page-home-tagline">
-
-  <div class="center">
-    <p class="lead large">We are a body of Christians striving to follow Jesus, serve one another, and study God's Word.</p>
-    <hr/>
-    <p class="lead">Our mission is to see disciples of Jesus made in the greater Portland area.</p>
+  <div class="teachings-home">
+    <div class="container">
+      <div class="center">
+        <i class="glyphicon-book icon-medium"></i>
+      </div>
+      <h3>Recent Teaching</h3>
+      <hr/>
+      <div class="row">
+        <xsl:apply-templates select="/data/featured-teachings/entry" mode="home" />
+      </div>
+    </div>
   </div>
 
 </xsl:template>
+
 
 
 <xsl:template name="page-live">
