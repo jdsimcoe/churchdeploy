@@ -11,48 +11,22 @@
     border-top: 1px solid darken(@color-events, 10%);
   }
 
-  .btn-large {
-    .btn-bordered(@color-border: darken(@color-events, 20%));
-    margin-bottom: 40px;
+  h3 {
 
-    small {
-      font-family: @font-family-serif;
-      font-size: 1.1em;
-      font-style: italic;
+    span {
       font-weight: normal;
-      margin: 0;
-      text-transform: none;
-    }
-
-    h4 {
-      color: darken(@color-events, 40%);
-      font-family: @font-family-condensed;
-      font-size: 1.6em;
-      font-weight: normal;
-      margin-top: 18px;
-    }
-
-    p {
-      color: darken(@color-events, 20%);
-      font-family: @font-family-serif;
-      font-size: 1.1em;
-      font-weight: normal;
-      letter-spacing: 0;
-      margin: 0;
-    }
-
-    &:hover {
-
-      small,
-      p {
-        color: darken(@color-events, 10%);
-      }
-
-      h4 {
-        color: darken(@color-events, 50%);
-      }
     }
 
   }
+
+  .lead.title {
+    .allcaps();
+  }
+
+  .btn-large {
+    .btn-bordered(@color-border: darken(@color-events, 20%));
+    margin-bottom: 40px;
+  }
+
 }
 

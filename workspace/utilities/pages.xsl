@@ -19,19 +19,43 @@
 
   <div class="teachings-home">
     <div class="container">
-      <div class="center">
+<!--       <div class="center">
         <i class="glyphicon-book icon-medium"></i>
+      </div> -->
+
+      <xsl:apply-templates select="/data/featured-teachings/entry" mode="home" />
+
+    </div>
+  </div>
+
+  <div class="announce">
+    <div class="announce-left">
+      <div class="col-lg-6">
+        <a href="/" class="btn btn-block btn-large">
+          <xsl:text>Home Groups</xsl:text>
+        </a>
       </div>
-      <h3>Recent Teaching</h3>
-      <hr/>
-      <div class="row">
-        <xsl:apply-templates select="/data/featured-teachings/entry" mode="home" />
+    </div>
+    <div class="announce-right">
+      <div class="col-lg-6">
+        <a href="/" class="btn btn-block btn-large">
+          <xsl:text>Servant Ministry</xsl:text>
+        </a>
       </div>
     </div>
   </div>
 
+  <xsl:call-template name="podcast"/>
+
 </xsl:template>
 
+<xsl:template name="podcast">
+  <div class="podcast">
+    <div class="container">
+      <h3>Official Podcasts</h3>
+    </div>
+  </div>
+</xsl:template>
 
 
 <xsl:template name="page-live">

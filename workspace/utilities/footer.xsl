@@ -11,8 +11,10 @@
     <h3>On Twitter</h3>
     <xsl:for-each select="/data/twitter-search/statuses/item[position() &lt; 2]">
       <p class="lead">
-        <xsl:value-of select="text" disable-output-escaping="yes" />
-        <xsl:text>&#160;&#160;</xsl:text>
+      	<em>
+	        <xsl:value-of select="text" disable-output-escaping="yes" />
+	        <xsl:text>&#160;&#160;</xsl:text>
+        </em>
       </p>
       <h4>
         <strong>
@@ -24,10 +26,15 @@
       </h4>
     </xsl:for-each>
 
-    <div class="center">
-    	<hr/>
-    	<a href="http://twitter.com/atheycreek/" target="_blank" class="btn btn-large">View all Tweets</a>
-    </div>
+
+    <hr/>
+
+    <div class="row">
+  		<div class="col-lg-3">
+  			<a href="http://twitter.com/atheycreek/" target="_blank" class="btn btn-block btn-large">View all Tweets</a>
+  		</div>
+  	</div>
+
 
   </div>
 

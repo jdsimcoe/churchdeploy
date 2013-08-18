@@ -1,0 +1,48 @@
+// Announce
+// ----------------------------------------------------------
+
+.announce {
+  //variables
+  @color-announce: darken(@color-white, 40%);
+
+  // call Horizon
+  .horizon(@color-background: @color-announce);
+
+  // ANNOUNCE styles
+  padding: 0;
+
+  // button styles
+
+  .btn-large {
+    .btn-bordered(@color-border: @color-white);
+    margin: 200px 0;
+
+    h4 {
+      font-family: @font-family-condensed;
+      font-size: 1.6em;
+      font-weight: normal;
+      margin-top: 18px;
+    }
+  }
+
+  .col-lg-6 {
+    float: none;
+    margin: 0 auto;
+  }
+
+  .announce-left,
+  .announce-right {
+    .make-lg-column(6);
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  .announce-left {
+    background: url('../img/left.jpg');
+  }
+
+  .announce-right {
+    background: url('../img/right.jpg');
+  }
+
+}
