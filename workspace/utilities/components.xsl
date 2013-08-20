@@ -106,10 +106,7 @@
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:if test=". = 'images'">
-			<xsl:call-template name="component-images">
-				<xsl:with-param name="position" select="name($xpath)" />
-				<xsl:with-param name="entries" select="/data/images-entries-by-tag/entry" />
-			</xsl:call-template>
+			<xsl:apply-templates select="/data/images-entries-by-tag/entry" mode="main" />
 		</xsl:if>
 		<xsl:if test=". = 'locations'">
 			<xsl:call-template name="component-locations">
@@ -122,10 +119,20 @@
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:if test=". = 'members-roles'">
-			<xsl:call-template name="component-members-roles">
-				<xsl:with-param name="position" select="name($xpath)" />
-				<xsl:with-param name="entries" select="/data/members-roles-entries-by-tag/entry" />
-			</xsl:call-template>
+			<xsl:choose>
+				<xsl:when test="count(/data/members-roles-entries-by-tag/entry) &gt;3">
+					<xsl:apply-templates select="/data/members-roles-entries-by-tag/entry" mode="staff" />
+				</xsl:when>
+				<xsl:when test="count(/data/members-roles-entries-by-tag/entry) = 3">
+					<xsl:apply-templates select="/data/members-roles-entries-by-tag/entry" mode="main-3" />
+				</xsl:when>
+				<xsl:when test="count(/data/members-roles-entries-by-tag/entry) = 2">
+					 <xsl:apply-templates select="/data/members-roles-entries-by-tag/entry" mode="main-2" />
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates select="/data/members-roles-entries-by-tag/entry" mode="main" />
+				</xsl:otherwise>
+			</xsl:choose>
 		</xsl:if>
 		<xsl:if test=". = 'spacer'">
 			<xsl:call-template name="component-spacer" />
@@ -177,10 +184,7 @@
 			</xsl:choose>
 		</xsl:if>
 		<xsl:if test=". = 'text'">
-			<xsl:call-template name="component-text">
-				<xsl:with-param name="position" select="name($xpath)" />
-				<xsl:with-param name="entries" select="/data/text-entries-by-tag/entry" />
-			</xsl:call-template>
+			<xsl:apply-templates select="/data/text-entries-by-tag/entry" mode="main" />
 		</xsl:if>
 		<xsl:if test=". = 'featured'">
 			<xsl:call-template name="component-featured">
@@ -188,10 +192,7 @@
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:if test=". = 'verses'">
-			<xsl:call-template name="component-verses">
-				<xsl:with-param name="position" select="name($xpath)" />
-				<xsl:with-param name="entries" select="/data/verses-entry-by-tag/entry" />
-			</xsl:call-template>
+			<xsl:apply-templates select="/data/verses-entry-by-tag/entry" mode="main" />
 		</xsl:if>
 		<xsl:if test=". = 'videos'">
 			<xsl:call-template name="component-videos">

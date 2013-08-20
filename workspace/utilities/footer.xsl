@@ -27,13 +27,13 @@
     </xsl:for-each>
 
 
-    <hr/>
+<!--     <hr/>
 
     <div class="row">
   		<div class="col-lg-3">
   			<a href="http://twitter.com/atheycreek/" target="_blank" class="btn btn-block btn-large">View all Tweets</a>
   		</div>
-  	</div>
+  	</div> -->
 
 
   </div>

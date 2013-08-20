@@ -10,7 +10,7 @@
         <i class="glyphicon-calendar icon-medium"></i>
       </div> -->
       <h3>Upcoming Events</h3>
-      <hr/>
+<!--       <hr/> -->
       <div class="row">
         <xsl:apply-templates select="/data/events-6-latest/entry" mode="home" />
       </div>
@@ -95,7 +95,7 @@
   <div class="podcast">
     <div class="container">
       <h3>Official Podcasts</h3>
-      <hr/>
+<!--       <hr/> -->
       <div class="row">
         <div class="col-lg-4">
           <a href="{$main-podcast-audio}" target="_blank">
