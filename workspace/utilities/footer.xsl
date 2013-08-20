@@ -72,6 +72,13 @@
 <xsl:template name="baseline">
 
 	<div class="baseline">
+    <p class="social">
+      <a href="/"><i class="icon-social-twitter"></i></a>
+      <a href="/"><i class="icon-social-facebook"></i></a>
+      <a href="/"><i class="icon-social-vimeo"></i></a>
+      <a href="/"><i class="icon-social-spotify"></i></a>
+      <a href="/" class="last"><i class="icon-social-churchdeploy"></i></a>
+    </p>
     <p>
       <xsl:text>© 1996—</xsl:text>
       <xsl:value-of select="$this-year" />

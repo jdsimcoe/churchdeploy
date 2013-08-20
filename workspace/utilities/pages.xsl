@@ -29,19 +29,61 @@
   </div>
 
   <div class="announce">
-    <div class="announce-left">
-      <div class="col-lg-6">
-        <a href="/" class="btn btn-block btn-large">
-          <xsl:text>Home Groups</xsl:text>
-        </a>
-      </div>
+    <div class="announce-1">
+      <xsl:attribute name="style">
+        <xsl:text>background:url('</xsl:text>
+        <xsl:text>/workspace/themes/active/img/announce-1.jpg</xsl:text>
+        <xsl:text>');</xsl:text>
+      </xsl:attribute>
+      <a href="/" class="btn btn-block btn-large">
+        <h3>Meetings</h3>
+        <p>
+          Our weekly gathering are<br/>
+          centered on time in the Scriptures.
+        </p>
+      </a>
     </div>
-    <div class="announce-right">
-      <div class="col-lg-6">
-        <a href="/" class="btn btn-block btn-large">
-          <xsl:text>Servant Ministry</xsl:text>
-        </a>
-      </div>
+    <div class="announce-2">
+      <xsl:attribute name="style">
+        <xsl:text>background:url('</xsl:text>
+        <xsl:text>/workspace/themes/active/img/announce-2.jpg</xsl:text>
+        <xsl:text>');</xsl:text>
+      </xsl:attribute>
+      <a href="/" class="btn btn-block btn-large">
+        <h3>I'm New Here</h3>
+        <p>
+          Get introduced to Athey Creek<br/>
+          so you know what to expect when you visit.
+        </p>
+      </a>
+    </div>
+    <div class="announce-3">
+      <xsl:attribute name="style">
+        <xsl:text>background:url('</xsl:text>
+        <xsl:text>/workspace/themes/active/img/announce-3.jpg</xsl:text>
+        <xsl:text>');</xsl:text>
+      </xsl:attribute>
+      <a href="/" class="btn btn-block btn-large">
+        <h3>Home Groups</h3>
+        <p>
+          Seeking Jesus through communion,<br/>
+          prayer, meals, and fellowship.
+        </p>
+      </a>
+    </div>
+    <div class="announce-4">
+      <xsl:attribute name="style">
+        <xsl:text>background:url('</xsl:text>
+        <xsl:text>/workspace/themes/active/img/announce-4.jpg</xsl:text>
+        <xsl:text>');</xsl:text>
+      </xsl:attribute>
+      <a href="/" class="btn btn-block btn-large">
+        <h3>Servant Ministry</h3>
+        <p>
+          Serving the body of Christ<br/>
+          with our time, talent &amp; treasure.
+        </p>
+      </a>
     </div>
   </div>
 
@@ -53,6 +95,33 @@
   <div class="podcast">
     <div class="container">
       <h3>Official Podcasts</h3>
+      <hr/>
+      <div class="row">
+        <div class="col-lg-4">
+          <a href="{$main-podcast-audio}" target="_blank">
+            <img src="{$root}/workspace/themes/active/img/podcast-audio.jpg" width="100%" alt=""/>
+            <div class="overlay">
+              <span class="btn btn-large">VIEW ON iTUNES</span>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4">
+          <a href="{$main-podcast-video}" target="_blank">
+            <img src="{$root}/workspace/themes/active/img/podcast-video.jpg" width="100%" alt=""/>
+            <div class="overlay">
+              <span class="btn btn-large">VIEW ON iTUNES</span>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4">
+          <a href="{$main-podcast-video-hd}" target="_blank">
+            <img src="{$root}/workspace/themes/active/img/podcast-video-hd.jpg" width="100%" alt=""/>
+            <div class="overlay">
+              <span class="btn btn-large">VIEW ON iTUNES</span>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </xsl:template>

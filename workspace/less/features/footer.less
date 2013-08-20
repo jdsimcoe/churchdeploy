@@ -55,7 +55,7 @@
   }
 
   .location {
-    border-right: 1px solid darken(@footer-color, 3%);
+    border-right: 1px solid darken(@footer-color, 5%);
   }
 
   h4 {
@@ -78,16 +78,40 @@
 
   @color-baseline: lighten(@color-black, 20%);
 
-  .horizon(@color-background: @color-baseline, @color-text: lighten(@color-baseline, 15%));
+  .horizon(@color-background: @color-baseline, @color-text: lighten(@color-baseline, 20%));
   .center();
 
+  // baseline styles
+  padding-top: 30px;
+
+  .social {
+    margin-top: 0;
+
+    a {
+      border: none;
+      color: darken(@color-baseline, 7%);
+      font-size: 2.5em;
+      margin-right: 30px;
+
+      &.last {
+        margin: 0;
+      }
+
+      &:hover {
+        border: none;
+        color: darken(@color-baseline, 17%);
+      }
+    }
+
+  }
+
   a {
-    color: lighten(@color-baseline, 15%);
+    color: lighten(@color-baseline, 20%);
     border-bottom: 2px solid darken(@color-baseline, 2%);
     padding-bottom: 5px;
 
     &:hover {
-      color: lighten(@color-baseline, 25%);
+      color: lighten(@color-baseline, 30%);
       border-bottom: 2px solid darken(@color-baseline, 10%);
     }
   }

@@ -9,40 +9,45 @@
   .horizon(@color-background: @color-announce);
 
   // ANNOUNCE styles
+  clear: both;
+  margin: 0;
   padding: 0;
 
   // button styles
 
   .btn-large {
     .btn-bordered(@color-border: @color-white);
-    margin: 200px 0;
+    margin: 160px auto;
+    padding: 15px 0;
+    width: 75%;
 
-    h4 {
+    h3 {
       font-family: @font-family-condensed;
-      font-size: 1.6em;
+      font-size: 2em;
       font-weight: normal;
-      margin-top: 18px;
+      margin-bottom: 0;
+    }
+
+    p {
+      color: @color-white;
+      font-family: @font-family-serif;
+      font-size: 1.4;
+      font-weight: normal;
+      line-height: 1.4;
+      margin: 0 0 15px 0;
+      text-transform: none;
     }
   }
 
-  .col-lg-6 {
-    float: none;
-    margin: 0 auto;
-  }
-
-  .announce-left,
-  .announce-right {
-    .make-lg-column(6);
+  [class*="announce-"] {
+    display: inline-block;
+    float: left;
+    margin: 0;
     padding: 0;
-    vertical-align: middle;
+    position: relative;
+    width: 50%;
   }
 
-  .announce-left {
-    background: url('../img/left.jpg');
-  }
 
-  .announce-right {
-    background: url('../img/right.jpg');
-  }
 
 }

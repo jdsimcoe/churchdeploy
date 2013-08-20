@@ -11,10 +11,52 @@
   // clear the floats
   clear: both;
 
-  // button styles
+  // image tiles
 
+  a {
+    background: #000;
+    display: block;
+    margin: 10px 0 0 0;
+    .center();
+
+    .overlay {
+      background: @color-white;
+      height: 100%;
+      width: 100%;
+    }
+
+    span {
+      height: auto;
+      position: relative;
+      top: -210px;
+      visibility: hidden;
+    }
+
+    &:hover {
+
+      img {
+        .opacity(0.3);
+      }
+
+      .overlay {
+
+      }
+
+      span {
+        visibility: visible;
+
+        &.btn-large:hover {
+          border-color: @color-white;
+          color: @color-white;
+        }
+      }
+    }
+  }
+
+  // button styles
   .btn-large {
     .btn-bordered(@color-border: @color-white);
+    text-transform: none;
   }
 
 
