@@ -108,6 +108,7 @@
 
 		public function buildContent(XMLElement $wrapper) {
 			$this->addStylesheetToHead(URL . '/extensions/profiledevkit/assets/devkit.css', 'screen', 9126343);
+			$this->addStylesheetToHead(URL . '/workspace/assets/css/devkit-override.css', 'screen', 11);
 
 			$table = new XMLElement('table');
 			$table->setAttribute('id', $this->_view);
