@@ -1,0 +1,3 @@
+[submodule "workspace/assets"]
+	path = workspace/assets
+	url = git://github.com/jsimcoe/Symphony-FlatAdminTheme.git
