@@ -31,12 +31,6 @@
 [submodule "extensions/conditionalizer"]
 	path = extensions/conditionalizer
 	url = git://github.com/ahwayakchih/conditionalizer.git
-[submodule "extensions/debugdevkit"]
-	path = extensions/debugdevkit
-	url = git://github.com/symphonycms/debugdevkit.git
-[submodule "extensions/profiledevkit"]
-	path = extensions/profiledevkit
-	url = git://github.com/symphonycms/profiledevkit.git
 [submodule "extensions/duplicate_entry"]
 	path = extensions/duplicate_entry
 	url = git://github.com/symphonists/duplicate_entry.git
