@@ -1,0 +1,25 @@
+/*---------------------------------------------------------------------------------
+	Content
+---------------------------------------------------------------------------------*/
+	
+	#content table {
+		border-spacing: 0;
+		color: hsl(0, 0%, 50%);
+		font: 115% monospace;
+		padding: 20px 0;
+		table-layout: fixed;
+	}
+	#content table th {
+		color: hsl(0, 0%, 80%);
+		padding: 0 20px;
+		text-align: left;
+		white-space: nowrap;
+		vertical-align: top;
+	}
+	#content table td {
+		color: hsl(210, 50%, 80%);
+		padding: 0 20px 0 0;
+		vertical-align: top;
+	}
+	
+/*-------------------------------------------------------------------------------*/
