@@ -42,11 +42,14 @@
 		 *  The domain this cookie is valid for
 		 * @param boolean $httpOnly
 		 *  Whether this cookie can be read by Javascript. By default the cookie
-		 *  can be read using Javascript and PHP
+		 *  cannot be read by Javascript
+		 * @param boolean $secure
+		 *  Whether this cookie should only be sent on secure servers. By default this is
+		 *  false, which means the cookie can be sent over HTTP and HTTPS
 		 * @return string|boolean
 		 *  Returns the Session ID on success, or false on error.
 		 */
-		public static function start($lifetime = 0, $path = '/', $domain = NULL, $httpOnly = false) {
+		public static function start($lifetime = 0, $path = '/', $domain = NULL, $httpOnly = true, $secure = false) {
 
 			if (!self::$_initialized) {
 				if(!is_object(Symphony::Database()) || !Symphony::Database()->isConnected()) return false;
@@ -67,7 +70,7 @@
 					array('Session', 'gc')
 				);
 
-				session_set_cookie_params($lifetime, $path, ($domain ? $domain : self::getDomain()), false, $httpOnly);
+				session_set_cookie_params($lifetime, $path, ($domain ? $domain : self::getDomain()), $secure, $httpOnly);
 
 				if(session_id() == ''){
 					if(headers_sent()){
@@ -146,8 +149,19 @@
 			// Only prevent this record from saving if there isn't already a record
 			// in the database. This prevents empty Sessions from being created, but
 			// allows them to be nulled.
-			if(is_null(Session::read($id))) {
-				if(preg_match('/^([^}]+\|a:0:{})+$/i', $data)) return true;
+			$session_data = Session::read($id);
+			if(is_null($session_data)) {
+				$empty = true;
+				$unserialized_data = Session::unserialize_session($session_data);
+				foreach ($unserialized_data as $d) {
+					if (!empty($d)) {
+						$empty = false;
+					}
+				}
+
+				if ($empty) {
+					return false;
+				}
 			}
 
 			$fields = array(
@@ -156,6 +170,31 @@
 				'session_data' => $data
 			);
 			return Symphony::Database()->insert($fields, 'tbl_sessions', true);
+		}
+
+		/**
+		 * Given raw session data return the unserialized array.
+		 * Used to check if the session is really empty before writing.
+		 *
+		 * @since Symphony 2.3.3
+		 * @param string $data
+		 *  The serialized session data
+		 * @return string
+		 *  The unserialised session data
+		 */
+		private static function unserialize_session($data) {
+			$hasBuffer = isset($_SESSION);
+			$buffer = $_SESSION;
+			session_decode($data);
+			$session = $_SESSION;
+			if($hasBuffer) {
+				$_SESSION = $buffer;
+			}
+			else {
+				unset($_SESSION);
+			}
+
+			return $session;
 		}
 
 		/**

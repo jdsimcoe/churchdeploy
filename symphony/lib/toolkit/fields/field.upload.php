@@ -17,7 +17,7 @@
 			'image/jpeg',
 			'image/pjpeg',
 			'image/png',
-			'image/x-png',
+			'image/x-png'
 		);
 
 		public function __construct(){
@@ -72,7 +72,7 @@
 	-------------------------------------------------------------------------*/
 
 		public function entryDataCleanup($entry_id, $data=NULL){
-			$file_location = WORKSPACE . '/' . ltrim($data['file'], '/');
+			$file_location = $this->getFilePath($data['file']);
 
 			if(is_file($file_location)){
 				General::deleteFile($file_location);
@@ -96,6 +96,16 @@
 			}
 
 			return $meta;
+		}
+
+		public function getFilePath($filename) {
+			/**
+			 * Ensure the file exists in the `WORKSPACE` directory
+			 * @link http://getsymphony.com/discuss/issues/view/610/
+			 */
+			$file = WORKSPACE . preg_replace(array('%/+%', '%(^|/)\.\./%', '%\/workspace\/%'), '/', $this->get('destination') . '/' . $filename);
+
+			return $file;
 		}
 
 	/*-------------------------------------------------------------------------
@@ -196,19 +206,21 @@
 			if($this->get('required') != 'yes') $label->appendChild(new XMLElement('i', __('Optional')));
 
 			$span = new XMLElement('span', NULL, array('class' => 'frame'));
-			if ($data['file']) {
-				// Check to see if the file exists without a user having to
-				// attempt to save the entry. RE: #1649
-				$file = WORKSPACE . preg_replace(array('%/+%', '%(^|/)\.\./%'), '/', $data['file']);
 
+			if (isset($data['file'])) {
+				$filename = $this->get('destination') . '/' . basename($data['file']);
+				$file = $this->getFilePath($data['file']);
 				if (file_exists($file) === false || !is_readable($file)) {
 					$flagWithError = __('The file uploaded is no longer available. Please check that it exists, and is readable.');
 				}
 
-				$span->appendChild(new XMLElement('span', Widget::Anchor('/workspace' . preg_replace("![^a-z0-9]+!i", "$0&#8203;", $data['file']), URL . '/workspace' . $data['file'])));
+				$span->appendChild(new XMLElement('span', Widget::Anchor(preg_replace("![^a-z0-9]+!i", "$0&#8203;", $filename), URL . $filename)));
+			}
+			else {
+				$filename = null;
 			}
 
-			$span->appendChild(Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, $data['file'], ($data['file'] ? 'hidden' : 'file')));
+			$span->appendChild(Widget::Input('fields'.$fieldnamePrefix.'['.$this->get('element_name').']'.$fieldnamePostfix, $filename, ($filename ? 'hidden' : 'file')));
 
 			$label->appendChild($span);
 
@@ -242,12 +254,7 @@
 
 			// Its not an array, so just retain the current data and return
 			if (is_array($data) === false) {
-				/**
-				 * Ensure the file exists in the `WORKSPACE` directory
-				 * @link http://symphony-cms.com/discuss/issues/view/610/
-				 */
-				$file = WORKSPACE . preg_replace(array('%/+%', '%(^|/)\.\./%'), '/', $data);
-
+				$file = $this->getFilePath(basename($data));
 				if (file_exists($file) === false || !is_readable($file)) {
 					$message = __('The file uploaded is no longer available. Please check that it exists, and is readable.');
 
@@ -347,9 +354,7 @@
 
 			// Its not an array, so just retain the current data and return:
 			if (is_array($data) === false) {
-				// Ensure the file exists in the `WORKSPACE` directory
-				// @link http://symphony-cms.com/discuss/issues/view/610/
-				$file = WORKSPACE . preg_replace(array('%/+%', '%(^|/)\.\./%'), '/', $data);
+				$file = $this->getFilePath(basename($data));
 
 				$result = array(
 					'file' =>		$data,
@@ -374,11 +379,7 @@
 				// Found the file, add any missing meta information:
 				if (file_exists($file) && is_readable($file)) {
 					if (empty($result['mimetype'])) {
-						$result['mimetype'] = (
-							function_exists('mime_content_type')
-								? mime_content_type($file)
-								: 'application/octet-stream'
-						);
+						$result['mimetype'] = General::getMimeType($file);
 					}
 
 					if (empty($result['size'])) {
@@ -409,15 +410,17 @@
 					$entry_id
 				));
 
-				$existing_file = '/' . trim($row['file'], '/');
+				$existing_file = isset($row['file'])
+					? $this->getFilePath($row['file'])
+					: null;
 
 				// File was removed:
 				if (
 					$data['error'] == UPLOAD_ERR_NO_FILE
 					&& !is_null($existing_file)
-					&& is_file(WORKSPACE . $existing_file)
+					&& is_file($existing_file)
 				) {
-					General::deleteFile(WORKSPACE . $existing_file);
+					General::deleteFile($existing_file);
 				}
 			}
 
@@ -429,6 +432,9 @@
 			// Where to upload the new file?
 			$abs_path = DOCROOT . '/' . trim($this->get('destination'), '/');
 			$rel_path = str_replace('/workspace', '', $this->get('destination'));
+
+			// Sanitize the filename
+			$data['name'] = Lang::createFilename($data['name']);
 
 			// If a file already exists, then rename the file being uploaded by
 			// adding `_1` to the filename. If `_1` already exists, the logic
@@ -448,9 +454,7 @@
 				$data['name'] = str_replace($abs_path . '/', '', $renamed_file);
 			}
 
-			// Sanitize the filename
-			$data['name'] = Lang::createFilename($data['name']);
-			$file = rtrim($rel_path, '/') . '/' . trim($data['name'], '/');
+			$file = $this->getFilePath($data['name']);
 
 			// Attempt to upload the file:
 			$uploaded = General::uploadFile(
@@ -475,25 +479,19 @@
 			if (
 				isset($existing_file)
 				&& $existing_file !== $file
-				&& is_file(WORKSPACE . $existing_file)
+				&& is_file($existing_file)
 			) {
-				General::deleteFile(WORKSPACE . $existing_file);
+				General::deleteFile($existing_file);
 			}
 
-			// If browser doesn't send MIME type (e.g. .flv in Safari)
-			if (strlen(trim($data['type'])) == 0) {
-				$data['type'] = (
-					function_exists('mime_content_type')
-						? mime_content_type(WORKSPACE . $file)
-						: 'application/octet-stream'
-				);
-			}
+			// Get the mimetype, don't trust the browser. RE: #1609
+			$data['type'] = General::getMimeType($file);
 
 			return array(
-				'file' =>		$file,
+				'file' =>		basename($file),
 				'size' =>		$data['size'],
 				'mimetype' =>	$data['type'],
-				'meta' =>		serialize(self::getMetaInfo(WORKSPACE . $file, $data['type']))
+				'meta' =>		serialize(self::getMetaInfo($file, $data['type']))
 			);
 		}
 
@@ -507,8 +505,8 @@
 				return;
 			}
 
+			$file = $this->getFilePath($data['file']);
 			$item = new XMLElement($this->get('element_name'));
-			$file = WORKSPACE . $data['file'];
 			$item->setAttributeArray(array(
 				'size' =>	(
 								file_exists($file)
@@ -517,12 +515,12 @@
 									: 'unknown'
 							),
 			 	'path' =>	General::sanitize(
-			 			 		str_replace(WORKSPACE, NULL, dirname(WORKSPACE . $data['file']))
+								str_replace(WORKSPACE, NULL, dirname($file))
 			 				),
 				'type' =>	$data['mimetype']
 			));
 
-			$item->appendChild(new XMLElement('filename', General::sanitize(basename($data['file']))));
+			$item->appendChild(new XMLElement('filename', General::sanitize(basename($file))));
 
 			$m = unserialize($data['meta']);
 
@@ -534,21 +532,21 @@
 		}
 
 		public function prepareTableValue($data, XMLElement $link=NULL, $entry_id = null){
-			if (!$file = $data['file']) {
+			if (isset($data['file']) === false || !$file = $data['file']) {
 				if ($link) return parent::prepareTableValue(null, $link, $entry_id);
 				else return parent::prepareTableValue(null, $link, $entry_id);
 			}
 
 			if ($link) {
 				$link->setValue(basename($file));
-				$link->setAttribute('data-path', $file);
+				$link->setAttribute('data-path', $this->get('destination'));
 
 				return $link->generate();
 			}
 
 			else {
-				$link = Widget::Anchor(basename($file), URL . '/workspace' . $file);
-				$link->setAttribute('data-path', $file);
+				$link = Widget::Anchor(basename($file), URL . $this->get('destination') . '/' . $file);
+				$link->setAttribute('data-path', $this->get('destination'));
 
 				return $link->generate();
 			}
@@ -608,14 +606,16 @@
 		public function prepareExportValue($data, $mode, $entry_id = null) {
 			$modes = (object)$this->getExportModes();
 
+			$file = $this->getFilePath($data['file']);
+
 			// No file, or the file that the entry is meant to have no
 			// longer exists.
-			if (!isset($data['file']) || !is_file(WORKSPACE . $data['file'])) {
+			if (!isset($data['file']) || !is_file($file)) {
 				return null;
 			}
 
 			if ($mode === $modes->getFilename) {
-				return WORKSPACE . $data['file'];
+				return $file;
 			}
 
 			if ($mode === $modes->getObject) {

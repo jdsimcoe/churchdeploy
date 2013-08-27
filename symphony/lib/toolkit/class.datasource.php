@@ -194,7 +194,7 @@
 		 *  DataSource::FILTER_OR or DataSource::FILTER_AND
 		 */
 		public function __determineFilterType($value){
-			return preg_match('/\s+\+\s+/', $string) ? DataSource::FILTER_AND : DataSource::FILTER_OR;
+			return preg_match('/\s+\+\s+/', $value) ? DataSource::FILTER_AND : DataSource::FILTER_OR;
 		}
 
 		/**
@@ -236,13 +236,19 @@
 			if($env) $this->_env = $env;
 
 			if((isset($this->_env) && is_array($this->_env)) && isset($this->dsParamFILTERS) && is_array($this->dsParamFILTERS) && !empty($this->dsParamFILTERS)){
+
 				foreach($this->dsParamFILTERS as $key => $value){
 					$value = stripslashes($value);
 					$new_value = $this->__processParametersInString($value, $this->_env);
 
-					if(strlen(trim($new_value)) == 0) unset($this->dsParamFILTERS[$key]);
-					else $this->dsParamFILTERS[$key] = $new_value;
-
+					// If a filter gets evaluated to nothing, eg. ` + ` or ``, then remove
+					// the filter. RE: #1759
+					if(strlen(trim($new_value)) == 0 || !preg_match('/\w+/', $new_value)) {
+						unset($this->dsParamFILTERS[$key]);
+					}
+					else {
+						$this->dsParamFILTERS[$key] = $new_value;
+					}
 				}
 			}
 

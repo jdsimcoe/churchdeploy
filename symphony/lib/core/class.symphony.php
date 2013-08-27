@@ -339,6 +339,27 @@
 				self::Database()->setCharacterEncoding();
 				self::Database()->setCharacterSet();
 
+				// Set Timezone, need to convert human readable, ie. Australia/Brisbane to be +10:00
+				// @see https://github.com/symphonycms/symphony-2/issues/1726
+				$timezone = self::Configuration()->get('timezone', 'region');
+				$symphony_date = new DateTime('now', new DateTimeZone($timezone));
+
+				// MySQL wants the offset to be in the format +/-H:I, getOffset returns offset in seconds
+				$utc = new DateTime('now ' . $symphony_date->getOffset() . ' seconds', new DateTimeZone("UTC"));
+
+				// Support PHP5.2
+				// @see https://github.com/symphonycms/symphony-2/issues/1735
+				if(function_exists('date_diff') === false) {
+					$offset = mysql_date_diff($utc, $symphony_date);
+				}
+				// On PHP5.3+ we can use DateInterval to format the difference
+				// in way that MySQL will be happy
+				else {
+					$offset = $symphony_date->diff($utc)->format('%R%H:%I');
+				}
+
+				self::Database()->setTimeZone($offset);
+
 				if(self::Configuration()->get('query_caching', 'database') == 'off') self::Database()->disableCaching();
 				elseif(self::Configuration()->get('query_caching', 'database') == 'on') self::Database()->enableCaching();
 			}
@@ -460,7 +481,7 @@
 				$this->Author = AuthorManager::fetchByID($row['id']);
 				$this->Cookie->set('username', $row['username']);
 				$this->Cookie->set('pass', $row['password']);
-				self::Database()->update(array('last_seen' => DateTimeObj::getGMT('Y-m-d H:i:s')), 'tbl_authors', " `id` = '$id'");
+				self::Database()->update(array('last_seen' => DateTimeObj::getGMT('Y-m-d H:i:s')), 'tbl_authors', " `id` = '{$row['id']}'");
 
 				return true;
 			}
@@ -743,7 +764,7 @@
 					self::$namespace = sprintf('/%s/%s/%s', $bits[0], $bits[1], $bits[2]);
 				}
 				else {
-					self::$namespace =  sprintf('/%s/%s', $bits[0], $bits[1]);
+					self::$namespace =  sprintf('/%s/%s', $bits[0], isset($bits[1]) ? $bits[1] : '');
 				}
 			}
 

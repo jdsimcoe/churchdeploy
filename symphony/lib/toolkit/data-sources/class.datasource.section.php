@@ -11,7 +11,7 @@
 	 * from other `SectionDatasource`'s using output parameters.
 	 *
 	 * @since Symphony 2.3
-	 * @link http://symphony-cms.com/learn/concepts/view/data-sources/
+	 * @link http://getsymphony.com/learn/concepts/view/data-sources/
 	 */
 
 	require_once(TOOLKIT . '/class.entrymanager.php');
@@ -325,7 +325,8 @@
 					);
 				}
 
-				if($field_id == 'id') {
+				// Support system:id as well as the old 'id'. #1691
+				if($field_id === 'system:id' || $field_id === 'id') {
 					$c = 'IN';
 					if(stripos($value[0], 'not:') === 0) {
 						$value[0] = preg_replace('/^not:\s*/', null, $value[0]);
@@ -416,7 +417,7 @@
 
 			// Process Sorting
 			if($this->dsParamSORT == 'system:id') {
-				EntryManager::setFetchSorting('id', $this->dsParamORDER);
+				EntryManager::setFetchSorting('system:id', $this->dsParamORDER);
 			}
 			else if($this->dsParamSORT == 'system:date' || $this->dsParamSORT == 'system:creation-date') {
 				EntryManager::setFetchSorting('system:creation-date', $this->dsParamORDER);
