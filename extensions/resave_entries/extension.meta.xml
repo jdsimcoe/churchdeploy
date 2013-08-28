@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="resave_entries" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Resave entries</name>
+	<description>Resave your entries after structural section changes.</description>
+	<repo type="github">https://github.com/alpacaaa/resave_entries</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/70824/</url>
+	<types>
+		<type>Other</type>
+	</types>
+	<authors>
+		<author>
+			<name github="alpacaaa" symphony="alpacaaa">Marco Sampellegrini</name>
+		</author>
+	</authors>
+	<releases>
+		<release version="0.1" date="2011-06-06" min="2.2.1" />
+		<release version="0.2" date="2012-03-30" min="2.3"  />
+	</releases>
+</extension>

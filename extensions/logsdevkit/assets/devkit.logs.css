@@ -1,0 +1,32 @@
+/*---------------------------------------------------------------------------------
+	Content
+---------------------------------------------------------------------------------*/
+
+	#content table {
+		border-spacing: 0;
+		color: hsl(0, 0%, 50%);
+		font: 115% monospace;
+		padding: 20px 0;
+		table-layout: fixed;
+	}
+	#content table th {
+		color: hsl(0, 0%, 80%);
+		clear: both;
+		text-align: left;
+		padding: 0 20px 0 10px;
+		white-space: nowrap;
+		vertical-align: top;
+	}
+	#content table td {
+		color: hsl(0, 0%, 60%);
+		padding: 0 0 0 20px;
+		vertical-align: top;
+	}
+	#content table td .file {
+		color: hsl(210, 50%, 80%);
+	}
+	#content table td .line {
+		color: hsl(80, 50%, 80%);
+	}
+
+/*-------------------------------------------------------------------------------*/
