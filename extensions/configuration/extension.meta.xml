@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="configuration" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Configuration Settings</name>
+	<description>Admin interface for Symphony System Preferences</description>
+	<repo type="github">https://github.com/bauhouse/configuration</repo>
+	<url type="discuss">http://getsymphony.com/discuss/thread/581/</url>
+	<types>
+		<type>Interface</type>
+	</types>
+	<authors>
+		<author>
+			<name github="bauhouse" symphony="bauhouse">Stephen Bau</name>
+			<website>http://stephenbau.com/</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="1.7.1" date="2013-02-12" min="2.3">
+			- Add Portuguese language translation
+		</release>
+		<release version="1.7" date="2013-02-11" min="2.3">
+			- Add Italian language translation
+		</release>
+		<release version="1.6" date="2012-10-29" min="2.3">
+			- Set the database settings fields to be read-only, not disabled
+			- Add `Read Only` to the label of database field inputs
+		</release>
+		<release version="1.5" date="2012-10-06" min="2.3">
+			- NOTE: THIS VERSION IS UNUSABLE. It looked great, but sets your database credentials to `null`. (My sincere apologies.)
+			- Moved the Configuration page into the System menu
+			- Formatted legend and setting field labels to use title case
+			- Disabled the database settings fields to make them read-only
+		</release>
+		<release version="1.4" date="2012-10-05" min="2.3">
+			- Updated for Symphony 2.3 (Contributed by [Brian Zerangue](http://symphony-cms.com/get-involved/member/bzerangue/).)
+		</release>
+		<release version="1.3.5" date="2011-11-05" min="2.2" max="2.2.5">
+			- Handle special characters for the Site Name setting on the Preferences page
+		</release>
+		<release version="1.3.4" date="2011-11-05" min="2.2" max="2.2.5">
+			- Fixed a minor bug when using this in conjunction with search index: Escape value output for parameters in case they contain special characters. (Contributed by [David Anderson](http://symphony-cms.com/get-involved/member/davjand/).)
+			- Update Romanian translation. (Contributed by [Vlad Ghita](http://symphony-cms.com/get-involved/member/vladG/).)
+		</release>
+		<release version="1.3.3" date="2011-02-10" min="2.2" max="2.2.5">
+			- Enable localization.
+			- Integrate Romanian translation. (Contributed by [Vlad Ghita](http://symphony-cms.com/get-involved/member/vladG/).)
+		</release>
+		<release version="1.3.2" date="2011-02-10" min="2.2" max="2.2.5">
+			- Reformat Configuration Settings page as an edit form rather than an index table to be more consistent with Symphony interface conventions.
+		</release>
+		<release version="1.3.1" date="2011-02-10" min="2.2" max="2.2.5">
+			- Replace deprecated accessors for forward compatibility.
+		</release>
+		<release version="1.3" date="2011-02-05" min="2.2" max="2.2.5">
+			- Removed the ability to display the current version of Symphony to the "Preferences" page.
+			- Update extension for Symphony 2.2.
+		</release>
+		<release version="1.2" date="2009-08-12" min="2.0.x" max="2.1.2">
+			- Limit access of Configuration Settings page to Developers.
+		</release>
+		<release version="1.1" date="2009-08-12" min="2.0.x" max="2.1.2">
+			- Removed Configuration Overview page.
+			- Removed the ability to modify `group` and `name` indices of the configuration settings array.
+			- Moved Configuration page to System menu. 
+			- Added the ability to display the current version of Symphony to the "Preferences" page.
+			- Added the ability to modify the Site Name on the "Preferences" page.
+		</release>
+		<release version="1.0" date="2009-01-09" min="2.0.x" max="2.1.2">
+			- Initial Release
+		</release>
+	</releases>
+</extension>

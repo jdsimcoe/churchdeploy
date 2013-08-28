@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="html5_doctype" xmlns="http://getsymphony.com/schemas/extension/1.0">
+	<name>HTML5 Doctype</name>
+	<description>Convert XHTML to HTML5</description>
+	<repo type="github">https://github.com/symphonists/html5_doctype</repo>
+	<url type="discuss">http://getsymphony.com/discuss/thread/79978/</url>
+	<types>
+		<type>Other</type>
+	</types>
+	<authors>
+		<author>
+			<name github="bauhouse" symphony="bauhouse">Stephen Bau</name>
+			<website>http://stephenbau.com/</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="1.3.1" date="2013-02-11" min="2.3">
+			- Add Russian language translation
+		</release>
+		<release version="1.3" date="2012-10-07" min="2.3">
+			- Modified the regexp so the meta charset is replaced regardless of XSL output method (mlathrom)
+			- Enable configuration setting to exclude page types from being processed with HTML5 doctype (iwyg)
+		</release>
+		<release version="1.2.6" date="2012-06-01" min="2.3">
+			- Compatibility update for Symphony 2.3: Add extension.meta.xml file
+		</release>
+		<release version="1.2.5" date="2011-11-05" min="2.0">
+			- Increase number of lines that are parsed from 5 to 15 to accommodate conditional classes
+			- Add instructions for adding Paul Irish's conditional classes
+			- Add a credit for contributions by Stephen Bau to the extension driver's `about` array
+		</release>
+		<release version="1.2.4" date="2011-03-03" min="2.0">
+			- Increase number of lines that are parsed from 5 to 15 to accommodate conditional classes
+			- Add instructions for adding Paul Irish's conditional classes
+			- Add a credit for contributions by Stephen Bau to the extension driver's `about` array
+		</release>
+		<release version="1.2.3" date="2011-03-03" min="2.0">
+			- Improved extension description: "Replace XHTML syntax with basic HTML5 syntax." (Michael Eichelsdoerfer)
+			- Fixed problems with Symphony error pages coming up blank. Prohibit any parsing attempts for document types other than HTML. (Michael Eichelsdoerfer)
+		</release>
+		<release version="1.2.2" date="2010-11-11" min="2.0">
+			- Limit processing of regex to the first 5 lines of the result document. (Stephen Bau)
+		</release>
+		<release version="1.2.1" date="2010-11-11" min="2.0">
+			- Fix regex for meta charset: escape forward slashes to use case insensitive match (Stephen Bau)
+		</release>
+		<release version="1.2" date="2010-11-10" min="2.0">
+			- Preserve the language and meta charset attributes from the original HTML document (Stephen Bau)
+		</release>
+		<release version="1.1" date="2010-11-10" min="2.0">
+			- Modify Nick Dunn's HTML5 Doctype hack to include regex to fix the html and meta charset elements http://getsymphony.com/discuss/thread/43003/3/#position-56 (Stephen Bau)
+		</release>
+		<release version="1.0" date="2010-07-13" min="2.0">
+			- Inital Release (Nick Dunn)
+		</release>
+	</releases>
+</extension>

@@ -1,0 +1,18 @@
+tr.hc-invalid td{color: red;}
+tr.hc-invalid.selected td{color: #fff;}
+
+.recommendation {
+	padding: 20px;
+}
+.recommendation p {margin-bottom: 5px;}
+.recommendation ul {
+	margin: 0;
+}
+.recommendation li {
+	list-style-type: disc;
+	list-style-position: inside;
+}
+
+.health_check_panel a.hc-button {
+	margin: 20px 20px 10px;
+}

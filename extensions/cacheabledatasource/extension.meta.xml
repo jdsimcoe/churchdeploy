@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<extension id="cacheabledatasource" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	
+	<name>Cacheable Datasource</name>
+
+	<description lang="en">Improve page performance by caching data source output XML.</description>
+
+	<url type="repo">https://github.com/symphonists/cacheabledatasource</url>
+	
+	<types>
+		<type>Performance</type>
+	</types>
+	
+	<authors>
+		<author>
+          		<name github="symphonists" symphony="community">Symphony Community</name>
+    		</author>
+		<author>
+			<name github="nickdunn" symphony="nickdunn" twitter="nickdunn">Nick Dunn</name>
+			<website>http://nick-dunn.co.uk</website>
+		</author>
+	</authors>
+	
+	<releases>
+		<release version="1.1.1" date="2012-03-11" min="2.3" />
+		<release version="1.1.0" date="2011-10-04" min="2.3" />
+		<release version="1.0.0" date="2011-10-03" min="2.2" max="2.2.5">
+			* major milestone release
+			* removed unnecessary bloat of the Cache Viewer page
+			* cache files are now stored in a folder within the cache directory for easier bulk purging
+			* no more editing of data sources! Caching is applied unobtrusively with delegates and JavaScript (Symphony 2.3+) meaning you don't need to touch PHP and customise your data source files
+		</release>
+		<release version="0.5" date="2011-09-01">
+			* fixed a major bug whereby the extension would not escape invalid XML properly
+		</release>
+	</releases>	
+		
+</extension>

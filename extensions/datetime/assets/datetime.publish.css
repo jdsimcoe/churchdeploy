@@ -1,0 +1,227 @@
+/**
+ * Date and Time for Symphony CMS
+ *
+ * @author: Nils Hörrmann, post@nilshoerrmann.de
+ * @source: http://github.com/nilshoerrmann/datetime
+ */
+
+.field-datetime + .field {
+	clear: both;
+}
+
+.field-datetime label {
+	margin-bottom: 2px;
+}
+
+.field-datetime .frame {
+	overflow: visible;
+	margin-bottom: 21px;
+	float: left;
+	width: 100%;
+}
+
+.field-datetime .frame header {
+	padding: 4px 10px 3px;
+	position: relative;
+}
+
+.field-datetime .frame header div {
+	padding: 0 3px 0;
+	margin: 0;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+	border-radius: 2px;
+	background: #fff;
+	position: relative;
+}
+
+.field-datetime .frame header div.focus {
+	border-color: rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+.field-datetime header input,
+.field-datetime header input:hover,
+.field-datetime header input:active,
+.field-datetime header input:focus {
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	padding: 1px 0 0;
+	margin: 0;
+	height: 23px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-radius: 0;
+}
+
+.field-datetime header input.end {
+	border-top: 1px solid #E4E4DE;
+	background: transparent url(images/range.png) 2px 6px no-repeat;
+	padding-left: 18px;
+	display: none;
+}
+
+.field-datetime li.range header input.end {
+	display: block;
+}
+
+.field-datetime .frame header a.destructor {
+	top: 9px;
+	right: 10px;
+	border: none;
+}
+
+.field-datetime header em.label {
+	color: #a9a9a9;
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	margin-top: 0;
+	font-style: normal;
+	text-shadow: none;
+	-webkit-transition: top 0.1s ease-out;
+	-moz-transition: top 0.1s ease-out;
+	-ms-transition: top 0.1s ease-out;
+	-o-transition: top 0.1s ease-out;
+	transition: top 0.1s ease-out;
+}
+
+.field-datetime header em.end.label {
+	top: 27px;
+}
+
+/* Invalid */
+.field-datetime .frame header .invalid {
+	border-color: #cc3311;
+}
+
+.field-datetime .frame header .invalid input {
+	color: #cc3311;
+}
+/* Ordering */
+
+.field-datetime .frame li.ordering header div {
+	border-color: #44689e;
+}
+
+/* Single dates */
+
+.field-datetime .frame.single.simple {
+	overflow: visible;
+	padding-bottom: 2px;
+}
+
+.field-datetime .frame.single ol {
+	background: none;
+	border: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.field-datetime .frame.single li {
+	border-radius: 0;
+	border: none;
+}
+
+.field-datetime .frame.single header {
+	padding: 0;
+	border: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.field-datetime .frame.single li header div {
+	border-radius: 2px 2px 0 0;
+	padding-left: 7px;
+	min-height: 23px;
+}
+
+.field-datetime .frame.single li.collapsed header div {
+	border-radius: 2px;
+	padding-left: 3px;
+}
+
+.field-datetime .frame.single li.collapsed:not(.range) header div {
+	min-height: 20px;
+	height: 20px;
+}
+
+.field-datetime .frame.single li.collapsed:not(.range) header div input {
+	height: 20px;
+	border: none;
+}
+
+.field-datetime .frame.single li.collapsed:not(.range) header div em.label {
+	top: 2px;
+}
+
+.field-datetime .frame.single .content {
+	border-radius: 0 0 4px 4px;
+	margin: 0 -10px;
+	padding: 10px;
+}
+
+/* Help */
+
+.field-datetime div.help.hidden {
+	display: none;
+}
+
+.field-datetime div.help {
+	border-radius: 4px 4px 0 0;
+	border-bottom: none;
+	box-shadow: none;
+	margin-bottom: 0;
+	display: block;
+}
+
+.field-datetime div.help + .frame li:first-child,
+.field-datetime div.help + .frame.single li:first-child div {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.field-datetime div.help h3 {
+	font-weight: normal;
+	margin: 0;
+	padding: 0 5px 0 0;
+	color: #000;
+	background: #f5f5f5;
+	z-index: 1000;
+	position: relative;
+	display: inline-block;
+}
+
+.field-datetime div.help dl {
+	position: relative;
+	margin: -8px 0 20px;
+	padding: 17px 0 0 130px;
+	border-top: 1px solid #fff;
+}
+
+.field-datetime div.help dl:last-of-type {
+	margin-bottom: 10px;
+}
+
+.field-datetime div.help dt {
+	position: absolute;
+	left: 0;
+}
+
+.field-datetime div.help code {
+	background: #383836;
+	border-radius: 4px;
+	color: #fff;
+	line-height: 1.85;
+	min-height: 20px;
+	padding: 0 10px;
+	display: inline-block;
+}
+
+.field-datetime div.help dd {
+	margin: 0 0 10px;
+	padding: 2px 0 0;
+}

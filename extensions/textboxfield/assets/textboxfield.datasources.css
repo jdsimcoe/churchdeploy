@@ -1,0 +1,39 @@
+.field-textbox .filter-prefix-suggestions {
+	color: #888877;
+	list-style: none;
+	margin: -1em 0 1.5em 0;
+	overflow: hidden;
+}
+.field-textbox.selected .filter-prefix-suggestions {
+	color: #aabbee;
+}
+.field-textbox .filter-prefix-suggestions li {
+	cursor: pointer;
+	float: left;
+}
+.field-textbox .filter-prefix-suggestions li:hover,
+.field-textbox .filter-prefix-suggestions li.selected {
+	background: transparent;
+	color: #444433;
+}
+.field-textbox.selected .filter-prefix-suggestions li:hover,
+.field-textbox.selected .filter-prefix-suggestions li.selected {
+	color: #ffffff;
+}
+.field-textbox .filter-prefix-suggestions li:before {
+	color: #888877;
+	content: ', ';
+}
+.field-textbox.selected .filter-prefix-suggestions li:before {
+	color: #aabbee;
+}
+.field-textbox .filter-prefix-suggestions li:first-child:before {
+	content: '';
+}
+.field-textbox.selected p {
+	color: #aabbee;
+}
+.field-textbox p code {
+	font-size: 110%;
+	line-height: 1.3;
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="export_ensemble" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
+	<name>Export Ensemble</name>
+	<description>Export your Symphony website as an installer package.</description>
+	<repo type="github">https://github.com/symphonycms/export_ensemble</repo>
+	<url type="discuss">http://getsymphony.com/discuss/thread/32777/</url>
+	<types>
+		<type>Workflow</type>
+	</types>
+	<authors>
+		<author>
+			<name github="symphonycms" symphony="team">Symphony Team</name>
+			<website>http://getsymphony.com</website>
+		</author>
+		<author>
+			<name github="bauhouse" symphony="bauhouse">Stephen Bau</name>
+			<website>http://domain7.com</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="2.0.3" data="2013-07-01" min="2.3">
+			- Added Finnish translation
+			- Update links to **getsymphony.com**
+		</release>
+		<release version="2.0.2" date="2013-02-22" min="2.3">
+			- Updated Russian language
+			- Fix some PHP notices
+			- Replace database prefix in the SQL comments
+		</release>
+		<release version="2.0.1" date="2012-05-28" min="2.3">
+			- Fix bug where table prefix could not be overridden
+			- Prevent the installation logs from being added to the ensemble
+		</release>
+		<release version="2.0" date="2012-05-21" min="2.3">
+			- Update extension for Symphony 2.3 (breaks compatibility with previous versions of Symphony)
+			- The extension now overwrites the `install/includes/config_default.php` and `install/includes/install.sql` files
+			- Requires a complete `install` directory
+			- Add a test to ensure the `install` directory exists (the responsibility to ensure the directory is complete is the developer's)
+			- Add `extension.meta.xml` file
+		</release>
+		<release version="1.16" date="2011-06-18" min="2.2" max="2.2.x">
+			- Enable creation of install files if they do not already exist
+		</release>
+		<release version="1.15" date="2011-05-22" min="2.2">
+			- Dump all tables with `tbl_prefix`
+			- Exclude email configuration settings
+			- Save install files (for Git repositories or for manually creating ensembles)
+			- ZipArchive class is no longer required for install
+			- Update README with usage instructions
+		</release>
+		<release version="1.14" date="2011-04-30" min="2.2">
+			- Dump the `tbl_sessions` table structure
+		</release>
+		<release version="1.13" date="2011-04-18" min="2.2">
+			- Use the current Symphony install configuration values instead of always using the defaults
+			- Export Ensemble is now dynamic and uses the the current Symphony version instead of being hardcoded
+		</release>
+		<release version="1.12" date="2011-01-02" min="2.2">
+			- Compatibility changes for 2.2
+			- Fix markup bug
+		</release>
+		<release version="1.11" date="2010-02-12" min="2.0.7">
+			- Compatibility changes for 2.0.7RC2
+		</release>
+		<release version="1.10" date="2010-02-02" min="2.0.1">
+			- Added localisation files for Dutch, German, Portuguese (Brazil) and Russian
+		</release>
+		<release version="1.9" date="2009-07-28" min="2.0.1">
+			- Misc code cleanup
+			- Minor changes to ensure compatibility with PHP v5.3.x
+		</release>
+		<release version="1.8" date="2009-07-27" min="2.0.1">
+			- Any file that matches `/README.*` will be added to the archive along with `/README` if it exists.
+		</release>
+		<release version="1.7" date="2009-07-27" min="2.0.1">
+			- Fixed order in which items are added to the zip so the new `workspace/install.sql` file overrides any existing one
+		</release>
+		<release version="1.6" date="2009-07-08" min="2.0.1">
+			- Creates separate SQL files. `install.sql` and `workspace/install.sql`
+		</release>
+		<release version="1.5" date="2009-03-06" min="2.0.1">
+			- `README` and `LICENCE` are correctly added to the archives
+		</release>
+		<release version="1.4" date="2009-01-28" min="2.0.1" />
+		<release version="1.3" date="2009-01-27" min="2.0.1">
+			- Changed call to `pageAlert` to make easier to translate and conform with 2.0.1 guidelines
+		</release>
+		<release version="1.2" date="2009-01-17" min="2.0">
+			- `install()` function properly checks for the `ZipArchive` class and returns true if found, allowing installation
+		</release>
+		<release version="1.1" date="2009-01-14" min="2.0">
+			- Moved `installer.tpl`, found in the main S2 repository, into the /lib folder
+		</release>
+	</releases>
+</extension>
