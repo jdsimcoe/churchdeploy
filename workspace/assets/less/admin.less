@@ -1,0 +1,505 @@
+// Mixins
+
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
+          box-shadow: @shadow;
+}
+
+
+// Variables
+
+@color-symphony: #b40b51;
+@color-header: #282828;
+@color-accent: #668abe;
+@color-white: #ffffff;
+@color-black: #000000;
+@color-success: #c7f464;
+@color-failure: #ff6b6b;
+@color-warning: #ecd078;
+
+@font-family-sans-serif: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@font-family-serif: 'Georgia', Times, serif;
+
+// Body
+
+body {
+  color: #555;
+  font-family: @font-family-sans-serif !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-text-size-adjust: none !important;
+}
+
+a {
+  -webkit-transition: color 150ms ease-in-out, background 150ms ease-in-out, border-color 150ms ease-in-out;
+}
+
+// Header
+
+#header {
+
+  .notifier p {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  h1 {
+    font-family: @font-family-sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding: 25px 20px;
+    text-shadow: none;
+
+    &:before {
+      color: @color-symphony;
+      content: "•";
+      font-size: 120%;
+      line-height: 70%;
+      margin-right: 10px;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+}
+
+#session {
+
+  li {
+    a {
+      background: lighten(@color-header, 5%);
+      .border-radius(5px);
+      font-size: 14px;
+      padding: 10px 15px;
+      position: relative;
+      text-transform: capitalize;
+      top: -13px;
+
+      &:hover {
+        background: lighten(@color-header, 10%);
+      }
+    }
+    &:last-child a {
+      background: darken(@color-header, 5%);
+      font-weight: bold;
+
+      &:hover {
+        background: darken(@color-header, 10%);
+      }
+    }
+  }
+}
+
+// Nav
+
+#nav {
+  background: lighten(@color-header, 80%);
+  border: none !important;
+  .box-shadow(none);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0 10px;
+  text-transform: uppercase;
+
+  li ul {
+    border: none !important;
+    .border-radius(0);
+    .box-shadow(none);
+    left: 0;
+    min-width: 150px;
+    z-index: 3;
+  }
+
+  ul li {
+    ul {
+      background:lighten(@color-header, 75%);
+
+      li {
+        background:lighten(@color-header, 75%);
+
+        &:hover {
+          background:lighten(@color-header, 65%);
+        }
+      }
+    }
+  }
+
+  ul a {
+    border: none !important;
+    color: lighten(@color-header, 40%);
+    font-weight: bold;
+    padding: 5px 10px;
+
+    &:hover {
+      background:lighten(@color-header, 55%);
+      border: none !important;
+      text-shadow: none;
+    }
+  }
+
+  ul ul li:last-child a {
+    .border-radius(0);
+  }
+
+  & > ul {
+    border: none;
+    .border-radius(0);
+
+    & > li {
+      border: none;
+      .box-shadow(none);
+      color: lighten(@color-header, 40%);
+      height: auto;
+      padding: 10px;
+      text-shadow: none;
+
+      &.active {
+        background: @color-accent;
+        text-shadow: none;
+
+        &:hover {
+          background:lighten(@color-header, 75%);
+        }
+      }
+
+      &:hover {
+        background:lighten(@color-header, 75%);
+
+        &:after {
+          display: none;
+        }
+      }
+
+      > a {
+        border: none;
+      }
+    }
+  }
+
+
+  .content, .structure {
+
+    ul {
+      border: none !important;
+      top: 51px;
+    }
+
+  }
+
+
+}
+
+#nav > ul > li:hover, #nav > ul > li.active:hover {
+  height: auto;
+}
+
+#nav.wide ul.structure li ul {
+  right: 0;
+}
+
+// Context
+
+#breadcrumbs a, #breadcrumbs span {
+  font-family: @font-family-serif;
+}
+
+#context {
+  background: @color-white;
+  .box-shadow(none);
+  padding: 20px 20px 15px 20px;
+
+  h2 {
+    font-family: @font-family-serif !important;
+    color: darken(@color-white, 40%);
+    font-size: 18px;
+    font-style: italic;
+    font-weight: normal;
+    position: relative;
+    top: 6px;
+  }
+
+  nav {
+    font-size: 14px;
+    position: relative;
+    margin-right: 5px;
+    top: 6px;
+  }
+
+  .inactive {
+
+    span {
+      color: darken(@color-white, 20%);
+      font-family: @font-family-sans-serif;
+      position: relative;
+      top: 10px;
+    }
+
+  }
+
+  .actions {
+    top: 19px;
+  }
+
+}
+
+// Buttons
+
+input[type=submit],
+button,
+.button {
+  background: darken(@color-white, 5%);
+  border: none;
+  .box-shadow(none);
+  color: darken(@color-white, 35%);
+  display: inline-block;
+  font-size: 14px;
+  line-height: 21px;
+  padding: 7px 15px;
+}
+
+input[type=submit]:hover,
+input[type=submit]:active,
+input[type=submit]:focus,
+button:hover,
+button:active,
+button:focus,
+.button:hover,
+.button:active,
+.button:focus {
+  color: #3c3c3c;
+  border: none;
+  .box-shadow(none);
+  cursor: pointer;
+}
+
+input[type=submit].selected,
+button.selected,
+.button.selected {
+  background: #efefed;
+  .box-shadow(none);
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.65);
+  border-color: rgba(0, 0, 0, 0.3);
+  text-shadow: none;
+}
+
+button.create,
+.button.create {
+  background: @color-success;
+  border: none;
+  color: darken(@color-success, 30%);
+  text-shadow: none;
+
+  &:hover {
+    color: darken(@color-success, 35%);
+  }
+}
+
+button.delete,
+button.delete,
+button.delete,
+.button.delete,
+.button.delete,
+.button.delete {
+  background: @color-failure;
+  color: darken(@color-failure, 35%);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: lighten(@color-failure, 5%);
+    color: darken(@color-failure, 40%);
+  }
+}
+
+button, input[type="submit"] {
+  font-family: @font-family-sans-serif;
+}
+
+button.constructor,
+button.destructor {
+  font-size: 12px;
+  padding: 0 10px;
+  position: relative;
+  top: 4px;
+}
+
+fieldset.apply button {
+  padding: 0 10px;
+
+  &.constructor {
+    background: transparent;
+    position: relative;
+    top: 1px;
+  }
+
+}
+
+fieldset.apply.single button.constructor {
+  top: 4px;
+}
+
+// Contents
+
+#contents {
+  .box-shadow(none);
+  border-top: 3px solid darken(@color-white, 5%);
+}
+
+// Tables
+
+table {
+  thead {
+    font-size: 14px;
+
+    th {
+      padding: 5px 0 10px 0;
+    }
+
+    th, a {
+      font-weight: bold;
+    }
+  }
+  tbody {
+    font-size: 14px;
+  }
+}
+
+// Forms
+
+.two.columns {
+  padding: 20px 0 0 0;
+
+  .primary {
+    padding: 20px !important;
+  }
+  .secondary {
+    padding: 20px;
+  }
+}
+
+.secondary {
+  .label {
+    font-size: 14px;
+  }
+}
+
+#utilities {
+  li {
+    padding: 4px 10px 8px 10px;
+    a {
+      font-size: 14px;
+    }
+  }
+}
+
+ul.page {
+  font-size: 14px;
+}
+
+.page-single #contents .actions, .single #contents .actions {
+  border-top: 3px solid darken(@color-white, 5%);
+  margin: 0;
+}
+
+.page-single #contents .actions button, .single #contents .actions button {
+  margin-left: 20px;
+}
+
+.page-single #contents .actions input, .single #contents .actions input {
+  margin-right: 20px;
+}
+
+fieldset {
+  font-size: 14px;
+
+  label {
+    i {
+      font-size: 12px;
+    }
+    input, textarea {
+      font-weight: normal;
+    }
+  }
+}
+
+fieldset.apply {
+  select {
+    font-size: 12px;
+    position: relative;
+    top: 2px;
+  }
+}
+
+textarea {
+  color: lighten(@color-black, 45%) !important;
+  font-family: "Menlo", monospaced !important;
+}
+
+label.file {
+
+  span.frame {
+
+    span {
+      left: 3px;
+      position: relative;
+      top: 3px;
+
+      a {
+        border: none;
+      }
+    }
+  }
+}
+
+span.frame, fieldset.frame, .frame.inline {
+  background: darken(@color-white, 2%);
+  border: 2px solid darken(@color-white, 5%);
+  .box-shadow(none);
+}
+
+#password {
+
+  label {
+    margin-top: 10px;
+  }
+}
+
+#fields {
+
+  .help {
+    padding-left: 10px;
+  }
+}
+
+
+#contents > .actions {
+  margin: 0 -18px !important;
+}
+
+.help {
+  font-size: 12px;
+}
+
+#duplicate-entry {
+
+  span {
+    display: none !important;
+  }
+}
+
+// Footer
+
+p#version {
+  color: darken(@color-white, 20%);
+  font-family: @font-family-sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
