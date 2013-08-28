@@ -1,33 +1,33 @@
-.field-textbox ul {
+.field-textbox .filter-prefix-suggestions {
 	color: #888877;
 	list-style: none;
 	margin: -1em 0 1.5em 0;
 	overflow: hidden;
 }
-.field-textbox.selected ul {
+.field-textbox.selected .filter-prefix-suggestions {
 	color: #aabbee;
 }
-.field-textbox ul li {
+.field-textbox .filter-prefix-suggestions li {
 	cursor: pointer;
 	float: left;
 }
-.field-textbox ul li:hover,
-.field-textbox ul li.selected {
+.field-textbox .filter-prefix-suggestions li:hover,
+.field-textbox .filter-prefix-suggestions li.selected {
 	background: transparent;
 	color: #444433;
 }
-.field-textbox.selected ul li:hover,
-.field-textbox.selected ul li.selected {
+.field-textbox.selected .filter-prefix-suggestions li:hover,
+.field-textbox.selected .filter-prefix-suggestions li.selected {
 	color: #ffffff;
 }
-.field-textbox ul li:before {
+.field-textbox .filter-prefix-suggestions li:before {
 	color: #888877;
 	content: ', ';
 }
-.field-textbox.selected ul li:before {
+.field-textbox.selected .filter-prefix-suggestions li:before {
 	color: #aabbee;
 }
-.field-textbox ul li:first-child:before {
+.field-textbox .filter-prefix-suggestions li:first-child:before {
 	content: '';
 }
 .field-textbox.selected p {

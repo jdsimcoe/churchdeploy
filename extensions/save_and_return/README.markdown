@@ -1,6 +1,6 @@
 # Save and Return/New Buttons #
 
-Version: 1.7
+Version: 1.8
 
 ## Enables the user to save and return to the list of a section or to save and create a new entry ##
 

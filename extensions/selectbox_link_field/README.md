@@ -1,9 +1,9 @@
 # Select Box Link Field
 
-- Version: 1.26
+- Version: 1.28
 - Author: Symphony Team
-- Release Date: 22nd February 2012
-- Requirements: Symphony 2.3.2 or greater
+- Release Date: 1 July 2013
+- Requirements: Symphony 2.3.3 or greater
 
 ## Installation
 
@@ -32,4 +32,4 @@ The Select Box Link supports the following filtering options in your data source
 - `sql: NULL`: Return all entries that do not have any linked entries
 - `sql: NOT NULL`: Return all entries that have a linked entry
 
-Please note that predicate filters, such as `not:` or `sql:`, will ignore all other [data source filters](http://symphony-cms.com/learn/concepts/view/data-source-filters/) for that field.
+Please note that predicate filters, such as `not:` or `sql:`, will ignore all other [data source filters](http://getsymphony.com/learn/concepts/view/data-source-filters/) for that field.

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="profiledevkit" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="profiledevkit" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Profile Devkit</name>
 	<description>Profile Devkit lets you profile the current page by adding `?profile` to the URL.</description>
 	<repo type="github">https://github.com/symphonycms/profiledevkit</repo>
-	<url type="discuss">http://symphony-cms.com/discuss/thread/36714/</url>
+	<url type="discuss">http://getsymphony.com/discuss/thread/36714/</url>
 	<url type="issues">https://github.com/symphonycms/profiledevkit/issues</url>
 	<types>
 		<type>Workflow</type>
@@ -11,7 +11,7 @@
 	<authors>
 		<author>
 			<name github="team" symphony="symphonycms">Symphony Team</name>
-			<website>http://www.symphony-cms.com</website>
+			<website>http://www.getsymphony.com</website>
 		</author>
 		<author>
 			<name github="rowan-lewis" symphony="buzzomatic">Rowan Lewis</name>
@@ -19,6 +19,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.3" data="2013-07-01" min="2.3">
+			- Update links to **getsymphony.com**
+		</release>
 		<release version="1.2" date="2013-02-22" min="2.3">
 			- Allowed Delegate Profiling (2.3.2+ only)
 			- Update Russian language

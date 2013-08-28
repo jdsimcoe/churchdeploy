@@ -1,11 +1,11 @@
-# Profile Devkit #
+# Profile Devkit
 
 A profile panel for Symphony. It is part of the Symphony core download package.
 
-- Version: 1.2
-- Date: 22nd February 2013
-- Requirements: Symphony 2.3 or later
+- Version: 1.3
 - Author: Rowan Lewis, Symphony Team
+- Date: 1 July 2013
+- Requirements: Symphony 2.3 or greater
 
 ## Usage
 

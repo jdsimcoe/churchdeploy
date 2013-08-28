@@ -1,13 +1,12 @@
-# Export Ensemble #
+# Export Ensemble
 
 This extension exports your Symphony website.
 It is part of the Symphony core download package.
 
-- Version: 2.0.2
-- Date: 22nd February 2013
-- Requirements: Symphony 2.3 or above. The `Download ZIP` feature requires the ZIP module for PHP (`--enable-zip`).
-- Author: Alistair Kearney, alistair@symphony-cms.com
-- GitHub Repository: <http://github.com/symphonycms/export_ensemble>
+- Version: 2.0.3
+- Author: Symphony Team
+- Release Date: 1 July 2013
+- Requirements: Symphony 2.3 or above. The `Download ZIP` feature requires the ZIP module for PHP (`--enable-zip`)
 
 ## Synopsis
 
@@ -19,7 +18,7 @@ This extension adds "Save Install Files" and "Download ZIP" buttons to the prefe
 
 ## Installation & Updating
 
-Information about [installing and updating extensions](http://symphony-cms.com/learn/tasks/view/install-an-extension/) can be found in the Symphony documentation at <http://symphony-cms.com/learn/>.
+Information about [installing and updating extensions](http://getsymphony.com/learn/tasks/view/install-an-extension/) can be found in the Symphony documentation at <http://getsymphony.com/learn/>.
 
 ## Usage
 

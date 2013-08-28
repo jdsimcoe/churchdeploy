@@ -128,7 +128,7 @@
 			$fieldset->appendChild(new XMLElement('script', NULL, array('src' => URL . '/extensions/conditionalizer/assets/conditionalizer.js', 'type' => 'text/javascript')));
 
 			$label = Widget::Label(__('Expression'));
-			$label->appendChild(Widget::Textarea('conditionalizer', 6, 50, General::sanitize(stripslashes($data)), array('class' => 'code')));
+			$label->appendChild(Widget::Textarea('conditionalizer', 6, 50, General::sanitize($data), array('class' => 'code')));
 
 			if (!class_exists('Conditionalizer')) {
 				require_once(EXTENSIONS . '/conditionalizer/lib/class.conditionalizer.php');

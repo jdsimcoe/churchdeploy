@@ -13,7 +13,7 @@ class Conditionalizer {
 					4 => param,
 				);
 			*/
-			if (!preg_match('/(?:^[^\(]*)(\(if\s+(value of|any of|all of)\s*(\((?:[^\(\)]+|(?3))*\))\s+((?:is|are)(?: not|)(?: in|))\s*(\((?:[^\(\)]+|(?5))*\))\s*\))/', $e, $r))
+			if (!preg_match('/(?:^[^\(]*)(\(if\s+(value of|any of|all of)\s*(\((?:[^\(\)]+|(?3))*\))\s+((?:is|are|matches)(?: not|)(?: in|))\s*(\((?:[^\(\)]+|(?5))*\))\s*\))/', $e, $r))
 				return array();
 			
 			array_shift($r); // Remove $r[0] that contains data which we do not want
@@ -111,6 +111,26 @@ class Conditionalizer {
 						foreach (preg_split('/\s*,\s*/', $r[2]) as $v) {
 							if ($v != $r[4]) return false;
 						}
+					}
+					break;
+
+				case 'matches':
+				case 'matches not':
+					$regexp = "/{$r[4]}/";
+					$yes = ($r[3] == 'matches' ? true : false);
+					$no = !$yes;
+					if ($r[1] == 'value of') {
+						return (preg_match($regexp, $r[2]) ? $yes : $no);
+					}
+					else if ($r[1] == 'any of') {
+						foreach (preg_split('/\s*,\s*/', $r[2]) as $v) {
+							if (preg_match($regexp, $v)) return $yes;
+						}
+						return $no;
+					}
+					else if ($r[1] == 'all of') {
+						$v = preg_split('/\s*,\s*/', $r[2]);
+						return (count(preg_grep($regexp, $v)) == count($v) ? $yes : $no);
 					}
 					break;
 			}

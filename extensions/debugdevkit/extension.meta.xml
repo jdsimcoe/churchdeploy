@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="debugdevkit" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="debugdevkit" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Debug Devkit</name>
-	<description>A debug panel for Symphony.</description>
+	<description>The Debug Devkit allows a developer to preview the XML of a Frontend page. It also includes the page parameters, included XSL templates and provides a navigation for other Devkit extensions (such as the Profile Devkit)</description>
 	<repo type="github">https://github.com/symphonycms/debugdevkit</repo>
 	<types>
 		<type>Workflow</type>
@@ -9,7 +9,7 @@
 	<authors>
 		<author>
 			<name github="team" symphony="symphonycms">Symphony Team</name>
-			<website>http://www.symphony-cms.com</website>
+			<website>http://www.getsymphony.com</website>
 		</author>
 		<author>
 			<name github="rowan-lewis" symphony="buzzomatic">Rowan Lewis</name>
@@ -17,6 +17,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.2.4" data="2013-07-01" min="2.3">
+			- Update links to **getsymphony.com**
+		</release>
 		<release version="1.2.3" date="2013-02-22" min="2.2" max="2.3.x">
 			- Update Bitter library for improving syntax highlighting
 			- Add Italian language

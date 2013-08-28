@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="selectbox_link_field" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="selectbox_link_field" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Select Box Link Field</name>
 	<description>Linking two sections together</description>
 	<repo type="github">https://github.com/symphonycms/selectbox_link_field</repo>
-	<url type="discuss">http://symphony-cms.com/discuss/thread/473/</url>
+	<url type="discuss">http://getsymphony.com/discuss/thread/473/</url>
 	<types>
 		<type>Field Types</type>
 	</types>
 	<authors>
 		<author>
 			<name github="symphonycms" symphony="team">Symphony Team</name>
-			<website>http://symphony-cms.com</website>
+			<website>http://getsymphony.com</website>
 		</author>
 	</authors>
 	<releases>
+		<release version="1.28" date="2013-07-01" min="2.3.3">
+			- Add Finnish and Polish translations
+			- Update links to **getsymphony.com**
+		</release>
+		<release version="1.27" date="2013-05-12" min="2.3.3">
+			- [#36](https://github.com/symphonycms/selectbox_link_field/issues/36) Add functionality to hide field in a prepopulated state
+			- [#35](https://github.com/symphonycms/selectbox_link_field/issues/35) Handle grouping on null values better
+			- When importing into the SBL field, if the data given is not entry ID's, attempt to find the entry ID's assuming the value we've been given is handles or values
+		</release>
 		<release version="1.26" date="2013-02-22" min="2.3.2">
 			- Implement the updated `ImportableField` interface
 			- Updated Russian language
@@ -63,7 +72,7 @@
 			- Fixed sort order of entries in select box. Corrected to use the column sort order. A bug in 1.13+ caused this particular issue to reappear. This fix is based on code by Nick Dunn initially introduced in 1.12.
 		</release>
 		<release version="1.15" date="2010-01-14" min="2.0.5">
-			- `relation_id` can now be a `null` value. Fixes issue [#1](http://symphony-cms.com/download/extensions/issues/view/20054/1/)
+			- `relation_id` can now be a `null` value. Fixes issue [#1](http://getsymphony.com/download/extensions/issues/view/20054/1/)
 		</release>
 		<release version="1.14" date="2009-12-29" min="2.0">
 			- Made install and update functions more tolerant of existing tables

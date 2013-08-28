@@ -343,6 +343,22 @@
 		}
 
 		/**
+		 * Sets the MySQL connection to use this timezone instead of the default
+		 * MySQL server timezone.
+		 *
+		 * @link https://dev.mysql.com/doc/refman/5.6/en/time-zone-support.html
+		 * @since Symphony 2.3.3
+		 * @param string $timezone
+		 *  Timezone will be a offset, `+10:00`, as not all MySQL installations will
+		 *  have the humanreadable timezone database available
+		 */
+		public function setTimeZone($timezone = null) {
+			if(is_null($timezone)) return;
+
+			$this->query("SET time_zone = '$timezone'");
+		}
+
+		/**
 		 * This function will clean a string using the `mysql_real_escape_string` function
 		 * taking into account the current database character encoding. Note that this
 		 * function does not encode _ or %. If `mysql_real_escape_string` doesn't exist,
@@ -393,14 +409,14 @@
 		/**
 		 * Determines whether this query is a read operation, or if it is a write operation.
 		 * A write operation is determined as any query that starts with CREATE, INSERT,
-		 * REPLACE, ALTER, DELETE, UPDATE, OPTIMIZE or TRUNCATE. Anything else is
+		 * REPLACE, ALTER, DELETE, UPDATE, OPTIMIZE, TRUNCATE or DROP. Anything else is
 		 * considered to be a read operation which are subject to query caching.
 		 *
 		 * @return integer
 		 *  `MySQL::__WRITE_OPERATION__` or `MySQL::__READ_OPERATION__`
 		 */
 		public function determineQueryType($query){
-			return (preg_match('/^(create|insert|replace|alter|delete|update|optimize|truncate)/i', $query) ? MySQL::__WRITE_OPERATION__ : MySQL::__READ_OPERATION__);
+			return (preg_match('/^(create|insert|replace|alter|delete|update|optimize|truncate|drop)/i', $query) ? MySQL::__WRITE_OPERATION__ : MySQL::__READ_OPERATION__);
 		}
 
 		/**

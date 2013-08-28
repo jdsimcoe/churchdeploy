@@ -781,6 +781,7 @@
 			);
 
 			$list = new XMLElement('ul');
+			$list->setAttribute('class', 'filter-prefix-suggestions');
 
 			foreach ($filters as $value) {
 				$item = new XMLElement('li', $value['name']);

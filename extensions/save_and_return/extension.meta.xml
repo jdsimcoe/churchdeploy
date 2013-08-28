@@ -23,6 +23,9 @@
 		<!-- None -->
 	</dependencies>
 	<releases>
+		<release version="1.8" date="2013-07-25" min="2.3">
+		- Added support for query string: That way, filters will stay active when usign the buttons.
+		</release>
 		<release version="1.7" date="2013-04-04" min="2.3">
 		- Removed compatibility with Static Section
 		- Minor bug fixes

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="maintenance_mode" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="maintenance_mode" status="released" xmlns="http://getsymphony.com/schemas/extension/1.0">
 	<name>Maintenance Mode</name>
 	<description>Temporarily close your site for maintenance</description>
 	<repo type="github">https://github.com/symphonycms/maintenance_mode</repo>
-	<url type="discuss">http://symphony-cms.com/discuss/thread/32797/</url>
+	<url type="discuss">http://getsymphony.com/discuss/thread/32797/</url>
 	<types>
 		<type>Workflow</type>
 		<type>Security</type>
@@ -11,10 +11,13 @@
 	<authors>
 		<author>
 			<name github="symphonycms" symphony="team">Symphony Team</name>
-			<website>http://symphony-cms.com</website>
+			<website>http://getsymphony.com</website>
 		</author>
 	</authors>
 	<releases>
+		<release version="1.7" data="2013-07-01" min="2.3">
+			- Update links to **getsymphony.com**
+		</release>
 		<release version="1.6" date="2012-05-21" min="2.3">
 			- Add support for Symphony 2.3
 			- Update to use `PageManager`, new `Configuration` methods

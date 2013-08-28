@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="entry_url_field" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Entry URL Field</name>
+	<description>Add a hyperlink in the backend to view an entry URL in the frontend</description>
+	<repo type="github">https://github.com/symphonists/entry_url_field</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/34412/</url>
+	<types>
+		<type>Field</type>
+	</types>
+	<authors>
+		<author>
+			<name github="symphonists" symphony="community">Symphony Community</name>
+		</author>
+		<author>
+			<name github="nickdunn" symphony="nickdunn">Nick Dunn</name>
+			<website>http://nick-dunn.co.uk</website>
+		</author>
+		<author>
+			<name github="vlad-ghita" symphony="vladG">Vlad Ghita</name>
+			<email>vlad_micutul@yahoo.com</email>
+			<website>http://www.xanderadvertising.com</website>
+		</author>
+	</authors>
+	<media>
+		<item type="image" url="http://symphonyextensions.com/nickdunn/entry_url_field/media/entry_url_field.png">Entry URL Field: Add a hyperlink in the backend to view an entry URL in the frontend</item>
+	</media>
+	<releases>
+		<release version="1.3.0" date="2012-06-21" min="2.3.x"><![CDATA[
+			* Added personalized labels supporting xPath at entry level instead of field level.
+		]]>
+		</release>
+		<release version="1.1.1" date="2012-03-15" min="2.2.0" max="2.2.x" />
+		<release version="1.1" date="2011-02-07" min="2.2" />
+	</releases>
+</extension>

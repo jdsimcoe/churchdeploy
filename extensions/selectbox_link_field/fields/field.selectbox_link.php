@@ -21,6 +21,7 @@
 			// Default settings
 			$this->set('show_column', 'no');
 			$this->set('show_association', 'yes');
+			$this->set('hide_when_prepopulated', 'no');
 			$this->set('required', 'yes');
 			$this->set('limit', 20);
 			$this->set('related_field_id', array());
@@ -315,6 +316,48 @@
 			return $relation_data;
 		}
 
+		/**
+		 * Given a string (assumed to be a handle or value), this function
+		 * will do a lookup to field the `entry_id` from the related fields
+		 * of the field and returns the `entry_id`.
+		 *
+		 * @since 1.27
+		 * @param string $value
+		 * @return integer
+		 */
+		public function fetchIDfromValue($value) {
+			$id = null;
+			$related_field_ids = $this->get('related_field_id');
+
+			foreach($related_field_ids as $related_field_id) {
+				try {
+					$return = Symphony::Database()->fetchCol("id", sprintf("
+						SELECT
+							`entry_id` as `id`
+						FROM
+							`tbl_entries_data_%d`
+						WHERE
+							`handle` = '%s'
+						LIMIT 1", $related_field_id, Lang::createHandle($value)
+					));
+
+					// Skipping returns wrong results when doing an
+					// AND operation, return 0 instead.
+					if(!empty($return)) {
+						$id = $return[0];
+						break;
+					}
+				} catch (Exception $ex) {
+					// Do nothing, this would normally be the case when a handle
+					// column doesn't exist!
+				}
+			}
+
+			$value = (is_null($id)) ? 0 : (int)$id;
+
+			return $value;
+		}
+
 	/*-------------------------------------------------------------------------
 		Settings:
 	-------------------------------------------------------------------------*/
@@ -366,13 +409,25 @@
 			}
 			else $wrapper->appendChild($label);
 
+			$div = new XMLElement('div', NULL, array('class' => 'two columns'));
+
 			// Maximum entries
 			$label = Widget::Label();
 			$label->setAttribute('class', 'column');
 			$input = Widget::Input('fields['.$this->get('sortorder').'][limit]', (string)$this->get('limit'));
 			$input->setAttribute('size', '3');
 			$label->setValue(__('Limit to %s entries', array($input->generate())));
-			$wrapper->appendChild($label);
+			$div->appendChild($label);
+
+			// Hide when prepopulated
+			$label = Widget::Label();
+			$label->setAttribute('class', 'column');
+			$input = Widget::Input('fields['.$this->get('sortorder').'][hide_when_prepopulated]', 'yes', 'checkbox');
+			if($this->get('hide_when_prepopulated') == 'yes') $input->setAttribute('checked', 'checked');
+			$label->setValue($input->generate() . ' ' . __('Hide when prepopulated'));
+			$div->appendChild($label);
+
+			$wrapper->appendChild($div);
 
 			// Allow selection of multiple items
 			$label = Widget::Label();
@@ -412,6 +467,7 @@
 			if($this->get('related_field_id') != '') $fields['related_field_id'] = $this->get('related_field_id');
 			$fields['allow_multiple_selection'] = $this->get('allow_multiple_selection') ? $this->get('allow_multiple_selection') : 'no';
 			$fields['show_association'] = $this->get('show_association') == 'yes' ? 'yes' : 'no';
+			$fields['hide_when_prepopulated'] = $this->get('hide_when_prepopulated') == 'yes' ? 'yes' : 'no';
 			$fields['limit'] = max(1, (int)$this->get('limit'));
 			$fields['related_field_id'] = implode(',', $this->get('related_field_id'));
 
@@ -588,6 +644,14 @@
 				return implode($data);
 			}
 			else if($mode === $modes->getPostdata) {
+				// Iterate over $data, and where the value is not an ID,
+				// do a lookup for it!
+				foreach($data as $key => &$value) {
+					if(!is_numeric($value) && !is_null($value)){
+						$value = $this->fetchIDfromValue($value);
+					}
+				}
+
 				return $this->processRawFieldData($data, $status, $message, true, $entry_id);
 			}
 
@@ -730,34 +794,7 @@
 					// for now, I assume string values are the only possible handles.
 					// of course, this is not entirely true, but I find it good enough.
 					if(!is_numeric($value) && !is_null($value)){
-						$related_field_ids = $this->get('related_field_id');
-						$id = null;
-
-						foreach($related_field_ids as $related_field_id) {
-							try {
-								$return = Symphony::Database()->fetchCol("id", sprintf("
-									SELECT
-										`entry_id` as `id`
-									FROM
-										`tbl_entries_data_%d`
-									WHERE
-										`handle` = '%s'
-									LIMIT 1", $related_field_id, Lang::createHandle($value)
-								));
-
-								// Skipping returns wrong results when doing an
-								// AND operation, return 0 instead.
-								if(!empty($return)) {
-									$id = $return[0];
-									break;
-								}
-							} catch (Exception $ex) {
-								// Do nothing, this would normally be the case when a handle
-								// column doesn't exist!
-							}
-						}
-
-						$value = (is_null($id)) ? 0 : $id;
+						$value = $this->fetchIDfromValue($value);
 					}
 				}
 
@@ -817,24 +854,38 @@
 
 			foreach($records as $r){
 				$data = $r->getData($this->get('id'));
-				$value = $data['relation_id'];
+				$value = (int)$data['relation_id'];
 
-				$related_data = EntryManager::fetch($value, $field->get('parent_section'), 1, null, null, null, false, true, array($field->get('element_name')));
-				$related_data = current($related_data);
+				if($value === 0) {
+					if(!isset($groups[$this->get('element_name')][$value])){
+						$groups[$this->get('element_name')][$value] = array(
+							'attr' => array(
+								'link-handle' => 'none',
+								'value' => "None"
+							),
+							'records' => array(),
+							'groups' => array()
+						);
+					}
+				}
+				else {
+					$related_data = EntryManager::fetch($value, $field->get('parent_section'), 1, null, null, null, false, true, array($field->get('element_name')));
+					$related_data = current($related_data);
 
-				if(!$related_data instanceof Entry) continue;
+					if(!$related_data instanceof Entry) continue;
 
-				$primary_field = $field->prepareTableValue($related_data->getData($related_field_id));
+					$primary_field = $field->prepareTableValue($related_data->getData($related_field_id));
 
-				if(!isset($groups[$this->get('element_name')][$value])){
-					$groups[$this->get('element_name')][$value] = array(
-						'attr' => array(
-							'link-id' => $data['relation_id'],
-							'link-handle' => Lang::createHandle($primary_field),
-							'value' => General::sanitize($primary_field)),
-						'records' => array(),
-						'groups' => array()
-					);
+					if(!isset($groups[$this->get('element_name')][$value])){
+						$groups[$this->get('element_name')][$value] = array(
+							'attr' => array(
+								'link-id' => $data['relation_id'],
+								'link-handle' => Lang::createHandle($primary_field),
+								'value' => General::sanitize($primary_field)),
+							'records' => array(),
+							'groups' => array()
+						);
+					}
 				}
 
 				$groups[$this->get('element_name')][$value]['records'][] = $r;

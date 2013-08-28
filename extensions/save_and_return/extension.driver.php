@@ -51,6 +51,7 @@
 		}
 		
 		public function appendElement($context) {
+			
 			// if in edit or new page
 			if ($this->isInEditOrNew()) {
 				
@@ -100,6 +101,17 @@
 					$button_wrap->appendChild($hidden_new);
 				}
 				
+				// save current query string: the raw (visible) query string
+				$queryString = explode('?', $_SERVER['REQUEST_URI'], 2);
+				if ($queryString != FALSE && count($queryString) == 2) {
+					$queryString = $queryString[1];
+				} else {
+					$queryString = '';
+				}
+				$qs_hidden = $this->createHidden('save-and-qs');
+				$qs_hidden->setAttribute('value', $queryString);
+				$button_wrap->appendChild($qs_hidden);
+				
 				// add content to the right div
 				$div_action = $this->getChildrenWithClass($form, 'div', 'actions');
 				
@@ -134,10 +146,19 @@
 		}
 		
 		private function getPath($isNew) {
-			if ($isNew) {
-				return '%s/publish/%s/new/';
+			
+			$queryString = isset($_POST['fields']['save-and-qs']) && strlen($_POST['fields']['save-and-qs']) > 1;
+			
+			if ($queryString) {
+				$queryString = '?' . $_POST['fields']['save-and-qs'];
+			} else {
+				$queryString = '';
 			}
-			return '%s/publish/%s/';
+			
+			if ($isNew) {
+				return '%s/publish/%s/new/' . $queryString;
+			}
+			return '%s/publish/%s/' . $queryString;
 		}
 		
 		private function isInEditOrNew() {
@@ -168,9 +189,8 @@
 			
 			return NULL;
 		}
-
+	
 		
-
 		private function getSectionLimit(){
 			$extman = Symphony::ExtensionManager();
 			
@@ -190,9 +210,9 @@
 			
 			return FALSE;
 		}
-
+	
 		public function appendJS($context){
-
+	
 			if ($this->isInEditOrNew()) {
 			
 				Administration::instance()->Page->addElementToHead(

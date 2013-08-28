@@ -4,12 +4,12 @@
 		public function about(){
 			return array(
 				'name' => 'Text Formatter: Markdown',
-				'version' => '1.15',
-				'release-date' => '2013-02-03',
+				'version' => '1.17',
+				'release-date' => '2013-07-01',
 				'author' => array(
 					'name' => 'Alistair Kearney',
-					'website' => 'http://symphony-cms.com',
-					'email' => 'alistair@symphony-cms.com'
+					'website' => 'http://getsymphony.com',
+					'email' => 'alistair@getsymphony.com'
 				),
 				'description' => 'Includes "Markdown", "Markdown Extra", "Markdown Extra with Smartypants" and "Markdown with HTML Purifier" text formatters. PHP implementation of the "Markdown" text-to-HTML syntax, created by John Gruber, developed by Michel Fortin.'
 			);

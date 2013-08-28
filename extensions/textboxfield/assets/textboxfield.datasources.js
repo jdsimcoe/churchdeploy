@@ -11,7 +11,7 @@
 		var settings = {
 			input:			'> label > input, > .content > label > input',
 			help:			'> p, > .content > p',
-			filters:		'> ul > li, > .content > ul > li'
+			filters:		'.filter-prefix-suggestions > li'
 		};
 
 		jQuery.extend(settings, custom_settings);

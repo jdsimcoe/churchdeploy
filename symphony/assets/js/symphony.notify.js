@@ -51,9 +51,8 @@
 
 			// Create item
 			item = $('<p />', {
-				html: message.replace(Symphony.Language.get('at') + ' ', ''),
 				'class': type
-			}).addClass('notice active').symphonyTimeAgo();
+			}).html(message.replace(Symphony.Language.get('at') + ' ', '')).addClass('notice active').symphonyTimeAgo();
 
 			// Add ignore link to notices)
 			if(!item.is('.error') && !item.is('.success') && !item.is('.protected')) {
@@ -67,7 +66,7 @@
 
 			// Load exclusion rules
 			if(Symphony.Support.localStorage === true) {
-				storage = $.parseJSON(window.localStorage[settings.storage]) || [];
+				storage = (window.localStorage[settings.storage]) ? $.parseJSON(window.localStorage[settings.storage]) : [];
 			}
 
 			// Prepend item
@@ -113,7 +112,7 @@
 
 				// No other items
 				if(item.siblings().length == 0) {
-					notifier.trigger('resize.notify');
+					notifier.trigger('resize.notify', [jQuery('<div />')]);
 				}
 
 				// More item
@@ -129,11 +128,12 @@
 
 		// Resize notifier
 		objects.on('resize.notify attachstop.notify', 'div.notifier', function resizeNotifer(event, item) {
-			var notifier = $(this),
-				active = item || notifier.find('.active:not(:animated)');
+			var notifier = $(this);
 
 			// Adjust height
-			if(!notifier.is('.constructing')) {
+			if(!notifier.hasClass('constructing')) {
+				var active = item || notifier.find('.active:not(:animated)');
+
 				notifier.show().animate({
 					height: active.innerHeight() || 0
 				}, 100);
@@ -159,7 +159,7 @@
 		// Next message
 		objects.on('click', 'nav', function switchMessage(event) {
 			var nav = $(this),
-				notifier = $(this).parents('div.notifier');
+				notifier = $(this).closest('div.notifier');
 
 			// Move messages
 			notifier.trigger('move.notify');
@@ -188,8 +188,8 @@
 				offset = 0;
 			}
 
-			// If next's height is smaller, resize first
-			if(next.outerHeight() < from) {
+			// If next's height is not the same, resize first
+			if(next.outerHeight() !== from) {
 				notifier.trigger('resize.notify');
 			}
 
@@ -213,7 +213,7 @@
 			if(Symphony.Support.localStorage === true) {
 				// Put in a try/catch incase we exceed storage space
 				try {
-					storage = $.parseJSON(window.localStorage[settings.storage]) || [];
+					storage = (window.localStorage[settings.storage]) ? $.parseJSON(window.localStorage[settings.storage]) : [];
 					storage.push(text);
 					window.localStorage[settings.storage] = JSON.stringify(storage);
 				}
@@ -251,7 +251,7 @@
 			if(notifier.find(settings.items).length > 0) {
 				notifier.removeClass('constructing').trigger('resize.notify');
 			}
-						
+
 			notifier.removeClass('constructing');
 
 			// Update relative times in system messages

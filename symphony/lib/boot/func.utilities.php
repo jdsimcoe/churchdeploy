@@ -102,3 +102,101 @@
 
 		return $val;
 	}
+
+	/**
+	 * This function, give two DateTime objects, will return the
+	 * difference between the two in hours and minutes, in a format
+	 * suitable for MySQL.
+	 *
+	 * This function does not provide full date_diff functionality,
+	 * it's a stopgap for PHP5.2 support.
+	 *
+	 * @since Symphony 2.3.3
+	 * @deprecated Do not use, it will be removed in the next
+	 *  major version of Symphony when PHP5.2 support is dropped
+	 * @param DateTime $date_1
+	 * @param DateTime $date_2
+	 * @return string
+	 *  A string representing the difference between the dates, eg.
+	 *  +05:00 or -10:00 or +09:30
+	 */
+	function mysql_date_diff(DateTime $date_1, DateTime $date_2) {
+		$date_1_seconds = $date_1->format('U');
+		$date_2_seconds = $date_2->format('U');
+
+		// In hours
+		$offset = ($date_1_seconds - $date_2_seconds) / 60 / 60;
+
+		// Deal with x.5 (:30 minutes)
+		$minutes = (fmod($offset, 1) === 0.5) ? ":30" : ":00";
+
+		// Is this +/- GMT?
+		$op = ($offset > 0) ? '+' : '-';
+
+		// Return difference, +05:00, -10:00, +09:30
+		$difference = $op . str_pad(abs(floor($offset)), 2, '0', STR_PAD_LEFT) . $minutes;
+
+		return $difference;
+	}
+
+	/**
+	 * Cleans up Session Cookies. When there is no data in the session the cookie will be unset.
+	 * If there is data, the cookie will be renewed, expiring it in two weeks from now.
+	 * This will improve the interoperability with caches like Varnish and Squid.
+	 *
+	 * @since 2.3.3
+	 * @author creativedutchmen (Huib Keemink)
+	 * @return void
+	 */
+	function cleanup_session_cookies()
+	{
+
+		/*
+		Unfortunately there is no way to delete a specific previously set cookie from PHP.
+		The only way seems to be the method employed here: store all the cookie we need to keep, then delete every cookie and add the stored cookies again.
+		Luckily we can just store the raw header and output them again, so we do not need to actively parse the header string.
+		*/
+
+		$cookie_params = session_get_cookie_params();
+		$list = headers_list();
+		$custom_cookies = array();
+
+		foreach ($list as $hdr) {
+			if ((stripos($hdr, 'Set-Cookie') !== FALSE) && (stripos($hdr, session_id()) === FALSE)) {
+				$custom_cookies[] = $hdr;
+			}
+		}
+		header_remove('Set-Cookie');
+		foreach ($custom_cookies as $custom_cookie) {
+			header($custom_cookie);
+		}
+
+		$session_is_empty = true;
+		foreach ($_SESSION as $contents) {
+			if (!empty($contents)) {
+				$session_is_empty = false;
+			}
+		}
+		if ($session_is_empty && !empty($_COOKIE[session_name()])) {
+			setcookie(
+				session_name(),
+				session_id(),
+				time() - 3600,
+				$cookie_params['path'],
+				$cookie_params['domain'],
+				$cookie_params['secure'],
+				$cookie_params['httponly']
+			);
+		}
+		elseif(!$session_is_empty) {
+			setcookie(
+				session_name(),
+				session_id(),
+				time() + TWO_WEEKS,
+				$cookie_params['path'],
+				$cookie_params['domain'],
+				$cookie_params['secure'],
+				$cookie_params['httponly']
+			);
+		}
+	}

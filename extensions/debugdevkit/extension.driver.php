@@ -10,13 +10,13 @@
 		public function about() {
 			return array(
 				'name'			=> 'Debug DevKit',
-				'version'		=> '1.2.3',
-				'release-date'	=> '2013-02-22',
+				'version'		=> '1.2.4',
+				'release-date'	=> '2013-07-01',
 				'author'		=> array(
 					array(
 						'name' => 'Symphony Team',
-						'website' => 'http://symphony-cms.com/',
-						'email' => 'team@symphony-cms.com'
+						'website' => 'http://getsymphony.com/',
+						'email' => 'team@getsymphony.com'
 					),
 					array(
 						'name' => 'Rowan Lewis',

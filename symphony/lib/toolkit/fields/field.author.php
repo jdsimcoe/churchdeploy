@@ -112,7 +112,7 @@
 
 		public function findDefaults(array &$settings){
 			if(!isset($settings['allow_multiple_selection'])) $settings['allow_multiple_selection'] = 'no';
-			if(!isset($settings['author_types'])) $settings['author_types'] = array('developer', 'author');
+			if(!isset($settings['author_types'])) $settings['author_types'] = array('developer', 'manager', 'author');
 		}
 
 		public function displaySettingsPanel(XMLElement &$wrapper, $errors = null) {
@@ -125,6 +125,7 @@
 			$types = $this->get('author_types');
 			$options = array(
 				array('author', empty($types) ? true : in_array('author', $types), __('Author')),
+                array('manager', empty($types) ? true : in_array('manager', $types), __('Manager')),
 				array('developer', empty($types) ? true : in_array('developer', $types), __('Developer'))
 			);
 			$label->appendChild(
@@ -360,7 +361,7 @@
 				}
 
 				else if ($mode === $modes->listAuthorToValue) {
-					$items[$author_id] = $author->getFullName();
+					$items[$data['author_id']] = $author->getFullName();
 				}
 			}
 

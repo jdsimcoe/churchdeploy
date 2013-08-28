@@ -19,6 +19,7 @@
 		public function update($previousVersion)
 		{
 			$symphony_version = Symphony::Configuration()->get('version', 'symphony');
+
 			if(version_compare($symphony_version, '2.0.8RC3', '>=') && version_compare($previousVersion, '1.1', '<'))
 			{
 				$uniqueupload_entry_tables = Symphony::Database()->fetchCol("field_id", "SELECT `field_id` FROM `tbl_fields_uniqueupload`");
@@ -31,6 +32,19 @@
 							$field
 						));
 					}
+				}
+			}
+
+			if(version_compare($symphony_version, '2.3.3beta1', '>'))
+			{
+				// Remove directory from the unique upload fields, similar to Symphony's upload field
+				$upload_tables = Symphony::Database()->fetchCol("field_id", "SELECT `field_id` FROM `tbl_fields_uniqueupload`");
+
+				if(is_array($upload_tables) && !empty($upload_tables)) foreach($upload_tables as $field) {
+					Symphony::Database()->query(sprintf(
+						"UPDATE tbl_entries_data_%d SET file = substring_index(file, '/', -1)",
+						$field
+					));
 				}
 			}
 		}

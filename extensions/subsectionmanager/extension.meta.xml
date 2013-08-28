@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="subsectionmanager" status="deprecated" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+<extension id="subsectionmanager" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>Subsection Manager</name>
 	<description>Subsection management for Symphony.</description>
 	<repo type="github">https://github.com/hananils/subsectionmanager</repo>
@@ -19,6 +19,18 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="3.5.1" date="2013-07-23" min="2.3.3">
+			- Remove jQuery migration plugin
+		</release>
+		<release version="3.5" date="2013-07-23" min="2.3.3">
+			- Remove Subsection Tabs
+		</release>
+		<release version="3.1.1" date="2013-07-04" min="2.3.3">
+			- Bug fix (thanks, Alexander)
+		</release>
+		<release version="3.1" date="2013-07-03" min="2.3.3">
+			- Symphony 2.3.3 compatibility – this change is not backwards-compatible (thanks, Alexander)
+		</release>
 		<release version="3.0" date="2013-03-22" min="2.3">
 			- Fix uninstaller
 		</release>

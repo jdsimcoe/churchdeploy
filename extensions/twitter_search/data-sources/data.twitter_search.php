@@ -16,7 +16,7 @@ Class datasourcetwitter_search extends Datasource{
 
 	public function about(){
 		return array(
-			'name' => 'Twitter Search'
+			'name' => 'Twitter search'
 		);
 	}
 

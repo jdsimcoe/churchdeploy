@@ -7,7 +7,8 @@
 	 * Symphony core interactions
 	 */
 	$(document).ready(function() {
-		var html = $('html').addClass('active'),
+		var win = $(window),
+			html = $('html').addClass('active'),
 			body = html.find('body'),
 			wrapper = html.find('#wrapper'),
 			header = wrapper.find('#header'),
@@ -18,6 +19,8 @@
 			context = wrapper.find('#context'),
 			contents = wrapper.find('#contents'),
 			form = contents.find('> form'),
+			columnPrimary = form.find('.primary'),
+			columnSecondary = form.find('.secondary'),
 			user = session.find('li:first a'),
 			pagination = contents.find('ul.page');
 
@@ -63,12 +66,14 @@
 			return false;
 		};
 
+
+
 		// Navigation sizing
-		$(window).on('resize.admin nav.admin', function(event) {
+		win.on('resize.admin nav.admin', function(event) {
 			var width = navContent.width() + navStructure.width() + 20;
 
 			// Compact mode
-			if(width > $(window).width()) {
+			if(width > win.width()) {
 				nav.removeClass('wide');
 			}
 
@@ -76,34 +81,42 @@
 			else {
 				nav.addClass('wide');
 			}
-		}).trigger('nav.admin');
+		});
 
 		// Accessible navigation
 		nav.on('focus.admin blur.admin', 'a', function() {
-			$(this).parents('li').eq(1).toggleClass('current');
-		});
-
-		// Notifier sizing
-		$(window).on('resize.admin', function(event) {
-			header.find('.notifier').trigger('resize.notify');
+			$(this).closest('li').toggleClass('current');
 		});
 
 		// Table sizing
-		$(window).on('resize.admin table.admin', function(event) {
+		win.on('resize.admin table.admin', function(event) {
 			var table = $('table:first');
 
 			// Fix table size, if width exceeds the visibile viewport area.
-			if(table.width() > $('html').width()){
+			if (table.width() > $('html').width()){
 				table.addClass('fixed');
 			}
 			else {
 				table.removeClass('fixed');
 			}
-		}).trigger('table.admin');
+		});
 
-		// Focus first text-input or textarea when creating entries
-		if(Symphony.Context.get('env') != null && (Symphony.Context.get('env')[0] == 'new' || Symphony.Context.get('env').page == 'new')) {
-			contents.find('input[type="text"], textarea').first().focus();
+		// trigger resize on load only
+		win.on('load', function () {
+			// Fire resize manually at this point
+			win.trigger('nav.admin').trigger('table.admin');
+
+			// Focus first text-input or textarea when creating entries
+			if(Symphony.Context.get('env') != null && (Symphony.Context.get('env')[0] == 'new' || Symphony.Context.get('env').page == 'new')) {
+				contents.find('input[type="text"], textarea').first().focus();
+			}
+		});
+
+
+		// Hide empty secondary column
+		if(columnSecondary.children(':visible').length == 0) {
+			columnSecondary.addClass('irrelevant');
+			columnPrimary.removeClass('column');
 		}
 
 	/*--------------------------------------------------------------------------
@@ -121,6 +134,11 @@
 
 		// Notify
 		header.symphonyNotify();
+
+		// Notifier sizing
+		win.on('resize.admin', function(event) {
+			header.find('.notifier').trigger('resize.notify');
+		});
 
 		// Drawers
 		wrapper.find('div.drawer').symphonyDrawer();
@@ -176,6 +194,7 @@
 	--------------------------------------------------------------------------*/
 
 		// Duplicators
+
 		contents.find('.filters-duplicator').symphonyDuplicator();
 
 		// Highlight instances with the same location when ordering fields
@@ -290,7 +309,7 @@
 
 			// Validate page number
 			pageform.on('submit.admin', function(event) {
-				if(pagegoto.val() > pagegoto.attr('data-max')) {
+				if(parseInt(pagegoto.val()) > parseInt(pagegoto.attr('data-max'))) {
 					pageform.addClass('invalid');
 					return false;
 				}
@@ -398,17 +417,17 @@
 			});
 
 			// Field legend
-			var fieldLegend = contents.find('#fields legend'),
+			var fieldLegend = contents.find('#fields > legend'),
 				fieldExpand = $('<a />', {
-					class: 'expand',
-					text: Symphony.Language.get('Expand all fields')
+					'class': 'expand',
+					'text': Symphony.Language.get('Expand all fields')
 				}),
 				fieldCollapse = $('<a />', {
-					class: 'collapse',
-					text: Symphony.Language.get('Collapse all fields')
+					'class': 'collapse',
+					'text': Symphony.Language.get('Collapse all fields')
 				}),
 				fieldToggle = $('<p />', {
-					class: 'help toggle'
+					'class': 'help toggle'
 				}).append(fieldExpand).append('<br />').append(fieldCollapse),
 				fieldLegendTop, fieldToggleTop;
 
@@ -433,7 +452,7 @@
 			});
 
 			// Toggle fields
-			fieldToggle.on('click.admin', 'p.help.toggle a', function toggleFields(event) {
+			fieldToggle.on('click.admin', 'a.expand, a.collapse', function toggleFields(event) {
 				var control = $(this),
 					fields = contents.find('#fields-duplicator > .instance');
 
@@ -560,22 +579,24 @@
 				var current = dsNameChangeCount = dsNameChangeCount + 1,
 					value = dsName.val();
 
-				setTimeout(function fetchDsHandle() {
-					if(dsNameChangeCount == current) {
-						$.ajax({
-							type: 'GET',
-							data: { 'string': value },
-							dataType: 'json',
-							url: Symphony.Context.get('root') + '/symphony/ajax/handle/',
-							success: function(result) {
-								if(dsNameChangeCount == current) {
-									dsName.data('handle', result);
-									dsParams.trigger('update.admin');
+				if (!!value) {
+					setTimeout(function fetchDsHandle(dsNameChangeCount, current, dsName, dsParams) {
+						if(dsNameChangeCount == current) {
+							$.ajax({
+								type: 'GET',
+								data: { 'string': value },
+								dataType: 'json',
+								url: Symphony.Context.get('root') + '/symphony/ajax/handle/',
+								success: function(result) {
+									if(dsNameChangeCount == current) {
+										dsName.data('handle', result);
+										dsParams.trigger('update.admin');
+									}
 								}
-							}
-						});
-					}
-				}, 500);
+							});
+						}
+					}, 500, dsNameChangeCount, current, dsName, dsParams);
+				}
 			});
 
 			// Update output parameters
@@ -601,20 +622,22 @@
 			// Data source manager options
 			contents.find('select.filtered > optgroup').each(function() {
 				var optgroup = $(this),
-					select = optgroup.parents('select'),
+					select = optgroup.closest('select'),
 					label = optgroup.attr('label'),
 					options = optgroup.remove().find('option').addClass('optgroup');
-
-				// Fix for Webkit browsers to initially show the options
-				if (select.attr('multiple')) {
-					select.scrollTop(0);
-				}
 
 				// Show only relevant options based on context
 				$('#ds-context').on('change.admin', function() {
 					if($(this).find('option:selected').text() == label) {
 						select.find('option.optgroup').remove();
 						select.append(options.clone(true));
+					}
+				});
+
+				win.on('load', function () {
+					// Fix for Webkit browsers to initially show the options
+					if (select.attr('multiple')) {
+						select.scrollTop(0);
 					}
 				});
 			});
@@ -672,7 +695,7 @@
 			});
 
 			// Enable parameter suggestions
-			contents.find('.duplicator:has(.filters-duplicator)').symphonySuggestions();
+			contents.find('.duplicator:has(.suggestable)').symphonySuggestions();
 		}
 
 	/*--------------------------------------------------------------------------

@@ -74,13 +74,6 @@
 					'page' => '/frontend/',
 					'delegate' => 'DataSourceEntriesBuilt',
 					'callback' => '__prepareSubsection'
-				),
-
-				// Subsection Tabs
-				array(
-					'page' => '/publish/',
-					'delegate' => 'Delete',
-					'callback' => '__deleteTabs'
 				)
 			);
 		}
@@ -241,16 +234,7 @@
 					WHERE t2.`element_name` = '{$subsection}'
 					{$section}
 					AND t1.`field_id` = t2.`id`
-					LIMIT 1)
-				UNION
-				(SELECT t1.`subsection_id`, t1.field_id
-					FROM `tbl_fields_subsectiontabs` AS t1
-					INNER JOIN `tbl_fields` AS t2
-					WHERE t2.`element_name` = '{$subsection}'
-					{$section}
-					AND t1.`field_id` = t2.`id`
-					LIMIT 1)
-				LIMIT 1"
+					LIMIT 1)"
 			);
 
 			// Get subfield id
@@ -333,38 +317,6 @@
 		}
 
 		/**
-		 * Delete tab entries, when parent entry is deleted
-		 *
-		 * @param object $context
-		 */
-		public function __deleteTabs($context) {
-
-			// Get Subsection Tab field
-			$callback = Symphony::Engine()->getPageCallback();
-			$section_id = SectionManager::fetchIDFromHandle($callback['context']['section_handle']);
-			$field_id = Symphony::Database()->fetchCol('id', "
-				SELECT `id`
-				FROM `tbl_fields`
-				WHERE `type` = 'subsectiontabs'
-				AND `parent_section` = '$section_id'
-			");
-
-			// Section with Tabs
-			if($field_id) {
-				$relation_id = Symphony::Database()->fetchCol('relation_id', "
-					SELECT `relation_id`
-					FROM sym_entries_data_" . $field_id[0] . "
-					WHERE `entry_id` IN(" . implode(',', $context['entry_id']) . ")
-				");
-
-				// Delete existing tabs
-				if(!empty($relation_id)) {
-					EntryManager::delete($relation_id);
-				}
-			}
-		}
-
-		/**
 		 * @see http://symphony-cms.com/learn/api/2.3/toolkit/extension/#install
 		 */
 		public function install() {
@@ -389,18 +341,6 @@
 					`show_preview` tinyint(1) default '0',
 					`recursion_levels` tinyint DEFAULT '0',
 					PRIMARY KEY	 (`id`),
-					KEY `field_id` (`field_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
-			);
-
-			// Create Subsection Tabs
-			$status[] = Symphony::Database()->query(
-				"CREATE TABLE IF NOT EXISTS `tbl_fields_subsectiontabs` (
-					`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-					`field_id` int(11) unsigned NOT NULL,
-					`subsection_id` varchar(255) NOT NULL,
-					`static_tabs` varchar(255) DEFAULT NULL,
-					PRIMARY KEY (`id`),
 					KEY `field_id` (`field_id`)
 				) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;"
 			);
@@ -621,7 +561,7 @@
 				Symphony::Database()->query("DELETE FROM `tbl_fields_stage` WHERE `context` = 'subsectionmanager'");
 				Symphony::Database()->query("DELETE FROM `tbl_fields_stage_sorting` WHERE `context` = 'subsectionmanager'");
 			}
-
+			
 		/*-----------------------------------------------------------------------*/
 
 			// Report status

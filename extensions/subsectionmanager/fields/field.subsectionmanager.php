@@ -583,14 +583,14 @@
 			$duplicator->appendChild($selected);
 
 			// Append item template
-			$item = new XMLElement('li', 
+			$item = new XMLElement('li',
 				'<header>
 					<strong>' . __('New item') . '</strong>
 					<span>' . __('Please fill out the form below') . '</span>
 				</header>
 				<div class="content">
 					<iframe></iframe>
-				</div>', 
+				</div>',
 				array(
 					'class' => 'template',
 					'data-type' => 'subsection'
@@ -712,7 +712,7 @@
 				}
 
 				// Create item
-				$item = new XMLElement('item', null, array('id' => $entry_id));
+				$item = new XMLElement('item', null, array('id' => $entry_id, 'creation-date' => $entry->get('creation_date')));
 				$subsection->appendChild($item);
 
 				// Process entry for Data Source

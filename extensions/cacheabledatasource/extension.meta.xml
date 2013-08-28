@@ -6,7 +6,7 @@
 
 	<description lang="en">Improve page performance by caching data source output XML.</description>
 
-	<url type="repo">https://github.com/nickdunn/cacheabledatasource</url>
+	<url type="repo">https://github.com/symphonists/cacheabledatasource</url>
 	
 	<types>
 		<type>Performance</type>
@@ -14,8 +14,10 @@
 	
 	<authors>
 		<author>
+          		<name github="symphonists" symphony="community">Symphony Community</name>
+    		</author>
+		<author>
 			<name github="nickdunn" symphony="nickdunn" twitter="nickdunn">Nick Dunn</name>
-			<email>nick@nick-dunn.co.uk</email>
 			<website>http://nick-dunn.co.uk</website>
 		</author>
 	</authors>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="logsdevkit" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Logs DevKit</name>
+	<description>View your Symphony logs</description>
+	<repo type="github">https://github.com/symphonists/logsdevkit</repo>
+	<url type="discuss">http://symphony-cms.com/discuss/thread/24448/</url>
+	<types>
+		<type>Interface</type>
+	</types>
+	<authors>
+		<author>
+			<name github="symphonists" symphony="community">Symphony Community</name>
+		</author>
+		<author>
+			<name github="rowan-lewis" symphony="buzzomatic">Rowan Lewis</name>
+			<website>http://nbsp.io/</website>
+		</author>
+	</authors>
+	<media>
+		<item type="image" url="http://symphonyextensions.com/rowan-lewis/logsdevkit/media/logsdevkit.png">Logs DevKit: View your Symphony logs</item>
+	</media>
+	<releases>
+		<release version="1.1" date="2012-06-05" min="2.3">
+			- Update for Symphony 2.3
+			- Tolerate different date formats to correctly output logs
+		</release>
+		<release version="1.0.3" date="2010-01-07" min="2.0.4" max="2.2.5" />
+	</releases>
+</extension>

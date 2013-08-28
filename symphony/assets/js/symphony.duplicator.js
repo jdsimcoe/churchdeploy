@@ -81,7 +81,7 @@
 
 				// Check if duplicator frame exists
 				if(duplicator.length == 0) {
-					duplicator = $('<div class="frame" />').insertBefore(list).prepend(list);
+					duplicator = $('<div />').attr('class','frame').insertBefore(list).prepend(list);
 				}
 			}
 
@@ -179,7 +179,7 @@
 					selector.find('option[value="' + instance.attr('data-type') + '"]').attr('disabled', true);
 
 					// Preselect first available instance
-					selector.find('option').attr('selected', false).filter(':not(:disabled):first').attr('selected', true);
+					selector.find('option').prop('selected', false).filter(':not(:disabled):first').prop('selected', true);
 
 					// All selected
 					if(selector.find('option:not(:disabled)').length == 0) {
@@ -198,7 +198,7 @@
 
 					// Preselect instance if it's the only active one
 					if(selector.find('option:not(:disabled)').length == 1) {
-						option.attr('selected', true);
+						option.prop('selected', true);
 					}
 				}
 			});
@@ -234,8 +234,8 @@
 			headers.each(function wrapContent() {
 				var header = $(this);
 
-				if(header.next('.content').length == 0) {
-					header.nextAll().wrapAll('<div class="content" />');
+				if (!header.next('.content').length) {
+					header.nextAll().wrapAll( $('<div />').attr('class','content') );
 				}
 			});
 
@@ -246,10 +246,11 @@
 				apply.appendTo(duplicator);
 
 				// Populate selector
-				templates.each(function createTemplates() {
+				templates.detach().each(function createTemplates() {
 					var template = $(this),
-						title = template.find(settings.headers).attr('data-name') || template.find(settings.headers).text(),
-						value = template.attr('data-type');
+						title = $.trim(template.find(settings.headers).attr('data-name')) 
+								|| $.trim(template.find(settings.headers).text()),
+						value = $.trim(template.attr('data-type'));
 
 					template.trigger('constructstart.duplicator');
 
@@ -267,12 +268,12 @@
 
 					// Check uniqueness
 					template.trigger('constructstop.duplicator');
-				}).removeClass('template').addClass('instance').detach();
+				}).removeClass('template').addClass('instance');
 			}
 
 			// Select default
 			if(settings.preselect != false) {
-				selector.find('option[value="' + settings.preselect + '"]').attr('selected', true);
+				selector.find('option[value="' + settings.preselect + '"]').prop('selected', true);
 			}
 
 			// Single template
@@ -289,7 +290,11 @@
 			// Destructable interface
 			if(settings.destructable === true) {
 				duplicator.addClass('destructable');
-				headers.append('<a class="destructor">' + (list.attr('data-remove') || Symphony.Language.get('Remove item')) + '</a>');
+				headers.append(
+						$('<a />')
+							.attr('class', 'destructor')
+							.text(list.attr('data-remove') || Symphony.Language.get('Remove item'))
+						);
 			}
 
 			// Collapsible interface

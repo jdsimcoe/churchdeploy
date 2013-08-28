@@ -17,10 +17,8 @@
 
 ## Installation
 
-1. Upload the 'textboxfield' folder in this archive to your Symphony
-   'extensions' folder.
+1. Upload `/textboxfield` folder to your Symphony `/extensions` folder.
 
-2. Enable it by selecting the "Field: Text Box", choose Enable from the
-   with-selected menu, then click Apply.
+2. Install the field by selecting the "Field: Text Box" on the System -> Extensions page, choose Enable from the menu then click Apply.
 
 3. You can now add the "Text Box" field to your sections.

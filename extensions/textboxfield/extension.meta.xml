@@ -14,6 +14,10 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="2.3.3" date="2013-07-09" min="2.3.2">
+			- Add class to the filter prefixes on the DSE for Symphony 2.3.3 compatibility
+			- Add Polish translation. Thanks @idea07
+		</release>
 		<release version="2.3.2" date="2013-06-04" min="2.3.2">
 			- Add support for `ImportableField` and `ExportableField` interfaces
 			- Fix grouping output for field. Thanks @PascalPiche

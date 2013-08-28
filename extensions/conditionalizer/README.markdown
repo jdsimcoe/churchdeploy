@@ -1,8 +1,8 @@
 # Conditionalizer
 
-- Version: 1.2.2
+- Version: 1.3
 - Author: Marcin Konicki (http://ahwayakchih.neoni.net)
-- Build Date: 11 July 2012
+- Build Date: 24 August 2013
 - Requirements: Symphony version 2.3 or later.
 
 
@@ -36,6 +36,7 @@ Conditionalizer field can also be used to minimize number of SQL queries, becaus
 
 ## Changelog
 
+- **1.3** Added "matches" and "matches not" operands (thanks to bzerangue for asking about validating for numeric values :).
 - **1.2.2** Fixed crash error reported by bzerangue.
 - **1.2.1** Fixed handling of whitespace inside values used in expression. Expression input fields are now textareas. Shows nice error box after conditions were not met for saving an entry.
 - **1.2** Update for Symphony 2.3. This drops compatibility with Symphony 2.2. Changed name from `filterfield` to `conditionalizer`. Fields are not required to set conditions for data-source. Conditions can be set for any type of data-source, e.g., Dynamic XML.
@@ -73,7 +74,9 @@ SELECTOR can be "value of", "any of" or "all of".
 
 VALUES is a comma separated list of values. Each of them can be either literal value, {$param} or sub expression. Every VALUES has to be wrapped with parenthesis. It can be empty, but parenthesis is required.
 
-OPERAND can be "is", "is not", "is in" or "is not in".
+OPERAND can be "is", "is not", "is in", "is not in", "matches" or "matches not".
+
+In case of "matches" and "matches not" operands, operand value has to be a regular expression (php.net/manual/en/book.pcre.php), but without starting and ending characters (usually "/") and modifiers.
 
 
 ## Examples of filtering field's value when publishing an entry
@@ -118,3 +121,6 @@ Allow data source to execute only when any of values found in data source genera
 
     (if any of ({$ds-names}) is not ()), yes
 
+Allow data source to execute only when any of values found in data source generated parameter is a numeric value:
+
+    (if any of ({$ds-names}) matches (^\d+$))
