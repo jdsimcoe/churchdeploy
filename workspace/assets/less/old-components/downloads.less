@@ -1,0 +1,57 @@
+
+.column-full-width {
+
+  .component-downloads {
+
+    .entry {
+      background: #eee;
+      padding-left: @base * 2;
+    }
+  }
+}
+
+.column-right {
+
+  > .component-downloads {
+
+    .entry {
+      background: @color-gray-accent;
+      padding: 0 20px;
+      border: none;
+      margin: 0;
+      position: relative;
+
+      a {
+        border: none;
+        background: @color-gray-accent;
+        padding: 30px 0;
+        border-bottom: 1px solid darken(@color-gray-accent, 20%);
+        color: @color-body-text;
+        font-size: 14px;
+
+        &:hover {
+          color: @color-accent;
+          border-bottom: 1px solid darken(@color-gray-accent, 20%);
+        }
+      }
+
+      &.even {
+        background: @color-gray-accent;
+      }
+
+      &.last {
+
+        a {
+          border-bottom: none;
+        }
+      }
+
+      .edit {
+        .edit-defaults;
+        top: @base;
+        right: @base;
+      }
+    }
+
+  }
+}

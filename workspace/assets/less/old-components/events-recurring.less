@@ -1,0 +1,70 @@
+
+.component-events-recurring {
+
+  margin-bottom: @base * 2;
+
+  ul {
+    list-style: none;
+    list-style-type: none;
+    margin: 0;
+    background: #E9E9E9;
+    padding: 15px;
+
+
+    li {
+      list-style: none;
+      list-style-type: none;
+
+      .edit {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+
+    .entry {
+      border-bottom: 1px solid #ccc;
+      padding: @base * 2 0 @base * 2 @base;
+      margin: 0;
+      position: relative;
+
+      &.first {
+        padding-top: 5px;
+      }
+
+      &.last {
+        border-bottom: none;
+        padding-bottom: 5px;
+      }
+
+      a {
+        .title {
+          .body-text-serif;
+          color: #303030;
+          margin-bottom: 0;
+        }
+
+        .frequency {
+          .small-grey-text;
+          margin: 0;
+          text-transform: none;
+        }
+
+        &:hover {
+
+          .frequency,
+          .title {
+            color: @color-accent;
+          }
+        }
+      }
+
+      .edit {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+  }
+}
+

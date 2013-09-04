@@ -1,0 +1,71 @@
+.component-events {
+	
+	.header {
+		margin-bottom: 0;
+	}
+	
+	.date {
+		font-size: 18px;
+		margin-top: 0;
+	}
+	
+	@month-height: 16px;
+	@day-height: 32px;
+	@calendar-height: @month-height + @day-height;
+	@calendar-width: @calendar-height;
+	@calendar-padding: @base * 1.5;
+	
+	.events {
+		.media {
+			position: relative;
+		
+			.date {
+				font-family: @font-family-sans-serif;
+				width: @calendar-width;
+				text-align: center;
+				position: absolute;
+				height: @calendar-height;
+				left: 5px;
+				top: 10px;
+
+				.month {
+					background: @color-accent;
+					color: @color-white;
+					font-size: 12px;
+					letter-spacing: 1px;
+					text-transform: uppercase;
+					line-height: @month-height;
+					height: @month-height;
+				}
+
+				.day {
+					background: darken(@color-white, 3%);
+					font-size: 26px;
+					color: @color-body-text;
+					line-height: @day-height;
+					height: @day-height;
+				}
+			}
+		
+			.media-body {
+				padding-left: 65px;
+		
+				h4 {
+					padding-top: 10px;
+				}
+			
+				.media {
+					margin-top: 0;
+				
+					p {
+						margin: 0 0 5px 0;
+						padding: 0;
+					}
+				}
+			}
+		
+		
+		}
+	}
+
+}

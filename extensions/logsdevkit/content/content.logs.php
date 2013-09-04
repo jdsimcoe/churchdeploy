@@ -64,7 +64,7 @@
 
 		protected function buildContent($wrapper) {
 			$this->addStylesheetToHead(URL . '/extensions/logsdevkit/assets/devkit.logs.css', 'screen');
-			$this->addStylesheetToHead(URL . '/workspace/assets/css/devkit-override.css', 'screen');
+			$this->addStylesheetToHead(URL . '/workspace/assets/css/devkit_css_override.css', 'screen');
 
 			if (array_key_exists($this->_view, $this->_files)) {
 				$table = new XMLElement('table');
