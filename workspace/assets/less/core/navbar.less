@@ -1,0 +1,14 @@
+@navbar-height: 75px;
+@navbar-margin-bottom: 0;
+@navbar-default-bg: @brand-primary;
+@navbar-default-color: lighten(@color-black, 20%);
+@navbar-default-link-color: lighten(@brand-primary, 10%);
+@navbar-default-brand-color: darken(@brand-primary, 15%);
+
+.navbar {
+  border: none;
+
+  &.photo {
+    @navbar-default-color: @color-white;
+  }
+}

@@ -40,11 +40,9 @@ module.exports = function (grunt) {
       },
       dist: {
         src : [
-          'workspace/bootstrap/assets/js/jquery.js',
-          'workspace/bootstrap/dist/js/bootstrap.min.js',
-          'workspace/js/responsimage.js',
-          'workspace/js/offcanvasmenu.js',
-          'workspace/js/audio.js',
+          'workspace/assets/bootstrap/assets/js/jquery.js',
+          'workspace/assets/js/responsimage.js',
+          'workspace/assets/bootstrap/dist/js/bootstrap.min.js',
           'workspace/themes/active/js/main.js'],
         dest: 'workspace/themes/active/js/application.js'
       }
@@ -61,7 +59,7 @@ module.exports = function (grunt) {
       },
       jquery: {
         files: {
-          'workspace/themes/active/js/jquery.min.js': ['workspace/bootstrap/assets/js/jquery.js']
+          'workspace/themes/active/js/jquery.min.js': ['workspace/assets/bootstrap/assets/js/jquery.js']
         }
       }
     },

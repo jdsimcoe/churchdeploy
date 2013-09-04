@@ -1,0 +1,43 @@
+/* font-face */
+@font-face {
+  font-family: "Social";
+  src: url("/workspace/assets/fonts/social.eot");
+  src: url("/workspace/assets/fonts/social.eot?#iefix") format("embedded-opentype"), url("/workspace/assets/fonts/social.woff") format("woff"), url("/workspace/fonts/social.ttf") format("truetype"), url("/workspace/assets/fonts/social.svg#Social") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* global foundicon styles */
+[class*="icon-social-"] {
+  display: inline;
+  width: auto;
+  height: auto;
+  line-height: inherit;
+  vertical-align: baseline;
+  background-image: none;
+  background-position: 0 0;
+  background-repeat: repeat;
+}
+
+[class*="icon-social-"]:before {
+  font-family: "Social";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+}
+
+.icon-social-churchdeploy {
+  font-size: 1.4em;
+  position: relative;
+  top: 0.08em;
+}
+
+/* icons */
+
+.icon-social-twitter:before                         { content: "\e001"; }
+.icon-social-facebook:before                        { content: "\e002"; }
+.icon-social-github:before                          { content: "\e003"; }
+.icon-social-spotify:before                         { content: "\e004"; }
+.icon-social-vimeo:before                           { content: "\e005"; }
+.icon-social-youtube:before                         { content: "\e006"; }
+.icon-social-churchdeploy:before                    { content: "\e007"; }
