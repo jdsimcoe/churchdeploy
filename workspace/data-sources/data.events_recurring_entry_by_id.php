@@ -18,11 +18,10 @@
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'yes';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$pt2}',
+				'system:id' => '{$pt2}',
 				'214' => 'no',
 		);
 		
@@ -30,7 +29,7 @@
 		public $dsParamINCLUDEDELEMENTS = array(
 				'name: unformatted',
 				'frequency: unformatted',
-				'description: unformatted',
+				'description: formatted',
 				'locations: name-formal: unformatted',
 				'locations: name-casual: unformatted',
 				'locations: address',
@@ -65,11 +64,11 @@
 			return array(
 				'name' => 'Events: Recurring: Entry by ID',
 				'author' => array(
-					'name' => 'Brian Zerangue',
-					'website' => 'http://churchdeploy.site',
-					'email' => 'brian.zerangue@gmail.com'),
-				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-28T06:00:52+00:00'
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek.dev',
+					'email' => 'jdsimcoe@gmail.com'),
+				'version' => 'Symphony 2.3.3',
+				'release-date' => '2013-09-11T21:21:53+00:00'
 			);
 		}
 
@@ -93,7 +92,7 @@
 				FrontendPageNotFoundExceptionHandler::render($e);
 			}
 			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
+				$result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
 				return $result;
 			}
 
