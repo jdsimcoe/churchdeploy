@@ -17,7 +17,6 @@
 		public $dsParamSORT = 'system:id';
 		public $dsParamHTMLENCODE = 'yes';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -40,11 +39,11 @@
 			return array(
 				'name' => 'Verses: Entry by tag',
 				'author' => array(
-					'name' => 'Brian Zerangue',
-					'website' => 'http://churchdeploy.site',
-					'email' => 'brian.zerangue@gmail.com'),
-				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-24T10:56:25+00:00'
+					'name' => 'Jonathan Simcoe',
+					'website' => 'http://atheycreek.dev',
+					'email' => 'jdsimcoe@gmail.com'),
+				'version' => 'Symphony 2.3.3',
+				'release-date' => '2013-09-19T17:11:10+00:00'
 			);
 		}
 
@@ -68,7 +67,7 @@
 				FrontendPageNotFoundExceptionHandler::render($e);
 			}
 			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
+				$result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
 				return $result;
 			}
 
