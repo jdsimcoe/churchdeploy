@@ -28,7 +28,8 @@
 				'member: email',
 				'member: about: formatted',
 				'member: phone-number',
-				'member: anonymize'
+				'member: anonymize',
+				'role: role: unformatted'
 		);
 		
 
@@ -44,8 +45,8 @@
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-08-13T23:18:47+00:00'
+				'version' => 'Symphony 2.3.3',
+				'release-date' => '2013-09-19T16:43:11+00:00'
 			);
 		}
 
@@ -69,7 +70,7 @@
 				FrontendPageNotFoundExceptionHandler::render($e);
 			}
 			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
+				$result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
 				return $result;
 			}
 
