@@ -5,6 +5,7 @@
 	Class datasourceverses_entry_by_id extends SectionDatasource {
 
 		public $dsParamROOTELEMENT = 'verses-entry-by-id';
+		public $dsParamConditionalizer = '(if value of ({$pt1}) is (events))';
 		public $dsParamORDER = 'desc';
 		public $dsParamPAGINATERESULTS = 'yes';
 		public $dsParamLIMIT = '1';
@@ -18,7 +19,7 @@
 		
 
 		public $dsParamFILTERS = array(
-				'id' => '{$ds-events-entry-by-id-preview},{$ds-events-recurring-entry-by-id},{$ds-events-entry-by-id.verses}',
+				'system:id' => '{$ds-events-entry-by-id-preview},{$ds-events-recurring-entry-by-id},{$ds-events-entry-by-id.verses}',
 				'211' => 'no',
 		);
 		
@@ -40,8 +41,8 @@
 					'name' => 'Jonathan Simcoe',
 					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-08-20T20:29:47+00:00'
+				'version' => 'Symphony 2.3.3',
+				'release-date' => '2013-09-27T23:37:57+00:00'
 			);
 		}
 
@@ -65,7 +66,7 @@
 				FrontendPageNotFoundExceptionHandler::render($e);
 			}
 			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
+				$result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
 				return $result;
 			}
 
