@@ -12,10 +12,12 @@
   }
 
   .btn-large {
-    .btn-bordered(@color-border: darken(@color-events, 20%));
+    .btn-bordered(@color-border: @color-events);
     margin-bottom: 40px;
+    padding: 0;
 
     small {
+      color: darken(@color-events, 20%);
       font-family: @font-family-serif;
       font-size: 1.1em;
       font-style: italic;
@@ -43,9 +45,10 @@
     }
 
     &:hover {
+      border-color: @color-events;
 
       h4 {
-        color: darken(@color-events, 50%);
+        color: @color-accent;
       }
     }
 

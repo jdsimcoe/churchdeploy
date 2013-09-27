@@ -2,22 +2,19 @@
 // ----------------------------------------------------------
 
 .announce {
-  //variables
-  @color-announce: darken(@color-white, 40%);
 
-  // call Horizon
-  .horizon(@color-background: @color-announce);
-
-  // ANNOUNCE styles
-  clear: both;
-  margin: 0;
-  padding: 0;
-
+  .row {
+    margin: 0;
+  }
   // button styles
+
+  .col-lg-6 {
+    padding: 10em 0;
+  }
 
   .btn-large {
     .btn-bordered(@color-border: @color-white);
-    margin: 160px auto;
+    margin: 0 auto;
     padding: 15px 0;
     width: 75%;
 
@@ -37,15 +34,6 @@
       margin: 0 0 15px 0;
       text-transform: none;
     }
-  }
-
-  [class*="announce-"] {
-    display: inline-block;
-    float: left;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    width: 50%;
   }
 
 

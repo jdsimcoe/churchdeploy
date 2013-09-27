@@ -12,7 +12,7 @@
       <h3>Upcoming Events</h3>
 <!--       <hr/> -->
       <div class="row">
-        <xsl:apply-templates select="/data/events-6-latest/entry" mode="home" />
+        <xsl:apply-templates select="/data/events-3-latest/entry" mode="home" />
       </div>
     </div>
   </div>
@@ -29,73 +29,67 @@
   </div>
 
   <div class="announce">
-    <div class="announce-1">
-      <xsl:attribute name="style">
-        <xsl:text>background:url('</xsl:text>
-        <xsl:text>/workspace/themes/active/img/announce-1.jpg</xsl:text>
-        <xsl:text>');</xsl:text>
-      </xsl:attribute>
-      <a href="/" class="btn btn-block btn-large">
-        <h3>Meetings</h3>
-        <p>
-          Our weekly gathering are<br/>
-          centered on time in the Scriptures.
-        </p>
-      </a>
-    </div>
-    <div class="announce-2">
-      <xsl:attribute name="style">
-        <xsl:text>background:url('</xsl:text>
-        <xsl:text>/workspace/themes/active/img/announce-2.jpg</xsl:text>
-        <xsl:text>');</xsl:text>
-      </xsl:attribute>
-      <a href="/" class="btn btn-block btn-large">
-        <h3>I'm New Here</h3>
-        <p>
-          Get introduced to Athey Creek<br/>
-          so you know what to expect when you visit.
-        </p>
-      </a>
-    </div>
-    <div class="announce-3">
-      <xsl:attribute name="style">
-        <xsl:text>background:url('</xsl:text>
-        <xsl:text>/workspace/themes/active/img/announce-3.jpg</xsl:text>
-        <xsl:text>');</xsl:text>
-      </xsl:attribute>
-      <a href="/" class="btn btn-block btn-large">
-        <h3>Home Groups</h3>
-        <p>
-          Seeking Jesus through communion,<br/>
-          prayer, meals, and fellowship.
-        </p>
-      </a>
-    </div>
-    <div class="announce-4">
-      <xsl:attribute name="style">
-        <xsl:text>background:url('</xsl:text>
-        <xsl:text>/workspace/themes/active/img/announce-4.jpg</xsl:text>
-        <xsl:text>');</xsl:text>
-      </xsl:attribute>
-      <a href="/" class="btn btn-block btn-large">
-        <h3>Servant Ministry</h3>
-        <p>
-          Serving the body of Christ<br/>
-          with our time, talent &amp; treasure.
-        </p>
-      </a>
+    <div class="row">
+      <div class="col-lg-6">
+        <xsl:attribute name="style">
+          <xsl:text>background:url('</xsl:text>
+          <xsl:text>/workspace/themes/active/img/announce-1.jpg</xsl:text>
+          <xsl:text>');</xsl:text>
+        </xsl:attribute>
+        <a href="/" class="btn btn-block btn-large">
+          <h3>Bullitt</h3>
+          <p>
+            One of the best movies of all time;<br/>
+            Steve McQueen is a beast!
+          </p>
+        </a>
+      </div>
+      <div class="col-lg-6">
+        <xsl:attribute name="style">
+          <xsl:text>background:url('</xsl:text>
+          <xsl:text>/workspace/themes/active/img/announce-2.jpg</xsl:text>
+          <xsl:text>');</xsl:text>
+        </xsl:attribute>
+        <a href="/" class="btn btn-block btn-large">
+          <h3>Servant Ministry</h3>
+          <p>
+            Serving the body of Christ<br/>
+            with our time, talent &amp; treasure.
+          </p>
+        </a>
+      </div>
     </div>
   </div>
+
+  <xsl:call-template name="home-groups"/>
 
   <xsl:call-template name="podcast"/>
 
 </xsl:template>
 
+<xsl:template name="home-groups">
+
+  <div class="home-groups">
+    <div class="content">
+      <div class="container">
+        <div class="center">
+          <i class="glyphicon glyphicon-home icon-medium"></i>
+        </div>
+      </div>
+      <h3>Home Groups</h3>
+      <p class="lead">The goal of our Home Groups is to faciliate people coming together in community and sharing Christ's work—deepening each other in truth.</p>
+      <p class="center">
+        <a href="{$root}/home-groups" class="btn btn-large">View Athey Home Groups</a>
+      </p>
+    </div>
+  </div>
+
+</xsl:template>
+
 <xsl:template name="podcast">
-  <div class="podcast">
+<!--   <div class="podcast">
     <div class="container">
       <h3>Official Podcasts</h3>
-<!--       <hr/> -->
       <div class="row">
         <div class="col-lg-4">
           <a href="{$main-podcast-audio}" target="_blank">
@@ -120,6 +114,23 @@
               <span class="btn btn-large">VIEW ON iTUNES</span>
             </div>
           </a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="podcast">
+    <div class="container">
+      <h3>Official Podcasts</h3>
+      <p class="lead">Podcasts are the easiest way to stay up-to-date with our teachings via audio or video from any of your devices:</p>
+      <div class="row">
+        <div class="col-lg-4">
+          <a href="{$main-podcast-audio}" target="_blank" class="btn btn-large btn-bordered">Audio Podcast</a>
+        </div>
+        <div class="col-lg-4">
+          <a href="{$main-podcast-video}" target="_blank" class="btn btn-large btn-bordered">Video Podcast</a>
+        </div>
+        <div class="col-lg-4">
+          <a href="{$main-podcast-video-hd}" target="_blank" class="btn btn-large btn-bordered">Video Podcast (HD)</a>
         </div>
       </div>
     </div>

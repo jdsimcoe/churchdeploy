@@ -1,0 +1,31 @@
+// Home Group area on Home Page
+// ----------------------------------------------------------
+
+.home-groups {
+
+  //variables
+  @color-podcast: @color-white;
+
+  // call Horizon
+  .horizon(@color-background: @color-podcast);
+
+  // Horizon overrides
+  background: url('/workspace/assets/img/hg.jpg') 0 50% no-repeat;
+  background-size: 200%;
+  padding: 0;
+
+  // clearing floats
+  clear: both;
+
+  .content {
+    background: fadeout(@color-white, 35%);
+    padding: 8em 2em;
+  }
+
+  // button styles
+  .btn-large {
+    .btn-bordered(@color-border: @color-white);
+    text-transform: uppercase;
+  }
+
+}

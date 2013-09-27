@@ -4,7 +4,7 @@
 
 <xsl:template name="nav-links">
 
-  <div class="navbar-header">
+  <div class="navbar-header center">
 
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
       <span class="sr-only">Toggle navigation</span>
@@ -12,7 +12,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="logo" href="{$root}"><i class="icon-full-outline icon-md"></i></a>
+    <a class="logo" href="{$root}"><i class="icon-full icon-md"></i></a>
 
   </div>
   <div class="collapse navbar-collapse navbar-ex1-collapse">

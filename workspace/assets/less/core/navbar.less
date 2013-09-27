@@ -1,4 +1,4 @@
-@navbar-height: 75px;
+@navbar-height: 140px;
 @navbar-margin-bottom: 0;
 @navbar-default-bg: @brand-primary;
 @navbar-default-color: lighten(@color-black, 20%);
@@ -10,5 +10,76 @@
 
   &.photo {
     @navbar-default-color: @color-white;
+  }
+
+  .logo {
+    color: @color-white;
+    font-size: 28px;
+    left: 30px;
+    position: relative;
+    text-shadow: none;
+
+    &:hover {
+      .opacity(0.75);
+    }
+  }
+
+  .navbar-nav {
+
+    li {
+
+      a {
+        color: @color-white;
+        font-family: @typekit-brandon;
+        font-size: 1em;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &:hover {
+          color: darken(@color-white, 20%);
+        }
+      }
+
+    }
+
+  }
+
+}
+
+.masthead {
+  @color-masthead: lighten(@color-black, 15%);
+
+  // call Horizon
+  .horizon(@color-background: @color-masthead);
+
+  .logo {
+    color: @color-white;
+    font-size: 35px;
+    left: 30px;
+    position: relative;
+    text-shadow: none;
+
+    &:hover {
+      .opacity(0.75);
+    }
+  }
+
+  .nav-pills {
+
+    li {
+
+      a {
+        color: @color-white;
+        font-family: @typekit-brandon;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &:hover {
+          color: darken(@color-white, 20%);
+        }
+      }
+
+    }
   }
 }
