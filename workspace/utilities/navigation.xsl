@@ -5,8 +5,25 @@
 <xsl:template name="nav-links">
 
   <div class="navbar-header center">
+    <xsl:if test="string-length(/data/tags-entries-by-tag/entry/image)">
+      <xsl:attribute name="style">
+        <xsl:text>background-image: url('</xsl:text>
+        <xsl:value-of select="$root"/>
+        <xsl:text>/workspace/uploads/images/leaderboards/</xsl:text>
+        <xsl:value-of select="/data/tags-entries-by-tag/entry/image/item/image/filename"/>
+        <xsl:text>');</xsl:text>
+        <xsl:choose>
+          <xsl:when test="/data/tags-entries-by-tag/entry/image/item/tile = 'Yes'">
+            <xsl:text>background-repeat:repeat;</xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>background-size:100%;</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+    </xsl:if>
 
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -15,24 +32,19 @@
     <a class="logo" href="{$root}"><i class="icon-full icon-md"></i></a>
 
   </div>
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
+  <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav navbar-right">
       <xsl:for-each select="/data/tags-all-entries/entry[ not(parent/item) and not(hide-from-header = 'Yes') ]">
         <xsl:call-template name="subnav-entry-new" />
       </xsl:for-each>
       <xsl:if test="$cookie-username">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="glyphicon glyphicon-wrench"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="/symphony/" target="_blank">Symphony</a></li>
-            <li><a href="?debug" target="_blank">Debug</a></li>
-            <li><a href="?logs" target="_blank">Logs</a></li>
-            <li><a href="?profile" target="_blank">Profile</a></li>
-            <li><a href="{$root}/symphony/logout/">Logout</a></li>
-          </ul>
-        </li>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/symphony/" target="_blank">Symphony</a></li>
+          <li><a href="?debug" target="_blank">Debug</a></li>
+          <li><a href="?logs" target="_blank">Logs</a></li>
+          <li><a href="?profile" target="_blank">Profile</a></li>
+          <li><a href="{$root}/symphony/logout/">Logout</a></li>
+        </ul>
       </xsl:if>
     </ul>
   </div>

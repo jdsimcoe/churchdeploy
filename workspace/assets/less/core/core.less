@@ -52,7 +52,7 @@ a {
   .box-shadow(none);
 
   &.btn-large {
-    .btn-bordered(@color-border: darken(@color-white, 25%););
+    .btn-bordered(@color-border: darken(@color-white, 25%));
   }
 }
 
@@ -97,7 +97,24 @@ a {
 // Main Classes
 // -------------------------------------------------
 
+.admin {
+  font-size: 1.2em;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 
+  .dropdown-toggle {
+    color: @color-white;
+    .opacity(0.5);
+
+    &:hover {
+      color: @color-white;
+      .opacity(0.4);
+    }
+  }
+
+
+}
 
 
 

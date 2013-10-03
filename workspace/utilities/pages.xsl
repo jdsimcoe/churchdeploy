@@ -10,7 +10,7 @@
         <i class="glyphicon-calendar icon-medium"></i>
       </div> -->
       <h3>Upcoming Events</h3>
-<!--       <hr/> -->
+      <!-- <hr/> -->
       <div class="row">
         <xsl:apply-templates select="/data/events-3-latest/entry" mode="home" />
       </div>
@@ -19,7 +19,7 @@
 
   <div class="teachings-home">
     <div class="container">
-<!--       <div class="center">
+    <!-- <div class="center">
         <i class="glyphicon-book icon-medium"></i>
       </div> -->
 
