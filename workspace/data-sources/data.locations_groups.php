@@ -47,7 +47,8 @@
 				'leaders: role: context: unformatted',
 				'leaders: role: description: unformatted',
 				'new',
-				'full'
+				'full',
+				'childcare'
 		);
 		
 
@@ -64,7 +65,7 @@
 					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.3',
-				'release-date' => '2013-10-04T17:55:02+00:00'
+				'release-date' => '2013-10-04T22:09:52+00:00'
 			);
 		}
 
