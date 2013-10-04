@@ -42,6 +42,7 @@
 
 		<xsl:call-template name="template-header-main" />
 		<body>
+<!-- 		<body data-spy="scroll" data-target=".hg-sidebar"> -->
 			<xsl:attribute name="class">
 				<xsl:text>pageid-</xsl:text>
 				<xsl:value-of select="$ds-tags-filtered.system-id"/>
