@@ -44,7 +44,6 @@ base_url: "../"
     <h3 id="overview-type-links">Typography and links</h3>
     <p>Bootstrap sets basic global display, typography, and link styles. Specifically, we:</p>
     <ul>
-      <li>Remove <code>margin</code> on the body</li>
       <li>Set <code>background-color: #fff;</code> on the <code>body</code></li>
       <li>Use the <code>@font-family-base</code>, <code>@font-size-base</code>, and <code>@line-height-base</code> attributes as our typographic base</li>
       <li>Set the global link color via <code>@link-color</code> and apply link underlines only on <code>:hover</code></li>
@@ -173,6 +172,7 @@ base_url: "../"
         </tbody>
       </table>
     </div>
+    <p>Grid classes apply to devices with screen widths greater than or equal to the breakpoint sizes, and override grid classes targeted at smaller devices. Therefore, applying any <code>.col-md-</code> class to an element will not only affect its styling on medium devices but also on large devices if a <code>.col-lg-</code> class is not present.</p>
 
     <h3 id="grid-example-basic">Example: Stacked-to-horizontal</h3>
     <p>Using a single set of <code>.col-md-*</code> grid classes, you can create a basic grid system that starts out stacked on mobile devices and tablet devices (the extra small to small range) before becoming horizontal on desktop (medium) devices.</p>
@@ -278,27 +278,27 @@ base_url: "../"
     <div class="bs-docs-grid">
       <div class="row show-grid">
         <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
-        <div class="col-xs-6 col-sm-6 col-md-4">.col-xs-6 .col-sm-6 .col-md-4</div>
+        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
       </div>
       <div class="row show-grid">
-        <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
-        <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
         <!-- Optional: clear the XS cols if their content doesn't match in height -->
         <div class="clearfix visible-xs"></div>
-        <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
       </div>
     </div>
 {% highlight html %}
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
-  <div class="col-xs-6 col-sm-6 col-md-4">.col-xs-6 .col-sm-6 .col-md-4</div>
+  <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
 </div>
 <div class="row">
-  <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
-  <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
+  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
   <!-- Optional: clear the XS cols if their content doesn't match in height -->
   <div class="clearfix visible-xs"></div>
-  <div class="col-xs-6 col-sm-4 col-md-4">.col-xs-6 .col-sm-4 .col-md-4</div>
+  <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
 </div>
 {% endhighlight %}
 
@@ -424,7 +424,7 @@ base_url: "../"
   // Then clear the floated columns
   .clearfix();
 
-  @media (min-width: @screen-small) {
+  @media (min-width: @screen-sm-min) {
     margin-left:  (@gutter / -2);
     margin-right: (@gutter / -2);
   }
@@ -462,7 +462,7 @@ base_url: "../"
   padding-right: (@gutter / 2);
 
   // Calculate width based on number of columns available
-  @media (min-width: @screen-small) {
+  @media (min-width: @screen-sm-min) {
     float: left;
     width: percentage((@columns / @grid-columns));
   }
@@ -470,17 +470,17 @@ base_url: "../"
 
 // Generate the small column offsets
 .make-sm-column-offset(@columns) {
-  @media (min-width: @screen-small) {
+  @media (min-width: @screen-sm-min) {
     margin-left: percentage((@columns / @grid-columns));
   }
 }
 .make-sm-column-push(@columns) {
-  @media (min-width: @screen-small) {
+  @media (min-width: @screen-sm-min) {
     left: percentage((@columns / @grid-columns));
   }
 }
 .make-sm-column-pull(@columns) {
-  @media (min-width: @screen-small) {
+  @media (min-width: @screen-sm-min) {
     right: percentage((@columns / @grid-columns));
   }
 }
@@ -495,7 +495,7 @@ base_url: "../"
   padding-right: (@gutter / 2);
 
   // Calculate width based on number of columns available
-  @media (min-width: @screen-medium) {
+  @media (min-width: @screen-md-min) {
     float: left;
     width: percentage((@columns / @grid-columns));
   }
@@ -503,17 +503,17 @@ base_url: "../"
 
 // Generate the medium column offsets
 .make-md-column-offset(@columns) {
-  @media (min-width: @screen-medium) {
+  @media (min-width: @screen-md-min) {
     margin-left: percentage((@columns / @grid-columns));
   }
 }
 .make-md-column-push(@columns) {
-  @media (min-width: @screen-medium) {
+  @media (min-width: @screen-md-min) {
     left: percentage((@columns / @grid-columns));
   }
 }
 .make-md-column-pull(@columns) {
-  @media (min-width: @screen-medium) {
+  @media (min-width: @screen-md-min) {
     right: percentage((@columns / @grid-columns));
   }
 }
@@ -528,7 +528,7 @@ base_url: "../"
   padding-right: (@gutter / 2);
 
   // Calculate width based on number of columns available
-  @media (min-width: @screen-large) {
+  @media (min-width: @screen-lg-min) {
     float: left;
     width: percentage((@columns / @grid-columns));
   }
@@ -536,17 +536,17 @@ base_url: "../"
 
 // Generate the large column offsets
 .make-lg-column-offset(@columns) {
-  @media (min-width: @screen-large) {
+  @media (min-width: @screen-lg-min) {
     margin-left: percentage((@columns / @grid-columns));
   }
 }
 .make-lg-column-push(@columns) {
-  @media (min-width: @screen-large) {
+  @media (min-width: @screen-lg-min) {
     left: percentage((@columns / @grid-columns));
   }
 }
 .make-lg-column-pull(@columns) {
-  @media (min-width: @screen-large) {
+  @media (min-width: @screen-lg-min) {
     right: percentage((@columns / @grid-columns));
   }
 }
@@ -587,7 +587,7 @@ base_url: "../"
 
     <!-- Headings -->
     <h2 id="type-headings">Headings</h2>
-    <p>All HTML headings, <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code> are available.</p>
+    <p>All HTML headings, <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code>, are available. <code>.h1</code> through <code>.h6</code> classes are also available, for when you want to match the font styling of a heading but still want your text to be displayed inline.</p>
     <div class="bs-example bs-example-type">
       <table class="table">
         <tbody>
@@ -1260,8 +1260,8 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     <div class="table-responsive">
       <table class="table table-bordered table-striped">
         <colgroup>
-          <col class="col-lg-1">
-          <col class="col-lg-7">
+          <col class="col-xs-1">
+          <col class="col-xs-7">
         </colgroup>
         <thead>
           <tr>
@@ -1797,14 +1797,14 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     <div class="bs-example">
       <form class="form-horizontal" role="form">
         <div class="form-group">
-          <label class="col-lg-2 control-label">Email</label>
-          <div class="col-lg-10">
+          <label class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
             <p class="form-control-static">email@example.com</p>
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-          <div class="col-lg-10">
+          <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
             <input type="password" class="form-control" id="inputPassword" placeholder="Password">
           </div>
         </div>
@@ -1813,14 +1813,14 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
 {% highlight html %}
 <form class="form-horizontal" role="form">
   <div class="form-group">
-    <label class="col-lg-2 control-label">Email</label>
-    <div class="col-lg-10">
+    <label class="col-sm-2 control-label">Email</label>
+    <div class="col-sm-10">
       <p class="form-control-static">email@example.com</p>
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-    <div class="col-lg-10">
+    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
       <input type="password" class="form-control" id="inputPassword" placeholder="Password">
     </div>
   </div>
@@ -1985,28 +1985,28 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     <div class="bs-example">
       <form role="form">
         <div class="row">
-          <div class="col-lg-2">
-            <input type="text" class="form-control" placeholder=".col-lg-2">
+          <div class="col-xs-2">
+            <input type="text" class="form-control" placeholder=".col-xs-2">
           </div>
-          <div class="col-lg-3">
-            <input type="text" class="form-control" placeholder=".col-lg-3">
+          <div class="col-xs-3">
+            <input type="text" class="form-control" placeholder=".col-xs-3">
           </div>
-          <div class="col-lg-4">
-            <input type="text" class="form-control" placeholder=".col-lg-4">
+          <div class="col-xs-4">
+            <input type="text" class="form-control" placeholder=".col-xs-4">
           </div>
         </div>
       </form>
     </div><!-- /.bs-example -->
 {% highlight html %}
 <div class="row">
-  <div class="col-lg-2">
-    <input type="text" class="form-control" placeholder=".col-lg-2">
+  <div class="col-xs-2">
+    <input type="text" class="form-control" placeholder=".col-xs-2">
   </div>
-  <div class="col-lg-3">
-    <input type="text" class="form-control" placeholder=".col-lg-3">
+  <div class="col-xs-3">
+    <input type="text" class="form-control" placeholder=".col-xs-3">
   </div>
-  <div class="col-lg-4">
-    <input type="text" class="form-control" placeholder=".col-lg-4">
+  <div class="col-xs-4">
+    <input type="text" class="form-control" placeholder=".col-xs-4">
   </div>
 </div>
 {% endhighlight %}
@@ -2570,52 +2570,52 @@ For example, <code>&lt;section&gt;</code> should be wrapped as inline.
     </div>
 
     <h3>Hidden on...</h3>
-    <p>Here, green checkmarks indicate the element <strong>is hidden</strong> in your current viewport.</p>
+    <p>Here, green checkmarks also indicate the element <strong>is hidden</strong> in your current viewport.</p>
     <div class="row responsive-utilities-test hidden-on">
       <div class="col-xs-6 col-sm-3">
-        <span class="visible-xs">Extra small</span>
-        <span class="hidden-xs">&#10004; Hidden on x-small</span>
+        <span class="hidden-xs">Extra small</span>
+        <span class="visible-xs">&#10004; Hidden on x-small</span>
       </div>
       <div class="col-xs-6 col-sm-3">
-        <span class="visible-sm">Small</span>
-        <span class="hidden-sm">&#10004; Hidden on small</span>
+        <span class="hidden-sm">Small</span>
+        <span class="visible-sm">&#10004; Hidden on small</span>
       </div>
       <div class="clearfix visible-xs"></div>
       <div class="col-xs-6 col-sm-3">
-        <span class="visible-md">Medium</span>
-        <span class="hidden-md">&#10004; Hidden on medium</span>
+        <span class="hidden-md">Medium</span>
+        <span class="visible-md">&#10004; Hidden on medium</span>
       </div>
       <div class="col-xs-6 col-sm-3">
-        <span class="visible-lg">Large</span>
-        <span class="hidden-lg">&#10004; Hidden on large</span>
+        <span class="hidden-lg">Large</span>
+        <span class="visible-lg">&#10004; Hidden on large</span>
       </div>
     </div>
     <div class="row responsive-utilities-test hidden-on">
       <div class="col-xs-6 col-sm-6">
-        <span class="visible-xs visible-sm">Extra small and small</span>
-        <span class="hidden-xs hidden-sm">&#10004; Hidden on x-small and small</span>
+        <span class="hidden-xs hidden-sm">Extra small and small</span>
+        <span class="visible-xs visible-sm">&#10004; Hidden on x-small and small</span>
       </div>
       <div class="col-xs-6 col-sm-6">
-        <span class="visible-md visible-lg">Medium and large</span>
-        <span class="hidden-md hidden-lg">&#10004; Hidden on medium and large</span>
-      </div>
-      <div class="clearfix visible-xs"></div>
-      <div class="col-xs-6 col-sm-6">
-        <span class="visible-xs visible-md">Extra small and medium</span>
-        <span class="hidden-xs hidden-md">&#10004; Hidden on x-small and medium</span>
-      </div>
-      <div class="col-xs-6 col-sm-6">
-        <span class="visible-sm visible-lg">Small and large</span>
-        <span class="hidden-sm hidden-lg">&#10004; Hidden on small and large</span>
+        <span class="hidden-md hidden-lg">Medium and large</span>
+        <span class="visible-md visible-lg">&#10004; Hidden on medium and large</span>
       </div>
       <div class="clearfix visible-xs"></div>
       <div class="col-xs-6 col-sm-6">
-        <span class="visible-xs visible-lg">Extra small and large</span>
-        <span class="hidden-xs hidden-lg">&#10004; Hidden on x-small and large</span>
+        <span class="hidden-xs hidden-md">Extra small and medium</span>
+        <span class="visible-xs visible-md">&#10004; Hidden on x-small and medium</span>
       </div>
       <div class="col-xs-6 col-sm-6">
-        <span class="visible-sm visible-md">Small and medium</span>
-        <span class="hidden-sm hidden-md">&#10004; Hidden on small and medium</span>
+        <span class="hidden-sm hidden-lg">Small and large</span>
+        <span class="visible-sm visible-lg">&#10004; Hidden on small and large</span>
+      </div>
+      <div class="clearfix visible-xs"></div>
+      <div class="col-xs-6 col-sm-6">
+        <span class="hidden-xs hidden-lg">Extra small and large</span>
+        <span class="visible-xs visible-lg">&#10004; Hidden on x-small and large</span>
+      </div>
+      <div class="col-xs-6 col-sm-6">
+        <span class="hidden-sm hidden-md">Small and medium</span>
+        <span class="visible-sm visible-md">&#10004; Hidden on small and medium</span>
       </div>
     </div>
 

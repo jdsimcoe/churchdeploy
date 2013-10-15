@@ -3,6 +3,7 @@
   <head>
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -17,18 +18,18 @@
 <link href="../dist/css/bootstrap.css" rel="stylesheet">
 
 <!-- Documentation extras -->
-<link href="../assets/css/docs.css" rel="stylesheet">
-<link href="../assets/css/pygments-manni.css" rel="stylesheet">
+<link href="../docs-assets/css/docs.css" rel="stylesheet">
+<link href="../docs-assets/css/pygments-manni.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-  <script src="../assets/js/html5shiv.js"></script>
-  <script src="../assets/js/respond.min.js"></script>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.6.2/html5shiv.js"></script>
+  <script src="../docs-assets/js/respond.min.js"></script>
 <![endif]-->
 
 <!-- Favicons -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-                               <link rel="shortcut icon" href="../assets/ico/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../docs-assets/ico/apple-touch-icon-144-precomposed.png">
+                               <link rel="shortcut icon" href="../docs-assets/ico/favicon.png">
 
 <script>
   var _gaq = _gaq || [];
@@ -43,7 +44,7 @@
 
   </head>
   <body>
-    <a class="sr-only" href="#content">Skip navigation</a>
+    <a class="sr-only" href="#content">Skip to main content</a>
 
     <!-- Docs master nav -->
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
@@ -779,9 +780,6 @@
         <input type="text" class="form-control" placeholder="@brand-info" data-var="@btn-info-bg">
         <label>@btn-info-border</label>
         <input type="text" class="form-control" placeholder="darken(@btn-info-bg, 5%)" data-var="@btn-info-border">
-        <h4>Button hover</h4>
-        <label>@btn-hover-color</label>
-        <input type="text" class="form-control" placeholder="@btn-default-color" data-var="@btn-hover-color">
       </div>
       <div class="col-md-6">
         <h4>Success</h4>
@@ -1064,10 +1062,10 @@
       <div class="col-md-4">
         <label>@table-cell-padding</label>
         <input type="text" class="form-control" placeholder="8px" data-var="@table-cell-padding">
-        <p>Default padding for <code>&lt;th&gt;</code>s and <code>&lt;td&gt;</code>s</p>
+        <p class="help-block">Default padding for <code>&lt;th&gt;</code>s and <code>&lt;td&gt;</code>s</p>
         <label>@table-condensed-cell-padding</label>
         <input type="text" class="form-control" placeholder="5px" data-var="@table-condensed-cell-padding">
-        <p>Default padding cells in <code>.table-condensed</code></p>
+        <p class="help-block">Default padding cells in <code>.table-condensed</code></p>
       </div>
       <div class="col-md-4">
         <label>@table-bg</label>
@@ -1332,17 +1330,17 @@
       <div class="col-md-4">
         <label>@badge-link-hover-color</label>
         <input type="text" class="form-control" placeholder="#fff" data-var="@badge-link-hover-color">
-        <p>Linked badge text color on hover</p>
+        <p class="help-block">Linked badge text color on hover</p>
       </div>
       <div class="col-md-4">
         <label>@badge-active-color</label>
         <input type="text" class="form-control" placeholder="@link-color" data-var="@badge-active-color">
-        <p>Badge text color in active nav link</p>
+        <p class="help-block">Badge text color in active nav link</p>
       </div>
       <div class="col-md-4">
         <label>@badge-active-bg</label>
         <input type="text" class="form-control" placeholder="@badge-color" data-var="@badge-active-bg">
-        <p>Badge background color in active nav link</p>
+        <p class="help-block">Badge background color in active nav link</p>
       </div>
     </div>
 
@@ -1352,18 +1350,18 @@
       <div class="col-md-6">
         <label>@breadcrumb-color</label>
         <input type="text" class="form-control" placeholder="#ccc" data-var="@breadcrumb-color">
-        <p>Breadcrumb text color</p>
+        <p class="help-block">Breadcrumb text color</p>
         <label>@breadcrumb-bg</label>
         <input type="text" class="form-control" placeholder="#f5f5f5" data-var="@breadcrumb-bg">
-        <p>Breadcrumb background color</p>
+        <p class="help-block">Breadcrumb background color</p>
       </div>
       <div class="col-md-6">
         <label>@breadcrumb-active-color</label>
         <input type="text" class="form-control" placeholder="@gray-light" data-var="@breadcrumb-active-color">
-        <p>Text color of current page in the breadcrumb</p>
+        <p class="help-block">Text color of current page in the breadcrumb</p>
         <label>@breadcrumb-separator</label>
         <input type="text" class="form-control" placeholder='"/"' data-var="@breadcrumb-separator">
-        <p>Textual separator for between breadcrumb elements</p>
+        <p class="help-block">Textual separator for between breadcrumb elements</p>
       </div>
     </div>
 
@@ -1916,21 +1914,21 @@
     <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="../assets/js/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="../dist/js/bootstrap.js"></script>
 
 <script src="http://platform.twitter.com/widgets.js"></script>
-<script src="../assets/js/holder.js"></script>
+<script src="../docs-assets/js/holder.js"></script>
 
-<script src="../assets/js/application.js"></script>
+<script src="../docs-assets/js/application.js"></script>
 
 
-<script src="../assets/js/less.js"></script>
-<script src="../assets/js/jszip.js"></script>
-<script src="../assets/js/uglify.js"></script>
-<script src="../assets/js/filesaver.js"></script>
-<script src="../assets/js/raw-files.js"></script>
-<script src="../assets/js/customizer.js"></script>
+<script src="../docs-assets/js/less.js"></script>
+<script src="../docs-assets/js/jszip.js"></script>
+<script src="../docs-assets/js/uglify.js"></script>
+<script src="../docs-assets/js/filesaver.js"></script>
+<script src="../docs-assets/js/raw-files.js"></script>
+<script src="../docs-assets/js/customizer.js"></script>
 
 
 <!-- Analytics

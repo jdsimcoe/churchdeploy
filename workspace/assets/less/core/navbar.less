@@ -30,10 +30,11 @@
 
       a {
         color: @color-white;
-        font-family: @typekit-brandon;
+        font-family: @font-family-serif;
         font-size: 1em;
+        font-style: italic;
         font-weight: bold;
-        text-transform: uppercase;
+        text-transform: lowercase;
 
         &:hover {
           color: darken(@color-white, 20%);
@@ -47,17 +48,19 @@
 }
 
 .masthead {
-  @color-masthead: lighten(@color-black, 15%);
+  @color-masthead: @color-black;
 
   // call Horizon
   .horizon(@color-background: @color-masthead);
+  padding: 1em 0 0 0;
 
   .logo {
     color: @color-white;
-    font-size: 35px;
+    font-size: 28px;
     left: 30px;
     position: relative;
     text-shadow: none;
+    top: -5px;
 
     &:hover {
       .opacity(0.75);
@@ -65,21 +68,131 @@
   }
 
   .nav-pills {
+    position: relative;
+    top: 10px;
 
     li {
+      margin-bottom: 5px;
+
+      &.active a {
+        border-bottom: 1px solid fadeout(@color-white, 50%);
+        color: @color-accent;
+      }
 
       a {
+        background: none;
         color: @color-white;
-        font-family: @typekit-brandon;
-        font-size: 1.2em;
+        font-family: @font-family-serif;
+        font-style: italic;
         font-weight: bold;
-        text-transform: uppercase;
+        padding: 10px 0 0 0;
+        text-transform: lowercase;
+
+        @media (min-width: @screen-sm) {
+          font-size: 1.1em;
+          margin: 0 10px;
+        }
+
+        @media (min-width: @screen-md) {
+          font-size: 1.3em;
+          margin: 0 12px;
+        }
+
+        @media (min-width: @screen-lg) {
+          font-size: 1.4em;
+          margin: 0 15px;
+        }
 
         &:hover {
-          color: darken(@color-white, 20%);
+          background: none;
+          border-bottom: 1px solid @color-white;
+          color: @color-accent;
         }
+
+      }
+
+      &.dropdown {
+
+        a {
+
+          &:hover {
+            border: none;
+          }
+
+        }
+
+      }
+
+      &.open a {
+        color: darken(@color-white, 35%);
+      }
+
+      .dropdown-menu {
+        border: none;
+        margin-top: 0;
+
+        li {
+          margin: 5px 0;
+
+          a {
+            color: darken(@color-white, 20%);
+
+            &:hover {
+              border: none;
+              color: darken(@color-white, 35%);
+            }
+          }
+        }
+
       }
 
     }
+  }
+
+
+  .container {
+    @media (min-width: @screen-sm) {
+      width: 100%;
+    }
+    @media (min-width: @screen-md) {
+      width: 970px;
+    }
+    @media (min-width: @screen-lg) {
+      width: 1170px;
+    }
+  }
+
+  .tagline {
+    margin: 20px 0 50px;
+
+    .full {
+      margin: 40px 0;
+
+      h1 {
+        font-size: 4.3em;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  h1 {
+    color: @color-white;
+    font-family: @font-family-condensed;
+    font-size: 8em;
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 40px auto 60px auto;
+    width: 50%;
+  }
+
+  hr {
+    margin: 30px auto 20px auto;
+  }
+
+  .lead {
+    color: @color-white;
+    font-size: 1.6em;
+    margin: 20px auto 0 auto;
+    width: 50%;
   }
 }

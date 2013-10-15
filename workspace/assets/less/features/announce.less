@@ -12,24 +12,45 @@
     padding: 10em 0;
   }
 
-  .btn-large {
-    .btn-bordered(@color-border: @color-white);
+  a {
+    color: @color-white;
     margin: 0 auto;
     padding: 15px 0;
+    text-align: center;
     width: 75%;
+
+    &:hover {
+
+      h3,
+      p {
+        color: @color-accent;
+      }
+
+    }
+
+    .announce-tile {
+      background-repeat: no-repeat;
+      background-size: 150%;
+    }
 
     h3 {
       font-family: @font-family-condensed;
-      font-size: 2em;
-      font-weight: normal;
+      font-size: 3.5em;
+      font-weight: 400;
       margin-bottom: 0;
+      text-transform: uppercase;
+    }
+
+    hr {
+      width: 25%;
     }
 
     p {
       color: @color-white;
       font-family: @font-family-serif;
-      font-size: 1.4;
+      font-size: 1.8em;
       font-weight: normal;
+      font-style: italic;
       line-height: 1.4;
       margin: 0 0 15px 0;
       text-transform: none;

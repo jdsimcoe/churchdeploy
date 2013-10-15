@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       },
       dist: {
         src : [
-          'workspace/assets/bootstrap/docs-assets/js/jquery.js',
+          'workspace/assets/js/jquery.js',
           'workspace/assets/js/responsimage.js',
           'workspace/assets/bootstrap/dist/js/bootstrap.min.js',
           'workspace/themes/active/js/main.js'],
@@ -55,11 +55,6 @@ module.exports = function (grunt) {
       bootstrap: {
         files: {
           'workspace/themes/active/js/application.min.js': ['workspace/themes/active/js/application.js']
-        }
-      },
-      jquery: {
-        files: {
-          'workspace/themes/active/js/jquery.min.js': ['workspace/assets/bootstrap/docs-assets/js/jquery.js']
         }
       }
     },
@@ -80,5 +75,5 @@ module.exports = function (grunt) {
 // Main task
 grunt.registerTask('cssdev', ['less:dev']);
 grunt.registerTask('cssprod', ['less:prod']);
-grunt.registerTask('jsprod', ['jshint', 'concat', 'uglify:bootstrap', 'uglify:jquery']);
-grunt.registerTask('default', ['jshint', 'concat', 'uglify:bootstrap', 'uglify:jquery', 'less:prod'])};
+grunt.registerTask('jsprod', ['jshint', 'concat', 'uglify:bootstrap']);
+grunt.registerTask('default', ['jshint', 'concat', 'uglify:bootstrap', 'less:prod'])};

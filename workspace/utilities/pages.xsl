@@ -30,34 +30,37 @@
 
   <div class="announce">
     <div class="row">
-      <div class="col-lg-6">
-        <xsl:attribute name="style">
-          <xsl:text>background:url('</xsl:text>
-          <xsl:text>/workspace/themes/active/img/announce-1.jpg</xsl:text>
-          <xsl:text>');</xsl:text>
-        </xsl:attribute>
-        <a href="/" class="btn btn-block btn-large">
+      <a href="/">
+        <div class="col-lg-6 announce-tile">
+          <xsl:attribute name="style">
+            <xsl:text>background-image:url('</xsl:text>
+            <xsl:text>/workspace/themes/active/img/announce-1.jpg</xsl:text>
+            <xsl:text>');</xsl:text>
+          </xsl:attribute>
           <h3>Bullitt</h3>
+          <hr/>
           <p>
             One of the best movies of all time;<br/>
             Steve McQueen is a beast!
           </p>
-        </a>
-      </div>
-      <div class="col-lg-6">
-        <xsl:attribute name="style">
-          <xsl:text>background:url('</xsl:text>
-          <xsl:text>/workspace/themes/active/img/announce-2.jpg</xsl:text>
-          <xsl:text>');</xsl:text>
-        </xsl:attribute>
-        <a href="/" class="btn btn-block btn-large">
+        </div>
+      </a>
+      <a href="/">
+        <div class="col-lg-6 announce-tile">
+          <xsl:attribute name="style">
+            <xsl:text>background-image:url('</xsl:text>
+            <xsl:text>/workspace/themes/active/img/announce-2.jpg</xsl:text>
+            <xsl:text>');</xsl:text>
+          </xsl:attribute>
           <h3>Servant Ministry</h3>
+          <hr/>
           <p>
             Serving the body of Christ<br/>
             with our time, talent &amp; treasure.
           </p>
-        </a>
-      </div>
+        </div>
+      </a>
+
     </div>
   </div>
 

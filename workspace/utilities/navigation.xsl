@@ -184,14 +184,12 @@
 
 
 <xsl:template name="subnav-entry-new">
-  <xsl:variable name="active-parent" select="/data/tags-all-entries/entry[ @id = $pt1 ]/parent/item/@id" />
+  <xsl:variable name="active-parent" select="/data/tags-all-entries/entry[ @id = $ds-tags-filtered.system-id ]/parent/item/@id" />
   <xsl:variable name="realID" select="@id" />
   <xsl:variable name="node" select="." />
   <li>
-    <xsl:if test="$pt1 = @id or $active-parent = @id or //tags-all-entries/entry[ @id = $active-parent ]/parent/item/@id = @id">
-      <xsl:attribute name="class">
-        <xsl:text>active</xsl:text>
-      </xsl:attribute>
+    <xsl:if test="$ds-tags-filtered.system-id = @id or $active-parent = @id or /data/tags-all-entries/entry[ @id = $active-parent ]/parent/item/@id = $realID">
+      <xsl:attribute name="class">active</xsl:attribute>
     </xsl:if>
     <a>
       <xsl:call-template name="url-tags" />
