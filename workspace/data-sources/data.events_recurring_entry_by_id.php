@@ -38,6 +38,7 @@
 				'locations: zip',
 				'locations: latitude',
 				'locations: longitude',
+				'tags: tag: unformatted',
 				'downloads: file',
 				'downloads: link',
 				'images: image',
@@ -68,7 +69,7 @@
 					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
 				'version' => 'Symphony 2.3.3',
-				'release-date' => '2013-09-11T21:21:53+00:00'
+				'release-date' => '2013-10-16T21:39:58+00:00'
 			);
 		}
 
