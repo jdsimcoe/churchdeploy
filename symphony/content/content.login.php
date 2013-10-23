@@ -42,9 +42,12 @@
 		}
 
 		public function view() {
-			if(isset($this->_context[0]) && in_array(strlen($this->_context[0]), array(6, 8))){
+			if(isset($this->_context[0]) && in_array(strlen($this->_context[0]), array(6, 8, 16))){
 				if(!$this->__loginFromToken($this->_context[0])) {
-					if(Administration::instance()->isLoggedIn()) redirect(SYMPHONY_URL);
+					if(Administration::instance()->isLoggedIn()) {
+						// Redirect to the Author's profile. RE: #1801
+						redirect(SYMPHONY_URL . '/system/authors/edit/' . Administration::instance()->Author->get('id'));
+					}
 				}
 			}
 
@@ -58,6 +61,7 @@
 			if(isset($this->_context[0]) && $this->_context[0] == 'retrieve-password'):
 				$this->Form->setAttribute('action', SYMPHONY_URL.'/login/retrieve-password/');
 
+				// Successful reset
 				if(isset($this->_email_sent) && $this->_email_sent) {
 					$fieldset->appendChild(new XMLElement('p', __('An email containing a customised login link has been sent to %s. It will expire in 2 hours.', array(
 						'<code>' . $this->_email_sent_to . '</code>')
@@ -65,13 +69,21 @@
 					$fieldset->appendChild(new XMLElement('p', Widget::Anchor(__('Login'), SYMPHONY_URL.'/login/', null)));
 					$this->Form->appendChild($fieldset);
 				}
+				// Default, get the email address for reset
 				else {
 					$fieldset->appendChild(new XMLElement('p', __('Enter your email address or username to be sent further instructions for logging in.')));
 
 					$label = Widget::Label(__('Email Address or Username'));
 					$label->appendChild(Widget::Input('email', General::sanitize($_POST['email']), 'text', array('autofocus' => 'autofocus')));
+
 					if(isset($this->_email_sent) && !$this->_email_sent) {
 						$label = Widget::Error($label, __('Unfortunately no account was found using this information.'));
+					}
+					else {
+						// Email exception
+						if(isset($this->_email_error) && $this->_email_error) {
+							$label = Widget::Error($label, __('This Symphony instance has not been set up for emailing, %s', array('<code>' . $this->_email_error . '</code>')));
+		                }
 					}
 					$fieldset->appendChild($label);
 
@@ -183,7 +195,7 @@
 						 */
 						Symphony::ExtensionManager()->notifyMembers('AuthorLoginSuccess', '/login/', array('username' => Symphony::Database()->cleanValue($_POST['username'])));
 
-						isset($_POST['redirect']) ? redirect($_POST['redirect']) : redirect(SYMPHONY_URL);
+						isset($_POST['redirect']) ? redirect($_POST['redirect']) : redirect(SYMPHONY_URL . '/');
 					}
 
 				// Reset of password requested
@@ -200,7 +212,16 @@
 						Symphony::Database()->delete('tbl_forgotpass', " `expiry` < '".DateTimeObj::getGMT('c')."' ");
 
 						if(!$token = Symphony::Database()->fetchVar('token', 0, "SELECT `token` FROM `tbl_forgotpass` WHERE `expiry` > '".DateTimeObj::getGMT('c')."' AND `author_id` = ".$author['id'])){
-							$token = substr(SHA1::hash(time() . rand(0, 1000)), 0, 6);
+
+							// More secure password token generation
+							if(function_exists('openssl_random_pseudo_bytes')) {
+								$seed = openssl_random_pseudo_bytes(16);
+							}
+							else {
+								$seed = mt_rand();
+							}
+							$token = substr(SHA1::hash($seed), 0, 16);
+
 							Symphony::Database()->insert(array(
 								'author_id' => $author['id'],
 								'token' => $token,
@@ -224,7 +245,10 @@
 							$this->_email_sent = true;
 							$this->_email_sent_to = $author['email']; // Set this so we can display a customised message
 						}
-						catch(Exception $e) {}
+						catch(Exception $e) {
+							$this->_email_error = General::unwrapCDATA($e->getMessage());
+							Symphony::Log()->pushExceptionToLog($e, true);
+						}
 
 						/**
 						 * When a password reset has occurred and after the Password
@@ -267,7 +291,7 @@
 			if(!Administration::instance()->loginFromToken($token)) return false;
 
 			// If token is valid and is an 8 char shortcut
-			if(strlen($token) != 6) redirect(SYMPHONY_URL); // Regular token-based login
+			if(!in_array(strlen($token), array(6, 16))) redirect(SYMPHONY_URL . '/'); // Regular token-based login
 
 			return false;
 		}

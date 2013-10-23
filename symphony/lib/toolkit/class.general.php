@@ -930,7 +930,7 @@
 		public function getMimeType($file) {
 			if (!empty($file)) {
 				// in PHP 5.3 we can use 'finfo'
-				if (function_exists('finfo_open')) {
+				if (PHP_VERSION_ID >= 50300) {
 					$finfo = finfo_open(FILEINFO_MIME_TYPE);
 					$mime_type = finfo_file($finfo, $file);
 					finfo_close($finfo);
@@ -1428,13 +1428,26 @@
 		 * Wrap a value in CDATA tags for XSL output of non encoded data
 		 *
 		 * @since Symphony 2.3.2
-		 * @param string @value
+		 * @param string $value
 		 *	The string to wrap in CDATA
 		 * @return string
 		 *	The wrapped string
 		 */
 		public static function wrapInCDATA($value) {
 			return (!empty($value)) ? '<![CDATA[' . $value . ']]>' : $value;
+		}
+
+		/**
+		 * Unwrap a value from CDATA tags to return the raw string
+		 *
+		 * @since Symphony 2.3.4
+		 * @param string $value
+		 *	The string to unwrap from CDATA
+		 * @return string
+		 *	The unwrapped string
+		 */
+		public static function unwrapCDATA($value) {
+			return str_replace(array('<![CDATA[', ']]>'), '', $value);
 		}
 
 	}

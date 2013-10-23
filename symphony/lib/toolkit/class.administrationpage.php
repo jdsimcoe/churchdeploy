@@ -159,7 +159,7 @@
 		 * Given a `$message` and an optional `$type`, this function will
 		 * add an Alert instance into this page's `$this->Alert` property.
 		 * Since Symphony 2.3, there may be more than one `Alert` per page.
- 		 * Unless the Alert is an Error, it is required the `$message` be
+		 * Unless the Alert is an Error, it is required the `$message` be
 		 * passed to this function.
 		 *
 		 * @param string $message
@@ -346,12 +346,13 @@
 			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.css', 'screen', 30);
 			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.legacy.css', 'screen', 31);
 			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.grids.css', 'screen', 32);
-			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.forms.css', 'screen', 34);
+			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.forms.css', 'screen', 33);
 			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.tables.css', 'screen', 34);
-			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.frames.css', 'screen', 33);
-			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.drawers.css', 'screen', 34);
-			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.tabs.css', 'screen', 34);
-			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.notices.css', 'screen', 34);
+			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.frames.css', 'screen', 35);
+			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.tabs.css', 'screen', 36);
+			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.drawers.css', 'screen', 37);
+			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.associations.css', 'screen', 38);
+			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/symphony.notices.css', 'screen', 39);
 			$this->addStylesheetToHead(APPLICATION_URL . '/assets/css/admin.css', 'screen', 40);
 
 			$this->addScriptToHead(APPLICATION_URL . '/assets/js/jquery.js', 50);
@@ -478,6 +479,7 @@
 			if(
 				$page_limit == 'author'
 				or ($page_limit == 'developer' && Administration::instance()->Author->isDeveloper())
+                or ($page_limit == 'manager' && (Administration::instance()->Author->isManager() || Administration::instance()->Author->isDeveloper()))
 				or ($page_limit == 'primary' && Administration::instance()->Author->isPrimaryAccount())
 			) {
 				return true;
@@ -510,12 +512,12 @@
 
 			// Add vertical-left drawers (between #context and #contents)
 			if(isset($this->Drawer['vertical-left'])) {
-				$this->Wrapper->appendChildArray($this->Drawer['vertical-left']);
+				$this->Contents->appendChildArray($this->Drawer['vertical-left']);
 			}
 
 			// Add vertical-right drawers (after #contents)
 			if(isset($this->Drawer['vertical-right'])) {
-				$this->Wrapper->appendChildArray($this->Drawer['vertical-right']);
+				$this->Contents->appendChildArray($this->Drawer['vertical-right']);
 			}
 
 			$this->Wrapper->appendChild($this->Contents);
@@ -539,7 +541,11 @@
 			$body_id = preg_replace("/^content/", '', get_class($this));
 
 			// lowercase any uppercase letters and prefix with a hyphen
-			$body_id = trim(preg_replace("/([A-Z])/e", "'-' . strtolower('\\1')", $body_id), '-');
+			$body_id = trim(preg_replace_callback("/([A-Z])/",
+				create_function('$id', 'return "-" . strtolower($id[0]);'),
+				$body_id),
+				'-'
+			);
 
 			if (!empty($body_id)) $this->Body->setAttribute('id', trim($body_id));
 		}
