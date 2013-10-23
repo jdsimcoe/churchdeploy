@@ -5,7 +5,7 @@ Elastica: elasticsearch PHP Client
 
 Documentation
 ---------------------
-Check out the [Elastica documentation](http://ruflin.github.com/Elastica/) to find out how Elastica works. If you have questions, don't hestitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client). Issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
+Check out the [Elastica documentation](http://Elastica.io/) to find out how Elastica works. If you have questions, don't hesitate to ask them in the [Elastica google group](https://groups.google.com/group/elastica-php-client). Issues should go to the [issue tracker from github](https://github.com/ruflin/Elastica/issues).
 
 About
 ---------------------
@@ -32,3 +32,9 @@ File indexing
 File upload is supported but the mapper attachement plugin has to be installed
 
 	./bin/plugin install mapper-attachments
+
+Contributing
+------------
+Help is very welcomed, but code contributions must be done in respect of [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md).
+
+See [Coding guidelines](https://github.com/ruflin/Elastica/wiki/Coding-guidelines) for tips on how to do so.
