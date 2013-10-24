@@ -30,17 +30,15 @@ Class datasourcetwitter_search extends Datasource{
 
 		$cb = \Codebird\Codebird::getInstance();
 
-		if (null == $token = Symphony::Configuration()->get('bearer_token', 'twitter_search')) {
-			$reply = $cb->oauth2_token();
-			$token = $reply->access_token;
-			Symphony::Configuration()->set('bearer_token', $token, 'twitter_search');
-			Symphony::Configuration()->write();
-		}
+		$cb->setToken(
+			Symphony::Configuration()->get('access_token','twitter_search'),
+			Symphony::Configuration()->get('access_secret','twitter_search')
+		);
 
-		$cb->setBearerToken($token);
 		$cb->setReturnFormat(CODEBIRD_RETURNFORMAT_ARRAY);
 
-		$reply = $cb->search_tweets('q=from:atheycreek&count=3', true);
+		$reply = (array) $cb->statuses_userTimeline('count=3');
+
 		$el = new XMLElement($this->dsParamROOTELEMENT);
 		General::array_to_xml($el, (array)$reply);
 		return $el;
