@@ -73,6 +73,7 @@ Examples are ..
 						<xsl:with-param name="date" select="end/@iso" />
 						<xsl:with-param name="format" select="'#ts;'" />
 					</xsl:call-template>
+					<xsl:text>&#160;</xsl:text>
 				</xsl:variable>
 				<xsl:choose>
 					<xsl:when test="$start-day = $end-day">

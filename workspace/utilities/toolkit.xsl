@@ -38,7 +38,7 @@ Toolkit
 							<img src="{$root}/image/2/0/50/5/0{image/@path}/{image/filename}" style="border: #000 1px solid" />
 						</td>
 						<td style="padding: 10px">
-							<input value='&lt;img data-responsimage="{image/filename}" style="width: 350px; height: 200px;" class="inline" data-responsimage-anchor="5" src="/workspace/img/spacer.gif" /&gt;' style="width: 550px; font-size: 13px" onclick="this.select()" />
+							<input value='&lt;img data-responsimage="{image/filename}" width="100%" class="img-responsive" data-responsimage-anchor="5" src="/workspace/img/spacer.gif" /&gt;' style="width: 550px; font-size: 13px" onclick="this.select()" />
 							<p style="font-size: 12px; margin: 5px 0; font-family: helvetica">
 								Filesize: <xsl:value-of select="image/@size" /> |
 								Type: <xsl:value-of select="image/@type" /> |
