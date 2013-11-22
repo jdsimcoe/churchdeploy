@@ -13,7 +13,6 @@
 		public $dsParamREDIRECTONEMPTY = 'no';
 		public $dsParamSORT = 'order';
 		public $dsParamASSOCIATEDENTRYCOUNTS = 'no';
-		public $dsParamCACHE = '0';
 		
 
 		public $dsParamFILTERS = array(
@@ -23,6 +22,7 @@
 		
 
 		public $dsParamINCLUDEDELEMENTS = array(
+				'title: unformatted',
 				'poster: image'
 		);
 		
@@ -37,10 +37,10 @@
 				'name' => 'Teachings: Series home (filtered)',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
+					'website' => 'http://atheycreek.dev',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-07-02T22:40:01+00:00'
+				'version' => 'Symphony 2.3.4',
+				'release-date' => '2013-11-22T18:00:04+00:00'
 			);
 		}
 
@@ -64,7 +64,7 @@
 				FrontendPageNotFoundExceptionHandler::render($e);
 			}
 			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
+				$result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
 				return $result;
 			}
 
