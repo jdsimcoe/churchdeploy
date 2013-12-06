@@ -1,0 +1,52 @@
+{
+  "teachings": {
+    "properties": {
+      "title": {
+        "type" : "multi_field",
+        "store": "yes",
+        "fields": {
+          "title": {"type" : "string"},
+          "symphony_fulltext" : {"type" : "string", "analyzer": "symphony_fulltext"},
+          "symphony_autocomplete" : {"type" : "string", "analyzer": "symphony_autocomplete"}
+        },
+        "boost": 3.0
+      },
+      "book": {
+        "type" : "multi_field",
+        "store": "yes",
+        "fields": {
+          "book": {"type" : "string"},
+          "symphony_fulltext" : {"type" : "string", "analyzer": "symphony_fulltext"}
+        },
+        "symphony_highlight": "yes"
+      },
+      "chapter": {
+        "type" : "multi_field",
+        "store": "yes",
+        "fields": {
+          "chapter": {"type" : "string"},
+          "symphony_fulltext" : {"type" : "string", "analyzer": "symphony_fulltext"}
+        },
+        "symphony_highlight": "yes"
+      },
+      "description": {
+        "type" : "multi_field",
+        "store": "yes",
+        "fields": {
+          "description": {"type" : "string"},
+          "symphony_fulltext" : {"type" : "string", "analyzer": "symphony_fulltext"}
+        },
+        "symphony_highlight": "yes"
+      },
+      "speaker": {
+        "type" : "multi_field",
+        "store": "yes",
+        "fields": {
+          "speaker": {"type" : "string"},
+          "symphony_fulltext" : {"type" : "string", "analyzer": "symphony_fulltext"}
+        },
+        "symphony_highlight": "yes"
+      }
+    }
+  }
+}
