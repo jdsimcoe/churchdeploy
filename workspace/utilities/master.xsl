@@ -129,7 +129,7 @@
 		<meta name="responsimage">
 			<xsl:attribute name="data-server">
 				<xsl:value-of select="$root" disable-output-escaping="yes" />
-				<xsl:text>/image/2/width/height/responsimageanchor/0/uploads/images/leaderboards/filename</xsl:text>
+				<xsl:text>/image/2/width/height/responsimageanchor/0/uploads/images/filename</xsl:text>
 			</xsl:attribute>
 			<xsl:attribute name="data-static">
 				<xsl:value-of select="$workspace" disable-output-escaping="yes" />
