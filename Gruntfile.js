@@ -1,38 +1,43 @@
 module.exports = function (grunt) {
   'use strict';
 
-  // Load local NPM tasks
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-notify');
+  // Load local NPM tasks automagically
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+  // Custom variables
+  var globalConfig = {
+    client: 'atheycreek',
+    password: '@th3yCr33k'
+  };
 
   grunt.initConfig({
+     globalConfig: globalConfig,
+
+    // JS Hint
+    // =====================================================
 
     jshint : {
       all: [
-        'workspace/themes/active/js/main.js'
+        'workspace/assets/js/main.js'
       ]
     },
 
+    // LESS
+    // =====================================================
+
     less: {
-      dev: {
-        files: {
-          "workspace/themes/active/css/main.css": "workspace/themes/active/less/main.less"
-        }
-      },
-      prod: {
+      main: {
         options: {
-          yuicompress: true
+          compress: true
         },
         files: {
-          "workspace/themes/active/css/main.css": "workspace/themes/active/less/main.less"
+          'workspace/assets/css/main.css': 'workspace/assets/less/main.less'
         }
       }
     },
+
+    // Concatenation
+    // =====================================================
 
     concat: {
       options: {
@@ -41,12 +46,16 @@ module.exports = function (grunt) {
       dist: {
         src : [
           'workspace/assets/js/jquery.js',
-          'workspace/assets/js/responsimage.js',
           'workspace/assets/bootstrap/dist/js/bootstrap.min.js',
-          'workspace/themes/active/js/main.js'],
-        dest: 'workspace/themes/active/js/application.js'
+          'workspace/assets/js/responsimage.js',
+          // 'workspace/assets/js/fitvids.js',
+          'workspace/assets/js/main.js'],
+        dest: 'workspace/assets/js/application.js'
       }
     },
+
+    // Uglify.js
+    // =====================================================
 
     uglify: {
       options: {
@@ -54,26 +63,72 @@ module.exports = function (grunt) {
       },
       bootstrap: {
         files: {
-          'workspace/themes/active/js/application.min.js': ['workspace/themes/active/js/application.js']
+          'workspace/assets/js/application.min.js': ['workspace/assets/js/application.js']
         }
       }
     },
 
+    // Notifications
+    // =====================================================
+
+    notify: {
+      main: {
+        options: {
+          title: '<%= globalConfig.client  %>.dev',
+          message: 'LESS and JS were compiled',
+        }
+      }
+    },
+
+    // Clean
+    // =====================================================
+
+    // clean: [ "manifest/cache/*.jpg" ],
+
+    // Watch
+    // =====================================================
+
     watch: {
-      cssdev: {
-        files: '**/*.less',
-        tasks: ['less:dev']
+      main: {
+        files: ['**/*.less','**/*.js','!**/node_modules/**'],
+        tasks: ['core', 'notify'],
+        options: {
+          livereload: true,
+        }
+      }
+    },
+
+    // Deployments
+    // =====================================================
+
+    deployments: {
+      options: {
+        "backups_dir": "sql"
       },
-      cssprod: {
-        files: '<config:watch.cssdev.files>',
-         tasks: ['less:prod']
+      local: {
+        "title": "Local",
+        "database": "<%= globalConfig.client  %>",
+        "user": "root",
+        "pass": "",
+        "host": "127.0.0.1",
+        "url": ""
+      },
+      production: {
+        "title": "Production",
+        "database": "<%= globalConfig.client  %>",
+        "user": "<%= globalConfig.client  %>",
+        "pass": "<%= globalConfig.password  %>",
+        "host": "localhost",
+        "ssh_host": "simko@192.241.202.190",
+        "ssh_port": "45454",
+        "url": ""
       }
     }
+
 
 });
 
 // Main task
-grunt.registerTask('cssdev', ['less:dev']);
-grunt.registerTask('cssprod', ['less:prod']);
-grunt.registerTask('jsprod', ['jshint', 'concat', 'uglify:bootstrap']);
-grunt.registerTask('default', ['jshint', 'concat', 'uglify:bootstrap', 'less:prod'])};
+grunt.registerTask('core', ['jshint', 'concat', 'uglify:bootstrap', 'less:main']);
+grunt.registerTask('build', ['core', 'notify']);
+grunt.registerTask('default', ['build', 'watch'])};
