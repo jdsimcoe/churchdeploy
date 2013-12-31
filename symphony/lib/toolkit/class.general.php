@@ -2,6 +2,10 @@
 	/**
 	 * @package toolkit
 	 */
+
+	define_safe('CDATA_BEGIN', '<![CDATA[');
+	define_safe('CDATA_END', ']]>');
+
 	/**
 	 * General is a utility class that offers a number miscellaneous of
 	 * functions that are used throughout Symphony.
@@ -930,7 +934,7 @@
 		public function getMimeType($file) {
 			if (!empty($file)) {
 				// in PHP 5.3 we can use 'finfo'
-				if (PHP_VERSION_ID >= 50300) {
+				if (PHP_VERSION_ID >= 50300 && function_exists('finfo_open')) {
 					$finfo = finfo_open(FILEINFO_MIME_TYPE);
 					$mime_type = finfo_file($finfo, $file);
 					finfo_close($finfo);
@@ -1423,18 +1427,36 @@
 
 			}
 		}
-
+		
+		
 		/**
-		 * Wrap a value in CDATA tags for XSL output of non encoded data
+		 * Wrap a value in CDATA tags for XSL output of non encoded data, only
+		 * if not already wrapped.
 		 *
 		 * @since Symphony 2.3.2
+		 *
 		 * @param string $value
 		 *	The string to wrap in CDATA
 		 * @return string
 		 *	The wrapped string
 		 */
 		public static function wrapInCDATA($value) {
-			return (!empty($value)) ? '<![CDATA[' . $value . ']]>' : $value;
+			if (empty($value)) {
+				return $value;
+			}
+			
+			$startRegExp = '/^' . preg_quote(CDATA_BEGIN) . '/';
+			$endRegExp = '/' . preg_quote(CDATA_END) . '$/';
+			
+			if (!preg_match($startRegExp, $value)) {
+				$value = CDATA_BEGIN . $value;
+			}
+			
+			if (!preg_match($endRegExp, $value)) {
+				$value .= CDATA_END;
+			}
+			
+			return $value;
 		}
 
 		/**
@@ -1447,7 +1469,7 @@
 		 *	The unwrapped string
 		 */
 		public static function unwrapCDATA($value) {
-			return str_replace(array('<![CDATA[', ']]>'), '', $value);
+			return str_replace(array(CDATA_BEGIN, CDATA_END), '', $value);
 		}
 
 	}

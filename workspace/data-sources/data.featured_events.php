@@ -25,8 +25,8 @@
 		public $dsParamINCLUDEDELEMENTS = array(
 				'name: unformatted',
 				'description: unformatted',
-				'images: image',
-				'images: caption: unformatted'
+				'images: caption: unformatted',
+				'images: image'
 		);
 		
 
@@ -40,10 +40,10 @@
 				'name' => 'Featured: Events',
 				'author' => array(
 					'name' => 'Jonathan Simcoe',
-					'website' => 'http://atheycreek',
+					'website' => 'http://atheycreek.com',
 					'email' => 'jdsimcoe@gmail.com'),
-				'version' => 'Symphony 2.3.2',
-				'release-date' => '2013-08-01T18:42:48+00:00'
+				'version' => 'Symphony 2.3.5beta1',
+				'release-date' => '2013-12-30T18:43:10+00:00'
 			);
 		}
 
@@ -67,7 +67,7 @@
 				FrontendPageNotFoundExceptionHandler::render($e);
 			}
 			catch(Exception $e){
-				$result->appendChild(new XMLElement('error', $e->getMessage()));
+				$result->appendChild(new XMLElement('error', $e->getMessage() . ' on ' . $e->getLine() . ' of file ' . $e->getFile()));
 				return $result;
 			}
 
