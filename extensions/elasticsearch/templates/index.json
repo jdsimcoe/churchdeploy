@@ -1,0 +1,30 @@
+{
+	"analysis": {
+		"analyzer": {
+			"symphony_fulltext" : {                    
+				"type": "custom",
+				"tokenizer" : "standard",
+				"filter": ["stop", "asciifolding", "snowball", "lowercase", "custom_synonyms", "custom_stop"]
+			},
+			"symphony_autocomplete" : {                    
+				"type": "custom",
+				"tokenizer" : "standard",
+				"filter": ["asciifolding", "lowercase"]
+			}
+		},
+		"filter" : {
+			"custom_synonyms": {
+				"type": "synonym",
+				"ignore_case": "true",
+				"synonyms": [
+					"i-pod, i pod => ipod",
+					"definately, definitly, definetly => definitely"
+				]
+			},
+			"custom_stop": {
+				"type": "stop",
+				"stopwords": ["a", "an", "and", "are", "as", "at", "be", "but", "by", "into", "is", "it", "of", "on", "or", "such", "that", "the", "their", "there", "these", "they", "this", "to", "was", "will"]
+			}
+		}
+	}
+}

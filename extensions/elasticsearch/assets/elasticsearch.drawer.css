@@ -1,0 +1,122 @@
+/*
+	Drawer filters
+*/
+
+.label.date-range span {
+	display: block;
+}
+
+.label.date-range input {
+	width: 80px;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+.label.date-range input[name='filter[date_from]'] {
+	border-right: none !important;
+	-webkit-border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+}
+
+.label.date-range input[name='filter[date_to]'] {
+	border-left: none !important;
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+}
+
+.label.date-range input[name='filter[date_from]'],
+.label.date-range input[name='filter[date_to]'],
+.label.date-range input[name='filter[date_from]']:focus,
+.label.date-range input[name='filter[date_to]']:focus {
+	box-shadow: none;
+	border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.label.date-range span.conjunctive {
+	float: left;
+	background: #fff;
+	color: #999;
+	margin-top: 2px;
+	padding: 3px 2px;
+	line-height: 1.3;
+	vertical-align: baseline;
+	border: none;
+	border-top: 1px solid rgba(0, 0, 0, 0.25);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.label.performance > span {
+	display: block;
+}
+
+.label.performance > span * {
+	display: inline-block;
+	width: auto;
+	margin-right: 5px;
+}
+
+.label.performance > span span {
+	margin-right: 0;
+}
+
+.label.performance > span option {
+	display: block;
+	margin: auto;
+	width: auto;
+}
+
+.label.performance input {
+	width: 30px;
+	text-align: center;
+}
+
+.label.performance span span {
+	color: #ccc;
+}
+
+#drawer-elasticsearch {
+	position: relative;
+	z-index: 99;
+}
+
+#drawer-elasticsearch .triple-input > span {
+	display: block;
+}
+
+#drawer-elasticsearch .triple-input input {
+	width: 80px;
+	margin-right: 3px;
+}
+
+#drawer-elasticsearch > .contents form {
+	margin: 0;
+}
+
+#drawer-elasticsearch label,
+#drawer-elasticsearch .label {
+	float: left;
+	margin: 0 20px 0 0;
+	min-height: 45px;
+}
+
+#drawer-elasticsearch input[type="text"],
+#drawer-elasticsearch textarea,
+#drawer-elasticsearch select {
+	font-size: 1em;
+	padding: 4px 2px;
+	outline: none;
+	margin-top: 2px;
+}
+
+#drawer-elasticsearch select {
+	padding: 1px;
+}
+
+#drawer-elasticsearch input.button {
+	margin-top: 18px;
+}
+
+#drawer-elasticsearch input[type='submit'] {
+	margin-left: 0;
+}
